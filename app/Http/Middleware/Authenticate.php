@@ -20,7 +20,7 @@ class Authenticate extends Middleware
             // 🛠️ GANTI fallback ini dari:
             // return route('login');
             // MENJADI misalnya halaman utama saja:
-            return '/';
+             return route('admin.login'); // fallback
         }
 
         return null;

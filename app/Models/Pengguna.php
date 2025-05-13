@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable; // ← WAJIB ini
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Pengguna extends Authenticatable
@@ -19,5 +19,7 @@ class Pengguna extends Authenticatable
 
     protected $hidden = [
         'password',
+        'remember_token',
     ];
 }
+

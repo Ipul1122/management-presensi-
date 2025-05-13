@@ -10,8 +10,9 @@ class PengajarMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check() || Auth::user()->role !== 'pengajar') {
-            return redirect()->route('pengajar.login');
+        if (!Auth::guard('pengajar')->check() || Auth::guard('pengajar')->user()->role !== 'pengajar') {
+            Auth::guard('pengajar')->logout(); // Ensure logout if role is invalid
+            return redirect()->route('pengajar.login')->withErrors(['auth' => 'Silakan login sebagai pengajar.']);
         }
 
         return $next($request);

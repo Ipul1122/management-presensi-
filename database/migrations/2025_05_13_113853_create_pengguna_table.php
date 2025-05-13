@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePenggunaTable extends Migration
 {
-    public function up()
-    {
-        Schema::create('pengguna', function (Blueprint $table) {
-            $table->id();
-            $table->string('username')->unique();  // username unik
-            $table->string('password');  // password
-            $table->string('role');  // role (admin/pengajar)
-            $table->timestamps();
-        });
-    }
+    public function up(): void
+{
+    Schema::create('pengguna', function (Blueprint $table) {
+        $table->id();
+        $table->string('username')->unique();
+        $table->string('password');
+        $table->string('role'); // admin / pengajar
+        $table->rememberToken(); // ← penting untuk Laravel Auth
+        $table->timestamps();
+    });
+}
 
     public function down()
     {

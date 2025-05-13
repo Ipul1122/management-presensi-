@@ -23,7 +23,7 @@ class LoginController extends Controller
         $user = Pengguna::where('username', $credentials['username'])->first();
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
-            Auth::login($user);
+            Auth::guard('pengajar')->login($user, true); // Use 'pengajar' guard
 
             if ($user->role === 'pengajar') {
                 return redirect()->route('pengajar.dashboard');

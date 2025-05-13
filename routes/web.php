@@ -45,5 +45,5 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('pengajar.dashboard');
-    })->middleware('auth')->name('dashboard');
+    })->middleware('auth:pengajar')->name('dashboard'); // Specify 'auth:pengajar' middleware
 });
