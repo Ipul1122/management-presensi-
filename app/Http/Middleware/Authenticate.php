@@ -9,18 +9,8 @@ class Authenticate extends Middleware
     protected function redirectTo($request): ?string
     {
         if (! $request->expectsJson()) {
-            if ($request->is('admin') || $request->is('admin/*')) {
-                return route('admin.login');
-            }
-
-            if ($request->is('pengajar') || $request->is('pengajar/*')) {
-                return route('pengajar.login');
-            }
-
-            // 🛠️ GANTI fallback ini dari:
-            // return route('login');
-            // MENJADI misalnya halaman utama saja:
-             return route('admin.login'); // fallback
+            // Tampilkan halaman kustom jika belum login
+            abort(response()->view('errors.custom-unauthenticated', [], 401));
         }
 
         return null;

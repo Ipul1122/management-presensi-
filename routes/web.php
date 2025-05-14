@@ -22,14 +22,17 @@ Route::get('/', function () {
 */
 
 
+// ADMIN
+// ================== ADMIN ==================
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AdminLoginController::class, 'login']);
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
-    
+
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    })->middleware('auth')->name('dashboard');
+    })->middleware('auth:admin')->name('dashboard');
 });
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +48,5 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('pengajar.dashboard');
-    })->middleware('auth:pengajar')->name('dashboard'); // Specify 'auth:pengajar' middleware
+    })->middleware('auth:pengajar')->name('dashboard');
 });

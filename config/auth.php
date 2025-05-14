@@ -43,6 +43,10 @@ return [
             'driver' => 'session',
             'provider' => 'pengajars',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'pengajars',
+        ],
     ],
 
     /*
@@ -71,6 +75,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Pengguna::class,
         ],
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

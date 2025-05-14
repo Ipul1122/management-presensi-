@@ -12,10 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-        'pengajar' => \App\Http\Middleware\PengajarMiddleware::class,
-    ]);
-})
-
+            'pengajar.role' => \App\Http\Middleware\PengajarMiddleware::class,
+            'admin.role' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
+        $middleware->append(\App\Http\Middleware\Authenticate::class); 
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

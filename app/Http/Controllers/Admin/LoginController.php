@@ -23,16 +23,12 @@ class LoginController extends Controller
         $user = Pengguna::where('username', $credentials['username'])->first();
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
-            Auth::login($user);
-
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            } elseif ($user->role === 'pengajar') {
-                return redirect()->route('pengajar.dashboard');
+            if ($user->role !== 'admin') {
+                return back()->withErrors(['username' => 'Anda tidak memiliki akses admin.']);
             }
 
-            Auth::logout();
-            return back()->withErrors(['username' => 'Role tidak valid.']);
+            Auth::guard('admin')->login($user);
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors(['username' => 'Username atau password salah.']);
