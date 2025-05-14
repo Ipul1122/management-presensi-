@@ -21,6 +21,13 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 */
 
+// ERROR MESSAGE
+// Route fallback untuk tampilan pesan error jika tidak login
+Route::get('/unauthorized', function () {
+    return view('errors.unauthorized');
+})->name('unauthorized');
+
+
 
 // ADMIN
 // ================== ADMIN ==================
@@ -32,7 +39,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    })->middleware('auth:admin')->name('dashboard');
+    })->middleware(['auth:admin', 'admin.role'])->name('dashboard');
 });
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +55,5 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('pengajar.dashboard');
-    })->middleware('auth:pengajar')->name('dashboard');
+    })->middleware(['auth:pengajar', 'pengajar.role'])->name('dashboard');
 });

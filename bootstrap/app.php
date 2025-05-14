@@ -14,8 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'pengajar.role' => \App\Http\Middleware\PengajarMiddleware::class,
             'admin.role' => \App\Http\Middleware\AdminMiddleware::class,
+              // Override middleware 'auth' bawaan Laravel dengan milikmu
+        'auth' => \App\Http\Middleware\Authenticate::class,
         ]);
-        $middleware->append(\App\Http\Middleware\Authenticate::class); 
+        // $middleware->append(\App\Http\Middleware\Authenticate::class); 
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
