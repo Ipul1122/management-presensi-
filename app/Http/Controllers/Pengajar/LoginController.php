@@ -35,7 +35,9 @@ class LoginController extends Controller
             return back()->withErrors(['username' => 'Role tidak valid.']);
         }
 
-        return back()->withErrors(['username' => 'Username atau password salah.']);
+        return back()->withErrors([
+            'login' => 'Sepertinya ada yang salah nih, cek lagi ya.',
+        ])->withInput();        
     }
 
     public function logout()

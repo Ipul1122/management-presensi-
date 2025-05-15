@@ -31,7 +31,10 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return back()->withErrors(['username' => 'Username atau password salah.']);
+        return back()->withErrors([
+            'login' => 'Sepertinya ada yang salah nih, cek lagi ya.',
+        ])->withInput();
+        
     }
 
 
