@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- ganti dengan layout utama kamu --}}
+@extends('components.layouts.app') {{-- ganti dengan layout utama kamu --}}
 
 @section('content')
 <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">

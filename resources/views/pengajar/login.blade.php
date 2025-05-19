@@ -1,5 +1,5 @@
 {{-- resources/views/pengajar/login.blade.php --}}
-@extends('layouts.app')
+@extends('components.layouts.app')
 
 @section('content')
     <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
