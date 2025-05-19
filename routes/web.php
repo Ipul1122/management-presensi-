@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController as AdminLoginController;
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
+use App\Http\Controllers\Admin\MuridController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->middleware(['auth:admin', 'admin.role'])->name('dashboard');
 });
+
+Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('murid', MuridController::class);
+});
+
+Route::get('/admin/murid/show', [MuridController::class, 'showAll'])->name('admin.murid.show');
+
+
 /*
 |--------------------------------------------------------------------------
 | PENGAJAR ROUTES
