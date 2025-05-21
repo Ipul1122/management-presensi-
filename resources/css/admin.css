@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for admin panel */
+@layer components {
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .overflow-x-auto {
+        margin: 0 -1rem;
+        width: calc(100% + 2rem);
+    }
+}
