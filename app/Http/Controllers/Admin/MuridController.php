@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class MuridController extends Controller
 {
-    public function index()
+        public function index()
     {
-        $murids = Murid::with('anak')->latest()->get();
+        $murids = Murid::orderBy('created_at', 'desc')->paginate(10); // Gunakan paginate
         return view('admin.murid.index', compact('murids'));
     }
+
 
     public function create()
 {
@@ -47,10 +48,11 @@ public function store(Request $request)
 
 
 
-    public function edit($id)
-    {
-        return view('admin.murid.edit');
-    }
+public function edit($id)
+{
+    $murid = Murid::findOrFail($id);
+    return view('admin.murid.edit', compact('murid'));
+}
 
     // public function show($id)
     // {
@@ -91,7 +93,7 @@ public function store(Request $request)
 
         $murid->update($data);
 
-        return redirect()->route('murid.index')->with('success', 'Data murid berhasil diperbarui.');
+        return redirect()->route('admin.murid.index')->with('success', 'Data murid berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -104,6 +106,30 @@ public function store(Request $request)
 
         $murid->delete();
 
-        return redirect()->route('murid.index')->with('success', 'Data murid berhasil dihapus.');
+        return redirect()->route('admin.murid.index')->with('success', 'Data murid berhasil dihapus.');
     }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids');
+        
+        if (!$ids || count($ids) === 0) {
+            return redirect()->route('admin.murid.index')->with('error', 'Tidak ada data yang dipilih.');
+        }
+    
+        Murid::whereIn('id_pendaftaran', $ids)->delete();
+    
+        return redirect()->route('admin.murid.index')->with('success', 'Beberapa data murid berhasil dihapus.');
+    }
+    
+
+public function deleteAll()
+{
+    Murid::truncate(); // hapus semua data
+    return redirect()->route('admin.murid.index')->with('success', 'Seluruh data murid telah dihapus.');
 }
+
+
+}
+
+

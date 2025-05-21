@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController as AdminLoginController;
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 use App\Http\Controllers\Admin\MuridController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,21 +34,26 @@ Route::get('/unauthorized', function () {
 // ADMIN
 // ================== ADMIN ==================
 
+
 Route::prefix('admin')->name('admin.')->group(function () {
+    // Auth Routes
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AdminLoginController::class, 'login']);
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->middleware(['auth:admin', 'admin.role'])->name('dashboard');
-});
+    // Routes dengan middleware auth:admin
+    Route::middleware(['auth:admin', 'admin.role'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('murid', MuridController::class);
-});
+        // Murid resource route
+        Route::resource('murid', MuridController::class);
 
-Route::get('/admin/murid/show', [MuridController::class, 'showAll'])->name('admin.murid.show');
+        // Tambahan fitur khusus
+        Route::get('/murid/show', [MuridController::class, 'show'])->name('murid.show');
+        Route::delete('/murid-delete-selected', [MuridController::class, 'bulkDelete'])->name('murid.bulkDelete');
+        Route::delete('/murid-delete-all', [MuridController::class, 'deleteAll'])->name('murid.deleteAll');
+    });
+});
 
 
 /*

@@ -78,7 +78,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <a href="#" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Murid</a>
+            <a href="{{ route('admin.murid.create') }}" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Murid</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Pengajar</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Manage Jadwal</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Manage Data Pengajar</a>
@@ -100,11 +100,13 @@
             <i class="fas fa-address-book text-3xl text-blue-500"></i>
             <div>
                 <h2 class="text-xl font-bold">DATA MURID</h2>
-                <p class="text-gray-600">Jumlah ....</p>
+                <p class="text-gray-600">Jumlah {{ $jumlahMurid }}</p>
             </div>
         </div>
-        <button class="text-sm bg-blue-500 text-white px-4 py-2 rounded">Lihat</button>
-    </div>
+        <a href="{{ route('admin.murid.show') }}">
+            <button class="text-sm bg-blue-500 text-white px-4 py-2 rounded">Lihat</button>
+        </a>
+    </div>    
 
     <!-- Data Pengajar -->
     <div class="bg-white p-6 rounded shadow flex items-center justify-between">
@@ -127,7 +129,9 @@
                 <p class="text-gray-600">Edit, Hapus, Update</p>
             </div>
         </div>
-        <button class="text-sm bg-indigo-500 text-white px-4 py-2 rounded">Lihat</button>
+        <a href="{{ route('admin.murid.index') }}">
+            <button class="text-sm bg-indigo-500 text-white px-4 py-2 rounded">Lihat</button>
+        </a>
     </div>
 
     <!-- Manage Data Pengajar -->
