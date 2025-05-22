@@ -9,6 +9,8 @@ export default defineConfig({
                 "resources/js/app.js",
                 "resources/css/admin.css",
                 "resources/js/admin.js",
+                "resources/css/pengajar.css",
+                "resources/js/pengajar.js",
             ],
             refresh: true,
         }),

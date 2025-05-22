@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController as AdminLoginController;
-use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 use App\Http\Controllers\Admin\MuridController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PengajarController;
 
+use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 /*
 |--------------------------------------------------------------------------
 | WEB ROUTES
@@ -17,18 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*
-|--------------------------------------------------------------------------
-| ADMIN ROUTES
-|--------------------------------------------------------------------------
-*/
-
 // ERROR MESSAGE
 // Route fallback untuk tampilan pesan error jika tidak login
 Route::get('/unauthorized', function () {
     return view('errors.unauthorized');
 })->name('unauthorized');
-
 
 
 // ADMIN
@@ -52,6 +46,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/murid/show', [MuridController::class, 'show'])->name('murid.show');
         Route::delete('/murid-delete-selected', [MuridController::class, 'bulkDelete'])->name('murid.bulkDelete');
         Route::delete('/murid-delete-all', [MuridController::class, 'deleteAll'])->name('murid.deleteAll');
+    
+        // Pengajar Resource Route
+        Route::resource('pengajar', PengajarController::class);
     });
 });
 

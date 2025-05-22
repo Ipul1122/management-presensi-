@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-       // database/migrations/xxxx_xx_xx_create_murids_table.php
-        Schema::create('murids', function (Blueprint $table) {
+        Schema::create('pengajar', function (Blueprint $table) {
             $table->id('id_pendaftaran');
-            $table->string('nama_anak'); // string biasa, bukan foreign key
-            $table->string('foto_anak')->nullable();
+            $table->string('nama_pengajar'); // string biasa, bukan foreign key
+            $table->string('foto_pengajar')->nullable();
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->text('alamat');
-            $table->string('kelas');
-            $table->date('tanggal_daftar');
+            $table->string('deskripsi');
+            // $table->date('tanggal_daftar');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('murids');
+        Schema::dropIfExists('pengajar');
     }
 };
