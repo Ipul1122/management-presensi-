@@ -3,60 +3,99 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Pengajar;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PengajarController extends Controller
 {
-    //
-    public function index(){
-        $pengajar = Pengajar::all();
-        return view('admin.pengajar.index', compact('pengajar'));
+    public function index()
+    {
+        $pengajars = Pengajar::all();
+        return view('admin.pengajar.index', compact('pengajars'));
     }
 
-    public function edit($id){
-        $pengajar = Pengajar::find($id);
+    public function create()
+    {
+        return view('admin.pengajar.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_pengajar' => 'required|string|max:255',
+            'foto_pengajar' => 'nullable|image|max:2048',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'alamat' => 'required|string',
+            'deskripsi' => 'required|string',
+        ]);
+
+        if ($request->hasFile('foto_pengajar')) {
+            $validated['foto_pengajar'] = $request->file('foto_pengajar')->store('foto_pengajar', 'public');
+        }
+
+        Pengajar::create($validated);
+        return redirect()->route('admin.pengajar.index')->with('success', 'Data pengajar berhasil ditambahkan.');
+    }
+
+    public function show(Pengajar $pengajar)
+    {
+        $pengajars = Pengajar::all();
+        return view('admin.pengajar.show', compact('pengajars'));
+    }
+
+    public function edit(Pengajar $pengajar)
+    {
         return view('admin.pengajar.edit', compact('pengajar'));
     }
 
-    public function update(Request $request, $id){
-        $pengajar = Pengajar::find($id);
-        $pengajar->update($request->all());
-
-        return redirect()->route('pengajar.index')->with('success', 'Data berhasil diubah');
-    }
-
-    public function destroy($id){
-        $pengajar = Pengajar::find($id);
-        $pengajar->delete();
-
-        return redirect()->route('pengajar.index')->with('berhasil', 'Data Berhasil Dihapus');
-    }
-
-    public function create(){
-        return view('admin.pengajar.index');
-    }
-
-    public function store(Request $request){
-        $request->validate([
-            'nama_pengajar' => 'required',
-            'foto_pengajar' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+    public function update(Request $request, Pengajar $pengajar)
+    {
+        $validated = $request->validate([
+            'nama_pengajar' => 'required|string|max:255',
+            'foto_pengajar' => 'nullable|image|max:2048',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'alamat' => 'required',
-            'deskripsi' => 'required',
+            'alamat' => 'required|string',
+            'deskripsi' => 'required|string',
         ]);
 
-        $data = $request->all();
+        if ($request->hasFile('foto_pengajar')) {
+            if ($pengajar->foto_pengajar) {
+                Storage::disk('public')->delete($pengajar->foto_pengajar);
+            }
+            $validated['foto_pengajar'] = $request->file('foto_pengajar')->store('foto_pengajar', 'public');
+        }
 
-        $data['foto_pengajar'] = $request->file('foto_pengajar')->store('foto_pengajar', 'public');
-        
+        $pengajar->update($validated);
+        return redirect()->route('admin.pengajar.index')->with('success', 'Data pengajar berhasil diperbarui.');
     }
 
-    public function show($id){
-        $pengajar = Pengajar::find($id);
-        return view('admin.pengajar.show', compact('pengajar'));
+    public function destroy(Pengajar $pengajar)
+    {
+        if ($pengajar->foto_pengajar) {
+            Storage::disk('public')->delete($pengajar->foto_pengajar);
+        }
+        $pengajar->delete();
+        return redirect()->route('admin.pengajar.index')->with('success', 'Data pengajar berhasil dihapus.');
     }
 
+    public function bulkDelete(Request $request)
+{
+    $ids = $request->input('ids', []);
+
+    if (!is_array($ids) || count($ids) === 0) {
+        return redirect()->route('admin.pengajar.index')->with('error', 'Tidak ada data yang dipilih.');
+    }
+
+    $pengajars = Pengajar::whereIn('id_pendaftaran', $ids)->get();
+
+    foreach ($pengajars as $pengajar) {
+        if ($pengajar->foto_pengajar && Storage::disk('public')->exists($pengajar->foto_pengajar)) {
+            Storage::disk('public')->delete($pengajar->foto_pengajar);
+        }
+        $pengajar->delete();
+    }
+
+    return redirect()->route('admin.pengajar.index')->with('success', count($ids) . ' data pengajar berhasil dihapus.');
 }
-
-
+}

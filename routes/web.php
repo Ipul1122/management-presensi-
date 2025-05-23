@@ -37,16 +37,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Routes dengan middleware auth:admin
     Route::middleware(['auth:admin', 'admin.role'])->group(function () {
+        
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Murid resource route
         Route::resource('murid', MuridController::class);
+        
 
         // Tambahan fitur khusus
         Route::get('/murid/show', [MuridController::class, 'show'])->name('murid.show');
         Route::delete('/murid-delete-selected', [MuridController::class, 'bulkDelete'])->name('murid.bulkDelete');
         Route::delete('/murid-delete-all', [MuridController::class, 'deleteAll'])->name('murid.deleteAll');
-    
+        
+        Route::get('/pengajar/show', [PengajarController::class, 'show'])->name('pengajar.show');
+        Route::delete('/pengajar-delete-selected', [PengajarController::class, 'bulkDelete'])->name('pengajar.bulkDelete');
+        Route::delete('/pengajar-delete-all', [PengajarController::class, 'deleteAll'])->name('pengajar.deleteAll');
+        
+
         // Pengajar Resource Route
         Route::resource('pengajar', PengajarController::class);
     });

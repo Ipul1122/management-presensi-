@@ -79,9 +79,9 @@
                 </button>
             </div>
             <a href="{{ route('admin.murid.create') }}" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Murid</a>
-            <a href="#" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Pengajar</a>
+            <a href="{{ route('admin.pengajar.create') }}" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Pengajar</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Manage Jadwal</a>
-            <a href="#" class="block p-2 hover:bg-gray-200 rounded">Manage Data Pengajar</a>
+            <a href="{{ route('admin.pengajar.index') }}" class="block p-2 hover:bg-gray-200 rounded">Manage Data Pengajar</a>
             <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
                 <button class="block w-full text-left p-2 hover:bg-gray-200 rounded text-red-500">Logout</button>
@@ -114,10 +114,12 @@
             <i class="fas fa-chalkboard-teacher text-3xl text-green-500"></i>
             <div>
                 <h2 class="text-xl font-bold">DATA PENGAJAR</h2>
-                <p class="text-gray-600">Jumlah ....</p>
+                <p class="text-gray-600">Jumlah {{ $jumlahPengajar }}</p>
             </div>
         </div>
-        <button class="text-sm bg-green-500 text-white px-4 py-2 rounded">Lihat</button>
+        <a href="{{ route('admin.pengajar.index') }}">
+            <button class="text-sm bg-green-500 text-white px-4 py-2 rounded">Lihat</button>
+        </a>
     </div>
 
     <!-- Manage Data Murid -->
@@ -143,7 +145,9 @@
                 <p class="text-gray-600">Edit, Hapus, Update</p>
             </div>
         </div>
-        <button class="text-sm bg-pink-500 text-white px-4 py-2 rounded">Lihat</button>
+        <a href="{{ route('admin.pengajar.index') }}">
+            <button class="text-sm bg-pink-500 text-white px-4 py-2 rounded">Lihat</button>
+        </a>
     </div>
 </div>
 
