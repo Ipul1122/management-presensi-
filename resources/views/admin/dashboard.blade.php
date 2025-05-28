@@ -41,7 +41,15 @@
                 </div>
                 <div class="flex space-x-4 text-xl md:hidden">
                     <button title="Tambah Data" class="text-blue-600 hover:text-blue-800"><i class="fas fa-plus-circle"></i></button>
-                    <button title="Notifikasi" class="text-green-600 hover:text-green-800"><i class="fas fa-bell"></i></button>
+                    <a href="{{ route('admin.notifikasi.index') }}" class="relative" title="Notifikasi">
+                        <i class="fas fa-bell text-green-600 hover:text-green-800"></i>
+                        @if ($unreadCount > 0)
+                            <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                                {{ $unreadCount > 9 ? '9+' : $unreadCount }}
+                            </span>
+                        @endif
+                    </a>
+                    
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button title="Logout" class="text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i></button>
@@ -49,18 +57,27 @@
                 </div>
             </div>
             
-            <!-- Search Bar -->
+            {{-- <!-- Search Bar -->
             <div class="w-full md:w-1/2">
                 <div class="relative">
                     <input type="text" placeholder="Cari apa yang anda mau" class="w-full p-2 pl-10 rounded border border-gray-300">
                     <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Desktop Navigation Icons -->
             <div class="hidden md:flex space-x-4 text-xl">
                 <button title="Tambah Data" class="text-blue-600 hover:text-blue-800"><i class="fas fa-plus-circle"></i></button>
-                <button title="Notifikasi" class="text-green-600 hover:text-green-800"><i class="fas fa-bell"></i></button>
+                <a href="{{ route('admin.notifikasi.index') }}" class="relative" title="Notifikasi">
+                    <i class="fas fa-bell text-green-600 hover:text-green-800"></i>
+                    @if ($unreadCount > 0)
+                        <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                            {{ $unreadCount > 9 ? '9+' : $unreadCount }}
+                        </span>
+                    @endif
+                </a>
+                
+
                 <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf
                     <button title="Logout" class="text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i></button>
@@ -82,6 +99,7 @@
             <a href="{{ route('admin.pengajar.create') }}" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Pengajar</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Manage Jadwal</a>
             <a href="{{ route('admin.pengajar.index') }}" class="block p-2 hover:bg-gray-200 rounded">Manage Data Pengajar</a>
+            <a href="{{ route('admin.notifikasi.index') }}" class="block p-2 hover:bg-gray-200 rounded">History Data</a>
             <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
                 <button class="block w-full text-left p-2 hover:bg-gray-200 rounded text-red-500">Logout</button>

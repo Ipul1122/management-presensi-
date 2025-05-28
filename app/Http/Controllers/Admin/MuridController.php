@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Murid;
 use Illuminate\Support\Facades\Storage;
+use App\Models\NotifikasiAdmin;
 
 class MuridController extends Controller
 {
@@ -33,6 +34,12 @@ public function store(Request $request)
         'tanggal_daftar' => 'required|date',
     ]);
 
+
+    NotifikasiAdmin::create([
+        'aksi' => 'Tambah Data Murid',
+        'deskripsi' => 'Admin menambahkan Murid bernama ' . $validatedData['nama_anak'],
+    ]);  
+
     // Simpan foto jika ada
     if ($request->hasFile('foto_anak')) {
         $validatedData['foto_anak'] = $request->file('foto_anak')->store('foto_anak', 'public');
@@ -46,19 +53,11 @@ public function store(Request $request)
                     ->with('success', 'Data telah dibuat.');
 }
 
-
-
 public function edit($id)
 {
     $murid = Murid::findOrFail($id);
     return view('admin.murid.edit', compact('murid'));
 }
-
-    // public function show($id)
-    // {
-    //     $murid = Murid::findOrFail($id);
-    //     return view('admin.murid.show', compact('murid'));
-    // }
 
     public function show()
     {
@@ -80,6 +79,11 @@ public function edit($id)
             'foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', // max dalam kilobytes
         ]);        
 
+        NotifikasiAdmin::create([
+            'aksi' => 'Edit Data Murid',
+            'deskripsi' => 'Admin mengubah data Murid bernama ' . $request['nama_anak'],
+        ]);
+
         $data = $request->all();
 
         // Update foto jika ada file baru
@@ -98,8 +102,14 @@ public function edit($id)
 
     public function destroy($id)
     {
-        $murid = Murid::findOrFail($id);
 
+        
+        $murid = Murid::findOrFail($id);
+        NotifikasiAdmin::create([
+            'aksi' => 'Hapus Data Murid',
+            'deskripsi' => 'Admin menghapus Murid bernama ' . $murid->nama_murid,
+        ]);
+        
         if ($murid->foto_anak && Storage::disk('public')->exists($murid->foto_anak)) {
             Storage::disk('public')->delete($murid->foto_anak);
         }
@@ -110,24 +120,46 @@ public function edit($id)
     }
 
     public function bulkDelete(Request $request)
-    {
-        $ids = $request->input('ids');
-        
-        if (!$ids || count($ids) === 0) {
-            return redirect()->route('admin.murid.index')->with('error', 'Tidak ada data yang dipilih.');
-        }
-    
-        Murid::whereIn('id_pendaftaran', $ids)->delete();
-    
-        return redirect()->route('admin.murid.index')->with('success', 'Beberapa data murid berhasil dihapus.');
-    }
-    
-
-public function deleteAll()
 {
-    Murid::truncate(); // hapus semua data
-    return redirect()->route('admin.murid.index')->with('success', 'Seluruh data murid telah dihapus.');
+    $ids = $request->input('ids', []);
+
+    if (!is_array($ids) || count($ids) === 0) {
+        return redirect()->route('admin.murid.index')->with('error', 'Tidak ada data yang dipilih.');
+    }
+
+    $murids = Murid::whereIn('id_pendaftaran', $ids)->get();
+
+    foreach ($murids as $murid) {
+
+        foreach ($murids as $murid) {
+            // hapus foto & data
+            NotifikasiAdmin::create([
+                'aksi' => 'Hapus Data murid (Bulk)',
+                'deskripsi' => 'Admin menghapus murid bernama ' . $murid->nama_anak,
+            ]);
+            $murid->delete();
+        }
+        
+
+        if ($murid->foto_murid && Storage::disk('public')->exists($murid->foto_murid)) {
+            Storage::disk('public')->delete($murid->foto_murid);
+        }
+        $murid->delete();
+    }
+
+    return redirect()->route('admin.murid.index')->with('success', count($ids) . ' data pengajar berhasil dihapus.');
 }
+
+    public function deleteAll()
+    {
+        $ids = Murid::all()->pluck('id');
+        Murid::truncate(); // hapus semua data
+        NotifikasiAdmin::create([
+            'aksi' => 'Hapus Data Murid (Bulk)',
+            'deskripsi' => 'Admin menghapus Murid bernama ' . $ids->nama_murid,
+        ]);
+        return redirect()->route('admin.murid.index')->with('success', 'Seluruh data murid telah dihapus.');
+    }
 
 
 }

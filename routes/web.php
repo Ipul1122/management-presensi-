@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\MuridController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PengajarController;
+use App\Http\Controllers\Admin\NotifikasiController;
+use App\Http\Controllers\Admin\AktivitasController;
 
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 /*
@@ -43,19 +45,24 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Murid resource route
         Route::resource('murid', MuridController::class);
         
-
         // Tambahan fitur khusus
-        Route::get('/murid/show', [MuridController::class, 'show'])->name('murid.show');
         Route::delete('/murid-delete-selected', [MuridController::class, 'bulkDelete'])->name('murid.bulkDelete');
         Route::delete('/murid-delete-all', [MuridController::class, 'deleteAll'])->name('murid.deleteAll');
         
-        Route::get('/pengajar/{pengajar}', [PengajarController::class, 'show'])->name('pengajar.show');
+        // Pengajar Resource Route
+        Route::resource('pengajar', PengajarController::class);
+        
+        // Additional Pengajar routes
         Route::delete('/pengajar-delete-selected', [PengajarController::class, 'bulkDelete'])->name('pengajar.bulkDelete');
         Route::delete('/pengajar-delete-all', [PengajarController::class, 'deleteAll'])->name('pengajar.deleteAll');
         
+        
+            Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
+            Route::delete('/notifikasi-delete-selected', [NotifikasiController::class, 'bulkDelete'])->name('notifikasi.bulkDelete');
+            Route::get('/notifikasi-delete-all', [NotifikasiController::class, 'deleteAll'])->name('notifikasi.deleteAll');
 
-        // Pengajar Resource Route
-        Route::resource('pengajar', PengajarController::class);
+        // NOTIFIKASI
+        Route::get('notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
     });
 });
 

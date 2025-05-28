@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Pengajar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\NotifikasiAdmin;
+use App\Models\Aktivitas;
+
 
 class PengajarController extends Controller
 {
@@ -30,6 +33,11 @@ class PengajarController extends Controller
             'deskripsi' => 'required|string',
         ]);
 
+        NotifikasiAdmin::create([
+            'aksi' => 'Tambah Data Pengajar',
+            'deskripsi' => 'Admin menambahkan pengajar bernama ' . $validated['nama_pengajar'],
+        ]);        
+
         if ($request->hasFile('foto_pengajar')) {
             $validated['foto_pengajar'] = $request->file('foto_pengajar')->store('foto_pengajar', 'public');
         }
@@ -37,6 +45,8 @@ class PengajarController extends Controller
         Pengajar::create($validated);
         return redirect()->route('admin.pengajar.index')->with('success', 'Data pengajar berhasil ditambahkan.');
     }
+
+
 
     public function show(Pengajar $pengajar)
     {
@@ -58,6 +68,12 @@ class PengajarController extends Controller
             'alamat' => 'required|string',
             'deskripsi' => 'required|string',
         ]);
+        
+        NotifikasiAdmin::create([
+            'aksi' => 'Edit Data Pengajar',
+            'deskripsi' => 'Admin mengubah data pengajar bernama ' . $validated['nama_pengajar'],
+        ]);
+        
 
         if ($request->hasFile('foto_pengajar')) {
             if ($pengajar->foto_pengajar) {
@@ -72,6 +88,13 @@ class PengajarController extends Controller
 
     public function destroy(Pengajar $pengajar)
     {
+
+        NotifikasiAdmin::create([
+            'aksi' => 'Hapus Data Pengajar',
+            'deskripsi' => 'Admin menghapus pengajar bernama ' . $pengajar->nama_pengajar,
+        ]);
+        
+
         if ($pengajar->foto_pengajar) {
             Storage::disk('public')->delete($pengajar->foto_pengajar);
         }
@@ -90,6 +113,17 @@ class PengajarController extends Controller
     $pengajars = Pengajar::whereIn('id_pendaftaran', $ids)->get();
 
     foreach ($pengajars as $pengajar) {
+
+        foreach ($pengajars as $pengajar) {
+            // hapus foto & data
+            NotifikasiAdmin::create([
+                'aksi' => 'Hapus Data Pengajar (Bulk)',
+                'deskripsi' => 'Admin menghapus pengajar bernama ' . $pengajar->nama_pengajar,
+            ]);
+            $pengajar->delete();
+        }
+        
+
         if ($pengajar->foto_pengajar && Storage::disk('public')->exists($pengajar->foto_pengajar)) {
             Storage::disk('public')->delete($pengajar->foto_pengajar);
         }

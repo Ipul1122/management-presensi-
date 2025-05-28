@@ -179,7 +179,7 @@
 </div>
 
 <!-- Popover for file size warning -->
-<div id="fileSizePopover" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+<div id="fileSizePopover" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
     <div class="bg-white rounded-2xl shadow-2xl p-6 m-4 max-w-sm w-full transform transition-all duration-300">
         <div class="flex items-center space-x-3 mb-4">
             <div class="p-2 bg-red-100 rounded-full">

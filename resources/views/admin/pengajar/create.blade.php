@@ -44,10 +44,10 @@
                         </label>
                         <div class="relative group">
                             <input type="text" 
-                                   name="nama_pengajar" 
-                                   placeholder="Masukkan nama lengkap pengajar" 
-                                   class="w-full border-2 border-green-200 rounded-xl p-4 pr-12 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white group-hover:shadow-md"
-                                   required>
+                                name="nama_pengajar" 
+                                placeholder="Masukkan nama lengkap pengajar" 
+                                class="w-full border-2 border-green-200 rounded-xl p-4 pr-12 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white group-hover:shadow-md"
+                                required>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-4">
                                 <svg class="w-5 h-5 text-green-400 group-focus-within:text-green-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -96,12 +96,12 @@
                         </label>
                         <div class="relative group">
                             <input type="file" 
-                                   name="foto_pengajar" 
-                                   accept="image/*"
-                                   id="foto_pengajar"
-                                   onchange="validateImage(this)"
-                                   class="w-full border-2 border-green-200 rounded-xl p-4 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 cursor-pointer"
-                                   required>
+                                name="foto_pengajar" 
+                                accept="image/*"
+                                id="foto_pengajar"
+                                onchange="validateImage(this)"
+                                class="w-full border-2 border-green-200 rounded-xl p-4 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 cursor-pointer"
+                                required>
                             <div class="mt-2 text-xs text-green-600">
                                 <span class="flex items-center">
                                     <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,10 +127,10 @@
                         </label>
                         <div class="relative group">
                             <textarea name="alamat" 
-                                      placeholder="Masukkan alamat lengkap pengajar (jalan, kecamatan, kota, kode pos)" 
-                                      rows="3"
-                                      class="w-full border-2 border-green-200 rounded-xl p-4 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white resize-none"
-                                      required></textarea>
+                                    placeholder="Masukkan alamat lengkap pengajar (jalan, kecamatan, kota, kode pos)" 
+                                    rows="3"
+                                    class="w-full border-2 border-green-200 rounded-xl p-4 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white resize-none"
+                                    required></textarea>
                         </div>
                     </div>
 
@@ -147,10 +147,10 @@
                         </label>
                         <div class="relative group">
                             <textarea name="deskripsi" 
-                                      placeholder="Jelaskan keahlian, pengalaman mengajar, spesialisasi, dan hal menarik lainnya tentang pengajar" 
-                                      rows="4"
-                                      class="w-full border-2 border-green-200 rounded-xl p-4 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white resize-none"
-                                      required></textarea>
+                                    placeholder="Jelaskan keahlian, pengalaman mengajar, spesialisasi, dan hal menarik lainnya tentang pengajar" 
+                                    rows="4"
+                                    class="w-full border-2 border-green-200 rounded-xl p-4 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 bg-green-50 hover:bg-white resize-none"
+                                    required></textarea>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
 </div>
 
 <!-- Popover for Image Validation -->
-<div id="imagePopover" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+<div id="imagePopover" class="fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl border border-red-200 animate-bounce">
         <div class="flex items-center space-x-3 mb-4">
             <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">

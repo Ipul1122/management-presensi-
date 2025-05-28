@@ -241,7 +241,7 @@
 </div>
 
 <!-- Delete Confirmation Modal -->
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center hidden">
     <div class="bg-white rounded-lg max-w-md w-full mx-4">
         <div class="p-6">
             <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full mb-4">
@@ -265,7 +265,7 @@
 </div>
 
 <!-- Bulk Delete Confirmation Modal -->
-<div id="bulkDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+<div id="bulkDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center hidden">
     <div class="bg-white rounded-lg max-w-md w-full mx-4">
         <div class="p-6">
             <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full mb-4">
@@ -285,7 +285,7 @@
 </div>
 
 <!-- View Murid Modal -->
-<div id="viewModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+<div id="viewModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center hidden">
     <div class="bg-white rounded-lg max-w-2xl w-full mx-4">
         <div class="flex justify-between items-center p-6 border-b">
             <h3 class="text-lg font-semibold">Detail Murid</h3>
@@ -408,18 +408,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             deleteModalName.textContent = name;
             deleteSingleItemForm.action = `/admin/murid/${id}`;
-            deleteModal.classList.remove("hidden");
+            showModal('deleteModal');
         });
     });
 
     cancelDelete.addEventListener("click", function () {
-        deleteModal.classList.add("hidden");
+        hideModal('deleteModal');
     });
 
     // Close modal if clicked outside
     deleteModal.addEventListener("click", function (e) {
         if (e.target === deleteModal) {
-            deleteModal.classList.add("hidden");
+            hideModal('deleteModal');
         }
     });
 
@@ -443,11 +443,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         bulkDeleteCount.textContent = count;
-        bulkDeleteModal.classList.remove("hidden");
+        showModal('bulkDeleteModal');
     });
 
     cancelBulkDelete.addEventListener("click", function () {
-        bulkDeleteModal.classList.add("hidden");
+        hideModal('bulkDeleteModal');
     });
 
     confirmBulkDelete.addEventListener("click", function () {
@@ -457,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Close modal if clicked outside
     bulkDeleteModal.addEventListener("click", function (e) {
         if (e.target === bulkDeleteModal) {
-            bulkDeleteModal.classList.add("hidden");
+            hideModal('bulkDeleteModal');
         }
     });
 
@@ -470,7 +470,7 @@ document.addEventListener("DOMContentLoaded", function () {
     viewButtons.forEach((button) => {
         button.addEventListener("click", function () {
             const id = this.getAttribute("data-id");
-            viewModal.classList.remove("hidden");
+            showModal('viewModal');
 
             // Here you would normally make an AJAX request to get the details
             // For now, we'll simulate loading with a timeout
@@ -587,21 +587,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     deleteModalName.textContent = name;
                     deleteSingleItemForm.action = `/admin/murid/${id}`;
-                    viewModal.classList.add("hidden");
-                    deleteModal.classList.remove("hidden");
+                    hideModal('viewModal');
+                    showModal('deleteModal');
                 });
             }, 500);
         });
     });
 
     closeViewModal.addEventListener("click", function () {
-        viewModal.classList.add("hidden");
+        hideModal('viewModal');
     });
 
     // Close modal if clicked outside
     viewModal.addEventListener("click", function (e) {
         if (e.target === viewModal) {
-            viewModal.classList.add("hidden");
+            hideModal('viewModal');
         }
     });
 
@@ -634,6 +634,19 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Class filter changed to:", this.value);
         filterRows();
     });
+
+    // Update modal visibility functions
+    function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function hideModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
 });
 
 // Add needed CSS animation
