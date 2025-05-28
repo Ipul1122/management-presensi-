@@ -1,4 +1,4 @@
-@extends('components.layouts.admin')
+{{-- @extends('components.layouts.admin')
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
@@ -81,8 +81,8 @@
                             <td class="py-3 px-4">
                                 @if ($murid->foto_anak)
                                     <img src="{{ asset('storage/' . $murid->foto_anak) }}" 
-                                         class="w-14 h-14 object-cover rounded-full border-2 border-gray-200 shadow hover:scale-150 transition-transform duration-300" 
-                                         alt="Foto {{ $murid->nama_anak }}">
+                                        class="w-14 h-14 object-cover rounded-full border-2 border-gray-200 shadow hover:scale-150 transition-transform duration-300" 
+                                        alt="Foto {{ $murid->nama_anak }}">
                                 @else
                                     <span class="inline-flex items-center justify-center bg-gray-200 text-gray-500 rounded-full w-14 h-14">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -116,4 +116,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

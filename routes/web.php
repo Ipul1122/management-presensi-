@@ -49,7 +49,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/murid-delete-selected', [MuridController::class, 'bulkDelete'])->name('murid.bulkDelete');
         Route::delete('/murid-delete-all', [MuridController::class, 'deleteAll'])->name('murid.deleteAll');
         
-        Route::get('/pengajar/show', [PengajarController::class, 'show'])->name('pengajar.show');
+        Route::get('/pengajar/{pengajar}', [PengajarController::class, 'show'])->name('pengajar.show');
         Route::delete('/pengajar-delete-selected', [PengajarController::class, 'bulkDelete'])->name('pengajar.bulkDelete');
         Route::delete('/pengajar-delete-all', [PengajarController::class, 'deleteAll'])->name('pengajar.deleteAll');
         

@@ -42,7 +42,7 @@ public function store(Request $request)
     $murid = Murid::create($validatedData);
 
     // Redirect ke halaman show dengan flash message
-    return redirect()->route('admin.murid.show', $murid->id_pendaftaran)
+    return redirect()->route('admin.murid.index', $murid->id_pendaftaran)
                     ->with('success', 'Data telah dibuat.');
 }
 

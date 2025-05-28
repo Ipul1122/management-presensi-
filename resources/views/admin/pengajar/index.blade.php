@@ -24,7 +24,7 @@
                     <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </button>
                 <a href="{{ route('admin.pengajar.create') }}" 
-                   class="group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:from-green-700 hover:to-emerald-700 hover:shadow-lg hover:scale-105 active:scale-95">
+                class="group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:from-green-700 hover:to-emerald-700 hover:shadow-lg hover:scale-105 active:scale-95">
                     <span class="relative z-10 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -45,7 +45,7 @@
                 <!-- Search Input -->
                 <div class="relative flex-1 max-w-md">
                     <input type="text" id="search-input" placeholder="Cari pengajar..." 
-                           class="w-full pl-10 pr-4 py-3 rounded-xl border border-green-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 bg-white/80">
+                        class="w-full pl-10 pr-4 py-3 rounded-xl border border-green-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 bg-white/80">
                     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
@@ -102,7 +102,7 @@
                             <th class="py-4 px-6 text-left">
                                 <label class="flex items-center cursor-pointer group">
                                     <input type="checkbox" onclick="toggleAll(this)" 
-                                           class="w-5 h-5 text-green-600 bg-white border-2 border-green-300 rounded focus:ring-green-500 focus:ring-2 transition-all duration-200">
+                                        class="w-5 h-5 text-green-600 bg-white border-2 border-green-300 rounded focus:ring-green-500 focus:ring-2 transition-all duration-200">
                                     <span class="ml-2 text-sm font-medium group-hover:text-green-100 transition-colors">Pilih</span>
                                 </label>
                             </th>
@@ -120,8 +120,8 @@
                                 style="animation-delay: {{ $index * 0.1 }}s" data-search="{{ strtolower($pengajar->nama_pengajar . ' ' . $pengajar->jenis_kelamin . ' ' . $pengajar->alamat) }}">
                                 <td class="py-4 px-6">
                                     <input type="checkbox" name="ids[]" value="{{ $pengajar->id_pendaftaran }}" 
-                                           class="row-checkbox w-5 h-5 text-green-600 bg-white border-2 border-green-300 rounded focus:ring-green-500 focus:ring-2 transition-all duration-200"
-                                           onchange="updateBulkDeleteButton()">
+                                        class="row-checkbox w-5 h-5 text-green-600 bg-white border-2 border-green-300 rounded focus:ring-green-500 focus:ring-2 transition-all duration-200"
+                                        onchange="updateBulkDeleteButton()">
                                 </td>
                                 <td class="py-4 px-6">
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -133,7 +133,7 @@
                                         <div class="flex-shrink-0 h-10 w-10">
                                             @if($pengajar->foto_pengajar)
                                                 <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
-                                                     alt="foto" class="h-10 w-10 rounded-full object-cover border-2 border-green-200">
+                                                    alt="foto" class="h-10 w-10 rounded-full object-cover border-2 border-green-200">
                                             @else
                                                 <div class="h-10 w-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-semibold">
                                                     {{ substr($pengajar->nama_pengajar, 0, 1) }}
@@ -161,7 +161,7 @@
                                         <button onclick="showImage('{{ asset('storage/' . $pengajar->foto_pengajar) }}')" 
                                                 class="relative group cursor-pointer">
                                             <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
-                                                 alt="foto" class="w-12 h-12 object-cover rounded-lg border-2 border-green-200 group-hover:border-green-400 transition-all duration-300">
+                                                alt="foto" class="w-12 h-12 object-cover rounded-lg border-2 border-green-200 group-hover:border-green-400 transition-all duration-300">
                                             <div class="absolute inset-0 bg-black/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -180,14 +180,14 @@
                                 <td class="py-4 px-6">
                                     <div class="flex items-center justify-center space-x-2">
                                         <a href="{{ route('admin.pengajar.show', $pengajar->id_pendaftaran) }}" 
-                                           class="group p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-110 transition-all duration-200">
+                                        class="group p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-110 transition-all duration-200">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                             </svg>
                                         </a>
                                         <a href="{{ route('admin.pengajar.edit', $pengajar->id_pendaftaran) }}" 
-                                           class="group p-2 rounded-lg bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:scale-110 transition-all duration-200">
+                                        class="group p-2 rounded-lg bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:scale-110 transition-all duration-200">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                             </svg>

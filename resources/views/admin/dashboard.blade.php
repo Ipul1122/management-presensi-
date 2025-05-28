@@ -103,9 +103,6 @@
                 <p class="text-gray-600">Jumlah {{ $jumlahMurid }}</p>
             </div>
         </div>
-        <a href="{{ route('admin.murid.show') }}">
-            <button class="text-sm bg-blue-500 text-white px-4 py-2 rounded">Lihat</button>
-        </a>
     </div>    
 
     <!-- Data Pengajar -->
@@ -117,9 +114,6 @@
                 <p class="text-gray-600">Jumlah {{ $jumlahPengajar }}</p>
             </div>
         </div>
-        <a href="{{ route('admin.pengajar.index') }}">
-            <button class="text-sm bg-green-500 text-white px-4 py-2 rounded">Lihat</button>
-        </a>
     </div>
 
     <!-- Manage Data Murid -->
