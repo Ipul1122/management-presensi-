@@ -45,6 +45,7 @@ Cek di terminal seperti CMD, Window Poweshell, bash dll. Lalu ketikkan, apabila 
 - `node -v`
 
 Jika kalian sudah cek dan ternyata ada semua, jalankan perintah selanjutnya di terminal
+- Pastikan memiliki server-side seperti xampp || laragon. Kemudian jalankan Apache && Mysql
 - `git clone https://github.com/Ipul1122/management-presensi-.git` untuk mendapatkan project tersebut
 - `npm run dev` menjalankan Vite
 - `php artisan migrate` menjalankan perintah migrasi database
