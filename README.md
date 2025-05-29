@@ -21,40 +21,52 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## About Project
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Project ini dibangun untuk membuat sistem presensi kegiatan, seperti membuat menambah murid atau pengajar, mengedit data murid dan pengajar dll. Yang telah dibangun dalam project ini yaitu
 
-## Laravel Sponsors
+- Login page Admin & Pengajar. Memiliki username dan password yang berbeda
+- Admin. username = admin, password = admin123
+- Pengajar. username = pengajar1, password = pengajar123 || username = pengajar2, password = pengajar123
+- Dashboard Admin, Pengajar
+- Perlindungan Dashboard Admin dan pengajar apa bila masuk tanpa login
+- Dapat membuat, mengedit, menghapus data murid dan pengajar
+- Notifikasi, memberi tahu apa saja yang baru saja melakukan perubahan
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Usage
 
-### Premium Partners
+Untuk menggunakan project tersebut, kamu memerlukan beberapa hal yang perlu dilakukan
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+Cek di terminal seperti CMD, Window Poweshell, bash dll. Lalu ketikkan, apabila tidak muncul versinya, berarti belum install
+- `php -v` Minimal php 8+
+- `composer` Minimal 2.8+
+- `node -v` Minimal 20+
+- `npm -v` Minimal 10+
 
-## Contributing
+Jika kalian sudah cek dan ternyata ada semua, jalankan perintah selanjutnya di terminal
+- Pastikan memiliki server-side seperti xampp || laragon. Kemudian jalankan Apache && Mysql
+- `git clone https://github.com/Ipul1122/management-presensi-.git` untuk mendapatkan project tersebut
+- `npm run dev` menjalankan Vite
+- `php artisan migrate` menjalankan perintah migrasi database
+- `php artisan db::seed` menjalankan kode akses login form admin || pengajar
+- `php artisan serve` menjalankan perintah artisan untuk mendapatkan localhost:8000
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Requirement
 
-## Code of Conduct
+Hal apa saja yang saya pakai untuk membangun website presensi tersebut, yaitu 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Framework: Laravel 12 -> latest update
+- CSS: Tailwind CSS 3.4.17
+- Animasi: AOS.js
+- Autentikasi: Laravel Sanctum (tanpa Breeze/Jetstream)
+- Desain Responsif
+- Login Multi-Auth:
+- Admin
+- Pengajar1 (Iqro)
+- Pengajar2 (Al-Qur’an)
+- ( Tambah baru )
 
 ## License
 
