@@ -66,7 +66,10 @@ Hal apa saja yang saya pakai untuk membangun website presensi tersebut, yaitu
 - Admin
 - Pengajar1 (Iqro)
 - Pengajar2 (Al-Qur’an)
+<<<<<<< HEAD
 - ( Tambah baru )
+=======
+>>>>>>> 6b22bb6118955ef8cbb6bf63ddbf0250094bdd62
 
 ## License
 
