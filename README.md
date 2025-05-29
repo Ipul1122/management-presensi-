@@ -45,8 +45,24 @@ Cek di terminal seperti CMD, Window Poweshell, bash dll. Lalu ketikkan, apabila 
 - `node -v`
 
 Jika kalian sudah cek dan ternyata ada semua, jalankan perintah selanjutnya di terminal
-- `npm run dev` menjalankan VIte
+- `npm run dev` menjalankan Vite
+- `php artisan migrate` menjalankan perintah migrasi database
+- `php artisan db::seed` menjalankan kode akses login form admin || pengajar
 - `php artisan serve` menjalankan perintah artisan untuk mendapatkan localhost:8000
+
+## Requirement
+
+Hal apa saja yang saya pakai untuk membangun website presensi tersebut, yaitu 
+
+- Framework: Laravel 12
+- CSS: Tailwind CSS 3.4.17
+- Animasi: AOS.js
+- Autentikasi: Laravel Sanctum (tanpa Breeze/Jetstream)
+- Desain Responsif
+- Login Multi-Auth:
+- Admin
+- Pengajar1 (Iqro)
+- Pengajar2 (Al-Qur’an)
 
 ## License
 
