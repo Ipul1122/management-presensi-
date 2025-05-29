@@ -41,8 +41,9 @@ Untuk menggunakan project tersebut, kamu memerlukan beberapa hal yang perlu dila
 
 Cek di terminal seperti CMD, Window Poweshell, bash dll. Lalu ketikkan, apabila tidak muncul versinya, berarti belum install
 - `php -v` Minimal php 8+
-- `composer`
-- `node -v`
+- `composer` Minimal 2.8+
+- `node -v` Minimal 20+
+- `npm -v` Minimal 10+
 
 Jika kalian sudah cek dan ternyata ada semua, jalankan perintah selanjutnya di terminal
 - Pastikan memiliki server-side seperti xampp || laragon. Kemudian jalankan Apache && Mysql
@@ -56,7 +57,7 @@ Jika kalian sudah cek dan ternyata ada semua, jalankan perintah selanjutnya di t
 
 Hal apa saja yang saya pakai untuk membangun website presensi tersebut, yaitu 
 
-- Framework: Laravel 12
+- Framework: Laravel 12 -> latest update
 - CSS: Tailwind CSS 3.4.17
 - Animasi: AOS.js
 - Autentikasi: Laravel Sanctum (tanpa Breeze/Jetstream)
