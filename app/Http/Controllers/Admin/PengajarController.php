@@ -7,8 +7,6 @@ use App\Models\Pengajar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\NotifikasiAdmin;
-use App\Models\Aktivitas;
-
 
 class PengajarController extends Controller
 {

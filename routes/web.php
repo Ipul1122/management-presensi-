@@ -6,7 +6,8 @@ use App\Http\Controllers\Admin\MuridController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PengajarController;
 use App\Http\Controllers\Admin\NotifikasiController;
-use App\Http\Controllers\Admin\AktivitasController;
+use App\Http\Controllers\Admin\JadwalController;
+
 
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 /*
@@ -44,25 +45,37 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Murid resource route
         Route::resource('murid', MuridController::class);
+        // Pengajar Resource Route
+        Route::resource('pengajar', PengajarController::class);
+        // Jadwal
+        Route::resource('jadwal', JadwalController::class);
+
+        
+        
         
         // Tambahan fitur khusus
         Route::delete('/murid-delete-selected', [MuridController::class, 'bulkDelete'])->name('murid.bulkDelete');
         Route::delete('/murid-delete-all', [MuridController::class, 'deleteAll'])->name('murid.deleteAll');
-        
-        // Pengajar Resource Route
-        Route::resource('pengajar', PengajarController::class);
-        
         // Additional Pengajar routes
         Route::delete('/pengajar-delete-selected', [PengajarController::class, 'bulkDelete'])->name('pengajar.bulkDelete');
         Route::delete('/pengajar-delete-all', [PengajarController::class, 'deleteAll'])->name('pengajar.deleteAll');
         
-        
-            Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
-            Route::delete('/notifikasi-delete-selected', [NotifikasiController::class, 'bulkDelete'])->name('notifikasi.bulkDelete');
-            Route::get('/notifikasi-delete-all', [NotifikasiController::class, 'deleteAll'])->name('notifikasi.deleteAll');
-
         // NOTIFIKASI
         Route::get('notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
+        // HAPUS BEBERAPA PILIHAN NOTIFIKASI
+        Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
+        Route::delete('/notifikasi-delete-selected', [NotifikasiController::class, 'bulkDelete'])->name('notifikasi.bulkDelete');
+        Route::get('/notifikasi-delete-all', [NotifikasiController::class, 'deleteAll'])->name('notifikasi.deleteAll');
+        
+        // JADWAL
+        Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+        Route::get(' jadwal/{id}' , [JadwalController::class, 'edit'])->name('jadwal.edit');
+        Route::put(' jadwal/{id}' , [JadwalController::class, 'update'])->name('jadwal.update');
+        // JADWAL HAPUS BEBERAPA PILIHAN ATAU SEMUA
+        Route::delete('/jadwal-delete-selected', [JadwalController::class, 'bulkDelete'])->name('jadwal.bulkDelete');
+        Route::get('/jadwal-delete-all', [JadwalController::class, 'deleteAll'])->name('jadwal.deleteAll');
+    
+        
     });
 });
 

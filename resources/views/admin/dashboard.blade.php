@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -97,7 +95,7 @@
             </div>
             <a href="{{ route('admin.murid.create') }}" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Murid</a>
             <a href="{{ route('admin.pengajar.create') }}" class="block p-2 hover:bg-gray-200 rounded">Tambah Data Pengajar</a>
-            <a href="#" class="block p-2 hover:bg-gray-200 rounded">Manage Jadwal</a>
+            {{-- <a href="{{ route('admin.jadwal.index') }}" class="block p-2 hover:bg-gray-200 rounded">Manage Jadwal</a> --}}
             <a href="{{ route('admin.pengajar.index') }}" class="block p-2 hover:bg-gray-200 rounded">Manage Data Pengajar</a>
             <a href="{{ route('admin.notifikasi.index') }}" class="block p-2 hover:bg-gray-200 rounded">History Data</a>
             <form action="{{ route('admin.logout') }}" method="POST">
@@ -165,20 +163,87 @@
 
 
             <!-- Kalender -->
-            <div class="bg-white p-6 rounded shadow">
-                <h2 class="text-xl font-bold mb-4">Kalender Kegiatan</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                    <div class="bg-blue-100 p-4 rounded text-center">Senin</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Selasa</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Rabu</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Kamis</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Jumat</div>
-                </div>
-            </div>
-        </main>
+          <form method="POST" action="{{ route('admin.jadwal.bulkDelete') }}">
+    @csrf
+    @method('DELETE')
+
+    <div class="overflow-x-auto mt-4">
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border-b">
+                        <input type="checkbox" id="selectAll">
+                    </th>
+                    <th class="px-4 py-2 border-b">Tanggal</th>
+                    <th class="px-4 py-2 border-b">Pukul</th>
+                    <th class="px-4 py-2 border-b">Nama Jadwal</th>
+                    <th class="px-4 py-2 border-b">Pengajar</th>
+                    <th class="px-4 py-2 border-b">Kegiatan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($jadwals as $jadwal)
+                    <tr>
+                        <td class="px-4 py-2 border-b">
+                            <input type="checkbox" name="selected_jadwals[]" value="{{ $jadwal->id }}">
+                        </td>
+                        <td class="px-4 py-2 border-b">{{ \Carbon\Carbon::parse($jadwal->tanggal_jadwal)->format('d M Y') }}</td>
+                        <td class="px-4 py-2 border-b">{{ $jadwal->pukul_jadwal }}</td>
+                        <td class="px-4 py-2 border-b">{{ $jadwal->nama_jadwal }}</td>
+                        <td class="px-4 py-2 border-b">{{ $jadwal->nama_pengajar_jadwal }}</td>
+                        <td class="px-4 py-2 border-b">{{ $jadwal->kegiatan_jadwal }}</td>
+                        <td class="px-4 py-2 border-b">
+                            <a href="{{ route('admin.jadwal.edit', $jadwal->id) }}"
+                            class="text-blue-600 hover:underline">Edit</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
+    <div>
+        <a href="{{ route('admin.jadwal.index') }}">Kelola Jadwal</a>
+    </div>
+
+    <div class="mt-4 flex gap-2">
+        <button type="submit" name="action" value="selected"
+            class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+            onclick="return confirm('Hapus jadwal yang dipilih?')">
+            Hapus Terpilih
+        </button>
+
+        <button type="submit" name="action" value="all"
+            class="bg-red-800 text-white px-4 py-2 rounded hover:bg-red-900"
+            onclick="return confirm('Hapus semua jadwal?')">
+            Hapus Semua
+        </button>
+    </div>
+</form>
+
+@if(session('success'))
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+        {{ session('error') }}
+    </div>
+@endif
+
+            
+
     <script>
+
+        // hapus jadwal yang dipilih
+        document.getElementById('selectAll').addEventListener('change', function(e) {
+                const checkboxes = document.querySelectorAll('input[name="selected_jadwals[]"]');
+                checkboxes.forEach(checkbox => checkbox.checked = e.target.checked);
+            });
+            
+        // Hamburger menu functionality
         const hamburger = document.getElementById('hamburger');
         const closeSidebar = document.getElementById('closeSidebar');
         const sidebar = document.querySelector('.sidebar');
@@ -199,4 +264,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
