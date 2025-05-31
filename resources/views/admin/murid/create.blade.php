@@ -143,6 +143,33 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin <span class="text-red-500">*</span></label>
+                    <div class="flex space-x-4 mt-2">
+                        <div class="flex items-center">
+                            <input 
+                                type="radio" 
+                                name="jenis_alkitab" 
+                                id="iqro" 
+                                value="iqro" 
+                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                                checked
+                            >
+                            <label for="iqro" class="ml-2 block text-sm text-gray-700">Iqro</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input 
+                                type="radio" 
+                                name="jenis_alkitab" 
+                                id="Al-Quran" 
+                                value="Al-Quran" 
+                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                            >
+                            <label for="Al-Quran" class="ml-2 block text-sm text-gray-700">Al-Quran</label>
+                        </div>
+                    </div>
+                </div>
             
             <!-- Alamat -->
             <div class="form-group mt-6">

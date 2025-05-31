@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->text('alamat');
             $table->string('kelas');
+            $table->enum('jenis_alkitab', ['iqro', 'Al-Quran']);
             $table->date('tanggal_daftar');
             $table->timestamps();
         });

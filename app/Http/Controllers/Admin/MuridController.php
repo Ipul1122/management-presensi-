@@ -27,11 +27,12 @@ public function store(Request $request)
 {
     $validatedData = $request->validate([
         'nama_anak' => 'required|string|max:255',
-        'foto_anak' => 'nullable|image|max:2048',
         'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
         'alamat' => 'required|string',
         'kelas' => 'required|string',
+        'jenis_alkitab' => 'required|in:iqro,Al-Quran',
         'tanggal_daftar' => 'required|date',
+        'foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', // max dalam kilobytes
     ]);
 
 
@@ -76,6 +77,7 @@ public function edit($id)
             'alamat' => 'required|string',
             'kelas' => 'required|string',
             'tanggal_daftar' => 'required|date',
+            'jenis_alkitab' => 'required|in:iqro,Al-Quran',
             'foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', // max dalam kilobytes
         ]);        
 

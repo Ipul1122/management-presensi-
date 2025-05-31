@@ -18,6 +18,7 @@ class Murid extends Model
         'jenis_kelamin',
         'alamat',
         'kelas',
+        'jenis_alkitab',
         'tanggal_daftar',
     ];
 

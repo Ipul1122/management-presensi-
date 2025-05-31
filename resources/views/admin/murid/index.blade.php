@@ -135,6 +135,7 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Kelamin</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Al-kitab</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 <div class="flex items-center">
                                     <span>Tanggal Daftar</span>
@@ -151,10 +152,12 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($murids as $index => $murid)
                         <tr class="hover:bg-gray-50 transition-colors duration-200 murid-row">
+                            {{-- ID PENDAFTARAN --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <input type="checkbox" name="ids[]" value="{{ $murid->id_pendaftaran }}" class="murid-checkbox rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer">
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $index + 1 }}</td>
+                            {{-- FOTO ANAK --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     @if ($murid->foto_anak)
@@ -170,25 +173,38 @@
                                     @endif
                                 </div>
                             </td>
+                            {{-- NAMA Anak --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-medium text-gray-900">{{ $murid->nama_anak }}</div>
                             </td>
+                            {{-- JENIS KELAMIN --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $murid->jenis_kelamin == 'Laki-laki' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
                                     {{ $murid->jenis_kelamin }}
                                 </span>
                             </td>
+                            {{-- ALAMAT --}}
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-900 max-w-xs truncate">{{ $murid->alamat }}</div>
                             </td>
+                            {{-- KELAS --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-lg bg-green-100 text-green-800">
                                     {{ $murid->kelas }}
                                 </span>
+                            {{-- AL-KITAB --}}
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $murid->jenis_alkitab == 'iqro' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
+                                    {{ $murid->jenis_alkitab }}
+                                </span>
+                            </td>
+                            {{-- TANGGAL DAFTAR --}}
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ \Carbon\Carbon::parse($murid->tanggal_daftar)->format('d M Y') }}
                             </td>
+                            {{-- ACTIONS --}}
+                            {{-- EDIT BUTTON --}}
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-2">
                                     <a href="{{ route('admin.murid.edit', $murid->id_pendaftaran) }}" class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 p-2 rounded-md transition-colors duration-200">
@@ -196,6 +212,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                                         </svg>
                                     </a>
+                                    {{-- DELETE BUTTTON --}}
                                     <button type="button" class="delete-btn text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-md transition-colors duration-200" 
                                         data-id="{{ $murid->id_pendaftaran }}" 
                                         data-name="{{ $murid->nama_anak }}">
@@ -203,6 +220,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                         </svg>
                                     </button>
+                                    {{-- VIEW BUTTON --}}
                                     <button type="button" class="view-btn text-green-600 hover:text-green-900 bg-green-50 hover:bg-green-100 p-2 rounded-md transition-colors duration-200" 
                                         data-id="{{ $murid->id_pendaftaran }}">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -496,6 +514,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         .closest("tr")
                         .querySelector("td:nth-child(7) span")
                         .textContent.trim(),
+                    jenis_alkitab: document
+                        .querySelector(`[data-id="${id}"]`)
+                        .closest("tr")
+                        .querySelector("td:nth-child(8) span")
+                        .textContent.trim(),
                     alamat: document
                         .querySelector(`[data-id="${id}"]`)
                         .closest("tr")
@@ -503,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     tanggal_daftar: document
                         .querySelector(`[data-id="${id}"]`)
                         .closest("tr")
-                        .querySelector("td:nth-child(8)")
+                        .querySelector("td:nth-child(9)")
                         .textContent.trim(),
                 };
 
@@ -537,6 +560,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             </span>
                             <span class="px-3 py-1 text-sm font-medium rounded-full bg-green-100 text-green-800">
                                 ${dummyData.kelas}
+                            </span>
+                            <span class="px-3 py-1 text-sm font-medium rounded-full ${
+                                dummyData.jenis_alkitab.includes("iqro")
+                                    ? "bg-blue-100 text-blue-800"
+                                    : "bg-pink-100 text-pink-800"
+                            }">
+                                ${dummyData.jenis_alkitab}
                             </span>
                         </div>
                     </div>

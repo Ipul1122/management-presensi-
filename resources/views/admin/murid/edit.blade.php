@@ -84,6 +84,33 @@
                 </div>
             </div>
 
+            {{-- <div class="col-span-1">
+                <label for="jenis_alkitab" class="block text-gray-700 font-bold mb-2">Jenis Alkitab</label>
+                    <select name="jenis_alkitab" id="jenis_alkitab" required class="w-full border rounded px-3 py-2">
+                    <option value="Iqro" {{ $murid->jenis_alkitab == 'Iqro' ? 'selected' : '' }}>Iqro</option>
+                    <option option value="Al-Qur'an" {{ $murid->jenis_alkitab == "Al-Qur'an" ? 'selected' : '' }}>Al-Qur'an</option>
+                    </select>
+            </div> --}}
+
+            <div class="col-span-1">
+                <label for="jenis_alkitab" class="block text-sm font-medium text-gray-700 mb-1">Jenis Al-Kitab</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <select name="jenis_alkitab" id="jenis_alkitab" required 
+                        class="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition duration-150">
+                        <option value="iqro" {{ $murid->jenis_alkitab == 'iqro' ? 'selected' : '' }}>Iqro</option>
+                        <option value="Al-Quran" {{ $murid->jenis_alkitab == 'Al-Quran' ? 'selected' : '' }}>Al-Quran</option>
+                    </select>
+                </div>
+            </div>
+
+
+            {{-- ==================================== --}}
+
             <div class="col-span-2">
                 <label for="foto_anak" class="block text-sm font-medium text-gray-700 mb-1">Foto Anak</label>
                 <div class="mt-1 flex items-center space-x-5">
