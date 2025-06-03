@@ -198,6 +198,10 @@
             </table>
         </div>
     </div>
+    
+    <div class="px-6 py-4 border-t border-gray-200">
+        {{ $jadwals->links('pagination::simple-tailwind') }}
+    </div>
 </div>
 
 <style>

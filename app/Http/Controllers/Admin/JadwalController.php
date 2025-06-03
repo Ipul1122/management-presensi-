@@ -12,7 +12,7 @@ class JadwalController extends Controller
 {
     public function index()
     {
-        $jadwals = Jadwal::all();
+        $jadwals = Jadwal::orderBy('tanggal_jadwal', 'desc')->paginate(10); 
         return view('admin.jadwal.index', compact('jadwals'));
     }
 
@@ -25,15 +25,21 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_jadwal' => 'required',
-            'tanggal_jadwal' => 'required|date',
-            'pukul_jadwal' => 'required',
-            'nama_pengajar_jadwal' => 'required',
-            'kegiatan_jadwal' => 'required',
-        ]);
-
+        'nama_jadwal' => 'required|string',
+        'tanggal_jadwal' => 'required|date',
+        'pukul_jadwal' => 'required',
+        'kegiatan_jadwal' => 'required|string',
+        'nama_pengajar_jadwal' => 'required|array|min:1',
+    ]);
         
-        Jadwal::create($request->all());
+        Jadwal::create([
+        'nama_jadwal' => $request->nama_jadwal,
+        'tanggal_jadwal' => $request->tanggal_jadwal,
+        'pukul_jadwal' => $request->pukul_jadwal,
+        'kegiatan_jadwal' => $request->kegiatan_jadwal,
+        // Simpan sebagai string yang digabung
+        'nama_pengajar_jadwal' => implode(', ', $request->nama_pengajar_jadwal),
+    ]);
         
         NotifikasiAdmin::create([
         'pesan' => 'Admin menambahkan jadwal baru: ' . $request->nama_jadwal,
@@ -112,14 +118,20 @@ public function bulkDelete(Request $request)
         }
 
     } elseif ($action === 'all') {
-        foreach (Jadwal::all() as $jadwal) {
+        // Hapus hanya jadwal pada bulan dan tahun saat ini
+        $now = now();
+        $jadwals = Jadwal::whereMonth('tanggal_jadwal', $now->month)
+                        ->whereYear('tanggal_jadwal', $now->year)
+                        ->get();
+
+        foreach ($jadwals as $jadwal) {
             NotifikasiAdmin::create([
-                'pesan' => 'Admin menghapus semua jadwal termasuk: ' . $jadwal->nama_jadwal,
+                'pesan' => 'Admin menghapus jadwal: ' . $jadwal->nama_jadwal,
                 'aksi' => 'hapus',
-                'deskripsi' => 'Semua jadwal telah dihapus termasuk: ' . $jadwal->nama_jadwal
+                'deskripsi' => 'Jadwal telah dihapus dengan nama: ' . $jadwal->nama_jadwal
             ]);
+            $jadwal->delete();
         }
-        Jadwal::truncate();
     }
 
     return redirect()->route('admin.dashboard')->with('success', 'Jadwal berhasil dihapus.');

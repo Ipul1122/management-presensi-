@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PengajarController;
 use App\Http\Controllers\Admin\NotifikasiController;
 use App\Http\Controllers\Admin\JadwalController;
+use App\Http\Controllers\Admin\RiwayatJadwalController;
 
 
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
@@ -31,7 +32,6 @@ Route::get('/unauthorized', function () {
 // ADMIN
 // ================== ADMIN ==================
 
-
 Route::prefix('admin')->name('admin.')->group(function () {
     // Auth Routes
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('login');
@@ -42,6 +42,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth:admin', 'admin.role'])->group(function () {
         
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::match(['GET', 'DELETE'], '/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
 
         // Murid resource route
         Route::resource('murid', MuridController::class);
@@ -54,6 +56,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('pengajar', PengajarController::class);
         // Jadwal
         Route::resource('jadwal', JadwalController::class);
+        // Riwayat Jadwal
+        Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');
 
         
         // Tambahan fitur khusus

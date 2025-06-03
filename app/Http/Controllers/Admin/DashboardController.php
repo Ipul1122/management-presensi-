@@ -8,11 +8,11 @@ use App\Models\Murid;
 use App\Models\Pengajar;
 use App\Models\NotifikasiAdmin;
 use App\Models\Jadwal;
-
+use Carbon\Carbon;  
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $jumlahMurid = Murid::count();
         $jumlahPengajar = Pengajar::count();
@@ -21,8 +21,31 @@ class DashboardController extends Controller
         // Ambil 5 jadwal terdekat
         $jadwals = Jadwal::orderBy('tanggal_jadwal', 'asc')->take(5)->get();
 
-        return view('admin.dashboard', compact('jumlahMurid', 'jumlahPengajar', 'unreadCount', 'jadwals', 'notifikasi'));
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        if ($request->has('hapus_semua')) {
+        $now = Carbon::now();
+
+        Jadwal::whereMonth('tanggal_jadwal', $now->month)
+            ->whereYear('tanggal_jadwal', $now->year)
+            ->delete();
+
+        return redirect()->back()->with('success', 'Jadwal bulan ini berhasil dihapus.');
     }
 
-    
+        $jadwalBulanIni = Jadwal::whereMonth('tanggal_jadwal', now()->month)
+                            ->whereYear('tanggal_jadwal', now()->year)
+                            ->get();
+
+        return view('admin.dashboard', compact(
+            'jumlahMurid', 
+            'jumlahPengajar', 
+            'unreadCount', 
+            'jadwals', 
+            'notifikasi',
+            'jadwalBulanIni'
+        ));
+    }
+
 }

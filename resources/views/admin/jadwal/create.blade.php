@@ -118,22 +118,16 @@
 
                     <!-- Pengajar -->
                     <div class="space-y-2">
-                        <label for="nama_pengajar_jadwal" class="block text-sm font-semibold text-gray-700">
-                            Nama Pengajar
-                            <span class="text-red-500">*</span>
-                        </label>
+                        <label for="nama_pengajar_jadwal" class="block text-gray-700 font-bold mb-2">Nama Pengajar</label>
                         <div class="relative">
-                            <select 
-                                name="nama_pengajar_jadwal" 
-                                id="nama_pengajar_jadwal" 
-                                required 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white appearance-none"
-                            >
-                                <option value="">-- Pilih Pengajar --</option>
-                                @foreach($pengajars as $pengajar)
-                                    <option value="{{ $pengajar->nama_pengajar }}">{{ $pengajar->nama_pengajar }}</option>
-                                @endforeach
-                            </select>
+                        @foreach($pengajars as $pengajar)
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" name="nama_pengajar_jadwal[]" value="{{ $pengajar->nama_pengajar }}"
+                                class="form-checkbox text-blue-600">
+                                <span class="ml-2">{{ $pengajar->nama_pengajar }}</span>
+                            </label>
+                        @endforeach
+                        </div>
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>

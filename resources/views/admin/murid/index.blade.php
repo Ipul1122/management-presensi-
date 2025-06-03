@@ -259,7 +259,7 @@
 
         <!-- Pagination Section -->
         <div class="px-6 py-4 border-t border-gray-200">
-            {{ $murids->links() }}
+            {{ $murids->links('pagination::simple-tailwind') }}
         </div>
     </div>
 </div>
