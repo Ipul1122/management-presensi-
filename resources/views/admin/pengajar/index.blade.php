@@ -125,16 +125,19 @@
                                 </td>
                                 <td class="py-4 px-6">
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            {{-- ID PENGAJAR --}}
                                         {{ $pengajar->id_pendaftaran }}
                                     </span>
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
+                                            {{-- FOTO PENGAJAR --}}
                                             @if($pengajar->foto_pengajar)
                                                 <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
                                                     alt="foto" class="h-10 w-10 rounded-full object-cover border-2 border-green-200">
                                             @else
+                                            {{-- NAMA PENGAJAR --}}
                                                 <div class="h-10 w-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-semibold">
                                                     {{ substr($pengajar->nama_pengajar, 0, 1) }}
                                                 </div>
@@ -147,16 +150,19 @@
                                 </td>
                                 <td class="py-4 px-6">
                                     <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium 
-                                        {{ $pengajar->jenis_kelamin == 'Laki-laki' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
+                                        {{-- JENIS KELAMIN --}}
+                                    {{ $pengajar->jenis_kelamin == 'Laki-laki' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
                                         {{ $pengajar->jenis_kelamin }}
                                     </span>
                                 </td>
                                 <td class="py-4 px-6 hidden md:table-cell">
                                     <div class="text-sm text-gray-600 max-w-xs truncate" title="{{ $pengajar->alamat }}">
+                                        {{-- ALAMAT PENGAJAR --}}
                                         {{ $pengajar->alamat }}
                                     </div>
                                 </td>
                                 <td class="py-4 px-6">
+                                    {{-- FOTO PENGAJAR --}}
                                     @if($pengajar->foto_pengajar)
                                         <button onclick="showImage('{{ asset('storage/' . $pengajar->foto_pengajar) }}')" 
                                                 class="relative group cursor-pointer">

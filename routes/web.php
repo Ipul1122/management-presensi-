@@ -46,18 +46,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Murid resource route
         Route::resource('murid', MuridController::class);
 
-        // Route::get('/murid', [MuridController::class, 'index'])->name('murid.index');
-        // Route::get('murid/create', [MuridController::class, 'create'])->name('murid.create');
-        // Route::get('murid/{id}', [MuridController::class, 'edit'])->name('murid.edit');
-        // Route::put('murid/{id}', [MuridController::class, 'update'])->name('murid.update');
+        // DataMurid Satuan Route
+        Route::get('dataMurid', [MuridController::class, 'dataMurid'])->name('dataMurid');
+
 
         // Pengajar Resource Route
         Route::resource('pengajar', PengajarController::class);
         // Jadwal
         Route::resource('jadwal', JadwalController::class);
 
-        
-        
         
         // Tambahan fitur khusus
         Route::delete('/murid-delete-selected', [MuridController::class, 'bulkDelete'])->name('murid.bulkDelete');

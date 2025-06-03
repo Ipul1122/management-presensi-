@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Murid;
 use Illuminate\Support\Facades\Storage;
 use App\Models\NotifikasiAdmin;
+use Illuminate\Support\Facades\DB;
 
 class MuridController extends Controller
 {
@@ -27,12 +28,13 @@ public function store(Request $request)
 {
     $validatedData = $request->validate([
         'nama_anak' => 'required|string|max:255',
+        'foto_anak' => 'nullable|image|max:2048',
         'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
         'alamat' => 'required|string',
         'kelas' => 'required|string',
         'jenis_alkitab' => 'required|in:iqro,Al-Quran',
         'tanggal_daftar' => 'required|date',
-        'foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', // max dalam kilobytes
+        ' foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', // max dalam kilobytes
     ]);
 
 
@@ -120,6 +122,42 @@ public function edit($id)
 
         return redirect()->route('admin.murid.index')->with('success', 'Data murid berhasil dihapus.');
     }
+
+
+    // dataMurid method to display statistics
+
+    public function dataMurid()
+    {
+    $totalLaki = Murid::where('jenis_kelamin', 'Laki-laki')->count();
+    $totalPerempuan = Murid::where('jenis_kelamin', 'Perempuan')->count();
+
+    $kelasCounts = Murid::select('kelas', DB::raw('count(*) as total'))
+        ->groupBy('kelas')
+        ->orderBy('kelas')
+        ->get();
+
+    $totalIqro = Murid::where('jenis_alkitab', 'iqro')->count();
+    $totalQuran = Murid::where('jenis_alkitab', 'Al-Quran')->count();
+
+    return view('admin.dataMurid', compact(
+        'totalLaki', 'totalPerempuan',
+        'kelasCounts', 'totalIqro', 'totalQuran'
+    ));
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * Bulk delete murids.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
 
     public function bulkDelete(Request $request)
 {

@@ -10,12 +10,13 @@
                     <h1 class="text-2xl md:text-3xl font-bold text-white">Data Murid</h1>
                     <p class="text-blue-100 mt-1">Manajemen data murid terpadu</p>
                 </div>
+                {{-- Total Murid --}}
                 <div class="mt-4 md:mt-0 flex space-x-4">
-                    <span class="bg-blue-500 bg-opacity-30 text-white px-4 py-2 rounded-lg">
-                        <span class="block text-sm">Total Murid</span>
-                        <span class="font-bold text-xl">{{ $murids->total() }}</span>
-                    </span>
-                </div>
+                <span class="bg-blue-500 bg-opacity-30 text-white px-4 py-2 rounded-lg">
+                <span class="block text-sm">Total Murid</span>
+                <span class="font-bold text-xl">{{ $murids->total() }}</span>
+                </span>
+            </div>
             </div>
         </div>
 
@@ -88,6 +89,11 @@
                         <option value="">Semua Jenis Kelamin</option>
                         <option value="Laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
+                    </select>
+                    <select id="kitabFilter" class="w-full sm:w-40 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Al-Kitab</option>
+                        <option value="iqro">Iqro</option>
+                        <option value="al-quran">Al-Quran</option>
                     </select>
                     <select id="classFilter" class="w-full sm:w-40 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">Semua Kelas</option>
@@ -379,6 +385,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Search and filter functionality
     const searchInput = document.getElementById("searchInput");
     const genderFilter = document.getElementById("genderFilter");
+    const kitabFilter = document.getElementById("kitabFilter");
     const classFilter = document.getElementById("classFilter");
     const rows = document.querySelectorAll(".murid-row");
 
@@ -386,6 +393,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const searchTerm = searchInput.value.toLowerCase();
         const selectedGender = genderFilter.value;
         const selectedClass = classFilter.value;
+        const selectedKitab = kitabFilter.value;
 
         rows.forEach((row) => {
             const name = row
@@ -396,19 +404,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 .textContent.trim();
             const kelasElement = row.querySelector("td:nth-child(7) span");
             const kelas = kelasElement ? kelasElement.textContent.trim() : "";
+            const kitab = row
+                .querySelector("td:nth-child(8) span")
+                .textContent.trim().toLowerCase();
 
             const matchesSearch = name.includes(searchTerm);
             const matchesGender = !selectedGender || gender === selectedGender;
             const matchesClass = !selectedClass || kelas === selectedClass;
-
-            const shouldShow = matchesSearch && matchesGender && matchesClass;
+            const matchesKitab = !selectedKitab || kitab === selectedKitab;
+            const shouldShow = matchesSearch && matchesGender && matchesClass && matchesKitab;
             row.classList.toggle("hidden", !shouldShow);
         });
     }
 
     searchInput.addEventListener("keyup", filterRows);
     genderFilter.addEventListener("change", filterRows);
+    kitabFilter.addEventListener("change", filterRows);
     classFilter.addEventListener("change", filterRows);
+// END OF SEARCH AND FILTER FUNCTIONALITY
+
 
     // Single delete modal
     const deleteModal = document.getElementById("deleteModal");

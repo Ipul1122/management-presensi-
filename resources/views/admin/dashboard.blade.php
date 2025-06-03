@@ -187,6 +187,14 @@
                     </div>
                     <span class="font-medium text-gray-700 group-hover:text-indigo-700">Tambah Data Murid</span>
                 </a>
+
+                {{-- Data Murid --}}
+                <a href="{{ route('admin.dataMurid') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-user-plus text-white"></i>
+                    </div>
+                    <span class="font-medium text-gray-700 group-hover:text-indigo-700">Data Murid</span>
+                </a>
                 
                 {{-- Data Pengajar --}}
                 <a href="{{ route('admin.pengajar.create') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-xl transition-all duration-300 group">

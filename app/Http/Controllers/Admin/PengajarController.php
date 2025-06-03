@@ -44,12 +44,9 @@ class PengajarController extends Controller
         return redirect()->route('admin.pengajar.index')->with('success', 'Data pengajar berhasil ditambahkan.');
     }
 
-
-
     public function show(Pengajar $pengajar)
     {
-        $pengajars = Pengajar::all();
-        return view('admin.pengajar.show', compact('pengajars'));
+        return view('admin.pengajar.show', compact('pengajar'));
     }
 
     public function edit(Pengajar $pengajar)
