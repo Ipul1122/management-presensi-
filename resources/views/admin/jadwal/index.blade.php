@@ -120,6 +120,9 @@
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Kegiatan
                         </th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Gaji
+                        </th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Aksi
                         </th>
@@ -157,6 +160,11 @@
                         <td class="px-6 py-4">
                             <span class="text-gray-700">{{ $jadwal->kegiatan_jadwal }}</span>
                         </td>
+                        <td class="px-4 py-2">
+                            Rp {{ number_format($jadwal->gaji, 0, ',', '.') }}
+                        </td>
+
+
                         <td class="px-6 py-4">
                             <div class="flex items-center justify-center space-x-2">
                                 <a href="{{ route('admin.jadwal.edit', $jadwal->id) }}" 

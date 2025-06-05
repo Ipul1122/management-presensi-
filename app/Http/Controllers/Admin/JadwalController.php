@@ -32,6 +32,10 @@ class JadwalController extends Controller
         'nama_pengajar_jadwal' => 'required|array|min:1',
     ]);
         
+        $pengajars = $request->nama_pengajar_jadwal;
+        $jumlahPengajar = count($pengajars);
+        $gaji = $jumlahPengajar * 50000; // Hitung gaji berdasarkan jumlah pengajar
+
         Jadwal::create([
         'nama_jadwal' => $request->nama_jadwal,
         'tanggal_jadwal' => $request->tanggal_jadwal,
@@ -39,6 +43,7 @@ class JadwalController extends Controller
         'kegiatan_jadwal' => $request->kegiatan_jadwal,
         // Simpan sebagai string yang digabung
         'nama_pengajar_jadwal' => implode(', ', $request->nama_pengajar_jadwal),
+        'gaji' => $gaji,
     ]);
         
         NotifikasiAdmin::create([
@@ -46,7 +51,7 @@ class JadwalController extends Controller
         'aksi' => 'tambah',
         'deskripsi' => 'Jadwal baru telah ditambahkan dengan nama: ' . $request->nama_jadwal
         ]);
-
+                        
         return redirect()->route('admin.dashboard')->with('success', 'Jadwal berhasil ditambahkan');
     }
 
@@ -64,11 +69,24 @@ class JadwalController extends Controller
             'pukul_jadwal' => 'required',
             'nama_pengajar_jadwal' => 'required',
             'kegiatan_jadwal' => 'required',
+            
         ]);
 
-        
         $jadwal = Jadwal::findOrFail($id);
+        $pengajars = $request->nama_pengajar_jadwal;
+        $jumlahPengajar = count($pengajars);
+        $gaji = $jumlahPengajar * 50000; // Hitung gaji berdasarkan jumlah pengajar
         $jadwal->update($request->all());
+
+        $jadwal->update([
+        'nama_jadwal' => $request->nama_jadwal,
+        'tanggal_jadwal' => $request->tanggal_jadwal,
+        'pukul_jadwal' => $request->pukul_jadwal,
+        'kegiatan_jadwal' => $request->kegiatan_jadwal,
+        'nama_pengajar_jadwal' => implode(', ', $pengajars),
+        'gaji' => $gaji,
+    ]);
+
         
         NotifikasiAdmin::create([
         'pesan' => 'Admin mengubah jadwal: ' . $request->nama_jadwal,

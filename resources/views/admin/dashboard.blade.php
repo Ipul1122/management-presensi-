@@ -169,88 +169,138 @@
 
     <div class="flex flex-1">
         <!-- Modern Sidebar -->
-        <aside class="sidebar w-72 bg-white/90 backdrop-blur-md shadow-2xl border-r border-white/20 custom-scrollbar overflow-y-auto">
-            <div class="p-6 space-y-2">
-                <div class="flex justify-between items-center lg:hidden mb-6">
-                    <span class="font-bold text-gray-800">Menu Navigasi</span>
-                    <button id="closeSidebar" class="text-gray-600 hover:text-gray-800 p-2 hover:bg-gray-100 rounded-lg transition-all duration-200">
-                        <i class="fas fa-times"></i>
-                    </button>
+        <!-- Modern Sidebar -->
+<aside class="sidebar w-72 bg-white/90 backdrop-blur-md shadow-2xl border-r border-white/20 custom-scrollbar overflow-y-auto">
+    <div class="p-6 space-y-2">
+        <div class="flex justify-between items-center lg:hidden mb-6">
+            <span class="font-bold text-gray-800">Menu Navigasi</span>
+            <button id="closeSidebar" class="text-gray-600 hover:text-gray-800 p-2 hover:bg-gray-100 rounded-lg transition-all duration-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- MENU MURID SECTION -->
+        <div class="mb-8">
+            <div class="flex items-center space-x-2 mb-4 px-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
+                    <i class="fas fa-user-graduate text-white text-xs"></i>
                 </div>
-                
-                <!-- Menu Items -->
-                
-                {{-- Data Murid --}}
-                <a href="{{ route('admin.murid.create') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-user-plus text-white"></i>
-                    </div>
-                    <span class="font-medium text-gray-700 group-hover:text-indigo-700">Tambah Data Murid</span>
-                </a>
-
-                {{-- Data Murid --}}
-                <a href="{{ route('admin.dataMurid') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-chart-simple text-white"></i>
-                    </div>
-                    <span class="font-medium text-gray-700 group-hover:text-indigo-700">Statistik Murid</span>
-                </a>
-                
-                {{-- Data Murid --}}
-                <a href="{{ route('admin.riwayatJadwal.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-chart-simple text-white"></i>
-                    </div>
-                    <span class="font-medium text-gray-700 group-hover:text-indigo-700">Riwayat Jadwal</span>
-                </a>
-
-                {{-- Data Pengajar --}}
-                <a href="{{ route('admin.pengajar.create') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-xl transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-chalkboard-teacher text-white"></i>
-                    </div>
-                    <span class="font-medium text-gray-700 group-hover:text-emerald-700">Tambah Data Pengajar</span>
-                </a>
-                
-                {{-- Data Jadwal --}}
-                <a href="{{ route('admin.jadwal.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-xl transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-800 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-calendar-days text-white" ></i>
-                    </div>
-                    <span class="font-medium text-gray-700 group-hover:text-emerald-700">Manage Jadwal</span>
-                </a>
-                
-                <a href="{{ route('admin.pengajar.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-users-cog text-white"></i>
-                    </div>
-                    <span class="font-medium text-gray-700 group-hover:text-purple-700">Manage Data Pengajar</span>
-                </a>
-                
-                <a href="{{ route('admin.notifikasi.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 rounded-xl transition-all duration-300 group">
-                    <div class="w-10 h-10 bg-gradient-to-r from-amber-500 to-orange-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-history text-white"></i>
-                    </div>
-                    <span class="font-medium text-gray-700 group-hover:text-amber-700">History Data</span>
-                </a>
-                
-                <div class="pt-4 border-t border-gray-200 mt-6">
-                    <form action="{{ route('admin.logout') }}" method="POST">
-                        @csrf
-                        <button class="flex items-center space-x-3 p-4 w-full hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                            <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-sign-out-alt text-white"></i>
-                            </div>
-                            <span class="font-medium text-gray-700 group-hover:text-red-700">Logout</span>
-                        </button>
-                    </form>
-                </div>
-                
-                <div class="pt-4 text-center">
-                    <p class="text-sm text-gray-400 bg-gray-50 px-3 py-2 rounded-full">Versi Web 1.0</p>
-                </div>
+                <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Data Murid</h3>
             </div>
-        </aside>
+            
+            {{-- Tambah Data Murid --}}
+            <a href="{{ route('admin.murid.create') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-user-plus text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-indigo-700">Tambah Data Murid</span>
+            </a>
+
+            {{-- Statistik Murid --}}
+            <a href="{{ route('admin.dataMurid') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fa-solid fa-chart-simple text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-indigo-700">Statistik Murid</span>
+            </a>
+
+            {{-- Manage Data Murid --}}
+            <a href="{{ route('admin.murid.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-folder-open text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-indigo-700">Manage Data Murid</span>
+            </a>
+        </div>
+
+        <!-- MENU PENGAJAR SECTION -->
+        <div class="mb-8">
+            <div class="flex items-center space-x-2 mb-4 px-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-md flex items-center justify-center">
+                    <i class="fas fa-chalkboard-teacher text-white text-xs"></i>
+                </div>
+                <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Data Pengajar</h3>
+            </div>
+
+            {{-- Tambah Data Pengajar --}}
+            <a href="{{ route('admin.pengajar.create') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-chalkboard-teacher text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-emerald-700">Tambah Data Pengajar</span>
+            </a>
+            
+            {{-- Manage Data Pengajar --}}
+            <a href="{{ route('admin.pengajar.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-users-cog text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-emerald-700">Manage Data Pengajar</span>
+            </a>
+        </div>
+
+        <!-- MENU JADWAL SECTION -->
+        <div class="mb-8">
+            <div class="flex items-center space-x-2 mb-4 px-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-yellow-400 to-yellow-800 rounded-md flex items-center justify-center">
+                    <i class="fa-solid fa-calendar-days text-white text-xs"></i>
+                </div>
+                <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Jadwal</h3>
+            </div>
+
+            {{-- Manage Jadwal --}}
+            <a href="{{ route('admin.jadwal.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-800 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fa-solid fa-calendar-days text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-yellow-700">Manage Jadwal</span>
+            </a>
+            
+            {{-- Riwayat Jadwal --}}
+            <a href="{{ route('admin.riwayatJadwal.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-800 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fa-solid fa-history text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-yellow-700">Riwayat Jadwal</span>
+            </a>
+        </div>
+
+        <!-- MENU LAINNYA SECTION -->
+        <div class="mb-8">
+            <div class="flex items-center space-x-2 mb-4 px-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-600 rounded-md flex items-center justify-center">
+                    <i class="fas fa-cog text-white text-xs"></i>
+                </div>
+                <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Lainnya</h3>
+            </div>
+
+            {{-- History Data / Notifikasi --}}
+            <a href="{{ route('admin.notifikasi.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
+                <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-bell text-white"></i>
+                </div>
+                <span class="font-medium text-gray-700 group-hover:text-purple-700">Notifikasi</span>
+            </a>
+        </div>
+        
+        {{-- LOGOUT SECTION --}}
+        <div class="pt-4 border-t border-gray-200 mt-6">
+            <form action="{{ route('admin.logout') }}" method="POST">
+                @csrf
+                <button class="flex items-center space-x-3 p-4 w-full hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
+                    <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-sign-out-alt text-white"></i>
+                    </div>
+                    <span class="font-medium text-gray-700 group-hover:text-red-700">Logout</span>
+                </button>
+            </form>
+        </div>
+        
+        <div class="pt-4 text-center">
+            <p class="text-sm text-gray-400 bg-gray-50 px-3 py-2 rounded-full">Versi Web 1.0</p>
+        </div>
+    </div>
+</aside>
 
         <!-- Main Content Area -->
         <main class="flex-1 p-6 lg:p-8 space-y-8 custom-scrollbar overflow-y-auto">
@@ -266,7 +316,7 @@
                                 <i class="fas fa-address-book text-2xl text-white"></i>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">DATA MURID</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">MURID</h2>
                                 <p class="text-gray-600 text-lg">Jumlah <span class="font-semibold text-indigo-600">{{ $jumlahMurid }}</span></p>
                             </div>
                         </div>
@@ -298,13 +348,13 @@
                                 <i class="fas fa-folder-open text-2xl text-white"></i>
                             </div>
                             <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">MANAGE DATA MURID</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">MURID</h2>
                                 <p class="text-gray-600">Edit, Hapus, Update</p>
                             </div>
                         </div>
                         <a href="{{ route('admin.murid.index') }}">
                             <button class="btn-modern bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
-                                Lihat <i class="fas fa-arrow-right ml-2"></i>
+                                KELOLA <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </a>
                     </div>
@@ -319,13 +369,13 @@
                                 <i class="fas fa-users-cog text-2xl text-white"></i>
                             </div>
                             <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">MANAGE DATA PENGAJAR</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">PENGAJAR</h2>
                                 <p class="text-gray-600">Edit, Hapus, Update</p>
                             </div>
                         </div>
                         <a href="{{ route('admin.pengajar.index') }}">
                             <button class="btn-modern bg-gradient-to-r from-pink-500 to-rose-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
-                                Lihat <i class="fas fa-arrow-right ml-2"></i>
+                                MANAGE <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </a>
                     </div>
@@ -339,7 +389,7 @@
             <i class="fas fa-calendar-alt mr-3"></i>
             Manajemen Jadwal
         </h3>
-        <p class="text-indigo-100 mt-2">Kelola jadwal kegiatan TPA</p>
+        <p class="text-indigo-100 mt-2">MANAGE jadwal kegiatan TPA</p>
     </div>
     
     <div class="p-6">
@@ -354,7 +404,7 @@
                         <div class="flex items-start justify-between mb-4">
                             <div class="flex items-center space-x-3">
                                 <input type="checkbox" name="selected_jadwals[]" value="{{ $jadwal->id }}" 
-                                       class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500 focus:ring-2">
+                                    class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500 focus:ring-2">
                                 <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
                                     <i class="fas fa-calendar-day text-white text-lg"></i>
                                 </div>
@@ -404,6 +454,11 @@
                                     <i class="fas fa-tasks text-orange-500 w-4 mt-0.5"></i>
                                     <span class="text-sm">{{ $jadwal->kegiatan_jadwal }}</span>
                                 </div>
+                                
+                                <div class="flex items-start space-x-2 text-gray-600">
+                                    <i class="fas fa-tasks text-orange-500 w-4 mt-0.5"></i>
+                                    <span class="text-sm">{ $Rp {{ number_format($jadwal->gaji, 0, ',', '.') }}}</span>
+                                </div>
                             </div>
                         </div>
                         
@@ -434,6 +489,7 @@
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Pengajar</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Kegiatan</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Status</th>
+                            <th class="px-6 py-4 text-left font-semibold text-gray-700">Gaji</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Aksi</th>
                         </tr>
                     </thead>
@@ -442,29 +498,29 @@
                             <tr class="hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 transition-all duration-200">
                                 <td class="px-6 py-4">
                                     <input type="checkbox" name="selected_jadwals[]" value="{{ $jadwal->id }}" 
-                                           class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                                        class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center space-x-2">
-                                        <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-                                            <i class="fas fa-calendar-day text-white text-sm"></i>
-                                        </div>
+                                        {{-- TANGGAL JADWAL --}}
                                         <div>
                                             <div class="font-medium text-gray-900">
                                                 {{ \Carbon\Carbon::parse($jadwal->tanggal_jadwal)->translatedFormat('d M Y') }}
                                             </div>
-                                            <div class="text-xs text-gray-500">
-                                                {{ \Carbon\Carbon::parse($jadwal->tanggal_jadwal)->translatedFormat('l') }}
-                                            </div>
+                                            {{-- <div class="text-xs text-gray-500">
+                                                {{ \Carbon\Carbon::parse($jadwal->tanggal_jadwal)->translatedFormat('') }}
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </td>
+                                {{-- PUKUL JADWAL --}}
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800">
-                                        <i class="fas fa-clock mr-1 text-xs"></i>
+                                        {{-- <i class="fas fa-clock mr-1 text-xs"></i> --}}
                                         {{ $jadwal->pukul_jadwal }}
                                     </span>
                                 </td>
+                                {{-- NAMA JADWAL --}}
                                 <td class="px-6 py-4">
                                     <div class="font-semibold text-gray-900">{{ $jadwal->nama_jadwal }}</div>
                                 </td>
@@ -473,12 +529,20 @@
                                         <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
                                             <i class="fas fa-user text-white text-xs"></i>
                                         </div>
+                                        {{-- NAMA PENGAJAR --}}
                                         <span class="text-gray-900 font-medium">{{ $jadwal->nama_pengajar_jadwal }}</span>
                                     </div>
                                 </td>
+                                {{-- KEGIATAN JADWAL --}}
                                 <td class="px-6 py-4">
                                     <div class="max-w-xs">
                                         <p class="text-gray-900 text-sm leading-relaxed">{{ $jadwal->kegiatan_jadwal }}</p>
+                                    </div>
+                                </td>
+                                {{-- GAJI  --}}
+                                <td class="px-6 py-4">
+                                    <div class="max-w-xs">
+                                        <p class="text-gray-900 text-sm leading-relaxed">Rp {{ number_format($jadwal->gaji, 0, ',', '.') }}</p>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
@@ -500,19 +564,18 @@
                                             $iconClass = 'fas fa-clock text-blue-500';
                                         }
                                     @endphp
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold {{ $statusClass }}">
-                                        <i class="{{ $iconClass }} mr-1"></i>
+                                    {{-- STATUS JADWAL --}}
+                                    <span class="inline-flex items-center px-4 py-1 rounded-full text-xs font-semibold {{ $statusClass }}">
                                         {{ $status }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex space-x-2">
-                                        <button type="button" class="p-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:shadow-md transition-all duration-200 group">
-                                            <i class="fas fa-edit text-sm group-hover:scale-110 transition-transform"></i>
-                                        </button>
-                                        <button type="button" class="p-2 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-lg hover:shadow-md transition-all duration-200 group">
-                                            <i class="fas fa-trash text-sm group-hover:scale-110 transition-transform"></i>
-                                        </button>
+                                        <a href="{{ route('admin.jadwal.edit', $jadwal->id) }}">
+                                            <button type="button" class="p-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:shadow-md transition-all duration-200 group">
+                                                <i class="fas fa-edit text-sm group-hover:scale-110 transition-transform"></i>
+                                            </button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -525,7 +588,7 @@
             <div class="flex flex-col sm:flex-row items-center justify-between mt-8 space-y-4 sm:space-y-0 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border">
                 <a href="{{ route('admin.jadwal.index') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 btn-modern group">
                     <i class="fas fa-cog mr-2 group-hover:rotate-180 transition-transform duration-300"></i>
-                    Kelola Jadwal
+                    MANAGE Jadwal
                 </a>
 
                 <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">

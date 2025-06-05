@@ -19,5 +19,6 @@ class Jadwal extends Model
         'pukul_jadwal',
         'nama_pengajar_jadwal',
         'kegiatan_jadwal',
+        'gaji',
     ];
 }

@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('pukul_jadwal');
             $table->string('nama_pengajar_jadwal');
             $table->text('kegiatan_jadwal');
+            $table->integer('gaji')->default(0); // Gaji default 0, bisa diubah sesuai kebutuhan
             $table->timestamps();
         });
     }
