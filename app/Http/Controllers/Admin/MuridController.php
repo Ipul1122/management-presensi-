@@ -13,7 +13,7 @@ class MuridController extends Controller
 {
         public function index()
     {
-        $murids = Murid::orderBy('created_at', 'desc')->paginate(10); // Gunakan paginate
+        $murids = Murid::orderBy('created_at', 'desc')->paginate(10); 
         return view('admin.murid.index', compact('murids'));
     }
 
@@ -34,7 +34,7 @@ public function store(Request $request)
         'kelas' => 'required|string',
         'jenis_alkitab' => 'required|in:iqro,Al-Quran',
         'tanggal_daftar' => 'required|date',
-        ' foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', // max dalam kilobytes
+        ' foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', 
     ]);
 
 

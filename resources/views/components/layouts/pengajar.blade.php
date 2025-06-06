@@ -11,7 +11,7 @@
 
     <div class="min-h-screen flex flex-col">
         {{-- Konten utama halaman --}}
-        <main class="flex-grow container mx-auto px-4 py-8">
+        <main class="">
             @yield('content')
         </main>
 

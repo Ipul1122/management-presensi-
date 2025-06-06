@@ -51,13 +51,15 @@ class JadwalController extends Controller
         'aksi' => 'tambah',
         'deskripsi' => 'Jadwal baru telah ditambahkan dengan nama: ' . $request->nama_jadwal
         ]);
-                        
+
         return redirect()->route('admin.dashboard')->with('success', 'Jadwal berhasil ditambahkan');
     }
 
     public function edit($id)
     {
+    
         $jadwal = Jadwal::findOrFail($id);
+        $pengajarTerpilih = explode(', ', $jadwal->nama_pengajar_jadwal); // Mengubah string menjadi array
         return view('admin.jadwal.edit', compact('jadwal'));
     }
 
@@ -69,29 +71,31 @@ class JadwalController extends Controller
             'pukul_jadwal' => 'required',
             'nama_pengajar_jadwal' => 'required',
             'kegiatan_jadwal' => 'required',
-            
         ]);
 
         $jadwal = Jadwal::findOrFail($id);
-        $pengajars = $request->nama_pengajar_jadwal;
+
+        // Pada form edit, nama_pengajar_jadwal dikirim sebagai string, bukan array
+        // Hitung jumlah pengajar berdasarkan koma
+        $pengajarString = $request->nama_pengajar_jadwal;
+        $pengajars = array_map('trim', explode(',', $pengajarString));
+        $pengajars = array_filter($pengajars, function($v) { return $v !== ''; }); // hilangkan kosong
         $jumlahPengajar = count($pengajars);
-        $gaji = $jumlahPengajar * 50000; // Hitung gaji berdasarkan jumlah pengajar
-        $jadwal->update($request->all());
+        $gaji = $jumlahPengajar * 50000;
 
         $jadwal->update([
-        'nama_jadwal' => $request->nama_jadwal,
-        'tanggal_jadwal' => $request->tanggal_jadwal,
-        'pukul_jadwal' => $request->pukul_jadwal,
-        'kegiatan_jadwal' => $request->kegiatan_jadwal,
-        'nama_pengajar_jadwal' => implode(', ', $pengajars),
-        'gaji' => $gaji,
-    ]);
+            'nama_jadwal' => $request->nama_jadwal,
+            'tanggal_jadwal' => $request->tanggal_jadwal,
+            'pukul_jadwal' => $request->pukul_jadwal,
+            'kegiatan_jadwal' => $request->kegiatan_jadwal,
+            'nama_pengajar_jadwal' => $pengajarString,
+            'gaji' => $gaji,
+        ]);
 
-        
         NotifikasiAdmin::create([
-        'pesan' => 'Admin mengubah jadwal: ' . $request->nama_jadwal,
-        'aksi' => 'ubah',
-        'deskripsi' => 'Jadwal telah diperbarui dengan nama: ' . $request->nama_jadwal
+            'pesan' => 'Admin mengubah jadwal: ' . $request->nama_jadwal,
+            'aksi' => 'ubah',
+            'deskripsi' => 'Jadwal telah diperbarui dengan nama: ' . $request->nama_jadwal
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Jadwal berhasil diperbarui');

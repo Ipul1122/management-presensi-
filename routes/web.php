@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\NotifikasiController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\RiwayatJadwalController;
 
+// Pengajar Controllers
+use App\Http\Controllers\Pengajar\MuridAbsensiController;
 
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 /*
@@ -41,9 +43,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Routes dengan middleware auth:admin
     Route::middleware(['auth:admin', 'admin.role'])->group(function () {
         
+        // Dashboard route
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::match(['GET', 'DELETE'], '/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-
 
         // Murid resource route
         Route::resource('murid', MuridController::class);
@@ -99,7 +101,16 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::post('/login', [PengajarLoginController::class, 'login']);
     Route::post('/logout', [PengajarLoginController::class, 'logout'])->name('logout');
 
+    // Routes dengan middleware auth:pengajar
     Route::get('/dashboard', function () {
         return view('pengajar.dashboard');
     })->middleware(['auth:pengajar', 'pengajar.role'])->name('dashboard');
+
+    // Routes Murid Absensis
+    Route::resource('muridAbsensi', MuridAbsensiController::class);
+    Route::get('muridAbsensi/create', [MuridAbsensiController::class, 'create'])->name('muridAbsensi.create');
+    Route::post('muridAbsensi/store', [MuridAbsensiController::class, 'store'])->name('muridAbsensi.store');
+
+    // Fitur otomatisasi ketika memilih murid akan mengisi data secara otomatis
+    Route::get('muridAbsensi/get-murid/{nama}', [MuridAbsensiController::class, 'getMurid']);
 });

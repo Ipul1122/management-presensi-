@@ -97,7 +97,9 @@
                             <i class="fas fa-clipboard-list text-3xl text-blue-500"></i>
                             <span class="text-lg font-semibold">Absensi Murid</span>
                         </div>
-                        <button class="text-sm text-blue-600 hover:underline">Lihat</button>
+                        <a href="{{ route('pengajar.muridAbsensi.index') }}" class="text-sm text-blue-600 hover:underline">
+                            <button class="text-sm text-blue-600 hover:underline">Lihat</button>
+                        </a>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow flex items-center justify-between">
                         <div class="flex items-center space-x-4">

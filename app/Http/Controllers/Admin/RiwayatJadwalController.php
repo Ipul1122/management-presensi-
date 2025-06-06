@@ -27,4 +27,6 @@ class RiwayatJadwalController extends Controller
 
     return view('admin.riwayatJadwal.index', compact('groupedByMonth'));
 }
+
+
 }

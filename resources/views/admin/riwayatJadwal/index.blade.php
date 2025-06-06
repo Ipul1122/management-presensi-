@@ -12,6 +12,10 @@
         </div>
 
         @forelse ($groupedByMonth as $month => $jadwals)
+            @php
+                $totalGaji = $jadwals->sum('gaji');
+            @endphp
+            
             <!-- Accordion Container -->
             <div class="mb-4 lg:mb-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
                 <!-- Accordion Header -->
@@ -26,13 +30,29 @@
                             </div>
                             <div>
                                 <h2 class="text-lg lg:text-xl font-bold text-white">{{ $month }}</h2>
-                                <p class="text-blue-100 text-sm">{{ count($jadwals) }} jadwal</p>
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-1 sm:space-y-0">
+                                    <p class="text-blue-100 text-sm">{{ count($jadwals) }} jadwal</p>
+                                    <div class="flex items-center space-x-1">
+                                        <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span class="text-yellow-300 text-sm font-semibold">Total: Rp {{ number_format($totalGaji, 0, ',', '.') }}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
                             <span class="hidden sm:inline-block bg-white/20 text-white text-xs px-3 py-1 rounded-full font-medium">
                                 {{ count($jadwals) }} item
                             </span>
+                            <div class="hidden lg:flex items-center space-x-1 bg-yellow-400/20 text-yellow-100 text-xs px-3 py-1 rounded-full font-medium">
+                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Rp {{ number_format($totalGaji, 0, ',', '.') }}</span>
+                            </div>
                             <svg class="accordion-icon w-5 h-5 lg:w-6 lg:h-6 text-white transform transition-transform duration-300" 
                                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -44,6 +64,20 @@
                 <!-- Accordion Content -->
                 <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
                     <div class="p-4 lg:p-6 bg-gray-50/50">
+                        <!-- Summary Card -->
+                        <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-4 mb-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold">Ringkasan Bulan {{ $month }}</h3>
+                                    <p class="text-green-100 text-sm">Total pendapatan dari {{ count($jadwals) }} jadwal</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold">Rp {{ number_format($totalGaji, 0, ',', '.') }}</div>
+                                    <div class="text-green-100 text-xs">{{ count($jadwals) }} jadwal selesai</div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="grid gap-3 lg:gap-4">
                             @foreach ($jadwals as $index => $jadwal)
                                 <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 overflow-hidden group">
@@ -90,16 +124,18 @@
                                                     <span class="line-clamp-1">{{ $jadwal->kegiatan_jadwal }}</span>
                                                 </div>
                                                 
-                                                <div class="flex items-center space-x-2 text-sm text-gray-600">
-                                                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                                <div class="flex items-center space-x-2 text-sm">
+                                                    <svg class="w-4 h-4 text-yellow-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
                                                     </svg>
-                                                    <span class="line-clamp-1">Rp {{ number_format($jadwal->gaji, 0, ',', '.') }}</span>
+                                                    <span class="font-semibold text-green-600">Rp {{ number_format($jadwal->gaji, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
+                                
                                     <!-- Progress Bar -->
                                     <div class="h-1 bg-gradient-to-r from-green-400 to-green-500"></div>
                                 </div>
