@@ -77,6 +77,7 @@
                 </button>
             </div>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Absen Murid</a>
+            <a href="{{ route('pengajar.riwayatMuridAbsensi.index') }}" class="block p-2 hover:bg-gray-200 rounded">riwayat Murid</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Info Data Murid</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Info Data Pengajar</a>
             <a href="#" class="block p-2 hover:bg-gray-200 rounded">Edit Info Pengajar</a>

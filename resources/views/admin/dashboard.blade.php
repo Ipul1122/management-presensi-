@@ -488,8 +488,8 @@
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Nama Jadwal</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Pengajar</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Kegiatan</th>
-                            <th class="px-6 py-4 text-left font-semibold text-gray-700">Status</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Gaji</th>
+                            <th class="px-6 py-4 text-left font-semibold text-gray-700">Status</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Aksi</th>
                         </tr>
                     </thead>

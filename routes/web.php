@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\RiwayatJadwalController;
 
 // Pengajar Controllers
 use App\Http\Controllers\Pengajar\MuridAbsensiController;
-
+use App\Http\Controllers\Pengajar\RiwayatMuridAbsensiController;
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 /*
 |--------------------------------------------------------------------------
@@ -111,13 +111,14 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::get('muridAbsensi/create', [MuridAbsensiController::class, 'create'])->name('muridAbsensi.create');
     Route::post('muridAbsensi/store', [MuridAbsensiController::class, 'store'])->name('muridAbsensi.store');
 
-    // Route edit dan hapus
+    // Route edit dan hapus muridAbsensi
     Route::get('/muridAbsensi/{id}/edit', [MuridAbsensiController::class, 'edit'])->name('pengajar.muridAbsensi.edit');
     Route::put('/muridAbsensi/{id}', [MuridAbsensiController::class, 'update'])->name('pengajar.muridAbsensi.update');
     Route::delete('/muridAbsensi/{id}', [MuridAbsensiController::class, 'destroy'])->name('pengajar.muridAbsensi.destroy');
+    // Riwayat Murid Absensi
+    Route::get('riwayatMuridAbsensi', [RiwayatMuridAbsensiController::class, 'index'])->name('riwayatMuridAbsensi.index');
     // Fitur otomatisasi ketika memilih murid akan mengisi data secara otomatis
     Route::get('muridAbsensi/get-murid/{nama}', [MuridAbsensiController::class, 'getMurid']);
-
     Route::get('/muridAbsensi', [MuridAbsensiController::class, 'index'])->name('muridAbsensi.index');
 
     // Bulk delete & delete all

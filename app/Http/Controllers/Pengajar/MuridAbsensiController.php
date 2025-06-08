@@ -6,52 +6,62 @@ use App\Http\Controllers\Controller;
 use App\Models\MuridAbsensi;
 use App\Models\Murid;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MuridAbsensiController extends Controller
 {
-    public function index(Request $request)
-    {
-        // Ambil data filter dari request
-        $filterNama = $request->nama_murid;
-        $filterKelamin = $request->jenis_kelamin;
-        $filterBacaan = $request->jenis_bacaan;
-        $filterStatus = $request->jenis_status;
+   public function index(Request $request)
+{
+    $filterNama = $request->nama_murid;
+    $filterKelamin = $request->jenis_kelamin;
+    $filterBacaan = $request->jenis_bacaan;
+    $filterStatus = $request->jenis_status;
 
-        // Query dasar
-        $query = MuridAbsensi::query();
+    // Tanggal hari ini
+    $tanggalHariIni = Carbon::today();
 
-        // Terapkan filter jika ada
-        if ($filterNama) {
-            $query->where('nama_murid', $filterNama);
-        }
-        if ($filterKelamin) {
-            $query->where('jenis_kelamin', $filterKelamin);
-        }
-        if ($filterBacaan) {
-            $query->where('jenis_bacaan', $filterBacaan);
-        }
-        if ($filterStatus) {
-            $query->where('jenis_status', $filterStatus);
-        }
+    // Query dasar absensi hari ini
+    $query = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni);
 
-        $absensis = $query->latest()->paginate(10)->appends($request->except('page'));
-
-        // Hitung jumlah murid berdasarkan jenis_status (tanpa filter)
-        $hadirCount = MuridAbsensi::where('jenis_status', 'Hadir')->count();
-        $izinCount = MuridAbsensi::where('jenis_status', 'Izin')->count();
-
-        // Data untuk dropdown filter
-        $namaList = MuridAbsensi::select('nama_murid')->distinct()->orderBy('nama_murid')->pluck('nama_murid');
-        $kelaminList = MuridAbsensi::select('jenis_kelamin')->distinct()->pluck('jenis_kelamin');
-        $bacaanList = MuridAbsensi::select('jenis_bacaan')->distinct()->pluck('jenis_bacaan');
-        $statusList = MuridAbsensi::select('jenis_status')->distinct()->pluck('jenis_status');
-
-        return view('pengajar.muridAbsensi.index', compact(
-            'absensis', 'hadirCount', 'izinCount',
-            'namaList', 'kelaminList', 'bacaanList', 'statusList',
-            'filterNama', 'filterKelamin', 'filterBacaan', 'filterStatus'
-        ));
+    // Terapkan filter jika ada
+    if ($filterNama) {
+        $query->where('nama_murid', $filterNama);
     }
+    if ($filterKelamin) {
+        $query->where('jenis_kelamin', $filterKelamin);
+    }
+    if ($filterBacaan) {
+        $query->where('jenis_bacaan', $filterBacaan);
+    }
+    if ($filterStatus) {
+        $query->where('jenis_status', $filterStatus);
+    }
+
+    // Ambil data absensi hari ini dengan filter
+    $absensis = $query->latest()->paginate(10)->appends($request->except('page'));
+
+    // Statistik hanya untuk hari ini
+    $hadirCount = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni)
+                    ->where('jenis_status', 'Hadir')->count();
+
+    $izinCount = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni)
+                    ->where('jenis_status', 'Izin')->count();
+
+    $totalMuridHariIni = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni)->count();
+
+    // Data filter dropdown
+    $namaList = MuridAbsensi::select('nama_murid')->distinct()->orderBy('nama_murid')->pluck('nama_murid');
+    $kelaminList = MuridAbsensi::select('jenis_kelamin')->distinct()->pluck('jenis_kelamin');
+    $bacaanList = MuridAbsensi::select('jenis_bacaan')->distinct()->pluck('jenis_bacaan');
+    $statusList = MuridAbsensi::select('jenis_status')->distinct()->pluck('jenis_status');
+
+    return view('pengajar.muridAbsensi.index', compact(
+        'absensis', 'hadirCount', 'izinCount', 'totalMuridHariIni',
+        'namaList', 'kelaminList', 'bacaanList', 'statusList',
+        'filterNama', 'filterKelamin', 'filterBacaan', 'filterStatus'
+    ));
+}
+
 
     public function create(Request $request)
 {
@@ -112,14 +122,12 @@ class MuridAbsensiController extends Controller
     ]);
 
     // Simpan ke DB
-    MuridAbsensi::create([
-        'nama_murid' => $validated['nama_murid'],
-        'jenis_kelamin' => $validated['jenis_kelamin'],
-        'jenis_bacaan' => $validated['jenis_bacaan'],
-        'jenis_status' => $validated['jenis_status'],
-        'tanggal_absen' => $validated['tanggal_absen'],
-        'catatan' => $validated['catatan'] ?? null,
+        MuridAbsensi::create([
+        'nama_murid' => $request->nama_murid,
+        'tanggal_absen' => $request->tanggal_absen,
+        'catatan' => $request->catatan,
     ]);
+
 
     return redirect()->route('pengajar.muridAbsensi.index')->with('success', 'Absensi berhasil disimpan.');
 }

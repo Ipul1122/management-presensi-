@@ -42,7 +42,7 @@
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             @foreach ([
-                ['title' => 'Total Murid', 'count' => $absensis->total(), 'color' => 'blue', 'gradient' => 'from-blue-500 to-blue-600', 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
+                ['title' => 'Total Murid', 'count' => $totalMuridHariIni, 'color' => 'blue', 'gradient' => 'from-blue-500 to-blue-600', 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
                 ['title' => 'Hadir Hari Ini', 'count' => $hadirCount, 'color' => 'emerald', 'gradient' => 'from-emerald-500 to-emerald-600', 'icon' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
                 ['title' => 'Izin Hari Ini', 'count' => $izinCount, 'color' => 'rose', 'gradient' => 'from-rose-500 to-rose-600', 'icon' => 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z']
             ] as $stat)
@@ -198,7 +198,7 @@
 
                     <div class="flex space-x-3">
                         <a href="{{ route('pengajar.muridAbsensi.edit', $absen->id) }}" 
-                           class="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-center py-2 px-4 rounded-xl text-sm font-medium transition-colors duration-200">
+                        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-center py-2 px-4 rounded-xl text-sm font-medium transition-colors duration-200">
                             Edit
                         </a>
                         <form action="{{ route('pengajar.muridAbsensi.destroy', $absen->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
