@@ -19,4 +19,9 @@ class MuridAbsensi extends Model
         'tanggal_absen',
         'catatan',
     ];
+
+    public function murid()
+    {
+        return $this->belongsTo(Murid::class, 'id_murid','id_pendaftaran');
+    }
 }
