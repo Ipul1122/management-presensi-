@@ -13,56 +13,65 @@ class RiwayatMuridAbsensiController extends Controller
     /**
      * Display a listing of the resource.
             */
-        public function index(Request $request)
-        {
-        // Ambil semua data absensi sebelum hari ini
-        $riwayatAbsensi = MuridAbsensi::whereDate('tanggal_absen', '<', Carbon::today())
-            ->orderBy('tanggal_absen', 'desc')
-            ->get()
-            ->groupBy(function ($item) {
-                return Carbon::parse($item->tanggal_absen)->format('F Y'); // Contoh: Juni 2025
-            })
-            ->map(function ($group) {
-                return $group->groupBy(function ($item) {
-                    return Carbon::parse($item->tanggal_absen)->format('l, d F Y'); // Contoh: Jumat, 06 Juni 2025
-                });
-            });
-
-
-            // / Ambil daftar bulan unik dari absensi
+       public function index(Request $request)
+{
     $bulanList = MuridAbsensi::selectRaw('DATE_FORMAT(tanggal_absen, "%Y-%m") as bulan')
         ->distinct()
         ->orderByDesc('bulan')
         ->pluck('bulan');
 
-    // Bulan yang dipilih (default: bulan sekarang)
     $bulanDipilih = $request->bulan ?? now()->format('Y-m');
 
-    // Ambil tanggal awal dan akhir dari bulan yang dipilih
-    $start = Carbon::createFromFormat('Y-m', $bulanDipilih)->startOfMonth();
-    $end = Carbon::createFromFormat('Y-m', $bulanDipilih)->endOfMonth();
+    $carbonBulan = Carbon::createFromFormat('Y-m', $bulanDipilih);
+    $start = $carbonBulan->startOfMonth();
+    $end = $carbonBulan->endOfMonth();
 
-    // Ambil absensi hadir antara tanggal tersebut & hanya Jumat, Sabtu, Minggu
-    $absensi = MuridAbsensi::whereBetween('tanggal_absen', [$start, $end])
-        ->where('jenis_status', 'Hadir')
-        ->get()
-        ->filter(function ($item) {
-            return in_array(Carbon::parse($item->tanggal_absen)->dayOfWeek, [Carbon::FRIDAY, Carbon::SATURDAY, Carbon::SUNDAY]);
-        });
+    // Ambil jumlah hari dalam bulan
+    $jumlahHari = $carbonBulan->daysInMonth;
 
-    // Hitung kehadiran per murid
-    $rekap = $absensi->groupBy('nama_murid')->map(function ($group) {
-        return $group->count();
-    });
+    // Ambil tanggal yang dipilih
+    $tanggalDipilih = $request->tanggal;
 
-// Tambahkan ke view return
-return view('pengajar.riwayatMuridAbsensi.index', [
-    'riwayatAbsensi' => $riwayatAbsensi, // data absen bulanan
-    'bulanList' => $bulanList,           // semua bulan yang tersedia
-    'rekap' => $rekap,                   // hasil rekap per murid
-]);
-    
+    // Jika tanggal valid
+    $absensiTanggal = collect();
+    if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
+        $tanggalFormat = Carbon::createFromFormat('Y-m-d', $bulanDipilih . '-' . str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT));
+
+        $absensiTanggal = MuridAbsensi::whereDate('tanggal_absen', $tanggalFormat)
+            ->orderBy('tanggal_absen', 'desc')
+            ->get();
+    }
+
+    // Ambil data absensi berdasarkan bulan
+$absensi = MuridAbsensi::whereMonth('tanggal_absen', Carbon::parse($request->bulan)->month)
+    ->whereYear('tanggal_absen', Carbon::parse($request->bulan)->year)
+    ->where('jenis_status', 'Hadir')
+    ->whereIn(DB::raw('DAYNAME(tanggal_absen)'), ['Friday', 'Saturday', 'Sunday'])
+    ->get();
+
+// Hitung rekap per murid
+$rekap = $absensi->groupBy('nama_murid')->map(function ($group) {
+    return $group->count();
+})->toArray(); // ubah ke array agar Blade tidak error saat count = 0
+
+// Ambil data harian jika ada parameter tanggal
+$riwayatHarian = null;
+if ($request->tanggal) {
+    $tanggalTerpilih = Carbon::parse($request->bulan . '-' . $request->tanggal);
+    $riwayatHarian = MuridAbsensi::whereDate('tanggal_absen', $tanggalTerpilih)->get();
 }
+
+    return view('pengajar.riwayatMuridAbsensi.index', [
+        'bulanList' => $bulanList,
+        'bulanDipilih' => $bulanDipilih,
+        'tanggalDipilih' => $tanggalDipilih,
+        'jumlahHari' => $jumlahHari,
+        'absensiTanggal' => $absensiTanggal,
+        'rekap' => $rekap,
+        'riwayatHarian' => $riwayatHarian,
+    ]);
+}
+
 
 
     /**
