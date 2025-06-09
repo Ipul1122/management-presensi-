@@ -42,10 +42,10 @@ class MuridAbsensiController extends Controller
 
     // Statistik hanya untuk hari ini
     $hadirCount = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni)
-                    ->where('jenis_status', 'Hadir')->count();
+                    ->where('jenis_status', 'hadir')->count();
 
     $izinCount = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni)
-                    ->where('jenis_status', 'Izin')->count();
+                    ->where('jenis_status', 'izin')->count();
 
     $totalMuridHariIni = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni)->count();
 
@@ -122,12 +122,14 @@ class MuridAbsensiController extends Controller
     ]);
 
     // Simpan ke DB
-        MuridAbsensi::create([
+    MuridAbsensi::create([
         'nama_murid' => $request->nama_murid,
+        'jenis_kelamin' => $request->jenis_kelamin,
+        'jenis_bacaan' => $request->jenis_bacaan,
+        'jenis_status' => $request->jenis_status,
         'tanggal_absen' => $request->tanggal_absen,
         'catatan' => $request->catatan,
     ]);
-
 
     return redirect()->route('pengajar.muridAbsensi.index')->with('success', 'Absensi berhasil disimpan.');
 }
@@ -167,8 +169,8 @@ class MuridAbsensiController extends Controller
 
     public function deleteAll()
     {
-        MuridAbsensi::truncate();
-        return redirect()->route('pengajar.muridAbsensi.index')->with('success', 'Semua data absensi berhasil dihapus.');
+        MuridAbsensi::whereDate('tanggal_absen', Carbon::today())->delete();
+    return redirect()->back()->with('success', 'Absensi hari ini berhasil dihapus.');
     }
 
 }

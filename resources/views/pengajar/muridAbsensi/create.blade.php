@@ -1,4 +1,4 @@
-    @extends('components.layouts.pengajar')
+@extends('components.layouts.pengajar')
     @section('content')
     <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 lg:p-8">
     <div class="max-w-4xl mx-auto">

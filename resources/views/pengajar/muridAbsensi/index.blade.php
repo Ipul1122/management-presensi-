@@ -22,14 +22,16 @@
                 </div>
                 
                 <div class="flex flex-col sm:flex-row gap-3">
-                    <button onclick="exportData()" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        Export Data
-                    </button>
+                    <a href="{{ route('pengajar.dashboard') }}">
+                        <button class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Dashboard
+                        </button>
+                    </a>
                     <a href="{{ route('pengajar.muridAbsensi.create') }}" 
-                       class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
@@ -44,7 +46,7 @@
             @foreach ([
                 ['title' => 'Total Murid', 'count' => $totalMuridHariIni, 'color' => 'blue', 'gradient' => 'from-blue-500 to-blue-600', 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
                 ['title' => 'Hadir Hari Ini', 'count' => $hadirCount, 'color' => 'emerald', 'gradient' => 'from-emerald-500 to-emerald-600', 'icon' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
-                ['title' => 'Izin Hari Ini', 'count' => $izinCount, 'color' => 'rose', 'gradient' => 'from-rose-500 to-rose-600', 'icon' => 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z']
+                ['title' => 'izin Hari Ini', 'count' => $izinCount, 'color' => 'rose', 'gradient' => 'from-rose-500 to-rose-600', 'icon' => 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z']
             ] as $stat)
             <div class="group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl p-6 border border-white/20 transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-br {{ $stat['gradient'] }}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -127,10 +129,19 @@
             </div>
 
             <!-- Hidden Forms -->
-            <form id="deleteAllForm" action="{{ route('pengajar.muridAbsensi.deleteAll') }}" method="POST" style="display:none;">
+            <form id="deleteAllForm" action="{{ route('pengajar.muridAbsensi.deleteAll') }}" method="POST" style="display:none;" onsubmit="return confirm('Yakin ingin menghapus semua data?')">
                 @csrf
                 @method('DELETE')
             </form>
+
+            {{-- <form action="{{ route('pengajar.muridAbsensi.deleteAll') }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus semua absensi hari ini?')">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+        Hapus Semua (Hari Ini)
+    </button>
+</form> --}}
+
 
             <form id="bulkDeleteForm" action="{{ route('pengajar.muridAbsensi.bulkDelete') }}" method="POST" style="display:none;">
                 @csrf
@@ -382,10 +393,10 @@ function clearFilters() {
 }
 
 // Export data function
-function exportData() {
-    // Add your export logic here
-    alert('Fitur export akan segera hadir!');
-}
+// function exportData() {
+//     // Add your export logic here
+//     alert('Fitur export akan segera hadir!');
+// }
 </script>
 
 <style>
