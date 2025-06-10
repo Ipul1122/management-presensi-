@@ -145,11 +145,7 @@ public function edit($id)
     ));
     }
 
-    
-    
-    
-    
-    
+        
     
     
     /**
@@ -201,6 +197,10 @@ public function edit($id)
         return redirect()->route('admin.murid.index')->with('success', 'Seluruh data murid telah dihapus.');
     }
 
+
+
+
+            // Info Data Murid
 
 }
 

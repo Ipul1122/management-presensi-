@@ -130,4 +130,7 @@ public function update(Request $request, $id)
     return back()->with('success', 'Absensi berhasil dihapus.');
 }
 
+
+
+
 }
