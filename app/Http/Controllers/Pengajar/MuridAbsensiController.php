@@ -173,4 +173,43 @@ class MuridAbsensiController extends Controller
     return redirect()->back()->with('success', 'Absensi hari ini berhasil dihapus.');
     }
 
+
+        // Info Data Murid
+    public function infoDataMurid()
+{
+    // Data untuk tabel (paginate 5)
+    $data = MuridAbsensi::select('nama_murid', 'jenis_kelamin', 'jenis_bacaan')
+        ->groupBy('nama_murid', 'jenis_kelamin', 'jenis_bacaan')
+        ->orderBy('nama_murid', 'asc')
+        ->paginate(5);
+
+    // Data untuk summary (seluruh data, tanpa paginate)
+    $allData = MuridAbsensi::select('nama_murid', 'jenis_kelamin', 'jenis_bacaan')
+        ->groupBy('nama_murid', 'jenis_kelamin', 'jenis_bacaan')
+        ->orderBy('nama_murid', 'asc')
+        ->get();
+
+    $totalMurid = $allData->count();
+    $totalLaki = $allData->where('jenis_kelamin', 'Laki-laki')->count();
+    $totalPerempuan = $allData->where('jenis_kelamin', 'Perempuan')->count();
+
+    $totalIqro = $allData->filter(function($item) {
+        return strtolower(trim($item->jenis_bacaan)) === 'iqro';
+    })->count();
+    
+    $totalQuran = $allData->filter(function($item) {
+        return strtolower(trim($item->jenis_bacaan)) === 'al-quran';
+    })->count();
+
+    
+
+    return view('pengajar.infoDataMurid.index', compact(
+        'data',
+        'totalMurid',
+        'totalLaki',
+        'totalPerempuan',
+        'totalIqro',
+        'totalQuran'
+    ));
+}
 }

@@ -123,6 +123,9 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::delete('riwayatMuridAbsensi/{id}', [RiwayatMuridAbsensiController::class, 'destroy'])->name('riwayatMuridAbsensi.hapus');
     Route::resource('riwayatMuridAbsensi', RiwayatMuridAbsensiController::class);
         
+    // infoDataMurid
+    Route::get('infoDataMurid', [MuridAbsensiController::class, 'infoDataMurid'])->name('infoDataMurid.index');
+
     
     
     // Fitur otomatisasi ketika memilih murid akan mengisi data secara otomatis
