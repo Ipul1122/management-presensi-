@@ -34,6 +34,9 @@ Project ini dibangun untuk membuat sistem presensi kegiatan, seperti membuat men
 - Perlindungan Dashboard Admin dan pengajar apa bila masuk tanpa login
 - Dapat membuat, mengedit, menghapus data murid dan pengajar
 - Notifikasi, memberi tahu apa saja yang baru saja melakukan perubahan
+- CRUD jadwal pengajar oleh admin
+- Riwayat Absensi Murid
+- Riwayat Jadwal Pengajar
 
 ## Usage
 
