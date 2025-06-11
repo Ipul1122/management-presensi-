@@ -97,34 +97,40 @@ class PengajarController extends Controller
         return redirect()->route('admin.pengajar.index')->with('success', 'Data pengajar berhasil dihapus.');
     }
 
-    public function bulkDelete(Request $request)
-{
-    $ids = $request->input('ids', []);
+        public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids', []);
 
-    if (!is_array($ids) || count($ids) === 0) {
-        return redirect()->route('admin.pengajar.index')->with('error', 'Tidak ada data yang dipilih.');
-    }
+        if (!is_array($ids) || count($ids) === 0) {
+            return redirect()->route('admin.pengajar.index')->with('error', 'Tidak ada data yang dipilih.');
+        }
 
-    $pengajars = Pengajar::whereIn('id_pendaftaran', $ids)->get();
-
-    foreach ($pengajars as $pengajar) {
+        $pengajars = Pengajar::whereIn('id_pendaftaran', $ids)->get();
 
         foreach ($pengajars as $pengajar) {
-            // hapus foto & data
-            NotifikasiAdmin::create([
-                'aksi' => 'Hapus Data Pengajar (Bulk)',
-                'deskripsi' => 'Admin menghapus pengajar bernama ' . $pengajar->nama_pengajar,
-            ]);
+
+            foreach ($pengajars as $pengajar) {
+                // hapus foto & data
+                NotifikasiAdmin::create([
+                    'aksi' => 'Hapus Data Pengajar (Bulk)',
+                    'deskripsi' => 'Admin menghapus pengajar bernama ' . $pengajar->nama_pengajar,
+                ]);
+                $pengajar->delete();
+            }
+            
+
+            if ($pengajar->foto_pengajar && Storage::disk('public')->exists($pengajar->foto_pengajar)) {
+                Storage::disk('public')->delete($pengajar->foto_pengajar);
+            }
             $pengajar->delete();
         }
-        
 
-        if ($pengajar->foto_pengajar && Storage::disk('public')->exists($pengajar->foto_pengajar)) {
-            Storage::disk('public')->delete($pengajar->foto_pengajar);
-        }
-        $pengajar->delete();
+        return redirect()->route('admin.pengajar.index')->with('success', count($ids) . ' data pengajar berhasil dihapus.');
     }
 
-    return redirect()->route('admin.pengajar.index')->with('success', count($ids) . ' data pengajar berhasil dihapus.');
-}
+        public function infoDataPengajar()
+        {
+            $pengajars = Pengajar::OrderBy('nama_pengajar', 'asc')->paginate(5);
+            return view('pengajar.infoDataPengajar.index', compact('pengajars'));
+        }
 }
