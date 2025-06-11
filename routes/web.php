@@ -126,7 +126,8 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     // infoDataMurid
     Route::get('infoDataMurid', [MuridAbsensiController::class, 'infoDataMurid'])->name('infoDataMurid.index');
 
-    
+    // InfoDataPengajar
+    Route::get('infoDataPengajar', [PengajarController::class, 'infoDataPengajar'])->name('infoDataPengajar.index');
     
     // Fitur otomatisasi ketika memilih murid akan mengisi data secara otomatis
     Route::get('muridAbsensi/get-murid/{nama}', [MuridAbsensiController::class, 'getMurid']);
