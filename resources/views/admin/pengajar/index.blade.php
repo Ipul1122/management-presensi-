@@ -33,6 +33,11 @@
                     </span>
                     <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </a>
+                <a href="{{ route('admin.dashboard') }}">
+                    <button class="text-sm text-green-600 hover:text-green-800 underline transition-colors duration-200">
+                        Kembali ke Dashboard
+                    </button>
+                </a>
             </div>
         </div>
     </div>

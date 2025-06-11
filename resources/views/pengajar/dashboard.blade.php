@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Pengajar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+@extends(' components.layouts.pengajar');
+
+@section('content')
     <style>
         .sidebar {
             transition: transform 0.3s ease-in-out;
@@ -24,8 +19,8 @@
             }
         }
     </style>
-</head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+
+{{-- <body class="bg-gray-100 min-h-screen flex flex-col"> --}}
     <!-- Navbar -->
     <nav class="bg-white shadow p-4">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
@@ -47,13 +42,7 @@
                 </div>
             </div>
             
-            <!-- Search Bar - Now visible on all screens -->
-            <div class="w-full md:w-1/2">
-                <div class="relative">
-                    <input type="text" placeholder="Cari apa yang anda mau" class="w-full p-2 pl-10 rounded border border-gray-300">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                </div>
-            </div>
+            
 
             <!-- Desktop Navigation Icons -->
             <div class="hidden md:flex space-x-4 text-xl">
@@ -80,7 +69,6 @@
             <a href="{{ route('pengajar.riwayatMuridAbsensi.index') }}" class="block p-2 hover:bg-gray-200 rounded">riwayat Murid</a>
             <a href="{{ route('pengajar.infoDataMurid.index') }}" class="block p-2 hover:bg-gray-200 rounded">Info Data Murid</a>
             <a href="{{ route('pengajar.infoDataPengajar.index') }}" class="block p-2 hover:bg-gray-200 rounded">Info Data Pengajar</a>
-            <a href="" class="block p-2 hover:bg-gray-200 rounded">Edit Info Pengajar</a>
             <form action="{{ route('pengajar.logout') }}" method="POST">
                 @csrf
                 <button title="Logout" class="block p-2 hover:bg-gray-200 rounded text-red-500">Logout</button>
@@ -118,32 +106,189 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow flex flex-col items-center">
-                    <div class="flex items-center justify-between w-full">
-                        <button class="text-gray-500 hover:text-gray-800"><i class="fas fa-chevron-left"></i></button>
-                        <div class="text-center">
-                            <img src="{{ asset('images/images.jpg') }}" alt="Pengajar" class="h-24 w-24 rounded-full mx-auto mb-2">
-                            <h3 class="text-lg font-bold">Nama Pengajar</h3>
-                            <p class="text-sm text-gray-600">Deskripsi Pengajar</p>
-                        </div>
-                        <button class="text-gray-500 hover:text-gray-800"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
+    {{-- slide data pengajar --}}
+<div class="mt-6">
+    <h2 class="text-lg font-semibold mb-2">Daftar Pengajar</h2>
 
-            <!-- Section 2 -->
-            <div class="bg-white p-6 rounded-lg shadow">
-                <h2 class="text-xl font-bold mb-4">Kalender Kegiatan</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                    <div class="bg-blue-100 p-4 rounded text-center">Senin</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Selasa</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Rabu</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Kamis</div>
-                    <div class="bg-blue-100 p-4 rounded text-center">Jumat</div>
-                </div>
+    <div class="relative">
+        <!-- Tombol geser kiri -->
+        <button onclick="prevCard()" id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow p-2 rounded-full z-10 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            ←
+        </button>
+
+        <!-- Tombol geser kanan -->
+        <button onclick="nextCard()" id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow p-2 rounded-full z-10 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            →
+        </button>
+
+        <!-- Kontainer untuk cards -->
+        <div class="px-12 py-4">
+            <div id="pengajarContainer" class="flex transition-transform duration-300 ease-in-out">
+                @forelse ($dataPengajar as $index => $pengajar)
+                    <div class="w-64 bg-white rounded-lg shadow p-4 text-center flex-shrink-0 mx-2">
+                        <img src="{{ $pengajar->foto_pengajar ? asset('storage/foto_pengajar/' . $pengajar->foto_pengajar) : asset('default/user.png') }}"
+                             alt="Foto Pengajar"
+                             class="w-20 h-20 mx-auto rounded-full object-cover mb-2">
+                        <h3 class="text-md font-bold">{{ $pengajar->nama_pengajar }}</h3>
+                        <p class="text-sm text-gray-600">{{ $pengajar->deskripsi ?? 'Tidak ada deskripsi' }}</p>
+                    </div>
+                @empty
+                    <div class="w-64 bg-white rounded-lg shadow p-4 text-center flex-shrink-0 mx-2">
+                        <img src="{{ asset('default/user.png') }}"
+                             alt="Foto Default"
+                             class="w-20 h-20 mx-auto rounded-full object-cover mb-2">
+                        <h3 class="text-md font-bold">John Doe</h3>
+                        <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet.</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+
+        <!-- Indikator dot (opsional) -->
+        <div class="flex justify-center mt-4 space-x-2" id="indicators">
+            <!-- Dots akan dibuat oleh JavaScript -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const container = document.getElementById('pengajarContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicators = document.getElementById('indicators');
+    
+    let currentIndex = 0;
+    const cards = container.children;
+    const totalCards = cards.length;
+    const cardsPerView = Math.floor((container.parentElement.offsetWidth - 96) / 272); // 272 = 256 + 16 (width + margin)
+    const maxIndex = Math.max(0, totalCards - cardsPerView);
+
+    // Buat indikator dots
+    function createIndicators() {
+        indicators.innerHTML = '';
+        const totalPages = Math.ceil(totalCards / cardsPerView);
+        
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'w-2 h-2 rounded-full cursor-pointer transition-colors duration-200';
+            dot.className += i === 0 ? ' bg-blue-500' : ' bg-gray-300';
+            dot.onclick = () => goToPage(i);
+            indicators.appendChild(dot);
+        }
+    }
+
+    // Update posisi container
+    function updatePosition() {
+        const translateX = -(currentIndex * (256 + 16)); // 256px width + 16px margin
+        container.style.transform = `translateX(${translateX}px)`;
+        
+        // Update tombol
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= maxIndex;
+        
+        // Update indikator
+        const currentPage = Math.floor(currentIndex / cardsPerView);
+        const dots = indicators.children;
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(/bg-(blue|gray)-(500|300)/, '');
+            dots[i].className += i === currentPage ? ' bg-blue-500' : ' bg-gray-300';
+        }
+    }
+
+    // Fungsi navigasi
+    function prevCard() {
+        if (currentIndex > 0) {
+            currentIndex = Math.max(0, currentIndex - cardsPerView);
+            updatePosition();
+        }
+    }
+
+    function nextCard() {
+        if (currentIndex < maxIndex) {
+            currentIndex = Math.min(maxIndex, currentIndex + cardsPerView);
+            updatePosition();
+        }
+    }
+
+    function goToPage(pageIndex) {
+        currentIndex = Math.min(pageIndex * cardsPerView, maxIndex);
+        updatePosition();
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            prevCard();
+        } else if (e.key === 'ArrowRight') {
+            nextCard();
+        }
+    });
+
+    // Auto-resize handler
+    window.addEventListener('resize', function() {
+        const newCardsPerView = Math.floor((container.parentElement.offsetWidth - 96) / 272);
+        if (newCardsPerView !== cardsPerView) {
+            location.reload(); // Simple solution untuk resize
+        }
+    });
+
+    // Initialize
+    createIndicators();
+    updatePosition();
+</script>
+
+
+                {{-- JADWAL BULAN IN --}}
+        <div class="mt-6 bg-white p-4 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Kalender Kegiatan - Bulan {{ \Carbon\Carbon::now()->translatedFormat('F Y') }}</h2>
+
+        @if($jadwalBulanIni->isEmpty())
+            <p class="text-gray-500">Tidak ada jadwal pada bulan ini.</p>
+        @else
+        <div class="overflow-auto">
+            <table>
+        <thead>
+        <tr>
+        <th>Tanggal</th>
+        <th>Pukul</th>
+        <th>Nama Jadwal</th>
+        <th>Pengajar</th>
+        <th>Kegiatan</th>
+        <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse($jadwalBulanIni as $jadwal)
+        <tr>
+            <td>{{ \Carbon\Carbon::parse($jadwal->tanggal_jadwal)->format('d M Y') }}</td>
+            <td>{{ $jadwal->pukul_jadwal }}</td>
+            <td>{{ $jadwal->nama_jadwal }}</td>
+            <td>{{ $jadwal->nama_pengajar_jadwal }}</td>
+            <td>{{ $jadwal->kegiatan_jadwal }}</td>
+            <td>
+            @if($jadwal->status === 'Hari Ini')
+                <span class="text-blue-500 font-bold">{{ $jadwal->status }}</span>
+            @elseif($jadwal->status === 'Selesai')
+                <span class="text-green-500">{{ $jadwal->status }}</span>
+            @else
+                <span class="text-yellow-500">{{ $jadwal->status }}</span>
+            @endif
+            </td>
+        </tr>
+        @empty
+        <tr><td colspan="6" class="text-center text-gray-400">Tidak ada jadwal bulan ini.</td></tr>
+        @endforelse
+        </tbody>
+        </table>
+
+            </div>
+                @endif
             </div>
         </main>
     </div>
+
+   
+
 
     <script>
         const hamburger = document.getElementById('hamburger');
@@ -165,5 +310,4 @@
             }
         });
     </script>
-</body>
-</html> 
+@endsection
