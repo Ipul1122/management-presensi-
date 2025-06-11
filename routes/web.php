@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\RiwayatJadwalController;
 use App\Http\Controllers\Pengajar\MuridAbsensiController;
 use App\Http\Controllers\Pengajar\RiwayatMuridAbsensiController;
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
+use App\Http\Controllers\Pengajar\DashboardPengajarController;
 /*
 |--------------------------------------------------------------------------
 | WEB ROUTES
@@ -105,6 +106,9 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::get('/dashboard', function () {
         return view('pengajar.dashboard');
     })->middleware(['auth:pengajar', 'pengajar.role'])->name('dashboard');
+
+    // Route untuk halaman dashboard pengajar
+    Route::get('/dashboard', [DashboardPengajarController::class, 'index'])->name('dashboard');
 
     // Routes Murid Absensis
     Route::resource('muridAbsensi', MuridAbsensiController::class);

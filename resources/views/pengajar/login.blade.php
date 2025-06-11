@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
-        <h2 class="text-xl font-semibold mb-4">Login Admin</h2>
+        <h2 class="text-xl font-semibold mb-4">Login Pengajar</h2>
         @if ($errors->has('login'))
             <div class="bg-red-100 text-red-700 border border-red-300 px-4 py-3 rounded relative mb-4" role="alert">
                 <strong class="font-bold">Oops!</strong>

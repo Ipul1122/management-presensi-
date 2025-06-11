@@ -27,11 +27,10 @@ class DashboardController extends Controller
         if ($request->has('hapus_semua')) {
         $now = Carbon::now();
 
-
-            
-
+        // Mengambil semua jadwal bulan ini
         $excludedIds = session('pindah_riwayat', []);
 
+        // Menampilkan jadwal bulan ini saja
         $jadwalBulanIni = Jadwal::whereMonth('tanggal_jadwal', date('m'))
         ->whereYear('tanggal_jadwal', date('Y'))
         ->whereNotIn('id_jadwal', $excludedIds)
@@ -44,13 +43,14 @@ class DashboardController extends Controller
                             ->whereYear('tanggal_jadwal', now()->year)
                             ->get();
 
+
         return view('admin.dashboard', compact(
             'jumlahMurid', 
             'jumlahPengajar', 
             'unreadCount', 
             'jadwals', 
             'notifikasi',
-            'jadwalBulanIni'
+            'jadwalBulanIni',
         ));
     }
 }

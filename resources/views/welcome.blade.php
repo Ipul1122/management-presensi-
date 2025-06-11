@@ -271,6 +271,12 @@
         </div>
 
         <h1 class="text-5xl font-bold text-blue-500 border">Hello, TPA!</h1>
+        <a href="{{ route('admin.dashboard') }}">
+            <button>Go To Dashboard Admin</button>
+        </a>
+        <a href="{{ route('pengajar.dashboard') }}">
+            <button>Go To Dashboard Pengajar</button>
+        </a>
 
 
         @if (Route::has('login'))

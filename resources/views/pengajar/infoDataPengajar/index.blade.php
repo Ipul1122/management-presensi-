@@ -23,9 +23,16 @@
                         <td class="px-4 py-2 text-sm text-gray-900">{{ $pengajar->nama_pengajar }}</td>
                         <td class="px-4 py-2 text-sm text-gray-900">{{ $pengajar->jenis_kelamin }}</td>
                         <td>
-                            <img src="{{ asset('storage/foto_pengajar/' . $pengajar->foto_pengajar) }}"
-                                alt="foto {{ $pengajar->nama_pengajar }}"
-                                class="w-20 h-20 object-cover rounded-full">
+                            {{-- FOTO PENGAJAR --}}
+                            @if($pengajar->foto_pengajar)
+                                <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
+                                    alt="foto" class="h-14 w-14 my-4 rounded object-cover border-2 border-green-140">
+                            @else
+                            {{-- NAMA PENGAJAR --}}
+                                <td class="h-14 w-14 rounded bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-semibold">
+                                    {{ substr($pengajar->nama_pengajar, 0, 1) }}
+                                </td>
+                            @endif
                         </td>
                         <td class="px-4 py-2 text-sm text-gray-700">{{ $pengajar->deskripsi }}</td>
                     </tr>
