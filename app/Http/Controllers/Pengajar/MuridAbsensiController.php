@@ -7,6 +7,7 @@ use App\Models\MuridAbsensi;
 use App\Models\Murid;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\NotifikasiAdmin;
 
 class MuridAbsensiController extends Controller
 {
@@ -93,6 +94,14 @@ class MuridAbsensiController extends Controller
             'tanggal_absen' => 'required|date',
             'catatan' => 'nullable|string',
         ]);
+
+        NotifikasiAdmin::create([
+        'aksi' => 'Pengajar Edit Absensi',
+        'deskripsi' => 'Pengajar ' . auth()->guard('pengajar')->user()->nama_pengajar . ' melakukan edit data murid bernama ' . $request->nama_murid,
+        'is_read' => false, // agar badge di ikon bell muncul
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
         
         $absensi = MuridAbsensi::findOrFail($id);
         $absensi->update($request->all());
@@ -100,9 +109,18 @@ class MuridAbsensiController extends Controller
         return redirect()->route('pengajar.muridAbsensi.index')->with('success', 'Absensi berhasil diperbarui.');
     }
 
-    public function destroy($id){
+    // Hapus data absensi
+    public function destroy(Request $Request, $id){
         $absensi = MuridAbsensi::findOrFail($id);
         $absensi->delete();
+
+        NotifikasiAdmin::create([
+        'aksi' => 'Pengajar Hapus Absensi',
+        'deskripsi' => 'Pengajar ' . auth()->guard('pengajar')->user()->nama_pengajar . ' Pengajar Hapus Absensi murid bernama ' . $Request->nama_murid,
+        'is_read' => false, // agar badge di ikon bell muncul
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
 
         return redirect()->route('pengajar.muridAbsensi.index')->with('success', 'Absensi berhasil dihapus.');
     }
@@ -130,6 +148,16 @@ class MuridAbsensiController extends Controller
         'tanggal_absen' => $request->tanggal_absen,
         'catatan' => $request->catatan,
     ]);
+
+     // Setelah absensi berhasil disimpan, tambahkan notifikasi ke admin
+    NotifikasiAdmin::create([
+        'aksi' => 'Pengajar Input Absensi',
+        'deskripsi' => 'Pengajar ' . auth()->guard('pengajar')->user()->nama_pengajar . ' melakukan absensi murid bernama ' . $request->nama_murid,
+        'is_read' => false, // agar badge di ikon bell muncul
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
 
     return redirect()->route('pengajar.muridAbsensi.index')->with('success', 'Absensi berhasil disimpan.');
 }

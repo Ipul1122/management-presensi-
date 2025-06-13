@@ -14,6 +14,7 @@ use App\Http\Controllers\Pengajar\MuridAbsensiController;
 use App\Http\Controllers\Pengajar\RiwayatMuridAbsensiController;
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 use App\Http\Controllers\Pengajar\DashboardPengajarController;
+use App\Http\Controllers\Pengajar\RiwayatJadwalPengajarController;
 /*
 |--------------------------------------------------------------------------
 | WEB ROUTES
@@ -141,5 +142,8 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::delete('/muridAbsensi-delete-selected', [MuridAbsensiController::class, 'bulkDelete'])->name('muridAbsensi.bulkDelete');
     Route::delete('/muridAbsensi-delete-all', [MuridAbsensiController::class, 'deleteAll'])->name('muridAbsensi.deleteAll');
 
+
+    // Riwayat Jadwal Pengajar 
+    Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');
 
 });
