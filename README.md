@@ -35,6 +35,8 @@ Project ini dibangun untuk membuat sistem presensi kegiatan, seperti membuat men
 - Dapat membuat, mengedit, menghapus data murid dan pengajar
 - Notifikasi, memberi tahu apa saja yang baru saja melakukan perubahan
 - CRUD jadwal pengajar oleh admin
+- Riwayat Jadwal Admin
+- Riwayat Jadwal Pengajar
 - Riwayat Absensi Murid
 - Riwayat Jadwal Pengajar
 
@@ -69,10 +71,10 @@ Hal apa saja yang saya pakai untuk membangun website presensi tersebut, yaitu
 - Admin
 - Pengajar1 (Iqro)
 - Pengajar2 (Al-Qur’an)
-
+- CRUD
 - ( Tambah baru )
 
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Dibuat oleh @pul_ipul © 2025
