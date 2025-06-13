@@ -32,7 +32,7 @@ class PengajarController extends Controller
         ]);
 
         NotifikasiAdmin::create([
-            'aksi' => 'Tambah Data Pengajar',
+            'aksi' => 'Admin Tambah Data Pengajar',
             'deskripsi' => 'Admin menambahkan pengajar bernama ' . $validated['nama_pengajar'],
         ]);        
 
@@ -65,7 +65,7 @@ class PengajarController extends Controller
         ]);
         
         NotifikasiAdmin::create([
-            'aksi' => 'Edit Data Pengajar',
+            'aksi' => 'Admin Edit Data Pengajar',
             'deskripsi' => 'Admin mengubah data pengajar bernama ' . $validated['nama_pengajar'],
         ]);
         
@@ -85,7 +85,7 @@ class PengajarController extends Controller
     {
 
         NotifikasiAdmin::create([
-            'aksi' => 'Hapus Data Pengajar',
+            'aksi' => 'Admin Hapus Data Pengajar',
             'deskripsi' => 'Admin menghapus pengajar bernama ' . $pengajar->nama_pengajar,
         ]);
         
@@ -112,7 +112,7 @@ class PengajarController extends Controller
             foreach ($pengajars as $pengajar) {
                 // hapus foto & data
                 NotifikasiAdmin::create([
-                    'aksi' => 'Hapus Data Pengajar (Bulk)',
+                    'aksi' => 'Admin Hapus Data Pengajar (Bulk)',
                     'deskripsi' => 'Admin menghapus pengajar bernama ' . $pengajar->nama_pengajar,
                 ]);
                 $pengajar->delete();

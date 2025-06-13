@@ -33,8 +33,16 @@
                     <span class="text-xl font-bold">TPA Nurul Haq</span>
                 </div>
                 <div class="flex space-x-4 text-xl md:hidden">
-                    <button title="Input Absen" class="text-blue-600 hover:text-blue-800"><i class="fas fa-calendar-check"></i></button>
-                    <button title="Profil Pengajar" class="text-green-600 hover:text-green-800"><i class="fas fa-users"></i></button>
+                    <a href="{{ route('pengajar.infoDataMurid.index') }}">
+                        <button title="Profil Pengajar" class="text-blue-600 hover:text-blue-800"><i class="fas fa-users"></i></button>
+                    </a>
+                    <a href="{{ route('pengajar.infoDataPengajar.index') }}">
+                        <button title="Profil Pengajar" class="text-green-600 hover:text-green-800"><i class="fas fa-users"></i></button>
+                    </a>
+                    {{-- <form action="{{ route('pengajar.infoDataPengajar.index') }}" method="POST">
+                        @csrf
+                        <button title="Profile Pengajar" class="text-green-600 hover:text-green-800"><i class="fas fa-users"></i></button>
+                    </form> --}}
                     <form action="{{ route('pengajar.logout') }}" method="POST">
                         @csrf
                         <button title="Logout" class="text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i></button>
@@ -47,8 +55,10 @@
             <!-- Desktop Navigation Icons -->
             <div class="hidden md:flex space-x-4 text-xl">
                 <button title="Input Absen" class="text-blue-600 hover:text-blue-800"><i class="fas fa-calendar-check"></i></button>
-                <button title="Profil Pengajar" class="text-green-600 hover:text-green-800"><i class="fas fa-users"></i></button>
-                <form action="{{ route('pengajar.logout') }}" method="POST">
+                <a href="{{ route('pengajar.infoDataPengajar.index') }}">
+                        <button title="Profil Pengajar" class="text-green-600 hover:text-green-800"><i class="fas fa-users"></i></button>
+                    </a>
+                    <form action="{{ route('pengajar.logout') }}" method="POST">
                     @csrf
                     <button title="Logout" class="text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i></button>
                 </form>
@@ -69,6 +79,7 @@
             <a href="{{ route('pengajar.riwayatMuridAbsensi.index') }}" class="block p-2 hover:bg-gray-200 rounded">riwayat Murid</a>
             <a href="{{ route('pengajar.infoDataMurid.index') }}" class="block p-2 hover:bg-gray-200 rounded">Info Data Murid</a>
             <a href="{{ route('pengajar.infoDataPengajar.index') }}" class="block p-2 hover:bg-gray-200 rounded">Info Data Pengajar</a>
+            <a href="{{ route('pengajar.riwayatJadwal.index') }}" class="block p-2 hover:bg-gray-200 rounded">Riwayat Jadwal</a>
             <form action="{{ route('pengajar.logout') }}" method="POST">
                 @csrf
                 <button title="Logout" class="block p-2 hover:bg-gray-200 rounded text-red-500">Logout</button>
@@ -97,13 +108,13 @@
                         </div>
                         <button class="text-sm text-green-600 hover:underline">Lihat</button>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow flex items-center justify-between">
+                    {{-- <div class="bg-white p-4 rounded-lg shadow flex items-center justify-between">
                         <div class="flex items-center space-x-4">
                             <i class="fas fa-edit text-3xl text-yellow-500"></i>
                             <span class="text-lg font-semibold">Edit Info Pengajar</span>
                         </div>
                         <button class="text-sm text-yellow-600 hover:underline">Lihat</button>
-                    </div>
+                    </div> --}}
                 </div>
 
     {{-- slide data pengajar --}}
@@ -126,17 +137,24 @@
             <div id="pengajarContainer" class="flex transition-transform duration-300 ease-in-out">
                 @forelse ($dataPengajar as $index => $pengajar)
                     <div class="w-64 bg-white rounded-lg shadow p-4 text-center flex-shrink-0 mx-2">
-                        <img src="{{ $pengajar->foto_pengajar ? asset('storage/foto_pengajar/' . $pengajar->foto_pengajar) : asset('default/user.png') }}"
-                             alt="Foto Pengajar"
-                             class="w-20 h-20 mx-auto rounded-full object-cover mb-2">
-                        <h3 class="text-md font-bold">{{ $pengajar->nama_pengajar }}</h3>
-                        <p class="text-sm text-gray-600">{{ $pengajar->deskripsi ?? 'Tidak ada deskripsi' }}</p>
+                        {{-- FOTO PENGAJAR --}}
+                            @if($pengajar->foto_pengajar)
+                                <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
+                                    alt="foto" class="h-14 w-14 my-4 rounded object-cover border-2 border-green-140">
+                                    {{ substr($pengajar->nama_pengajar, 0, 100) }}
+                            @else
+                            {{-- NAMA PENGAJAR --}}
+                                <td class="h-14 w-14 rounded bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-semibold">
+                                    {{ substr($pengajar->nama_pengajar, 0, 1) }}
+                                </td>
+                            @endif
+                                <p class="text-sm text-gray-600">{{ $pengajar->deskripsi ?? 'Tidak ada deskripsi' }}</p>
                     </div>
                 @empty
                     <div class="w-64 bg-white rounded-lg shadow p-4 text-center flex-shrink-0 mx-2">
                         <img src="{{ asset('default/user.png') }}"
-                             alt="Foto Default"
-                             class="w-20 h-20 mx-auto rounded-full object-cover mb-2">
+                            alt="Foto Default"
+                            class="w-20 h-20 mx-auto rounded-full object-cover mb-2">
                         <h3 class="text-md font-bold">John Doe</h3>
                         <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet.</p>
                     </div>

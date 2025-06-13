@@ -48,7 +48,7 @@ class JadwalController extends Controller
         
         NotifikasiAdmin::create([
         'pesan' => 'Admin menambahkan jadwal baru: ' . $request->nama_jadwal,
-        'aksi' => 'tambah',
+        'aksi' => 'Admin Tambah Jadwal',
         'deskripsi' => 'Jadwal baru telah ditambahkan dengan nama: ' . $request->nama_jadwal
         ]);
 
@@ -94,7 +94,7 @@ class JadwalController extends Controller
 
         NotifikasiAdmin::create([
             'pesan' => 'Admin mengubah jadwal: ' . $request->nama_jadwal,
-            'aksi' => 'ubah',
+            'aksi' => 'Admin Ubah Jadwal',
             'deskripsi' => 'Jadwal telah diperbarui dengan nama: ' . $request->nama_jadwal
         ]);
 
@@ -114,7 +114,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::findOrFail($id);
         NotifikasiAdmin::create([
         'pesan' => 'Admin menghapus jadwal: ' . $jadwal->nama_jadwal,
-        'aksi' => 'hapus',
+        'aksi' => 'Admin Hapus Jadwal',
         'deskripsi' => 'Jadwal telah dihapus dengan nama: ' . $jadwal->nama_jadwal
         ]);
         $jadwal->delete();
@@ -133,7 +133,7 @@ public function bulkDelete(Request $request)
         foreach ($jadwals as $jadwal) {
             NotifikasiAdmin::create([
                 'pesan' => 'Admin menghapus jadwal: ' . $jadwal->nama_jadwal,
-                'aksi' => 'hapus',
+                'aksi' => 'Admin Hapus Jadwal',
                 'deskripsi' => 'Jadwal telah dihapus dengan nama: ' . $jadwal->nama_jadwal
             ]);
             $jadwal->delete();
@@ -149,7 +149,7 @@ public function bulkDelete(Request $request)
         foreach ($jadwals as $jadwal) {
             NotifikasiAdmin::create([
                 'pesan' => 'Admin menghapus jadwal: ' . $jadwal->nama_jadwal,
-                'aksi' => 'hapus',
+                'aksi' => 'Admin Hapus Jadwal',
                 'deskripsi' => 'Jadwal telah dihapus dengan nama: ' . $jadwal->nama_jadwal
             ]);
             $jadwal->delete();

@@ -39,7 +39,7 @@ public function store(Request $request)
 
 
     NotifikasiAdmin::create([
-        'aksi' => 'Tambah Data Murid',
+        'aksi' => 'Admin Tambah Data Murid',
         'deskripsi' => 'Admin menambahkan Murid bernama ' . $validatedData['nama_anak'],
     ]);  
 
@@ -84,7 +84,7 @@ public function edit($id)
         ]);        
 
         NotifikasiAdmin::create([
-            'aksi' => 'Edit Data Murid',
+            'aksi' => 'Admin Edit Data Murid',
             'deskripsi' => 'Admin mengubah data Murid bernama ' . $request['nama_anak'],
         ]);
 
@@ -110,7 +110,7 @@ public function edit($id)
         
         $murid = Murid::findOrFail($id);
         NotifikasiAdmin::create([
-            'aksi' => 'Hapus Data Murid',
+            'aksi' => 'Admin Hapus Data Murid',
             'deskripsi' => 'Admin menghapus Murid bernama ' . $murid->nama_murid,
         ]);
         
@@ -170,7 +170,7 @@ public function edit($id)
         foreach ($murids as $murid) {
             // hapus foto & data
             NotifikasiAdmin::create([
-                'aksi' => 'Hapus Data murid (Bulk)',
+                'aksi' => 'Admin Hapus Data murid (Bulk)',
                 'deskripsi' => 'Admin menghapus murid bernama ' . $murid->nama_anak,
             ]);
             $murid->delete();
@@ -191,7 +191,7 @@ public function edit($id)
         $ids = Murid::all()->pluck('id');
         Murid::truncate(); // hapus semua data
         NotifikasiAdmin::create([
-            'aksi' => 'Hapus Data Murid (Bulk)',
+            'aksi' => 'Admin Hapus Data Murid (Bulk)',
             'deskripsi' => 'Admin menghapus Murid bernama ' . $ids->nama_murid,
         ]);
         return redirect()->route('admin.murid.index')->with('success', 'Seluruh data murid telah dihapus.');
