@@ -1,4 +1,5 @@
-@extends('components.layouts.pengajar')
+@extends('components.layouts.admin.sidebar-and-navbar')
+
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-green-50 via-green-100 to-emerald-50 p-4 md:p-6">
@@ -33,7 +34,7 @@
                     
                     <!-- Nama Pengajar -->
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-semibold text-green-800 mb-2">
+                        <label for="nama_pengajar"  class="block text-sm font-semibold text-green-800 mb-2">
                             <span class="flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>

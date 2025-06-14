@@ -253,7 +253,7 @@
                                 </div>
                             </div>
                             <a href="{{ route('pengajar.muridAbsensi.index') }}" 
-                               class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors font-medium">
+                                    class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors font-medium">
                                 Lihat
                             </a>
                         </div>
@@ -319,8 +319,8 @@
                                 <div class="mb-4">
                                     @if($pengajar->foto_pengajar)
                                         <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
-                                             alt="Foto {{ $pengajar->nama_pengajar }}" 
-                                             class="w-16 h-16 mx-auto rounded-full object-cover border-4 border-green-200">
+                                            alt="Foto {{ $pengajar->nama_pengajar }}" 
+                                            class="w-16 h-16 mx-auto rounded-full object-cover border-4 border-green-200">
                                     @else
                                         <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-bold text-xl">
                                             {{ substr($pengajar->nama_pengajar, 0, 1) }}

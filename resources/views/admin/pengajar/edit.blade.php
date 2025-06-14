@@ -1,4 +1,5 @@
-@extends('components.layouts.admin')
+@extends('components.layouts.admin.sidebar-and-navbar')
+
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4 md:p-6">

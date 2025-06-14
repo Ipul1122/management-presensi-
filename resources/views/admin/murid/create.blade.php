@@ -1,4 +1,4 @@
-@extends('components.layouts.admin')
+@extends('components.layouts.admin.sidebar-and-navbar')
 
 @section('content')
 <div class="max-w-4xl mx-auto p-6">

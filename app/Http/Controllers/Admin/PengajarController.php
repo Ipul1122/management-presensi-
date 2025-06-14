@@ -23,6 +23,7 @@ class PengajarController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $validated = $request->validate([
             'nama_pengajar' => 'required|string|max:255',
             'foto_pengajar' => 'nullable|image|max:2048',
@@ -31,11 +32,13 @@ class PengajarController extends Controller
             'deskripsi' => 'required|string',
         ]);
 
+        // Buat notifikasi admin
         NotifikasiAdmin::create([
             'aksi' => 'Admin Tambah Data Pengajar',
             'deskripsi' => 'Admin menambahkan pengajar bernama ' . $validated['nama_pengajar'],
         ]);        
 
+        // Simpan foto pengajar jika ada
         if ($request->hasFile('foto_pengajar')) {
             $validated['foto_pengajar'] = $request->file('foto_pengajar')->store('foto_pengajar', 'public');
         }
@@ -133,4 +136,8 @@ class PengajarController extends Controller
             $pengajars = Pengajar::OrderBy('nama_pengajar', 'asc')->paginate(5);
             return view('pengajar.infoDataPengajar.index', compact('pengajars'));
         }
-}
+
+
+
+        
+    }

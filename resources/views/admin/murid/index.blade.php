@@ -1,4 +1,4 @@
-@extends('components.layouts.admin')
+@extends('components.layouts.admin.sidebar-and-navbar')
 
 @section('content')
 <div class="p-4 md:p-6 lg:p-8">
@@ -335,7 +335,7 @@
         </div>
     </div>
 </div>
-
+</ma>
 
 <script>
     
