@@ -6,14 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Jadwal;
 use App\Models\Pengajar;
-use App\Models\NotifikasiAdmin;
 use Carbon\Carbon;
+
 
 class DashboardPengajarController extends Controller
 {
     //
     public function index()
     {
+         // Menampilkan Jadwal bulan ini di halaman dashboard pengajar
+        $namaPengajar = auth('pengajar')->user()->nama_pengajar;
 
         // Mengambil jadwal bulan ini dan mengurutkannya berdasarkan tanggal
         $jadwalBulanIni = Jadwal::whereMonth('tanggal_jadwal', Carbon::now()->month)
@@ -35,16 +37,9 @@ class DashboardPengajarController extends Controller
                 return $item;
             });
 
+        // Ambil semua data pengajar
+        $dataPengajar = Pengajar::all();
 
-            // Ambil semua data pengajar
-            $dataPengajar = Pengajar::all();
-
-            // Ambil notifikasi admin untuk pengajar yang sedang input absensi
-            // NotifikasiAdmin::create([
-            //     'aksi' => 'Input Absensi' ,
-            //     'deskripsi' => 'Pengajar' . auth()->guard('pengajar')->user()->nama_pengajar . 'melakukan input absensi bernama' . $request->nama_murid,
-            // ]);
-
-        return view('pengajar.dashboard', compact('jadwalBulanIni',  'dataPengajar'));
+        return view('pengajar.dashboard', compact('jadwalBulanIni', 'namaPengajar', 'dataPengajar'));
     }
 }

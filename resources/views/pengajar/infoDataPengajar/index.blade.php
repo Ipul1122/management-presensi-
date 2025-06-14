@@ -35,6 +35,32 @@
                             @endif
                         </td>
                         <td class="px-4 py-2 text-sm text-gray-700">{{ $pengajar->deskripsi }}</td>
+{{-- 
+                                                <!-- Tombol Edit -->
+                        <div x-data="{ open: false, error: '' }" class="relative">
+                            <button @click="open = true" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                                Edit Data
+                            </button>
+
+                            <!-- Popover PIN -->
+                            <div x-show="open" class="absolute top-12 left-0 bg-white shadow-lg p-4 border rounded w-64 z-10">
+                                <form @submit.prevent="submitPIN">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Masukkan PIN (4 digit)</label>
+                                    <input x-ref="pinInput" type="password" maxlength="4" x-model="pin"
+                                        class="w-full border px-2 py-1 rounded mb-2" required>
+
+                                    <template x-if="error">
+                                        <div class="text-red-600 text-sm mb-2" x-text="error"></div>
+                                    </template>
+
+                                    <div class="flex justify-end space-x-2">
+                                        <button type="button" @click="open = false" class="text-gray-600 hover:underline">Batal</button>
+                                        <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded">Lanjutkan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> --}}
+
                     </tr>
                 @empty
                     <tr>
@@ -50,4 +76,7 @@
     </div>
 </div>
 
+
+<script>
+</script>
 @endsection

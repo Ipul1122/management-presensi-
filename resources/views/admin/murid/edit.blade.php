@@ -1,4 +1,5 @@
-@extends('components.layouts.admin')
+@extends('components.layouts.admin.sidebar-and-navbar')
+
 @section('content')
 <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
     <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6">

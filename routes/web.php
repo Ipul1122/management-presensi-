@@ -146,4 +146,7 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     // Riwayat Jadwal Pengajar 
     Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');
 
+    // Riwayat Jadwal Pengajar Edit
+    // Route::post('infoDataPengajar', [PengajarController::class, 'verifikasiPin'])->name('infoDataPengajar.index');
+    // Route::get('/pengajar/infoDataPengajar/edit', [PengajarController::class, 'edit'])->name('infoDataPengajar.edit');
 });
