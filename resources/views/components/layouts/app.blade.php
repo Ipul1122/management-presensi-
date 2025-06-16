@@ -9,6 +9,18 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    
+    <div class="">
+        {{-- Konten utama halaman --}}
+        <main class="">
+            @yield('content')
+        </main>
+
+        {{-- Footer opsional --}}
+        <footer class="">
+            &copy; {{ date('Y') }} TPA Masjid Nurul Haq
+        </footer>
+    </div>
+
+    @stack('scripts')
 </body>
 </html>

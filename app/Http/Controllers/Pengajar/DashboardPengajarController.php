@@ -15,7 +15,7 @@ class DashboardPengajarController extends Controller
     public function index()
     {
          // Menampilkan Jadwal bulan ini di halaman dashboard pengajar
-        $namaPengajar = auth('pengajar')->user()->nama_pengajar;
+        // $namaPengajar = auth('pengajar')->user()->nama_pengajar;
 
         // Mengambil jadwal bulan ini dan mengurutkannya berdasarkan tanggal
         $jadwalBulanIni = Jadwal::whereMonth('tanggal_jadwal', Carbon::now()->month)
@@ -40,6 +40,6 @@ class DashboardPengajarController extends Controller
         // Ambil semua data pengajar
         $dataPengajar = Pengajar::all();
 
-        return view('pengajar.dashboard', compact('jadwalBulanIni', 'namaPengajar', 'dataPengajar'));
+        return view('pengajar.dashboard', compact('jadwalBulanIni', 'dataPengajar'));
     }
 }
