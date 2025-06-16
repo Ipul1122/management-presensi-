@@ -1,6 +1,6 @@
-@extends('components.layouts.pengajar')
+@extends('components.layouts.pengajar.sidebar')
 
-@section('content')
+@section('sidebar-pengajar')
 <div class="max-w-xl mx-auto mt-8 p-6 bg-white rounded shadow">
     <h2 class="text-xl font-bold mb-4">Edit Absensi Murid</h2>
     <form action="{{ route('pengajar.riwayatMuridAbsensi.update', $absensi->id) }}" method="POST">

@@ -1,4 +1,3 @@
-{{-- resources/views/components/admin-layout.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -350,6 +349,7 @@
                     </div>
                 </div>
             </aside>
+
 
             {{-- Main Content --}}
             <main class="main-content flex-1">

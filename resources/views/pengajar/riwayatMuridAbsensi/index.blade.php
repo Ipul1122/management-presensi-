@@ -1,6 +1,6 @@
-@extends('components.layouts.pengajar')
+@extends('components.layouts.pengajar.sidebar')
 
-@section('content')
+@section('sidebar-pengajar')
 
 {{-- Custom CSS untuk animasi dan styling tambahan --}}
 <style>

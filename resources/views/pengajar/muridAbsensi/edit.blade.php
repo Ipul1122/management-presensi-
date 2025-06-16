@@ -1,5 +1,5 @@
-@extends('components.layouts.pengajar')
-@section('content')
+@extends('components.layouts.pengajar.sidebar')
+@section('sidebar-pengajar')
 
     <div class="p-6">
     <h2 class="text-2xl font-bold mb-4">Edit Absensi Murid</h2>

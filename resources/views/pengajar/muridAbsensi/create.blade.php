@@ -1,5 +1,5 @@
-@extends('components.layouts.pengajar')
-    @section('content')
+@extends('components.layouts.pengajar.sidebar')
+    @section('sidebar-pengajar')
     <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 lg:p-8">
     <div class="max-w-4xl mx-auto">
         <!-- Header -->

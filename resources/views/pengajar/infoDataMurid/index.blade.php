@@ -1,5 +1,5 @@
-@extends('components.layouts.pengajar')
-@section('content')
+@extends('components.layouts.pengajar.sidebar')
+@section('sidebar-pengajar')
 
 <style>
 /* Custom animations */

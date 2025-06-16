@@ -1,6 +1,34 @@
-@extends('components.layouts.pengajar')
+@extends('components.layouts.pengajar.sidebar')
 
-@section('content')
+@section('sidebar-pengajar')
+
+<style>
+    .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .accordion-content.open {
+        max-height: 1000px;
+    }
+    
+    .accordion-icon.rotate {
+        transform: rotate(180deg);
+    }
+    
+    @media (max-width: 640px) {
+        .accordion-header {
+            padding: 1rem;
+        }
+        
+        .accordion-content .p-4 {
+            padding: 1rem;
+        }
+    }
+</style>
+
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 lg:p-6">
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
@@ -10,7 +38,6 @@
             </h1>
             <p class="text-gray-600 text-sm lg:text-base">Kelola dan lihat riwayat jadwal yang telah berlalu</p>
         </div>
-
         @forelse ($groupedByMonth as $month => $jadwals)
             @php
                 $totalGaji = $jadwals->sum('gaji');
@@ -20,7 +47,7 @@
             <div class="mb-4 lg:mb-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
                 <!-- Accordion Header -->
                 <div class="accordion-header cursor-pointer select-none bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 p-4 lg:p-6" 
-                     onclick="toggleAccordion(this)">
+                    onclick="toggleAccordion(this)">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <div class="bg-white/20 rounded-full p-2">
@@ -54,7 +81,7 @@
                                 <span>Rp {{ number_format($totalGaji, 0, ',', '.') }}</span>
                             </div>
                             <svg class="accordion-icon w-5 h-5 lg:w-6 lg:h-6 text-white transform transition-transform duration-300" 
-                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
@@ -163,32 +190,6 @@
     </div>
 </div>
 
-<style>
-    .line-clamp-1 {
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    
-    .accordion-content.open {
-        max-height: 1000px;
-    }
-    
-    .accordion-icon.rotate {
-        transform: rotate(180deg);
-    }
-    
-    @media (max-width: 640px) {
-        .accordion-header {
-            padding: 1rem;
-        }
-        
-        .accordion-content .p-4 {
-            padding: 1rem;
-        }
-    }
-</style>
 
 <script>
     function toggleAccordion(element) {

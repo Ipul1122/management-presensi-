@@ -142,11 +142,6 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::delete('/muridAbsensi-delete-selected', [MuridAbsensiController::class, 'bulkDelete'])->name('muridAbsensi.bulkDelete');
     Route::delete('/muridAbsensi-delete-all', [MuridAbsensiController::class, 'deleteAll'])->name('muridAbsensi.deleteAll');
 
-
-    // Riwayat Jadwal Pengajar 
-    Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');
-
-    // Riwayat Jadwal Pengajar Edit
-    // Route::post('infoDataPengajar', [PengajarController::class, 'verifikasiPin'])->name('infoDataPengajar.index');
-    // Route::get('/pengajar/infoDataPengajar/edit', [PengajarController::class, 'edit'])->name('infoDataPengajar.edit');
+    // Riwayat Jadwal Pengajar
+    Route::get('riwayatJadwal', [RiwayatJadwalPengajarController::class, 'index'])->name('riwayatJadwal.index');
 });

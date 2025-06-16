@@ -1,6 +1,6 @@
-@extends('components.layouts.pengajar')
+@extends('components.layouts.pengajar.sidebar')
 
-@section('content')
+@section('sidebar-pengajar')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4 md:p-6">
     <div class="max-w-7xl mx-auto">
         <!-- Header Section -->
@@ -292,7 +292,7 @@
                             <td class="px-6 py-4">
                                 <div class="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                     <a href="{{ route('pengajar.muridAbsensi.edit', $absen->id) }}" 
-                                       class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded-lg transition-colors duration-200">
+                                        class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded-lg transition-colors duration-200">
                                         Edit
                                     </a>
                                     <form action="{{ route('pengajar.muridAbsensi.destroy', $absen->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">

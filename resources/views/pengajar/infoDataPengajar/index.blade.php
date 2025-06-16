@@ -1,6 +1,6 @@
-@extends('components.layouts.pengajar');
+@extends('components.layouts.pengajar.sidebar');
 
-@section('content')
+@section('sidebar-pengajar')
     
 <div class="p-6">
     <h1 class="text-2xl font-bold mb-4">Informasi Data Pengajar</h1>
