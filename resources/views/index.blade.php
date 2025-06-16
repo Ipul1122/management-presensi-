@@ -1,6 +1,6 @@
 @extends('components.user.navbar')
 
-@section( 'content')
+@section( 'navbar-user')
 
      <style>
         @keyframes gradient-shift {
@@ -149,7 +149,7 @@
             </div>
         </div>
     </div>
-</section>
+    </section>
 
 
  <!-- GALERI -->
@@ -171,10 +171,10 @@
                         <h3 class="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl"><span class="gradient-text-highlight">Pesantren Ramadhan</span></h3>
                     </a>
                     <div class="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2">
-                        <a href="#" onclick="openModal('{{ asset('images/foto_tpa/foto_tpa4.jpg') }}', 'Benefit')" class="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 cursor-pointer">
-                            <img src="{{ asset('images/foto_tpa/foto_tpa4.jpg') }}" alt="Benefit" class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                        <a href="#" onclick="openModal('{{ asset('images/foto_tpa/foto_tpa6.jpg') }}', 'Refreshing')" class="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 cursor-pointer">
+                            <img src="{{ asset('images/foto_tpa/foto_tpa6.jpg') }}" alt="Refreshing" class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">
                             <div class="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                            <h3 class="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl"><span class="gradient-text-highlight">Benefit</span></h3>
+                            <h3 class="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl"><span class="gradient-text-highlight">Refreshing</span></h3>
                         </a>
                         <a href="#" onclick="openModal('{{ asset('images/foto_tpa/foto_tpa3.jpg') }}', 'Benefit')" class="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 cursor-pointer">
                             <img src="{{ asset('images/foto_tpa/foto_tpa3.jpg') }}" alt="Benefit" class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">

@@ -16,16 +16,17 @@ use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 use App\Http\Controllers\Pengajar\DashboardPengajarController;
 use App\Http\Controllers\Pengajar\RiwayatJadwalPengajarController;
 use App\Http\Controllers\Pengajar\panduanPengajarController;
+
+// USER CONTROLLERS
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\InformasiController;
+
 /*
 |--------------------------------------------------------------------------
 | WEB ROUTES
 |--------------------------------------------------------------------------
 */
 
-// Root
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // ERROR MESSAGE
 // Route fallback untuk tampilan pesan error jika tidak login
@@ -147,4 +148,19 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     // Panduan Pengajar
     Route::get('panduanPengajar', [panduanPengajarController::class, 'index'])->name('panduanPengajar.index');
     });
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| USER ROUTES
+|--------------------------------------------------------------------------
+*/
+
+// user
+Route::get('/', [HomeController::class, 'index'])->name('index');
+
+// GROUP USER
+Route::prefix('user')->name('user.')->group(function() {
+    Route::get('/informasi', [InformasiController::class, 'index'])->name('informasi.index');
 });
