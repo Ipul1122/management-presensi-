@@ -25,8 +25,8 @@
 
             {{-- Tengah: Menu Navigasi --}}
             <nav class="hidden md:flex space-x-6">
-                <a href="#home" class="text-gray-700 hover:text-emerald-600 transition font-medium">Home</a>
-                <a href="#informasi" class="text-gray-700 hover:text-emerald-600 transition font-medium">informasi</a>
+                <a href="{{ route('index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">Home</a>
+                <a href="{{ route('user.informasi.index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">informasi</a>
                 <a href="#galeri" class="text-gray-700 hover:text-emerald-600 transition font-medium">Galeri</a>
                 <a href="#pendaftaran" class="text-gray-700 hover:text-emerald-600 transition font-medium">Pendaftaran</a>
                 <a href="#kontak" class="text-gray-700 hover:text-emerald-600 transition font-medium">Kontak</a>
@@ -56,8 +56,8 @@
     {{-- Mobile Dropdown Menu --}}
     <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-sm">
         <div class="px-4 py-3 space-y-2">
-            <a href="#home" class="block text-gray-700 hover:text-emerald-600">Home</a>
-            <a href="#informasi" class="block text-gray-700 hover:text-emerald-600">informasi</a>
+            <a href="{{ route('index') }}" class="block text-gray-700 hover:text-emerald-600">Home</a>
+            <a href="{{ route('user.informasi.index') }}" class="block text-gray-700 hover:text-emerald-600">informasi</a>
             <a href="#galeri" class="block text-gray-700 hover:text-emerald-600">Galeri</a>
             <a href="#pendaftaran" class="block text-gray-700 hover:text-emerald-600">Pendaftaran</a>
             <a href="#kontak" class="block text-gray-700 hover:text-emerald-600">Kontak</a>
@@ -73,7 +73,7 @@
 
         {{-- Konten utama halaman --}}
         <main class="">
-            @yield('content')
+            @yield('navbar-user')
         </main>
 
         {{-- Footer opsional --}}
@@ -92,8 +92,8 @@
         <div>
             <h3 class="text-lg font-semibold mb-3">Navigasi</h3>
             <ul class="space-y-2 text-sm">
-                <li><a href="#hero" class="hover:underline">Beranda</a></li>
-                <li><a href="#informasi" class="hover:underline">informasi</a></li>
+                <li><a href="{{ route('index') }}" class="hover:underline">Beranda</a></li>
+                <li><a href="{{ route('user.informasi.index') }}" class="hover:underline">informasi</a></li>
                 <li><a href="#galeri" class="hover:underline">Galeri</a></li>
                 <li><a href="#pendaftaran" class="hover:underline">Pendaftaran</a></li>
                 <li><a href="#kontak" class="hover:underline">Kontak</a></li>
