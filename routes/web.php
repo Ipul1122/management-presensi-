@@ -15,6 +15,7 @@ use App\Http\Controllers\Pengajar\RiwayatMuridAbsensiController;
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 use App\Http\Controllers\Pengajar\DashboardPengajarController;
 use App\Http\Controllers\Pengajar\RiwayatJadwalPengajarController;
+use App\Http\Controllers\Pengajar\panduanPengajarController;
 /*
 |--------------------------------------------------------------------------
 | WEB ROUTES
@@ -144,4 +145,7 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 
     // Riwayat Jadwal Pengajar
     Route::get('riwayatJadwal', [RiwayatJadwalPengajarController::class, 'index'])->name('riwayatJadwal.index');
+
+    // Panduan Pengajar
+    Route::get('panduanPengajar', [panduanPengajarController::class, 'index'])->name('panduanPengajar.index');
 });
