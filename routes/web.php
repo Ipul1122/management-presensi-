@@ -105,12 +105,10 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::post('/logout', [PengajarLoginController::class, 'logout'])->name('logout');
 
     // Routes dengan middleware auth:pengajar
-    Route::get('/dashboard', function () {
-        return view('pengajar.dashboard');
-    })->middleware(['auth:pengajar', 'pengajar.role'])->name('dashboard');
+ Route::middleware(['auth:pengajar', 'pengajar.role'])->group(function () {
 
-    // Route untuk halaman dashboard pengajar
     Route::get('/dashboard', [DashboardPengajarController::class, 'index'])->name('dashboard');
+    // Route untuk halaman dashboard pengajar
 
     // Routes Murid Absensis
     Route::resource('muridAbsensi', MuridAbsensiController::class);
@@ -148,4 +146,5 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 
     // Panduan Pengajar
     Route::get('panduanPengajar', [panduanPengajarController::class, 'index'])->name('panduanPengajar.index');
+    });
 });
