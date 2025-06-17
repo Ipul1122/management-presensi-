@@ -21,6 +21,9 @@ use App\Http\Controllers\Pengajar\panduanPengajarController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\InformasiController;
 use App\Http\Controllers\User\GaleriController;
+use App\Http\Controllers\User\PendaftaranController;
+use App\Http\Controllers\User\KontakController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -167,5 +170,9 @@ Route::prefix('user')->name('user.')->group(function() {
     Route::get('/informasi', [InformasiController::class, 'index'])->name('informasi.index');
     // GALERI USER
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
+    // PENDAFTARAN USER
+    Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
+    // KONTAK USER
+    Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
     
 });

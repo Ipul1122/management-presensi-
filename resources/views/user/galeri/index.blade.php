@@ -12,7 +12,7 @@
                     {{-- Gambar diulang 2x untuk efek looping --}}
                     @for ($i = 1; $i <= 2; $i++)
                         @foreach (['foto_tpa2.jpg', 'foto_tpa3.jpg', 'foto_tpa4.jpg', 
-                        'foto_tpa5.jpg', 'benefit_murid_terbaik.jpg', 'foto_tpa10.jpg',
+                        'foto_tpa5.jpg', 'foto_tpa16.jpg', 'foto_tpa10.jpg',
                         'foto_tpa11.jpg', 'foto_tpa12.jpg', 'foto_tpa13.jpg', 'foto_tpa14.jpg', 'foto_tpa15.jpg'] as $gambar)
                             <div class="gallery-item">
                                 <img src="{{ asset('images/galeri_tpa/' . $gambar) }}" alt="Galeri TPA" class="gallery-image">
