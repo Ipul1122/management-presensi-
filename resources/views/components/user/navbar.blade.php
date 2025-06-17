@@ -27,7 +27,7 @@
             <nav class="hidden md:flex space-x-6">
                 <a href="{{ route('index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">Home</a>
                 <a href="{{ route('user.informasi.index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">informasi</a>
-                <a href="#galeri" class="text-gray-700 hover:text-emerald-600 transition font-medium">Galeri</a>
+                <a href="{{ route('user.galeri.index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">Galeri</a>
                 <a href="#pendaftaran" class="text-gray-700 hover:text-emerald-600 transition font-medium">Pendaftaran</a>
                 <a href="#kontak" class="text-gray-700 hover:text-emerald-600 transition font-medium">Kontak</a>
             </nav>
@@ -58,7 +58,7 @@
         <div class="px-4 py-3 space-y-2">
             <a href="{{ route('index') }}" class="block text-gray-700 hover:text-emerald-600">Home</a>
             <a href="{{ route('user.informasi.index') }}" class="block text-gray-700 hover:text-emerald-600">informasi</a>
-            <a href="#galeri" class="block text-gray-700 hover:text-emerald-600">Galeri</a>
+            <a href="{{ route('user.galeri.index') }}" class="block text-gray-700 hover:text-emerald-600">Galeri</a>
             <a href="#pendaftaran" class="block text-gray-700 hover:text-emerald-600">Pendaftaran</a>
             <a href="#kontak" class="block text-gray-700 hover:text-emerald-600">Kontak</a>
             <a href="#pendaftaran" class="block text-white bg-emerald-600 px-3 py-2 rounded-lg text-center font-semibold hover:bg-emerald-700">
@@ -94,7 +94,7 @@
             <ul class="space-y-2 text-sm">
                 <li><a href="{{ route('index') }}" class="hover:underline">Beranda</a></li>
                 <li><a href="{{ route('user.informasi.index') }}" class="hover:underline">informasi</a></li>
-                <li><a href="#galeri" class="hover:underline">Galeri</a></li>
+                <li><a href="{{ route('user.galeri.index') }}" class="hover:underline">Galeri</a></li>
                 <li><a href="#pendaftaran" class="hover:underline">Pendaftaran</a></li>
                 <li><a href="#kontak" class="hover:underline">Kontak</a></li>
             </ul>

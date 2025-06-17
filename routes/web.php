@@ -20,6 +20,7 @@ use App\Http\Controllers\Pengajar\panduanPengajarController;
 // USER CONTROLLERS
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\InformasiController;
+use App\Http\Controllers\User\GaleriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,5 +163,9 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 // GROUP USER
 Route::prefix('user')->name('user.')->group(function() {
+    // INFORMASI USER
     Route::get('/informasi', [InformasiController::class, 'index'])->name('informasi.index');
+    // GALERI USER
+    Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
+    
 });
