@@ -19,7 +19,7 @@
                                 <div class="text-xs text-gray-500">Total</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-green-600" id="selectedCount">0</div>
+                                <div class="text-2xl font-bold text-yellow-600" id="selectedCount">0</div>
                                 <div class="text-xs text-gray-500">Dipilih</div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                         <!-- Selection Controls -->
                         <div class="flex items-center space-x-4">
                             <label class="flex items-center space-x-2 cursor-pointer group">
-                                <input type="checkbox" id="checkAll" class="w-5 h-5 text-blue-600 rounded border-2 border-gray-300 focus:ring-blue-500 focus:ring-2 transition-all">
+                                <input type="checkbox" id="checkAll" class="w-5 h-5 text-blue-600 rounded border-2 border-blue-600 focus:ring-blue-500 focus:ring-2 transition-all">
                                 <span class="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">Pilih Semua</span>
                             </label>
                             <div class="text-sm text-gray-500" id="selectionInfo">
@@ -83,7 +83,7 @@
                             </button>
                             
                             <a href="{{ route('admin.notifikasi.deleteAll') }}" 
-                            class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm font-medium rounded-lg hover:from-gray-700 hover:to-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                            class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm font-medium rounded-lg hover:from-gray-700 hover:to-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                             onclick="return confirmDeleteAll()">
                                 <i class="fas fa-trash mr-2"></i>
                                 Hapus Semua
@@ -119,7 +119,7 @@
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
                                         {{ $notif->aksi === 'create' ? 'bg-green-100 text-green-800' : 
                                         ($notif->aksi === 'update' ? 'bg-blue-100 text-blue-800' : 
-                                        ($notif->aksi === 'delete' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800')) }}">
+                                        ($notif->aksi === 'delete' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-blue-800')) }}">
                                         <i class="fas fa-{{ $notif->aksi === 'create' ? 'plus' : ($notif->aksi === 'update' ? 'edit' : ($notif->aksi === 'delete' ? 'trash' : 'info')) }} mr-1"></i>
                                         {{ ucfirst($notif->aksi) }}
                                     </span>
@@ -128,7 +128,7 @@
                                     <p class="text-gray-900 font-medium">{{ $notif->deskripsi }}</p>
                                 </div>
                                 <div class="col-span-3">
-                                    <div class="flex items-center text-gray-500">
+                                    <div class="flex items-center text-blue-500">
                                         <i class="fas fa-clock mr-2"></i>
                                         <span class="text-sm">{{ $notif->created_at->diffForHumans() }}</span>
                                     </div>
@@ -149,11 +149,11 @@
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
                                             {{ $notif->aksi === 'create' ? 'bg-green-100 text-green-800' : 
                                             ($notif->aksi === 'update' ? 'bg-blue-100 text-blue-800' : 
-                                            ($notif->aksi === 'delete' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800')) }}">
+                                            ($notif->aksi === 'delete' ? 'bg-blue-400 text-blue-800' : 'bg-gray-100 text-blue-800')) }}">
                                             <i class="fas fa-{{ $notif->aksi === 'create' ? 'plus' : ($notif->aksi === 'update' ? 'edit' : ($notif->aksi === 'delete' ? 'trash' : 'info')) }} mr-1"></i>
                                             {{ ucfirst($notif->aksi) }}
                                         </span>
-                                        <span class="text-xs text-gray-500">
+                                        <span class="text-xs text-blue-500">
                                             <i class="fas fa-clock mr-1"></i>
                                             {{ $notif->created_at->diffForHumans() }}
                                         </span>

@@ -68,7 +68,7 @@
             z-index: 45;
             width: 40px;
             height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #93c5fd 0%, #38bdf8 100%);
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
             display: flex;
@@ -85,7 +85,7 @@
         .arrow-toggle:hover {
             width: 45px;
             box-shadow: 6px 0 25px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
         }
         
         .arrow-toggle i {
@@ -217,13 +217,13 @@
                         </button>
                     </div>
 
-                    <!-- MENU LAINNYA SECTION -->
+                    <!-- DASHBOARD SECTION -->
                     <div class="mb-6">
-                        <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                            <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-bell text-white"></i>
+                        <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
+                            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-tachometer-alt text-white"></i>
                             </div>
-                            <span class="font-medium text-gray-700 group-hover:text-purple-700">Dashboard</span>
+                            <span class="font-medium text-gray-700 group-hover:text-indigo-700">Dashboard</span>
                         </a>
                     </div>
                     
@@ -267,27 +267,27 @@
                     <div class="mb-6">
                         <button class="dropdown-toggle w-full flex items-center justify-between p-4 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-xl transition-all duration-300 group" data-dropdown="pengajar">
                             <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                     <i class="fas fa-chalkboard-teacher text-white"></i>
                                 </div>
-                                <span class="font-medium text-gray-700 group-hover:text-emerald-700">Data Pengajar</span>
+                                <span class="font-medium text-gray-700 group-hover:text-blue-700">Data Pengajar</span>
                             </div>
-                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-emerald-600"></i>
+                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-blue-600"></i>
                         </button>
                         
                         <div class="dropdown-menu pl-4 mt-2 space-y-1" id="dropdown-pengajar">
                             <a href="{{ route('admin.pengajar.create') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-md flex items-center justify-center">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
                                     <i class="fas fa-chalkboard-teacher text-white text-sm"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-emerald-700">Tambah Data Pengajar</span>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-blue-700">Tambah Data Pengajar</span>
                             </a>
                             
-                            <a href="{{ route('admin.pengajar.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-md flex items-center justify-center">
+                            <a href="{{ route('admin.pengajar.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 rounded-lg transition-all duration-300 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
                                     <i class="fas fa-users-cog text-white text-sm"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-emerald-700">Manage Data Pengajar</span>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-blue-700">Manage Data Pengajar</span>
                             </a>
                         </div>
                     </div>
@@ -296,58 +296,65 @@
                     <div class="mb-6">
                         <button class="dropdown-toggle w-full flex items-center justify-between p-4 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 rounded-xl transition-all duration-300 group" data-dropdown="jadwal">
                             <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-800 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                     <i class="fa-solid fa-calendar-days text-white"></i>
                                 </div>
-                                <span class="font-medium text-gray-700 group-hover:text-yellow-700">Jadwal</span>
+                                <span class="font-medium text-gray-700 group-hover:text-blue-700">Jadwal</span>
                             </div>
-                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-yellow-600"></i>
+                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-blue-600"></i>
                         </button>
                         
                         <div class="dropdown-menu pl-4 mt-2 space-y-1" id="dropdown-jadwal">
                             <a href="{{ route('admin.jadwal.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-md flex items-center justify-center">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
                                     <i class="fa-solid fa-calendar-days text-white text-sm"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-yellow-700">Manage Jadwal</span>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-blye-700">Manage Jadwal</span>
                             </a>
                             
-                            <a href="{{ route('admin.riwayatJadwal.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-md flex items-center justify-center">
+                            <a href="{{ route('admin.riwayatJadwal.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-blye-50 hover:to-orange-50 rounded-lg transition-all duration-300 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
                                     <i class="fa-solid fa-history text-white text-sm"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-yellow-700">Riwayat Jadwal</span>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-blye-700">Riwayat Jadwal</span>
                             </a>
                         </div>
                     </div>
 
-                    <!--  GOOGLE FORM -->
-                    <div class="mb-6">
-                        <a href="https://docs.google.com/spreadsheets/d/1ltY_KB9K1NTsIKE5RmwIGYe-gofJ_sN8YVHH1JEj5zc/edit?usp=sharing" target="_blank" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                            <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-bell text-white"></i>
-                            </div>
-                            <span class="font-medium text-gray-700 group-hover:text-purple-700">SpreadSheets</span>
-                        </a>
-                    </div>
-
-                    <div class="mb-6">
-                        <a href="{{ route('admin.testimoniUser.index') }}" target="_blank" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                            <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-bell text-white"></i>
-                            </div>
-                            <span class="font-medium text-gray-700 group-hover:text-purple-700">Testimoni User</span>
-                        </a>
-                    </div>
-
                     <!-- MENU LAINNYA SECTION -->
                     <div class="mb-6">
-                        <a href="{{ route('admin.notifikasi.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                            <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-bell text-white"></i>
+                        <button class="dropdown-toggle w-full flex items-center justify-between p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group" data-dropdown="lainnya">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-ellipsis-h text-white"></i>
+                                </div>
+                                <span class="font-medium text-gray-700 group-hover:text-indigo-700">Menu Lainnya</span>
                             </div>
-                            <span class="font-medium text-gray-700 group-hover:text-purple-700">Notifikasi</span>
-                        </a>
+                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-indigo-600"></i>
+                        </button>
+                        
+                        <div class="dropdown-menu pl-4 mt-2 space-y-1" id="dropdown-lainnya">
+                            <a href="{{ route('admin.notifikasi.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
+                                    <i class="fas fa-bell text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Notifikasi</span>
+                            </a>
+                            
+                            <a href="{{ route('admin.testimoniUser.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
+                                    <i class="fas fa-comments text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Testimoni User</span>
+                            </a>
+                            
+                            <a href="https://docs.google.com/spreadsheets/d/1ltY_KB9K1NTsIKE5RmwIGYe-gofJ_sN8YVHH1JEj5zc/edit?usp=sharing" target="_blank" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
+                                    <i class="fas fa-table text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">SpreadSheets</span>
+                            </a>
+                        </div>
                     </div>
                     
                     {{-- LOGOUT SECTION --}}
@@ -355,7 +362,7 @@
                         <form action="{{ route('admin.logout') }}" method="POST">
                             @csrf
                             <button class="flex items-center space-x-3 p-4 w-full hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                                <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <div class="w-10 h-10 bg-gradient-to-r from-red-400 to-red-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                     <i class="fas fa-sign-out-alt text-white"></i>
                                 </div>
                                 <span class="font-medium text-gray-700 group-hover:text-red-700">Logout</span>

@@ -2,15 +2,15 @@
 
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-4 md:p-6">
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 md:p-6">
     <!-- Header Section -->
     <div class="mb-8 animate-fade-in">
-        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-green-100">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-blue-100">
             <div>
-                <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent">
+                <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r text-black bg-clip-text text-transparent">
                     Daftar Pengajar
                 </h1>
-                <p class="text-green-600 mt-1">Kelola data pengajar dengan mudah</p>
+                <p class="text-black mt-1">Kelola data pengajar dengan mudah</p>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <button onclick="bulkDelete()" 
@@ -25,7 +25,7 @@
                     <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </button>
                 <a href="{{ route('admin.pengajar.create') }}" 
-                class="group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:from-green-700 hover:to-emerald-700 hover:shadow-lg hover:scale-105 active:scale-95">
+                class="group relative overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:from-blue-700 hover:to-blue-700 hover:shadow-lg hover:scale-105 active:scale-95">
                     <span class="relative z-10 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -34,46 +34,51 @@
                     </span>
                     <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </a>
-                <a href="{{ route('admin.dashboard') }}">
-                    <button class="text-sm text-green-600 hover:text-green-800 underline transition-colors duration-200">
-                        Kembali ke Dashboard
-                    </button>
+                <a href="{{ route('admin.dashboard') }}" 
+                class="group relative overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:from-blue-700 hover:to-blue-700 hover:shadow-lg hover:scale-105 active:scale-95">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h7v7H4V4 M13 4h7v4h-7V4 M13 10h7v10h-7V10 "></path>
+                        </svg>
+                        Dashboard
+                    </span>
+                    <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Table Container -->
-    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-green-100 overflow-hidden animate-slide-up">
+    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-100 overflow-hidden animate-slide-up">
         <!-- Search and Filter Bar -->
-        <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-100 p-6">
+        <div class="bg-gradient-to-r from-blue-50 to-blue-50 border-b border-blue-100 p-6">
             <div class="flex flex-col lg:flex-row gap-4 items-center">
                 <!-- Search Input -->
                 <div class="relative flex-1 max-w-md">
                     <input type="text" id="search-input" placeholder="Cari pengajar..." 
-                        class="w-full pl-10 pr-4 py-3 rounded-xl border border-green-200 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 bg-white/80">
-                    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="w-full pl-10 pr-4 py-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/80">
+                    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
 
                 <!-- Gender Filter -->
                 <div class="flex flex-col sm:flex-row gap-3 items-center">
-                    <label class="text-sm font-medium text-green-700">Filter Jenis Kelamin:</label>
+                    <label class="text-sm font-medium text-blue-700">Filter Jenis Kelamin:</label>
                     <div class="flex gap-2">
                         <button type="button" id="filter-all" onclick="filterByGender('all')" 
-                                class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-green-600 text-white shadow-md hover:shadow-lg">
+                                class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-blue-600 text-white shadow-md hover:shadow-lg">
                             Semua
                         </button>
                         <button type="button" id="filter-male" onclick="filterByGender('Laki-laki')" 
-                                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-green-600 border border-green-200 hover:bg-green-50 hover:border-green-300">
+                                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300">
                             <div class="flex items-center gap-2">
                                 <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
                                 Laki-laki
                             </div>
                         </button>
                         <button type="button" id="filter-female" onclick="filterByGender('Perempuan')" 
-                                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-green-600 border border-green-200 hover:bg-green-50 hover:border-green-300">
+                                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300">
                             <div class="flex items-center gap-2">
                                 <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
                                 Perempuan
@@ -83,7 +88,7 @@
                 </div>
 
                 <!-- Results Counter -->
-                <div class="text-sm text-green-600 bg-green-100 px-4 py-2 rounded-lg whitespace-nowrap">
+                <div class="text-sm text-blue-600 bg-blue-100 px-4 py-2 rounded-lg whitespace-nowrap">
                     Total: <span class="font-semibold" id="results-count">{{ count($pengajars) }}</span> pengajar
                 </div>
             </div>
@@ -91,7 +96,7 @@
             <!-- Clear Filters Button -->
             <div class="mt-4 flex justify-end">
                 <button type="button" id="clear-filters" onclick="clearAllFilters()" 
-                        class="text-sm text-green-600 hover:text-green-800 underline transition-colors duration-200 hidden">
+                        class="text-sm text-blue-600 hover:text-blue-800 underline transition-colors duration-200 hidden">
                     Hapus semua filter
                 </button>
             </div>
@@ -104,12 +109,12 @@
             <div class="overflow-x-auto">
                 <table class="min-w-full">
                     <thead>
-                        <tr class="bg-gradient-to-r from-green-700 to-emerald-700 text-white">
+                        <tr class="bg-gradient-to-r from-blue-700 to-indigo-700 text-white">
                             <th class="py-4 px-6 text-left">
                                 <label class="flex items-center cursor-pointer group">
                                     <input type="checkbox" onclick="toggleAll(this)" 
-                                        class="w-5 h-5 text-green-600 bg-white border-2 border-green-300 rounded focus:ring-green-500 focus:ring-2 transition-all duration-200">
-                                    <span class="ml-2 text-sm font-medium group-hover:text-green-100 transition-colors">Pilih</span>
+                                        class="w-5 h-5 text-blue-600 bg-white border-2 border-blue-300 rounded focus:ring-blue-500 focus:ring-2 transition-all duration-200">
+                                    <span class="ml-2 text-sm font-medium group-hover:text-blue-100 transition-colors">Pilih</span>
                                 </label>
                             </th>
                             <th class="py-4 px-6 text-left font-semibold">ID</th>
@@ -120,17 +125,17 @@
                             <th class="py-4 px-6 text-center font-semibold">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-green-100" id="table-body">
+                    <tbody class="divide-y divide-blue-100" id="table-body">
                         @foreach ($pengajars as $index => $pengajar)
-                            <tr class="group hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 transition-all duration-300 animate-fade-in-row" 
+                            <tr class="group hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 transition-all duration-300 animate-fade-in-row" 
                                 style="animation-delay: {{ $index * 0.1 }}s" data-search="{{ strtolower($pengajar->nama_pengajar . ' ' . $pengajar->jenis_kelamin . ' ' . $pengajar->alamat) }}">
                                 <td class="py-4 px-6">
                                     <input type="checkbox" name="ids[]" value="{{ $pengajar->id_pendaftaran }}" 
-                                        class="row-checkbox w-5 h-5 text-green-600 bg-white border-2 border-green-300 rounded focus:ring-green-500 focus:ring-2 transition-all duration-200"
+                                        class="row-checkbox w-5 h-5 text-blue-600 bg-white border-2 border-blue-300 rounded focus:ring-blue-500 focus:ring-2 transition-all duration-200"
                                         onchange="updateBulkDeleteButton()">
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             {{-- ID PENGAJAR --}}
                                         {{ $pengajar->id_pendaftaran }}
                                     </span>
@@ -141,10 +146,10 @@
                                             {{-- FOTO PENGAJAR --}}
                                             @if($pengajar->foto_pengajar)
                                                 <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
-                                                    alt="foto" class="h-10 w-10 rounded-full object-cover border-2 border-green-200">
+                                                    alt="foto" class="h-10 w-10 rounded-full object-cover border-2 border-blue-200">
                                             @else
                                             {{-- NAMA PENGAJAR --}}
-                                                <div class="h-10 w-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-semibold">
+                                                <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white font-semibold">
                                                     {{ substr($pengajar->nama_pengajar, 0, 1) }}
                                                 </div>
                                             @endif
@@ -173,7 +178,7 @@
                                         <button onclick="showImage('{{ asset('storage/' . $pengajar->foto_pengajar) }}')" 
                                                 class="relative group cursor-pointer">
                                             <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
-                                                alt="foto" class="w-12 h-12 object-cover rounded-lg border-2 border-green-200 group-hover:border-green-400 transition-all duration-300">
+                                                alt="foto" class="w-12 h-12 object-cover rounded-lg border-2 border-blue-200 group-hover:border-blue-400 transition-all duration-300">
                                             <div class="absolute inset-0 bg-black/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -278,17 +283,17 @@
 }
 
 .overflow-x-auto::-webkit-scrollbar-thumb {
-    background: linear-gradient(to right, #059669, #10b981);
+    background: linear-gradient(to right, #014ca0, #1e00e4);
     border-radius: 4px;
 }
 
 .overflow-x-auto::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to right, #047857, #059669);
+    background: linear-gradient(to right, #014ca0, #1e00e4);
 }
 
 /* Filter button styles */
 .filter-btn.active {
-    background: linear-gradient(to right, #059669, #10b981) !important;
+    background: linear-gradient(to right, #014ca0, #1e00e4) !important;
     color: white !important;
     border: none !important;
     transform: scale(1.05);
@@ -379,14 +384,14 @@ function filterByGender(gender) {
     // Update active button
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
-        btn.classList.add('bg-white', 'text-green-600', 'border', 'border-green-200');
-        btn.classList.remove('bg-green-600', 'text-white', 'shadow-md');
+        btn.classList.add('bg-white', 'text-blue-600', 'border', 'border-blue-200');
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
     });
     
     const activeBtn = document.getElementById(`filter-${gender === 'all' ? 'all' : gender === 'Laki-laki' ? 'male' : 'female'}`);
     activeBtn.classList.add('active');
-    activeBtn.classList.remove('bg-white', 'text-green-600', 'border', 'border-green-200');
-    activeBtn.classList.add('bg-green-600', 'text-white', 'shadow-md');
+    activeBtn.classList.remove('bg-white', 'text-blue-600', 'border', 'border-blue-200');
+    activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
     
     applyFilters();
     updateClearFiltersButton();

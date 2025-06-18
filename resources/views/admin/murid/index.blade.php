@@ -54,7 +54,7 @@
         <!-- Action Toolbar -->
         <div class="px-4 py-3 bg-gray-50 border-b flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
             <div class="flex items-center space-x-2">
-                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200">
+                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h7v7H4V4 M13 4h7v4h-7V4 M13 10h7v10h-7V10 "></path>
                     </svg>
