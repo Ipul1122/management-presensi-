@@ -227,72 +227,46 @@
 
 
     {{-- TESTIMONI --}}
-    <section class="bg-white py-16" id="testimoni">
+    <section id="testimoni" class="py-16 bg-gray-100">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center text-emerald-700 mb-10">Testimoni Orang Tua</h2>
+        <h2 class="text-3xl font-bold text-center mb-8 text-green-700">Testimoni</h2>
 
-        <div 
-            x-data="{
-                testimonials: [
-                    {
-                        foto: '{{ asset("images/testimoni1.jpg") }}',
-                        nama: 'Bunda Aisyah',
-                        deskripsi: 'Anak saya jadi lebih semangat belajar mengaji dan selalu ingin datang ke TPA setiap hari.'
-                    },
-                    {
-                        foto: '{{ asset("images/testimoni2.jpg") }}',
-                        nama: 'Pak Fadli',
-                        deskripsi: 'Saya merasa lebih tenang karena bisa memantau perkembangan anak melalui web ini.'
-                    },
-                    {
-                        foto: '{{ asset("images/testimoni3.jpg") }}',
-                        nama: 'Ibu Rina',
-                        deskripsi: 'Guru-gurunya ramah dan metode ngajinya menyenangkan. Terima kasih TPA Nurul Haq!'
-                    }
-                ],
-                active: 0,
-                get showControls() {
-                    return this.testimonials.length > 3;
-                }
-            }"
-            class="relative"
-        >
-            <!-- Wrapper -->
-            <div class="overflow-hidden">
-                <div class="flex transition-transform duration-500 ease-in-out"
-                    :style="`transform: translateX(-${active * 100}%); width: ${testimonials.length * 100}%`">
-                    
-                    <template x-for="(item, index) in testimonials" :key="index">
-                        <div class="w-full sm:w-1/2 md:w-1/3 flex-shrink-0 p-4">
-                            <div class="bg-gray-50 rounded-lg p-6 shadow text-center h-full flex flex-col items-center">
-                                <img :src="item.foto" alt="foto"
-                                    class="w-16 h-16 rounded-full object-cover mb-4 border-2 border-emerald-500">
-                                <h3 class="text-lg font-semibold text-emerald-700" x-text="item.nama"></h3>
-                                <p class="text-sm text-gray-600 mt-2" x-text="item.deskripsi"></p>
-                            </div>
-                        </div>
-                    </template>
-                </div>
+        @if ($testimonis->isEmpty())
+            <div class="text-center text-gray-500 mb-6">
+                <p>Belum ada yang memberikan testimoni nih, ayo kamu jadi salah satunya!</p>
+            </div>
+        @else
+            <div class="text-center text-green-700 font-semibold mb-6">
+                <p>Yang lain sudah berikan testimoni nih, kamu kapan? Aku tunggu yah 😊</p>
             </div>
 
-            <!-- Navigasi Panah -->
-            <template x-if="showControls">
-                <div>
-                    <button 
-                        @click="active = active === 0 ? testimonials.length - 3 : active - 1"
-                        class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white border rounded-full shadow p-2 hover:bg-emerald-100">
-                        <i class="fas fa-chevron-left text-emerald-700"></i>
-                    </button>
-                    <button 
-                        @click="active = active + 1 >= testimonials.length - 2 ? 0 : active + 1"
-                        class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white border rounded-full shadow p-2 hover:bg-emerald-100">
-                        <i class="fas fa-chevron-right text-emerald-700"></i>
-                    </button>
+            <div class="overflow-hidden relative">
+                <div id="carousel-testimoni" class="flex space-x-4 transition-all duration-500">
+                    @foreach ($testimonis as $testimoni)
+                        <div class="min-w-[250px] max-w-[300px] bg-white shadow rounded-lg p-4 shrink-0">
+                            @if($testimoni->foto_user)
+                                <img src="{{ asset('storage/' . $testimoni->foto_user) }}" alt="foto" class="h-10 w-10 rounded-full object-cover">
+                            @else
+                                <div class="h-10 w-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-semibold">
+                                    {{ strtoupper(substr($testimoni->nama_user, 0, 1)) }}
+                                </div>
+                            @endif
+                            <h3 class="text-lg font-bold mt-2">{{ $testimoni->nama_user }}</h3>
+                            <p class="text-sm text-gray-600 mt-1">{{ $testimoni->isi_testimoni }}</p>
+                        </div>
+                    @endforeach
                 </div>
-            </template>
+            </div>
+        @endif
+
+        <div class="text-center mt-6">
+            <a href="{{ route('user.testimoni.index') }}" class="inline-block px-6 py-3 bg-emerald-500 text-white rounded-lg shadow hover:bg-emerald-600 transition">
+                Berikan Testimoni
+            </a>
         </div>
     </div>
 </section>
+
 
 
 
