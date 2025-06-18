@@ -1,5 +1,42 @@
 @extends('components.layouts.pengajar.sidebar')
     @section('sidebar-pengajar')
+
+        <style>
+    @media (max-width: 768px) {
+    .grid-cols-1 {
+        grid-template-columns: 1fr;
+    }
+    }
+
+    /* Custom scrollbar for webkit browsers */
+    ::-webkit-scrollbar {
+    width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+    }
+
+    /* Focus states for better accessibility */
+    input:focus, select:focus, textarea:focus {
+    outline: none;
+    }
+
+    /* Smooth transitions */
+    * {
+    transition: all 0.2s ease-in-out;
+    }
+    </style>
+
     <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 lg:p-8">
     <div class="max-w-4xl mx-auto">
         <!-- Header -->
@@ -230,40 +267,6 @@
     </div>
     </div>
 
-    <style>
-    @media (max-width: 768px) {
-    .grid-cols-1 {
-        grid-template-columns: 1fr;
-    }
-    }
 
-    /* Custom scrollbar for webkit browsers */
-    ::-webkit-scrollbar {
-    width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    }
-
-    ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-    }
-
-    /* Focus states for better accessibility */
-    input:focus, select:focus, textarea:focus {
-    outline: none;
-    }
-
-    /* Smooth transitions */
-    * {
-    transition: all 0.2s ease-in-out;
-    }
-    </style>
 
     @endsection

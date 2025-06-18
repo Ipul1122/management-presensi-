@@ -270,11 +270,11 @@
                     <button type="button" onclick="clearDateSelection()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium transition-colors duration-200">
                         🗑️ Hapus Pilihan Tanggal
                     </button>
-                    @if($muridDipilih)
+                    {{-- @if($muridDipilih)
                         <button type="button" onclick="clearMuridSelection()" class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-lg text-sm font-medium transition-colors duration-200">
                             👤 Hapus Pilihan Murid
                         </button>
-                    @endif
+                    @endif --}}
                     @if($tanggalDipilih)
                         <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
                             Terpilih: {{ $tanggalDipilih }}
