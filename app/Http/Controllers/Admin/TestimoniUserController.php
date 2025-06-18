@@ -33,4 +33,25 @@ class TestimoniUserController extends Controller
 
         return redirect()->back()->with('error', 'Testimoni telah ditolak.');
     }
+
+    /** Hapus beberapa testimoni terpilih */
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids', []);
+
+        if (count($ids)) {
+            TestimoniUser::whereIn('id', $ids)->delete();
+            return back()->with('success', 'Testimoni terpilih berhasil dihapus.');
+        }
+
+        return back()->with('error', 'Tidak ada testimoni yang dipilih.');
+    }
+
+    /** Hapus SEMUA testimoni */
+    public function deleteAll()
+    {
+        TestimoniUser::truncate();   // hapus seluruh isi tabel
+        return back()->with('success', 'Semua testimoni berhasil dihapus.');
+    }
+
 }
