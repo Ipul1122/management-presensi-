@@ -209,7 +209,8 @@
                             <textarea name="catatan" 
                                         class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 resize-none" 
                                         rows="4" 
-                                        placeholder="Jelaskan Iqro Halaman berapa atau Al-Qur'an Surah dan Ayat berapa..."></textarea>
+                                        placeholder="Jelaskan Iqro Halaman berapa atau Al-Qur'an Surah dan Ayat berapa..."
+                                        required></textarea>
                         </div>
 
                         <!-- Submit Button -->

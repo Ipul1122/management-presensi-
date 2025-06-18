@@ -251,17 +251,17 @@ html {
                     <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 p-6 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-4">
-                                <div class="relative w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:shadow-emerald-500/40 transition-shadow duration-300">
+                                <div class="relative w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:shadow-blue-500/40 transition-shadow duration-300">
                                     <i class="fas fa-users text-white text-xl"></i>
                                     <div class="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 text-lg group-hover:text-emerald-600 transition-colors">Info Data Murid</h4>
-                                    <p class="text-sm text-gray-500 mt-1">Lihat informasi murid</p>
+                                    <h4 class="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">Info Data Murid</h4>
+                                    <p class="text-sm text-gray-500 mt-1">Lihat informasi murid</p> 
                                 </div>
                             </div>
                             <a href="{{ route('pengajar.infoDataMurid.index') }}" 
-                                class="px-5 py-2.5 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 hover:scale-105 transition-all duration-200 font-semibold text-sm shadow-sm">
+                                class="px-5 py-2.5 bg-emerald-50 text-blue-600 rounded-xl hover:bg-blue-100 hover:scale-105 transition-all duration-200 font-semibold text-sm shadow-sm">
                                 Lihat
                             </a>
                         </div>
@@ -271,16 +271,16 @@ html {
                     <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 p-6 transition-all duration-300 hover:-translate-y-1 sm:col-span-2 xl:col-span-1">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-4">
-                                <div class="relative w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-shadow duration-300">
+                                <div class="relative w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-shadow duration-300">
                                     <i class="fas fa-calendar-alt text-white text-xl"></i>
                                     <div class="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 text-lg group-hover:text-purple-600 transition-colors">Jadwal Hari Ini</h4>
+                                    <h4 class="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">Jadwal Hari Ini</h4>
                                     <p class="text-sm text-gray-500 mt-1">Lihat agenda hari ini</p>
                                 </div>
                             </div>
-                            <button class="px-5 py-2.5 bg-purple-50 text-purple-600 rounded-xl hover:bg-purple-100 hover:scale-105 transition-all duration-200 font-semibold text-sm shadow-sm">
+                            <button class="px-5 py-2.5 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 hover:scale-105 transition-all duration-200 font-semibold text-sm shadow-sm">
                                 Lihat
                             </button>
                         </div>
@@ -318,19 +318,19 @@ html {
                                         <div class="relative inline-block">
                                             <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
                                                 alt="Foto {{ $pengajar->nama_pengajar }}" 
-                                                class="w-20 h-20 mx-auto rounded-2xl object-cover border-4 border-emerald-200 group-hover:border-emerald-300 transition-all duration-300 shadow-lg">
-                                            <div class="absolute -bottom-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white shadow-sm"></div>
+                                                class="w-20 h-20 mx-auto rounded-2xl object-cover border-4 border-blue-200 group-hover:border-blue-300 transition-all duration-300 shadow-lg">
+                                            <div class="absolute -bottom-2 -right-2 w-6 h-6 bg-blue-500 rounded-full border-2 border-white shadow-sm"></div>
                                         </div>
                                     @else
                                         <div class="relative inline-block">
-                                            <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg group-hover:shadow-emerald-500/30 transition-all duration-300">
+                                            <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg group-hover:shadow-blue-500/30 transition-all duration-300">
                                                 {{ substr($pengajar->nama_pengajar, 0, 1) }}
                                             </div>
-                                            <div class="absolute -bottom-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white shadow-sm"></div>
+                                            <div class="absolute -bottom-2 -right-2 w-6 h-6 bg-blue-500 rounded-full border-2 border-white shadow-sm"></div>
                                         </div>
                                     @endif
                                 </div>
-                                <h4 class="font-bold text-gray-900 mb-3 text-lg group-hover:text-emerald-600 transition-colors">
+                                <h4 class="font-bold text-gray-900 mb-3 text-lg group-hover:text-blue-600 transition-colors">
                                     {{ $pengajar->nama_pengajar }}
                                 </h4>
                                 <p class="text-sm text-gray-500 leading-relaxed">
