@@ -23,10 +23,8 @@
                 
                 <div class="flex flex-col sm:flex-row gap-3">
                     <a href="{{ route('pengajar.dashboard') }}">
-                        <button class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
+                        <button class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                            <i class="fas fa-home text-white mr-3"></i>
                             Dashboard
                         </button>
                     </a>
@@ -73,7 +71,7 @@
         <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-8 border border-white/20">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"></path>
                         </svg>
@@ -101,7 +99,7 @@
         <!-- Table Section -->
         <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/20">
             <!-- Table Header -->
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-6">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-6">
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
@@ -116,7 +114,7 @@
                         <button onclick="toggleBulkActions()" id="bulkActionBtn" class="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-xl text-sm transition-all duration-200 backdrop-blur-sm">
                             Aksi Massal
                         </button>
-                        <div id="bulkActions" class="hidden flex gap-2">
+                        <div id="bulkActions" class="hidden gap-2">
                             <button onclick="bulkDelete()" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm transition-colors duration-200">
                                 Hapus Terpilih
                             </button>
@@ -133,14 +131,6 @@
                 @csrf
                 @method('DELETE')
             </form>
-
-            {{-- <form action="{{ route('pengajar.muridAbsensi.deleteAll') }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus semua absensi hari ini?')">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-        Hapus Semua (Hari Ini)
-    </button>
-</form> --}}
 
 
             <form id="bulkDeleteForm" action="{{ route('pengajar.muridAbsensi.bulkDelete') }}" method="POST" style="display:none;">

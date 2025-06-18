@@ -68,7 +68,7 @@
         left: 0;
         transform: translateY(-50%);
         z-index: 60;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #93c5fd 0%, #38bdf8 100%);
         color: white;
         border: none;
         width: 40px;
@@ -97,10 +97,10 @@
     }
     
     .arrow-toggle:hover {
-        transform: translateY(-50%) translateX(5px);
-        box-shadow: 5px 0 25px rgba(102, 126, 234, 0.4);
-        width: 45px;
-    }
+            width: 45px;
+            box-shadow: 6px 0 25px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        }
     
     .arrow-toggle:hover::before {
         opacity: 1;
@@ -108,7 +108,7 @@
 
     .arrow-toggle.active {
         left: 320px;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background: linear-gradient(135deg, #ef4444 0%, #f87171  100%);
         box-shadow: -2px 0 15px rgba(240, 147, 251, 0.3);
         border-radius: 20px 0 0 20px;
     }
@@ -120,7 +120,7 @@
     }
 
     .sidebar-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #93c5fd 0%, #38bdf8 100%);
         color: white;
         padding: 2rem 1.5rem;
         position: relative;
@@ -429,45 +429,45 @@
     <div class="p-4">
         <!-- Navigation Menu -->
         <nav class="space-y-1">
-            <a href="{{ route('pengajar.dashboard') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
-                <i class="fas fa-home text-blue-500"></i>
+            <a href="{{ route('pengajar.dashboard') }}" class="main-nav-item text-blue-700 hover:text-blue-600">
+                <i class="fas fa-home text-blue-700"></i>
                 <span class="nav-text">Dashboard</span>
             </a>
 
             <!-- Menu Murid dengan Submenu -->
             <div class="mobile-nav-item text-gray-700 hover:text-blue-600" id="muridMenuToggle">
-                <i class="fas fa-users text-green-500"></i>
+                <i class="fas fa-users text-blue-700"></i>
                 <span class="nav-text">Menu Murid</span>
                 <i class="fas fa-chevron-right dropdown-arrow" id="muridDropdownArrow"></i>
             </div>
             
             <div class="submenu" id="muridSubmenu">
                 <a href="{{ route('pengajar.muridAbsensi.index') }}" class="submenu-item text-gray-600 hover:text-blue-600">
-                    <i class="fas fa-clipboard-check text-blue-400"></i>
+                    <i class="fas fa-clipboard-check text-blue-700"></i>
                     <span class="nav-text">Absen Murid</span>
                 </a>
                 <a href="{{ route('pengajar.riwayatMuridAbsensi.index') }}" class="submenu-item text-gray-600 hover:text-blue-600">
-                    <i class="fas fa-history text-indigo-400"></i>
+                    <i class="fas fa-history text-blue-700"></i>
                     <span class="nav-text">Riwayat Absensi</span>
                 </a>
                 <a href="{{ route('pengajar.infoDataMurid.index') }}" class="submenu-item text-gray-600 hover:text-blue-600">
-                    <i class="fas fa-info-circle text-green-400"></i>
+                    <i class="fas fa-info-circle text-blue-700"></i>
                     <span class="nav-text">Info Data Murid</span>
                 </a>
             </div>
 
             <a href="{{ route('pengajar.infoDataPengajar.index') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
-                <i class="fas fa-chalkboard-teacher text-yellow-500"></i>
+                <i class="fas fa-chalkboard-teacher text-blue-700"></i>
                 <span class="nav-text">Info Data Pengajar</span>
             </a>
             
             <a href="{{ route('pengajar.riwayatJadwal.index') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
-                <i class="fas fa-calendar-alt text-purple-500"></i>
+                <i class="fas fa-calendar-alt text-blue-700"></i>
                 <span class="nav-text">Riwayat Jadwal</span>
             </a>
             
             <a href="{{ route('pengajar.panduanPengajar.index') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
-                <i class="fa-solid fa-book text-purple-500"></i>
+                <i class="fa-solid fa-book text-blue-700"></i>
                 <span class="nav-text">Panduan Pengajar</span>
             </a>
 
