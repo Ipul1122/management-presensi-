@@ -331,6 +331,15 @@
                         </a>
                     </div>
 
+                    <div class="mb-6">
+                        <a href="{{ route('admin.testimoniUser.index') }}" target="_blank" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
+                            <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-bell text-white"></i>
+                            </div>
+                            <span class="font-medium text-gray-700 group-hover:text-purple-700">Testimoni User</span>
+                        </a>
+                    </div>
+
                     <!-- MENU LAINNYA SECTION -->
                     <div class="mb-6">
                         <a href="{{ route('admin.notifikasi.index') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">

@@ -1,5 +1,6 @@
 <?php
 
+// ADMIN CONTROLLER
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\MuridController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Admin\PengajarController;
 use App\Http\Controllers\Admin\NotifikasiController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\RiwayatJadwalController;
+use App\Http\Controllers\Admin\TestimoniUserController;
 
 // Pengajar Controllers
 use App\Http\Controllers\Pengajar\MuridAbsensiController;
@@ -23,6 +25,7 @@ use App\Http\Controllers\User\InformasiController;
 use App\Http\Controllers\User\GaleriController;
 use App\Http\Controllers\User\PendaftaranController;
 use App\Http\Controllers\User\KontakController;
+use App\Http\Controllers\User\TestimoniController;
 
 
 /*
@@ -91,8 +94,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // JADWAL HAPUS BEBERAPA PILIHAN ATAU SEMUA
         Route::delete('/jadwal-delete-selected', [JadwalController::class, 'bulkDelete'])->name('jadwal.bulkDelete');
         Route::get('/jadwal-delete-all', [JadwalController::class, 'deleteAll'])->name('jadwal.deleteAll');
-    
         
+        // ADMIN TESTIMONI FROM USER
+        Route::get('/testimoniUser', [TestimoniUserController::class, 'index'])->name('testimoniUser.index');
+        Route::post('/testimoniUser/{id}/approve', [TestimoniUserController::class, 'approve'])->name('testimoniUser.approve');
+        Route::post('/testimoniUser/{id}/reject', [TestimoniUserController::class, 'reject'])->name('testimoniUser.reject');
+            
     });
 });
 
@@ -174,5 +181,8 @@ Route::prefix('user')->name('user.')->group(function() {
     Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
     // KONTAK USER
     Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
+    // TESTIMONI USER
+    Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
+    Route::post('/testimoni/store', [TestimoniController::class, 'store'])->name('testimoni.store');
     
 });
