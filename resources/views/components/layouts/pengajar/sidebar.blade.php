@@ -10,7 +10,6 @@
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-blue-50 text-gray-800 min-h-screen">
 
-    <!-- components/sidebar.blade.php -->
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
@@ -26,7 +25,7 @@
         top: 0;
         left: 0;
         height: 100vh;
-        z-index: 50;
+        z-index: 9999; /* Increased z-index to ensure it's above everything */
         width: 320px;
         overflow-y: auto;
         scrollbar-width: none;
@@ -50,7 +49,7 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.6);
-        z-index: 40;
+        z-index: 9998; /* Increased z-index */
         opacity: 0;
         visibility: hidden;
         transition: all 0.4s ease;
@@ -67,7 +66,7 @@
         top: 50%;
         left: 0;
         transform: translateY(-50%);
-        z-index: 60;
+        z-index: 10000; /* Highest z-index for the toggle button */
         background: linear-gradient(135deg, #93c5fd 0%, #38bdf8 100%);
         color: white;
         border: none;
@@ -82,6 +81,8 @@
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
         border-left: none;
+        /* Ensure button is always clickable */
+        pointer-events: auto;
     }
     
     .arrow-toggle::before {
@@ -97,10 +98,10 @@
     }
     
     .arrow-toggle:hover {
-            width: 45px;
-            box-shadow: 6px 0 25px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-        }
+        width: 45px;
+        box-shadow: 6px 0 25px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    }
     
     .arrow-toggle:hover::before {
         opacity: 1;
@@ -170,6 +171,8 @@
         overflow: hidden;
         background: transparent;
         border: 1px solid transparent;
+        /* Ensure all nav items are clickable */
+        pointer-events: auto;
     }
     
     .mobile-nav-item::before {
@@ -234,6 +237,8 @@
         overflow: hidden;
         text-decoration: none;
         color: inherit;
+        /* Ensure submenu items are clickable */
+        pointer-events: auto;
     }
 
     .submenu-item::before {
@@ -292,6 +297,8 @@
         overflow: hidden;
         background: transparent;
         border: 1px solid transparent;
+        /* Ensure main nav items are clickable */
+        pointer-events: auto;
     }
 
     .main-nav-item::before {
@@ -392,6 +399,8 @@
     .nav-text {
         font-weight: 500;
         transition: all 0.3s ease;
+        /* Ensure text is clickable */
+        pointer-events: auto;
     }
 
     .mobile-nav-item:hover .nav-text,
@@ -408,6 +417,12 @@
         .arrow-toggle.active {
             left: 300px;
         }
+    }
+
+    /* Fix for content overlap issues */
+    .content-wrapper {
+        position: relative;
+        z-index: 1;
     }
 </style>
 
@@ -491,14 +506,15 @@
     </div>
 </aside>
 
-    {{-- Konten utama halaman --}}
-    <main class="">
-        @yield('sidebar-pengajar')
-    </main>
+{{-- Konten utama halaman dengan wrapper --}}
+<main class="content-wrapper">
+    @yield('sidebar-pengajar')
+</main>
 
 <script>
-// Sidebar functionality
+// Enhanced Sidebar functionality with better error handling
 document.addEventListener('DOMContentLoaded', function() {
+    // Get elements with error checking
     const arrowToggle = document.getElementById('arrowToggle');
     const arrowIcon = document.getElementById('arrowIcon');
     const sidebar = document.getElementById('sidebar');
@@ -507,60 +523,99 @@ document.addEventListener('DOMContentLoaded', function() {
     const muridSubmenu = document.getElementById('muridSubmenu');
     const muridDropdownArrow = document.getElementById('muridDropdownArrow');
 
+    // Debug log to check if elements are found
+    console.log('Sidebar elements:', {
+        arrowToggle: !!arrowToggle,
+        sidebar: !!sidebar,
+        sidebarOverlay: !!sidebarOverlay,
+        muridMenuToggle: !!muridMenuToggle
+    });
+
     function openSidebar() {
-        sidebar.classList.add('active');
-        sidebarOverlay.classList.add('active');
-        arrowToggle.classList.add('active');
-        arrowToggle.classList.add('pulse-animation');
-        arrowIcon.className = 'fas fa-chevron-left';
-        document.body.style.overflow = 'hidden';
+        if (sidebar && sidebarOverlay && arrowToggle && arrowIcon) {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            arrowToggle.classList.add('active');
+            arrowToggle.classList.add('pulse-animation');
+            arrowIcon.className = 'fas fa-chevron-left';
+            document.body.style.overflow = 'hidden';
+            console.log('Sidebar opened');
+        } else {
+            console.error('Some sidebar elements not found');
+        }
     }
 
     function closeSidebarFunc() {
-        sidebar.classList.remove('active');
-        sidebarOverlay.classList.remove('active');
-        arrowToggle.classList.remove('active');
-        arrowToggle.classList.remove('pulse-animation');
-        arrowIcon.className = 'fas fa-chevron-right';
-        document.body.style.overflow = '';
+        if (sidebar && sidebarOverlay && arrowToggle && arrowIcon) {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            arrowToggle.classList.remove('active');
+            arrowToggle.classList.remove('pulse-animation');
+            arrowIcon.className = 'fas fa-chevron-right';
+            document.body.style.overflow = '';
+            console.log('Sidebar closed');
+        }
     }
 
     function toggleMuridSubmenu() {
-        muridSubmenu.classList.toggle('active');
-        muridDropdownArrow.classList.toggle('active');
+        if (muridSubmenu && muridDropdownArrow) {
+            muridSubmenu.classList.toggle('active');
+            muridDropdownArrow.classList.toggle('active');
+            console.log('Submenu toggled');
+        }
     }
 
-    // Event listeners
-    arrowToggle?.addEventListener('click', function() {
-        if (sidebar.classList.contains('active')) {
-            closeSidebarFunc();
-        } else {
-            openSidebar();
-        }
-    });
-
-    sidebarOverlay?.addEventListener('click', closeSidebarFunc);
-
-    // Murid submenu toggle
-    muridMenuToggle?.addEventListener('click', function(e) {
-        e.preventDefault();
-        toggleMuridSubmenu();
-    });
-
-    // Close sidebar when clicking on navigation links (except submenu toggle)
-    const navLinks = sidebar.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Don't close if it's a submenu item and sidebar should stay open
-            if (!this.classList.contains('submenu-item')) {
+    // Event listeners with error checking
+    if (arrowToggle) {
+        arrowToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Arrow toggle clicked');
+            
+            if (sidebar && sidebar.classList.contains('active')) {
                 closeSidebarFunc();
+            } else {
+                openSidebar();
             }
         });
-    });
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Overlay clicked');
+            closeSidebarFunc();
+        });
+    }
+
+    // Murid submenu toggle with better event handling
+    if (muridMenuToggle) {
+        muridMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Murid menu toggle clicked');
+            toggleMuridSubmenu();
+        });
+    }
+
+    // Close sidebar when clicking on navigation links (except submenu toggle)
+    if (sidebar) {
+        const navLinks = sidebar.querySelectorAll('a.main-nav-item, a.submenu-item');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Don't close sidebar immediately for submenu items to allow navigation
+                setTimeout(() => {
+                    closeSidebarFunc();
+                }, 100);
+            });
+        });
+    }
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+        if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+            e.preventDefault();
             closeSidebarFunc();
         }
     });
@@ -575,10 +630,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add smooth scroll behavior
     document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Ensure arrow toggle is always visible and clickable
+    if (arrowToggle) {
+        arrowToggle.style.pointerEvents = 'auto';
+        arrowToggle.style.zIndex = '10000';
+    }
+
+    // Force reflow to ensure styles are applied
+    if (sidebar) {
+        sidebar.offsetHeight;
+    }
+});
+
+// Additional failsafe for sidebar initialization
+window.addEventListener('load', function() {
+    const arrowToggle = document.getElementById('arrowToggle');
+    if (arrowToggle) {
+        console.log('Sidebar initialized after page load');
+        arrowToggle.style.display = 'flex';
+        arrowToggle.style.visibility = 'visible';
+    }
 });
 </script>
-<script ></script>
 
-    @stack('scripts')
+@stack('scripts')
 </body>
 </html>

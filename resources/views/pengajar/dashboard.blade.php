@@ -358,16 +358,16 @@ html {
             </div>
 
             <!-- Monthly Schedule -->
-            <div class="animate-fade-in">
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100/80 overflow-hidden">
-                    <div class="p-6 lg:p-8 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+            <div class="animate-fade-in ">
+                <div class="bg-gradient-to-br border-black from-blue-500 to-indigo-600 rounded-2xl shadow-sm  border-blue-500/80 overflow-hidden">
+                    <div class="p-6 lg:p-8 border-b bg-gradient-to-br border-black from-blue-500 to-indigo-600 ">
                         <h3 class="text-xl font-bold text-gray-900 flex items-center">
                             <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4 shadow-lg shadow-blue-500/25">
                                 <i class="fas fa-calendar-alt text-white"></i>
                             </div>
-                            <div>
-                                <span class="block">Kalender Kegiatan</span>
-                                <span class="text-sm font-normal text-gray-500 mt-1">{{ \Carbon\Carbon::now()->translatedFormat('F Y') }}</span>
+                            <div class=""> 
+                                <span class="block text-white ">Kalender Kegiatan</span>
+                                <span class="text-sm font-normal text-white mt-1">{{ \Carbon\Carbon::now()->translatedFormat('F Y') }}</span>
                             </div>
                         </h3>
                     </div>
@@ -384,14 +384,14 @@ html {
                         @else
                             <div class="overflow-x-auto">
                                 <table class="w-full min-w-full">
-                                    <thead class="bg-gray-50/80">
+                                    <thead class="bg-gradient-to-br border-black from-blue-500 to-indigo-600 ">
                                         <tr>
-                                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
-                                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Waktu</th>
-                                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nama Jadwal</th>
-                                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pengajar</th>
-                                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Kegiatan</th>
-                                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                                            <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Tanggal</th>
+                                            <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Waktu</th>
+                                            <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Nama Jadwal</th>
+                                            <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Pengajar</th>
+                                            <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Kegiatan</th>
+                                            <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-100">
