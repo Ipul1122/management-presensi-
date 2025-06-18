@@ -29,11 +29,11 @@
                     <div class="gradient-green absolute top-0 right-0 w-24 h-24 rounded-full -translate-y-8 translate-x-8 opacity-10"></div>
                     <div class="flex items-center justify-between relative z-10">
                         <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">DATA PENGAJAR</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">GURU</h2>
                                 <p class="text-gray-600 text-lg">Jumlah <span class="font-semibold text-emerald-600">{{ $jumlahPengajar }}</span></p>
                             </div>
                         </div>
@@ -45,16 +45,16 @@
                     <div class="gradient-purple absolute top-0 right-0 w-24 h-24 rounded-full -translate-y-8 translate-x-8 opacity-10"></div>
                     <div class="flex items-center justify-between relative z-10">
                         <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <i class="fas fa-folder-open text-2xl text-white"></i>
                             </div>
                             <div class="flex-1">
                                 <h2 class="text-2xl font-bold text-gray-800 mb-1">MURID</h2>
-                                <p class="text-gray-600">Edit, Hapus, Update</p>
+                                <p class="text-gray-600">Edit, Hapus, <br> Update</p>
                             </div>
                         </div>
                         <a href="{{ route('admin.murid.index') }}">
-                            <button class="btn-modern bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
+                            <button class="btn-modern bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
                                 KELOLA <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </a>
@@ -66,16 +66,17 @@
                     <div class="gradient-pink absolute top-0 right-0 w-24 h-24 rounded-full -translate-y-8 translate-x-8 opacity-10"></div>
                     <div class="flex items-center justify-between relative z-10">
                         <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <i class="fas fa-users-cog text-2xl text-white"></i>
                             </div>
                             <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">PENGAJAR</h2>
-                                <p class="text-gray-600">Edit, Hapus, Update</p>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">GURU</h2>
+                                <p class="text-gray-600">Edit, Hapus, 
+                                    <br>Update</p>
                             </div>
                         </div>
                         <a href="{{ route('admin.pengajar.index') }}">
-                            <button class="btn-modern bg-gradient-to-r from-pink-500 to-rose-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
+                            <button class="btn-modern bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
                                 MANAGE <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </a>
@@ -85,7 +86,7 @@
 
             <!-- Jadwal Management Section -->
 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
+    <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6">
         <h3 class="text-2xl font-bold text-white flex items-center">
             <i class="fas fa-calendar-alt mr-3"></i>
             Manajemen Jadwal
@@ -106,7 +107,7 @@
                             <div class="flex items-center space-x-3">
                                 <input type="checkbox" name="selected_jadwals[]" value="{{ $jadwal->id }}" 
                                     class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500 focus:ring-2">
-                                <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
                                     <i class="fas fa-calendar-day text-white text-lg"></i>
                                 </div>
                             </div>
