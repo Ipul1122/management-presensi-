@@ -99,7 +99,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/testimoniUser', [TestimoniUserController::class, 'index'])->name('testimoniUser.index');
         Route::post('/testimoniUser/{id}/approve', [TestimoniUserController::class, 'approve'])->name('testimoniUser.approve');
         Route::post('/testimoniUser/{id}/reject', [TestimoniUserController::class, 'reject'])->name('testimoniUser.reject');
-            
+        // ADMIN HAPUS TESTIMONI USER
+        Route::post('/testimoniUser/bulk-delete',  [TestimoniUserController::class, 'bulkDelete'])->name('testimoniUser.bulkDelete');
+        Route::delete('/testimoniUser/delete-all', [TestimoniUserController::class, 'deleteAll'])->name('testimoniUser.deleteAll');
     });
 });
 
@@ -184,5 +186,5 @@ Route::prefix('user')->name('user.')->group(function() {
     // TESTIMONI USER
     Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
     Route::post('/testimoni/store', [TestimoniController::class, 'store'])->name('testimoni.store');
-    
+
 });
