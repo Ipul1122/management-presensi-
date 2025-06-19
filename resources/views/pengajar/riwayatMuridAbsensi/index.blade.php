@@ -326,7 +326,7 @@
     <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 hover-scale fade-in">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
-                <span class="bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">👤</span>
+                <span class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">👤</span>
                 Riwayat Absensi {{ $muridDipilih }}
             </h2>
             <div class="text-sm bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">
@@ -363,7 +363,7 @@
         <div class="overflow-x-auto">
             <table class="w-full table-auto border-collapse">
                 <thead>
-                    <tr class="bg-gradient-to-r from-green-500 to-teal-600 text-white">
+                    <tr class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
                         <th class="px-6 py-4 text-left rounded-tl-xl font-semibold">Tanggal</th>
                         <th class="px-6 py-4 text-center font-semibold">Status</th>
                         <th class="px-6 py-4 text-left font-semibold">Catatan</th>
@@ -394,10 +394,10 @@
                                             $statusClass = 'bg-blue-100 text-blue-800';
                                             $statusIcon = '📝';
                                             break;
-                                        case 'alpha':
-                                            $statusClass = 'bg-red-100 text-red-800';
-                                            $statusIcon = '❌';
-                                            break;
+                                        // case 'alpha':
+                                        //     $statusClass = 'bg-red-100 text-red-800';
+                                        //     $statusIcon = '❌';
+                                        //     break;
                                         default:
                                             $statusClass = 'bg-gray-100 text-gray-800';
                                             $statusIcon = '❓';
@@ -412,13 +412,13 @@
                                 <div class="flex justify-center space-x-2">
                                     <a href="{{ route('pengajar.riwayatMuridAbsensi.edit', $riwayat->id) }}" 
                                     class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
-                                        ✏️ Edit
+                                        Edit
                                     </a>
                                     <form action="{{ route('pengajar.riwayatMuridAbsensi.hapus', $riwayat->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('{{ $riwayat->nama_murid }}')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
-                                            🗑️ Hapus
+                                            Hapus
                                         </button>
                                     </form>
                                 </div>
