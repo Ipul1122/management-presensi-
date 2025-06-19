@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $testimonis = TestimoniUser::where('status', 'approved')->latest()->get();
+        $testimonis = TestimoniUser::where('status', 'approved')->orderBy('created_at', 'desc')->get();
         return view('index', compact('testimonis'));
     }
 }
