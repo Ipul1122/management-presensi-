@@ -242,7 +242,7 @@
 
             <div class="overflow-hidden relative">
                 <div id="carousel-testimoni" class="flex space-x-4 transition-all duration-500">
-                    @foreach ($testimonis as $testimoni)
+                    @foreach ($testimonis->where('status', 'approved') as $testimoni)
                         <div class="min-w-[250px] max-w-[300px] bg-white shadow rounded-lg p-4 shrink-0">
                             @if($testimoni->foto_user)
                                 <img src="{{ asset('storage/' . $testimoni->foto_user) }}" alt="foto" class="h-10 w-10 rounded-full object-cover">
