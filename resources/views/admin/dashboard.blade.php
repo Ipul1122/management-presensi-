@@ -148,7 +148,7 @@
                                 </div>
                                 
                                 <div class="flex items-center space-x-2 text-gray-600">
-                                    <i class="fas fa-user-teacher text-purple-500 w-4"></i>
+                                    <i class="fas fa-user-teacher text-blue-500 w-4"></i>
                                     <span class="text-sm">{{ $jadwal->nama_pengajar_jadwal }}</span>
                                 </div>
                                 
@@ -228,7 +228,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center space-x-2">
-                                        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
                                             <i class="fas fa-user text-white text-xs"></i>
                                         </div>
                                         {{-- NAMA PENGAJAR --}}
