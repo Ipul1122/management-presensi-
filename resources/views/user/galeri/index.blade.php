@@ -3,7 +3,7 @@
 @section('navbar-user')
 <section class="py-16 bg-white">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-4 text-emerald-700">Galeri TPA Nurul Haq</h2>
+        <h2 class="text-3xl font-bold text-center mb-4 text-blue-700">Galeri TPA Nurul Haq</h2>
         <p class="text-center text-gray-500 mb-8">Berbagai macam aktivitas TPA Nurul Haq</p>
 
         <div class="gallery-container">

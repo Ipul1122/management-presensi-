@@ -88,22 +88,22 @@
             {{-- Left Content --}}
             <div class="space-y-6 text-center md:text-left">
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold gradient-text leading-tight">
-                    Daftar TPA jadi <br>
-                    <span class="gradient-text-highlight">Lebih Mudah</span> <br>
-                    Di Website 
+                    Daftar TPA ? <br>
+                    <span class="gradient-text-highlight">Disini aja</span> <br>
+                    tpanurhaq.my.id
                 </h1>
                 <p class="text-gray-600 text-lg sm:text-xl">
-                    Dibangun untuk mempermudah orang tua melihat perkembangan anak murid selama di TPA Nurul Haq.
+                    Dibangun untuk mempermudah melihat perkembangan anak murid selama proses pembelajaran di TPA Nurul Haq.
                 </p>
-                <a href="" 
-                class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-md">
+                <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" 
+                class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-md">
                     Daftar Yuk
                 </a>
             </div>
 
             {{-- Right Image --}}
             <div class="flex justify-center ">
-                <img src="{{ asset('images/hero-section-homepage-image.svg') }}" 
+                <img src="{{ asset('images/hero-section-homepages.svg') }}" 
                     alt="Ilustrasi Hero" 
                     class="max-w-full h-auto md:max-w-[85%] rounded-xl drop-shadow-xl">
             </div>
@@ -114,13 +114,13 @@
     {{-- VISI MISI --}}
     <section class="py-16 bg-gray-50" id="visi-misi">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-10 text-emerald-700">Visi & Misi TPA Nurul Haq</h2>
+        <h2 class="text-3xl font-bold text-center mb-10 text-blue-700">Visi & Misi TPA Nurul Haq</h2>
 
         <div class="flex flex-col md:flex-row gap-6">
             <!-- Left: Visi -->
             <div class="w-full md:w-1/2 mr-28">
                 <div x-data="{ open: true }" class="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
-                    <button @click="open = !open" class="w-full  px-5 py-4 bg-emerald-100 font-semibold text-emerald-700 hover:bg-emerald-200 text-center">
+                    <button @click="open = !open" class="w-full  px-5 py-4 bg-blue-300 font-semibold text-blue-700 hover:bg-indigo-400 text-center">
                         Visi
                     </button>
                     <div x-show="open" x-transition class="px-5 py-4 text-gray-700">
@@ -134,7 +134,7 @@
             <!-- Right: Misi -->
             <div class="w-full md:w-1/2">
                 <div x-data="{ open: true }" class="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
-                    <button @click="open = !open" class="w-full text-center px-5 py-4 bg-emerald-100 font-semibold text-emerald-700 hover:bg-emerald-200">
+                    <button @click="open = !open" class="w-full text-center px-5 py-4 bg-blue-300 font-semibold text-blue-700 hover:bg-indigo-400">
                         Misi
                     </button>
                     <div x-show="open" x-transition class="px-5 py-4 text-gray-700 space-y-2">
@@ -155,7 +155,7 @@
  <!-- GALERI -->
     <section class="bg-white">
         <div class="py-4 px-2 mx-auto max-w-screen-xl sm:py-4 lg:px-6">
-            <h2 class="text-3xl font-bold text-center mb-10 text-emerald-700">Galeri TPA</h2>
+            <h2 class="text-3xl font-bold text-center mb-10 text-blue-700">Galeri TPA</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-full">
                 <div class="col-span-2 sm:col-span-1 md:col-span-2 bg-gray-50 h-auto md:h-full flex flex-col">
                     <a href="#" onclick="openModal('{{ asset('images/foto_tpa/foto_tpa5.jpg') }}', 'Benefit Murid Terbaik')" class="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow cursor-pointer object-cover">
@@ -229,14 +229,14 @@
     {{-- TESTIMONI --}}
     <section id="testimoni" class="py-16 bg-gray-100">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8 text-green-700">Testimoni</h2>
+        <h2 class="text-3xl font-bold text-center mb-8 text-blue-700">Testimoni</h2>
 
         @if ($testimonis->isEmpty())
             <div class="text-center text-gray-500 mb-6">
                 <p>Belum ada yang memberikan testimoni nih, ayo kamu jadi salah satunya!</p>
             </div>
         @else
-            <div class="text-center text-green-700 font-semibold mb-6">
+            <div class="text-center text-blue-700 font-semibold mb-6">
                 <p>Yang lain sudah berikan testimoni nih, kamu kapan? Aku tunggu yah 😊</p>
             </div>
 
@@ -247,7 +247,7 @@
                             @if($testimoni->foto_user)
                                 <img src="{{ asset('storage/' . $testimoni->foto_user) }}" alt="foto" class="h-10 w-10 rounded-full object-cover">
                             @else
-                                <div class="h-10 w-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-semibold">
+                                <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold">
                                     {{ strtoupper(substr($testimoni->nama_user, 0, 1)) }}
                                 </div>
                             @endif
@@ -260,7 +260,7 @@
         @endif
 
         <div class="text-center mt-6">
-            <a href="{{ route('user.testimoni.index') }}" class="inline-block px-6 py-3 bg-emerald-500 text-white rounded-lg shadow hover:bg-emerald-600 transition">
+            <a href="{{ route('user.testimoni.index') }}" class="inline-block px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-indigo-600 transition">
                 Berikan Testimoni
             </a>
         </div>
