@@ -8,10 +8,10 @@
         <div class="grid md:grid-cols-2 gap-8">
             {{-- Card 1: Murid --}}
             <div class="bg-emerald-100 p-6 rounded-xl shadow text-center">
-                <h3 class="text-2xl font-bold text-emerald-700 mb-2">
+                <h3 class="text-2xl font-bold text-blue-700 mb-2">
                     Total Murid TPA Kami
                 </h3>
-                <div class="text-5xl font-extrabold text-emerald-800">
+                <div class="text-5xl font-extrabold text-blue-800">
                     <span id="murid-count">0</span>+
                 </div>
                 <p class="mt-2 text-gray-600">Murid yang aktif terdaftar</p>
@@ -19,10 +19,10 @@
 
             {{-- Card 2: Pengajar --}}
             <div class="bg-emerald-100 p-6 rounded-xl shadow text-center">
-                <h3 class="text-2xl font-bold text-emerald-700 mb-2">
+                <h3 class="text-2xl font-bold text-blue-700 mb-2">
                     Total Pengajar kami terdaftar
                 </h3>
-                <div class="text-5xl font-extrabold text-emerald-800">
+                <div class="text-5xl font-extrabold text-blue-800">
                     <span id="pengajar-count">0</span>+
                 </div>
                 <p class="mt-2 text-gray-600">Dibimbing Oleh Pengajar Berbagai Keahlian</p>
@@ -35,14 +35,14 @@
     {{-- form pendaftaran --}}
     <section id="pendaftaran" class="py-20 bg-emerald-50">
     <div class="max-w-3xl mx-auto text-center px-4">
-        <h2 class="text-3xl font-bold text-emerald-700 mb-4">Tertarik untuk bergabung di TPA Nurul Haq?</h2>
+        <h2 class="text-3xl font-bold text-blue-700 mb-4">Tertarik untuk bergabung di TPA Nurul Haq?</h2>
         <p class="text-gray-700 text-lg mb-8">
             Yuk! Langsung aja klik tombol di bawah ini
         </p>
 
         <a href="https://forms.gle/xwMYkaf2YXzuKiE99" 
             target="_blank"
-            class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-full text-lg shadow hover:bg-emerald-700 transition">
+            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg shadow hover:bg-indigo-700 transition">
             Daftar
         </a>
     </div>

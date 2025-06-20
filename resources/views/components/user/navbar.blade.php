@@ -19,22 +19,22 @@
         <div class="flex items-center justify-between h-16">
 
             {{-- Kiri: Logo atau Nama --}}
-            <div class="flex-shrink-0 text-emerald-600 text-2xl font-bold">
+            <div class="flex-shrink-0 text-blue-600 xl:ml-10 text-2xl font-bold">
                 TPA Nurul Haq
             </div>
 
             {{-- Tengah: Menu Navigasi --}}
             <nav class="hidden md:flex space-x-6">
-                <a href="{{ route('index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">Home</a>
-                <a href="{{ route('user.informasi.index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">informasi</a>
-                <a href="{{ route('user.galeri.index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">Galeri</a>
-                <a href="{{ route('user.pendaftaran.index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">Pendaftaran</a>
-                <a href="{{ route('user.kontak.index') }}" class="text-gray-700 hover:text-emerald-600 transition font-medium">Kontak</a>
+                <a href="{{ route('index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Home</a>
+                <a href="{{ route('user.informasi.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">informasi</a>
+                <a href="{{ route('user.galeri.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Galeri</a>
+                <a href="{{ route('user.pendaftaran.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Pendaftaran</a>
+                <a href="{{ route('user.kontak.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Kontak</a>
             </nav>
 
             {{-- Kanan: Tombol Daftar --}}
             <div class="hidden md:block">
-                <a href="#pendaftaran" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-emerald-700 transition">
+                <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 transition">
                     Daftar
                 </a>
             </div>
@@ -56,12 +56,12 @@
     {{-- Mobile Dropdown Menu --}}
     <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-sm">
         <div class="px-4 py-3 space-y-2">
-            <a href="{{ route('index') }}" class="block text-gray-700 hover:text-emerald-600">Home</a>
-            <a href="{{ route('user.informasi.index') }}" class="block text-gray-700 hover:text-emerald-600">informasi</a>
-            <a href="{{ route('user.galeri.index') }}" class="block text-gray-700 hover:text-emerald-600">Galeri</a>
-            <a href="{{ route('user.pendaftaran.index') }}" class="block text-gray-700 hover:text-emerald-600">Pendaftaran</a>
-            <a href="{{ route('user.kontak.index') }}" class="block text-gray-700 hover:text-emerald-600">Kontak</a>
-            <a href="#pendaftaran" class="block text-white bg-emerald-600 px-3 py-2 rounded-lg text-center font-semibold hover:bg-emerald-700">
+            <a href="{{ route('index') }}" class="block text-gray-700 hover:text-blue-600">Home</a>
+            <a href="{{ route('user.informasi.index') }}" class="block text-gray-700 hover:text-blue-600">informasi</a>
+            <a href="{{ route('user.galeri.index') }}" class="block text-gray-700 hover:text-blue-600">Galeri</a>
+            <a href="{{ route('user.pendaftaran.index') }}" class="block text-gray-700 hover:text-blue-600">Pendaftaran</a>
+            <a href="{{ route('user.kontak.index') }}" class="block text-gray-700 hover:text-blue-600">Kontak</a>
+            <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" class="block text-white bg-blue-600 px-3 py-2 rounded-lg text-center font-semibold hover:bg-blue-700">
                 Daftar
             </a>
         </div>
@@ -77,7 +77,7 @@
         </main>
 
         {{-- Footer opsional --}}
-        <footer class="bg-emerald-800 text-white py-12">
+        <footer class="bg-blue-600 text-white py-12">
     <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         
         <!-- 1. Logo & Deskripsi -->
@@ -106,7 +106,7 @@
             <p class="text-sm mb-2">Jl. Rawa Bahagia I No.8 1, RT.1/RW.2, Grogol, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11450</p>
             <div class="rounded overflow-hidden shadow border">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.738454302736!2d106.79538937413047!3d-6.1657695604241525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f642d88d5841%3A0x6c31ab35f182053a!2sMasjid%20Nurul%20Haq!5e0!3m2!1sid!2sid!4v1750151052295!5m2!1sid!2sid" 
-                width="350" height="150" style="border:0;" allowfullscreen="" loading="lazy" 
+                width="710" height="200" style="border:0;" allowfullscreen="" loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
@@ -130,7 +130,7 @@
         Wah kamu sudah mengunjungi web selama <span x-text="elapsedMinutes"></span> menit!
     </p>
     <div class="flex justify-between space-x-2">
-        <a href="#daftar" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm">Daftar</a>
+        <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Daftar</a>
         <button @click="dismiss()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-3 py-1 rounded text-sm">Nanti deh</button>
         <button @click="dismiss()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">Sudah daftar</button>
     </div>

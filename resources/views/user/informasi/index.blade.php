@@ -15,7 +15,7 @@
         <div class="text-center mb-16">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Selamat Datang di 
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-green-600">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
                     TPA Nurul Haq
                 </span>
             </h1>
@@ -29,7 +29,7 @@
             <div x-data="{ open: true }" class="group">
                 <div class="bg-white/80 backdrop-blur-sm shadow-xl rounded-3xl overflow-hidden border border-emerald-100 hover:shadow-2xl transition-all duration-300">
                     <button @click="open = !open" 
-                            class="w-full px-8 py-6 bg-gradient-to-r from-emerald-500 to-green-500 text-white font-bold text-xl hover:from-emerald-600 hover:to-green-600 transition-all duration-300 flex items-center justify-between">
+                            class="w-full px-8 py-6 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold text-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 flex items-center justify-between">
                         <span class="flex items-center gap-3">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -53,7 +53,7 @@
             <div x-data="{ open: true }" class="group">
                 <div class="bg-white/80 backdrop-blur-sm shadow-xl rounded-3xl overflow-hidden border border-emerald-100 hover:shadow-2xl transition-all duration-300">
                     <button @click="open = !open" 
-                            class="w-full px-8 py-6 bg-gradient-to-r from-green-500 to-teal-500 text-white font-bold text-xl hover:from-green-600 hover:to-teal-600 transition-all duration-300 flex items-center justify-between">
+                            class="w-full px-8 py-6 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold text-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 flex items-center justify-between">
                         <span class="flex items-center gap-3">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -116,29 +116,29 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama murid..."
-                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200">
+                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
                         </div>
 
-                        <select name="jenis_kelamin" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200">
-                            <option value="">👦👧 Semua Gender</option>
-                            <option value="Laki-laki" {{ request('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>👦 Laki-laki</option>
-                            <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>👧 Perempuan</option>
+                        <select name="jenis_kelamin" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                            <option value="">Semua Gender</option>
+                            <option value="Laki-laki" {{ request('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </select>
 
-                        <select name="kelas" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200">
-                            <option value="">📚 Semua Kelas</option>
+                        <select name="kelas" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                            <option value="">Semua Kelas</option>
                             @foreach ($kelas_list as $kelas)
                                 <option value="{{ $kelas }}" {{ request('kelas') == $kelas ? 'selected' : '' }}>{{ $kelas }}</option>
                             @endforeach
                         </select>
 
-                        <select name="jenis_bacaan" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200">
-                            <option value="">📖 Semua Bacaan</option>
+                        <select name="jenis_bacaan" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                            <option value="">Semua Bacaan</option>
                             <option value="Iqro" {{ request('jenis_bacaan') == 'Iqro' ? 'selected' : '' }}>Iqro</option>
                             <option value="al-quran" {{ request('jenis_bacaan') == "Al-Qur'an" ? 'selected' : '' }}>Al-Qur'an</option>
                         </select>
 
-                        <button type="submit" class="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-6 py-3 rounded-xl hover:from-emerald-600 hover:to-green-600 transition-all duration-200 flex items-center justify-center gap-2 font-medium">
+                        <button type="submit" class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-3 rounded-xl hover:from-blue-600 hover:to-blue-600 transition-all duration-200 flex items-center justify-center gap-2 font-medium">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"/>
                             </svg>
@@ -155,14 +155,14 @@
 <section id="informasi-murid" class="py-16 bg-gradient-to-br from-gray-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Informasi Murid TPA</h2>
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">Informasi Murid TPA</h2>
             <p class="text-gray-600 max-w-2xl mx-auto">Lihat informasi lengkap tentang murid-murid yang terdaftar di TPA Nurul Haq</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gradient-to-r from-emerald-500 to-green-500">
+                    <thead class="bg-gradient-to-r from-blue-500 to-indigo-500">
                         <tr>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-white">
                                 <div class="flex items-center gap-2">
@@ -268,7 +268,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-green-600">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
                     Para Pengajar Kami
                 </span>
             </h2>
@@ -287,7 +287,7 @@
                                         <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
                                             alt="foto" class="h-16 w-16 rounded-2xl object-cover border-3 border-emerald-200 shadow-lg group-hover:scale-105 transition-transform duration-300">
                                     @else
-                                        <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform duration-300">
+                                        <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform duration-300">
                                             {{ strtoupper(substr($pengajar->nama_pengajar, 0, 1)) }}
                                         </div>
                                     @endif
@@ -295,7 +295,7 @@
                                         <h3 class="font-bold text-gray-900 text-lg mb-1">
                                             {{ $pengajar->nama_pengajar }}
                                         </h3>
-                                        <div class="flex items-center text-emerald-600">
+                                        <div class="flex items-center text-blue-600">
                                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                             </svg>
