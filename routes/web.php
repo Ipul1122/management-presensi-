@@ -26,6 +26,9 @@ use App\Http\Controllers\User\GaleriController;
 use App\Http\Controllers\User\PendaftaranController;
 use App\Http\Controllers\User\KontakController;
 use App\Http\Controllers\User\TestimoniController;
+use App\Http\Controllers\User\DataPengajarController;
+use App\Http\Controllers\User\VisiDanMisiController;
+use App\Http\Controllers\User\DataMuridController;
 
 
 /*
@@ -176,7 +179,11 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 // GROUP USER
 Route::prefix('user')->name('user.')->group(function() {
     // INFORMASI USER
-    Route::get('/informasi', [InformasiController::class, 'index'])->name('informasi.index');
+    Route::prefix('informasi')->name('informasi.')->group(function(){
+        Route::get('/dataPengajar', [DataPengajarController::class, 'index'])->name('dataPengajar.index');
+        Route::get('/visiDanMisi', [VisiDanMisiController::class, 'index'])->name('visiDanMisi.index');
+        Route::get('/dataMurid', [DataMuridController::class, 'index'])->name('dataMurid.index');
+    });
     // GALERI USER
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
     // PENDAFTARAN USER
