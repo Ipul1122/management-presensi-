@@ -226,8 +226,8 @@
     </div>
 
 
-    {{-- TESTIMONI --}}
-    <section id="testimoni" class="py-16 bg-gray-100">
+{{-- TESTIMONI --}}
+<section id="testimoni" class="py-16 bg-gray-100">
     <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-8 text-blue-700">Testimoni</h2>
 
@@ -240,8 +240,9 @@
                 <p>Yang lain sudah berikan testimoni nih, kamu kapan? Aku tunggu yah 😊</p>
             </div>
 
-            <div class="overflow-hidden relative">
-                <div id="carousel-testimoni" class="flex space-x-4 transition-all duration-500">
+            {{-- Scrollable testimonial section --}}
+            <div class="overflow-x-auto">
+                <div id="carousel-testimoni" class="flex space-x-4 w-max">
                     @foreach ($testimonis->where('status', 'approved') as $testimoni)
                         <div class="min-w-[250px] max-w-[300px] bg-white shadow rounded-lg p-4 shrink-0">
                             @if($testimoni->foto_user)
