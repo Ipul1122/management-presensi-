@@ -8,14 +8,14 @@
     @vite('resources/css/app.css', 'resources/js/app.js') 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 m-0 p-0">
 
     <div class="">
 
         {{-- Navbar --}}
         {{-- Sticky Navbar --}}
-<header class="sticky top-0 z-50 bg-white shadow-sm ">
-    <div class="max-w-7xl mx-auto px-auto sm:px-6 lg:px-8 ">
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-auto sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
 
             {{-- Kiri: Logo atau Nama --}}
@@ -26,7 +26,37 @@
             {{-- Tengah: Menu Navigasi --}}
             <nav class="hidden md:flex space-x-6">
                 <a href="{{ route('index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Home</a>
-                <a href="{{ route('user.informasi.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">informasi</a>
+                
+                {{-- Dropdown Informasi --}}
+                <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                    <button @click="open = !open" class="text-gray-700 hover:text-blue-600 transition font-medium flex items-center">
+                        Informasi
+                        <svg class="ml-1 h-4 w-4 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    {{-- Dropdown Menu --}}
+                    <div x-show="open" 
+                        x-transition:enter="transition ease-out duration-200" 
+                        x-transition:enter-start="opacity-0 transform scale-95" 
+                        x-transition:enter-end="opacity-100 transform scale-100" 
+                        x-transition:leave="transition ease-in duration-150" 
+                        x-transition:leave-start="opacity-100 transform scale-100" 
+                        x-transition:leave-end="opacity-0 transform scale-95"
+                        class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
+                        <a href="{{ route('user.informasi.visiDanMisi.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                            <i class="fas fa-bullseye mr-2"></i>Visi dan Misi
+                        </a>
+                        <a href="{{ route('user.informasi.dataMurid.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                            <i class="fas fa-users mr-2"></i>Data Murid
+                        </a>
+                        <a href="{{ route('user.informasi.dataPengajar.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                            <i class="fas fa-chalkboard-teacher mr-2"></i>Data Pengajar
+                        </a>
+                    </div>
+                </div>
+                
                 <a href="{{ route('user.galeri.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Galeri</a>
                 <a href="{{ route('user.pendaftaran.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Pendaftaran</a>
                 <a href="{{ route('user.kontak.index') }}" class="text-gray-700 hover:text-blue-600 transition font-medium">Kontak</a>
@@ -57,7 +87,28 @@
     <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-sm">
         <div class="px-4 py-3 space-y-2">
             <a href="{{ route('index') }}" class="block text-gray-700 hover:text-blue-600">Home</a>
-            <a href="{{ route('user.informasi.index') }}" class="block text-gray-700 hover:text-blue-600">informasi</a>
+            
+            {{-- Mobile Informasi Dropdown --}}
+            <div x-data="{ mobileOpen: false }">
+                <button @click="mobileOpen = !mobileOpen" class="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 py-1">
+                    Informasi
+                    <svg class="h-4 w-4 transition-transform" :class="{ 'rotate-180': mobileOpen }" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div x-show="mobileOpen" x-transition class="ml-4 mt-2 space-y-2 border-l-2 border-blue-100 pl-3">
+                    <a href="{{ route('user.informasi.visiDanMisi.index') }}" class="block text-sm text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-bullseye mr-2"></i>Visi dan Misi
+                    </a>
+                    <a href="{{ route('user.informasi.dataMurid.index') }}" class="block text-sm text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-users mr-2"></i>Data Murid
+                    </a>
+                    <a href="{{ route('user.informasi.dataPengajar.index') }}" class="block text-sm text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>Data Pengajar
+                    </a>
+                </div>
+            </div>
+            
             <a href="{{ route('user.galeri.index') }}" class="block text-gray-700 hover:text-blue-600">Galeri</a>
             <a href="{{ route('user.pendaftaran.index') }}" class="block text-gray-700 hover:text-blue-600">Pendaftaran</a>
             <a href="{{ route('user.kontak.index') }}" class="block text-gray-700 hover:text-blue-600">Kontak</a>
@@ -93,7 +144,7 @@
             <h3 class="text-lg font-semibold mb-3">Navigasi</h3>
             <ul class="space-y-2 text-sm">
                 <li><a href="{{ route('index') }}" class="hover:underline">Beranda</a></li>
-                <li><a href="{{ route('user.informasi.index') }}" class="hover:underline">informasi</a></li>
+                <li><a href="" class="hover:underline">informasi</a></li>
                 <li><a href="{{ route('user.galeri.index') }}" class="hover:underline">Galeri</a></li>
                 <li><a href="{{ route('user.pendaftaran.index') }}" class="hover:underline">Pendaftaran</a></li>
                 <li><a href="{{ route('user.kontak.index') }}" class="hover:underline">Kontak</a></li>
@@ -125,7 +176,7 @@
 
     {{-- NOTIFIKASI POPOVER --}}
     <div x-data="visitTimer()" x-init="startTimer()" x-show="showPopover" x-transition
-     class="fixed bottom-5 right-5 bg-white border border-gray-300 shadow-xl rounded-lg w-80 p-4 z-50">
+    class="fixed bottom-5 right-5 bg-white border border-gray-300 shadow-xl rounded-lg w-80 p-4 z-50">
     <p class="text-sm text-gray-800 font-medium mb-3">
         Wah kamu sudah mengunjungi web selama <span x-text="elapsedMinutes"></span> menit!
     </p>
