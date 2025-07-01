@@ -38,29 +38,23 @@
             
                 <!-- Jenis Kelamin -->
                 <div class="form-group">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin <span class="text-red-500">*</span></label>
-                    <div class="flex space-x-4 mt-2">
-                        <div class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="jenis_kelamin" 
-                                id="laki" 
-                                value="Laki-laki" 
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
-                                checked
-                            >
-                            <label for="laki" class="ml-2 block text-sm text-gray-700">Laki-laki</label>
+                    <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                            </svg>
                         </div>
-                        <div class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="jenis_kelamin" 
-                                id="perempuan" 
-                                value="Perempuan" 
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
-                            >
-                            <label for="perempuan" class="ml-2 block text-sm text-gray-700">Perempuan</label>
-                        </div>
+                        <select 
+                            name="jenis_kelamin" 
+                            id="jenis_kelamin" 
+                            class="form-select pl-10 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition"
+                            required
+                        >
+                            <option value="">Pilih Jenis Kelamin</option>
+                            <option value="Laki-laki" selected>Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -112,14 +106,23 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                         </div>
-                        <input 
-                            type="number" 
+                        <select 
                             name="kelas" 
                             id="kelas" 
-                            class="form-input pl-10 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition" 
-                            placeholder="Contoh: 1A / TK Kecil"
+                            class="form-select pl-10 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition"
                             required
                         >
+                            <option value="">Pilih Kelas</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
                     </div>
                 </div>
                 
@@ -144,32 +147,27 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin <span class="text-red-500">*</span></label>
-                    <div class="flex space-x-4 mt-2">
-                        <div class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="jenis_alkitab" 
-                                id="iqro" 
-                                value="iqro" 
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
-                                checked
-                            >
-                            <label for="iqro" class="ml-2 block text-sm text-gray-700">Iqro</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input 
-                                type="radio" 
-                                name="jenis_alkitab" 
-                                id="Al-Quran" 
-                                value="Al-Quran" 
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
-                            >
-                            <label for="Al-Quran" class="ml-2 block text-sm text-gray-700">Al-Quran</label>
-                        </div>
+            <!-- Al-Kitab -->
+            <div class="form-group mt-6">
+                <label for="jenis_alkitab" class="block text-sm font-medium text-gray-700 mb-1">Al-Kitab <span class="text-red-500">*</span></label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
                     </div>
+                    <select 
+                        name="jenis_alkitab" 
+                        id="jenis_alkitab" 
+                        class="form-select pl-10 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition"
+                        required
+                    >
+                        <option value="">Pilih Al-Kitab</option>
+                        <option value="iqro" selected>Iqro</option>
+                        <option value="Al-Quran">Al-Qur'an</option>
+                    </select>
                 </div>
+            </div>
             
             <!-- Alamat -->
             <div class="form-group mt-6">
@@ -307,6 +305,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputs = form.querySelectorAll('input, textarea, select');
     inputs.forEach(input => {
         input.addEventListener('input', function() {
+            this.classList.remove('border-red-500');
+            const errorMsg = this.parentNode.querySelector('.error-message');
+            if (errorMsg) {
+                errorMsg.remove();
+            }
+        });
+        
+        // Handle change event for select elements
+        input.addEventListener('change', function() {
             this.classList.remove('border-red-500');
             const errorMsg = this.parentNode.querySelector('.error-message');
             if (errorMsg) {
