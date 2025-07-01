@@ -16,7 +16,7 @@
         </main>
 
         {{-- Footer opsional --}}
-        <footer class="">
+        <footer class="text-center ">
             &copy; {{ date('Y') }} TPA Masjid Nurul Haq
         </footer>
     </div>
