@@ -10,23 +10,37 @@ use App\Models\Jadwal;
 class RiwayatJadwalPengajarController extends Controller
 {
     //
-    public function index()
+public function index(Request $request)
 {
     $now = Carbon::now();
-    $riwayatJadwal = Jadwal::where(function ($query) use ($now) {
-        $query->whereYear('tanggal_jadwal', '<', $now->year)
-            ->orWhere(function ($query) use ($now) {
-                $query->whereYear('tanggal_jadwal', $now->year)
-                        ->whereMonth('tanggal_jadwal', '<', $now->month);
-            });
-    })->orderBy('tanggal_jadwal', 'desc')->get();
 
-    $groupedByMonth = $riwayatJadwal->groupBy(function ($item) {
-        return Carbon::parse($item->tanggal_jadwal)->format('F Y'); // contoh: "Mei 2025"
-    });
+    // Ambil tahun-tahun tersedia dari jadwal lama
+    $availableYears = Jadwal::selectRaw('YEAR(tanggal_jadwal) as tahun')
+                            ->whereDate('tanggal_jadwal', '<', $now->startOfMonth())
+                            ->distinct()
+                            ->pluck('tahun')
+                            ->sortDesc();
 
-    return view('pengajar.riwayatJadwal.index', compact('groupedByMonth'));
+    $bulan = $request->bulan;
+    $tahun = $request->tahun;
+
+    $groupedByMonth = collect(); // default kosong
+
+    if ($bulan && $tahun) {
+        $riwayatJadwal = Jadwal::whereMonth('tanggal_jadwal', $bulan)
+            ->whereYear('tanggal_jadwal', $tahun)
+            ->whereDate('tanggal_jadwal', '<', $now->startOfMonth())
+            ->orderBy('tanggal_jadwal', 'desc')
+            ->get();
+
+        $groupedByMonth = $riwayatJadwal->groupBy(function ($item) {
+            return Carbon::parse($item->tanggal_jadwal)->format('F Y');
+        });
+    }
+
+    return view('pengajar.riwayatJadwal.index', compact('groupedByMonth', 'availableYears'));
 }
+
 
 
 }
