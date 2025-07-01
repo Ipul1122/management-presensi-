@@ -1,6 +1,5 @@
 @extends('components.layouts.admin.sidebar-and-navbar')
 
-
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 lg:p-6">
     <div class="max-w-7xl mx-auto">
@@ -14,30 +13,63 @@
 
         {{-- DROPDOWN FILTER --}}
         <form method="GET" class="mb-6 flex flex-wrap items-center gap-2">
-    <div>
-        <label for="bulan" class="block text-sm font-medium text-gray-700">Pilih Bulan</label>
-        <select name="bulan" id="bulan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200">
-            @for ($i = 1; $i <= 12; $i++)
-                <option value="{{ $i }}" {{ request('bulan') == $i ? 'selected' : '' }}>
-                    {{ \Carbon\Carbon::create()->month($i)->translatedFormat('F') }}
-                </option>
-            @endfor
-        </select>
-    </div>
+            <div class="relative">
+                <label for="bulan" class="block text-sm font-medium text-gray-700">Pilih Bulan</label>
+                <select name="bulan" id="bulan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200" onchange="checkScheduleData()">
+                    <option value="">-- Pilih Bulan --</option>
+                    @for ($i = 1; $i <= 12; $i++)
+                        @php
+                            $currentYear = request('tahun') ?: date('Y');
+                            $hasSchedule = isset($jadwalData[$currentYear . '-' . $i]);
+                            $scheduleCount = $hasSchedule ? $jadwalData[$currentYear . '-' . $i]->jumlah : 0;
+                        @endphp
+                        <option value="{{ $i }}" {{ request('bulan') == $i ? 'selected' : '' }} 
+                                data-has-schedule="{{ $hasSchedule ? 'true' : 'false' }}"
+                                data-schedule-count="{{ $scheduleCount }}">
+                            {{ \Carbon\Carbon::create()->month($i)->translatedFormat('F') }}
+                            @if($hasSchedule) ● @endif
+                        </option>
+                    @endfor
+                </select>
+                <!-- Popover untuk bulan -->
+                <div id="bulan-popover" class="absolute z-10 invisible opacity-0 bg-blue-600 text-white text-xs rounded-lg py-2 px-3 shadow-lg transition-all duration-200 transform -translate-y-1 pointer-events-none">
+                    <span id="bulan-popover-text">Ada jadwal di bulan ini</span>
+                    <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-blue-600"></div>
+                </div>
+            </div>
 
-    <div>
-        <label for="tahun" class="block text-sm font-medium text-gray-700">Pilih Tahun</label>
-        <select name="tahun" id="tahun" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200">
-            @foreach ($availableYears as $year)
-                <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
-            @endforeach
-        </select>
-    </div>
+            <div class="relative">
+                <label for="tahun" class="block text-sm font-medium text-gray-700">Pilih Tahun</label>
+                <select name="tahun" id="tahun" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200" onchange="checkScheduleData()">
+                    <option value="">-- Pilih Tahun --</option>
+                    @foreach ($availableYears as $year)
+                        @php
+                            $hasScheduleInYear = $jadwalData->keys()->filter(function($key) use ($year) {
+                                return str_starts_with($key, $year . '-');
+                            })->count() > 0;
+                            $totalSchedulesInYear = $jadwalData->filter(function($item, $key) use ($year) {
+                                return str_starts_with($key, $year . '-');
+                            })->sum('jumlah');
+                        @endphp
+                        <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}
+                                data-has-schedule="{{ $hasScheduleInYear ? 'true' : 'false' }}"
+                                data-schedule-count="{{ $totalSchedulesInYear }}">
+                            {{ $year }}
+                            @if($hasScheduleInYear) ● @endif
+                        </option>
+                    @endforeach
+                </select>
+                <!-- Popover untuk tahun -->
+                <div id="tahun-popover" class="absolute z-10 invisible opacity-0 bg-green-600 text-white text-xs rounded-lg py-2 px-3 shadow-lg transition-all duration-200 transform -translate-y-1 pointer-events-none">
+                    <span id="tahun-popover-text">Ada jadwal di tahun ini</span>
+                    <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-green-600"></div>
+                </div>
+            </div>
 
-    <div class="self-end">
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Tampilkan</button>
-    </div>
-</form>
+            <div class="self-end">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Tampilkan</button>
+            </div>
+        </form>
 
         {{--  --}}
         @forelse ($groupedByMonth as $month => $jadwals)
@@ -192,6 +224,11 @@
     </div>
 </div>
 
+<!-- Hidden data untuk JavaScript -->
+<script type="text/javascript">
+    const jadwalData = @json($jadwalData);
+</script>
+
 <style>
     .line-clamp-1 {
         display: -webkit-box;
@@ -216,6 +253,13 @@
         .accordion-content .p-4 {
             padding: 1rem;
         }
+    }
+
+    /* Popover styles */
+    .popover-visible {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: translateY(-8px) !important;
     }
 </style>
 
@@ -253,6 +297,100 @@
         openContents.forEach(content => {
             content.style.maxHeight = content.scrollHeight + 'px';
         });
+    });
+
+    // Popover functionality
+    let hideTimeout;
+
+    function showPopover(element, popoverId) {
+        clearTimeout(hideTimeout);
+        const popover = document.getElementById(popoverId);
+        const selectedOption = element.options[element.selectedIndex];
+        const hasSchedule = selectedOption.getAttribute('data-has-schedule') === 'true';
+        const scheduleCount = selectedOption.getAttribute('data-schedule-count');
+        
+        if (hasSchedule && scheduleCount > 0) {
+            const popoverText = document.getElementById(popoverId + '-text');
+            if (popoverId === 'bulan-popover') {
+                popoverText.textContent = `Ada ${scheduleCount} jadwal di bulan ini`;
+            } else {
+                popoverText.textContent = `Ada ${scheduleCount} jadwal di tahun ini`;
+            }
+            popover.classList.add('popover-visible');
+        }
+    }
+
+    function hidePopover(popoverId) {
+        hideTimeout = setTimeout(() => {
+            const popover = document.getElementById(popoverId);
+            popover.classList.remove('popover-visible');
+        }, 100);
+    }
+
+    function checkScheduleData() {
+        const bulanSelect = document.getElementById('bulan');
+        const tahunSelect = document.getElementById('tahun');
+        const bulan = bulanSelect.value;
+        const tahun = tahunSelect.value;
+
+        // Update options untuk bulan berdasarkan tahun yang dipilih
+        if (tahun) {
+            for (let i = 0; i < bulanSelect.options.length; i++) {
+                const option = bulanSelect.options[i];
+                const monthValue = option.value;
+                if (monthValue) {
+                    const key = tahun + '-' + monthValue;
+                    const hasSchedule = jadwalData[key] ? true : false;
+                    const scheduleCount = jadwalData[key] ? jadwalData[key].jumlah : 0;
+                    
+                    option.setAttribute('data-has-schedule', hasSchedule ? 'true' : 'false');
+                    option.setAttribute('data-schedule-count', scheduleCount);
+                    
+                    // Update text option untuk menampilkan indikator
+                    const monthName = option.textContent.replace(' ●', '');
+                    option.textContent = monthName + (hasSchedule ? ' ●' : '');
+                }
+            }
+        }
+    }
+
+    // Event listeners untuk dropdown bulan
+    document.getElementById('bulan').addEventListener('mouseenter', function() {
+        showPopover(this, 'bulan-popover');
+    });
+
+    document.getElementById('bulan').addEventListener('mouseleave', function() {
+        hidePopover('bulan-popover');
+    });
+
+    document.getElementById('bulan').addEventListener('focus', function() {
+        showPopover(this, 'bulan-popover');
+    });
+
+    document.getElementById('bulan').addEventListener('blur', function() {
+        hidePopover('bulan-popover');
+    });
+
+    // Event listeners untuk dropdown tahun
+    document.getElementById('tahun').addEventListener('mouseenter', function() {
+        showPopover(this, 'tahun-popover');
+    });
+
+    document.getElementById('tahun').addEventListener('mouseleave', function() {
+        hidePopover('tahun-popover');
+    });
+
+    document.getElementById('tahun').addEventListener('focus', function() {
+        showPopover(this, 'tahun-popover');
+    });
+
+    document.getElementById('tahun').addEventListener('blur', function() {
+        hidePopover('tahun-popover');
+    });
+
+    // Initialize pada load
+    document.addEventListener('DOMContentLoaded', function() {
+        checkScheduleData();
     });
 </script>
 @endsection
