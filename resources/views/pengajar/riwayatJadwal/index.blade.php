@@ -1,7 +1,5 @@
 @extends('components.layouts.pengajar.sidebar')
-
 @section('sidebar-pengajar')
-
 <style>
     .line-clamp-1 {
         display: -webkit-box;
@@ -28,7 +26,6 @@
         }
     }
 </style>
-
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 lg:p-6">
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
@@ -38,6 +35,34 @@
             </h1>
             <p class="text-gray-600 text-sm lg:text-base">Kelola dan lihat riwayat jadwal yang telah berlalu</p>
         </div>
+
+        {{-- DROPDOWN FILTER --}}
+        <form method="GET" class="mb-6 flex flex-wrap items-center gap-2">
+    <div>
+        <label for="bulan" class="block text-sm font-medium text-gray-700">Pilih Bulan</label>
+        <select name="bulan" id="bulan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200">
+            @for ($i = 1; $i <= 12; $i++)
+                <option value="{{ $i }}" {{ request('bulan') == $i ? 'selected' : '' }}>
+                    {{ \Carbon\Carbon::create()->month($i)->translatedFormat('F') }}
+                </option>
+            @endfor
+        </select>
+    </div>
+
+    <div>
+        <label for="tahun" class="block text-sm font-medium text-gray-700">Pilih Tahun</label>
+        <select name="tahun" id="tahun" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200">
+            @foreach ($availableYears as $year)
+                <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="self-end">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Tampilkan</button>
+    </div>
+</form>
+
         @forelse ($groupedByMonth as $month => $jadwals)
             @php
                 $totalGaji = $jadwals->sum('gaji');
@@ -81,7 +106,7 @@
                                 <span>Rp {{ number_format($totalGaji, 0, ',', '.') }}</span>
                             </div>
                             <svg class="accordion-icon w-5 h-5 lg:w-6 lg:h-6 text-white transform transition-transform duration-300" 
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
@@ -189,6 +214,7 @@
         @endforelse
     </div>
 </div>
+
 
 
 <script>
