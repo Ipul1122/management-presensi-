@@ -378,8 +378,8 @@ html {
                                 <div class="w-24 h-24 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
                                     <i class="fas fa-calendar-times text-gray-400 text-3xl"></i>
                                 </div>
-                                <h4 class="text-xl font-bold text-gray-600 mb-3">Tidak Ada Jadwal</h4>
-                                <p class="text-gray-500 max-w-md mx-auto leading-relaxed">Belum ada jadwal kegiatan untuk bulan ini. Jadwal akan muncul ketika sudah ditambahkan.</p>
+                                <h4 class="text-xl font-bold text-white mb-3">Tidak Ada Jadwal</h4>
+                                <p class="text-white max-w-md mx-auto leading-relaxed">Belum ada jadwal kegiatan untuk bulan ini. Jadwal akan muncul ketika sudah ditambahkan.</p>
                             </div>
                         @else
                             <div class="overflow-x-auto">
