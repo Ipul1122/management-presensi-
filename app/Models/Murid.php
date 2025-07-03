@@ -20,6 +20,9 @@ class Murid extends Model
         'kelas',
         'jenis_alkitab',
         'tanggal_daftar',
+        'nomor_telepon',
+        'ayah',
+        'ibu',
     ];
 
 

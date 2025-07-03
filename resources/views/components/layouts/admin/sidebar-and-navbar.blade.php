@@ -211,7 +211,7 @@
             <aside class="sidebar w-72 bg-white/90 backdrop-blur-md shadow-2xl border-r border-white/20 custom-scrollbar overflow-y-auto">
                 <div class="p-6 space-y-2">
                     <div class="flex justify-between items-center mb-6">
-                        <span class="font-bold text-gray-800">Menu Navigasi</span>
+                        <span class="font-bold text-gray-800 ml-4">Menu Navigasi</span>
                         <button id="closeSidebar" class="text-gray-600 hover:text-gray-800 p-2 hover:bg-gray-100 rounded-lg transition-all duration-200 lg:hidden">
                             <i class="fas fa-times"></i>
                         </button>

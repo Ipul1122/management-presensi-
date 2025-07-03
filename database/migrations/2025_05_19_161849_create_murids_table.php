@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('kelas');
             $table->enum('jenis_alkitab', ['iqro', 'Al-Quran']);
             $table->date('tanggal_daftar');
+            // Ubah dari integer ke string
+            $table->string('nomor_telepon');
+            $table->string('ayah');
+            $table->string('ibu');
             $table->timestamps();
         });
     }

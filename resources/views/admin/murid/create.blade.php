@@ -14,6 +14,19 @@
 
         <form action="{{ route('admin.murid.store') }}" method="POST" enctype="multipart/form-data" class="p-6" id="formTambahMurid">
             @csrf
+
+            {{-- Tampilkan error validasi --}}
+            @if ($errors->any())
+                <div class="mb-4">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Nama Anak -->
@@ -56,6 +69,45 @@
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
+                </div>
+
+                <!-- Nomor Telepon -->
+                <div class="form-group">
+                    <label for="nomor_telepon" class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon <span class="text-red-500">*</span></label>
+                    <input 
+                        type="number" 
+                        name="nomor_telepon" 
+                        id="nomor_telepon" 
+                        class="form-input w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition" 
+                        placeholder="Masukkan nomor telepon"
+                        required
+                    >
+                </div>
+
+                <!-- Nama Ayah -->
+                <div class="form-group">
+                    <label for="ayah" class="block text-sm font-medium text-gray-700 mb-1">Nama Ayah <span class="text-red-500">*</span></label>
+                    <input 
+                        type="text" 
+                        name="ayah" 
+                        id="ayah" 
+                        class="form-input w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition" 
+                        placeholder="Masukkan nama ayah"
+                        required
+                    >
+                </div>
+
+                <!-- Nama Ibu -->
+                <div class="form-group">
+                    <label for="ibu" class="block text-sm font-medium text-gray-700 mb-1">Nama Ibu <span class="text-red-500">*</span></label>
+                    <input 
+                        type="text" 
+                        name="ibu" 
+                        id="ibu" 
+                        class="form-input w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition" 
+                        placeholder="Masukkan nama ibu"
+                        required
+                    >
                 </div>
             </div>
 
@@ -133,7 +185,6 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
                         </div>
                         <input 
                             type="date" 
@@ -322,5 +373,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+// Semua field sudah sesuai dan lengkap
 </script>
 @endsection
