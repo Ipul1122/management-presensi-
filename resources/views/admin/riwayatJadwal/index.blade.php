@@ -1,6 +1,42 @@
 @extends('components.layouts.admin.sidebar-and-navbar')
 
 @section('content')
+
+    <style>
+    .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .accordion-content.open {
+        max-height: 1000px;
+    }
+    
+    .accordion-icon.rotate {
+        transform: rotate(180deg);
+    }
+    
+    @media (max-width: 640px) {
+        .accordion-header {
+            padding: 1rem;
+        }
+        
+        .accordion-content .p-4 {
+            padding: 1rem;
+        }
+    }
+
+    /* Popover styles */
+    .popover-visible {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: translateY(-8px) !important;
+    }
+</style>
+
+
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 lg:p-6">
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
@@ -82,6 +118,15 @@
                 <!-- Accordion Header -->
                 <div class="accordion-header cursor-pointer select-none bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 p-4 lg:p-6" 
                     onclick="toggleAccordion(this)">
+                    {{-- ADD BUTTON PDF --}}
+@if(request('bulan') && request('tahun'))
+    <a href="{{ route('admin.riwayatJadwal.pdf', ['bulan' => request('bulan'), 'tahun' => request('tahun')]) }}"
+        class="inline-block bg-red-600 hover:bg-red-700 text-white text-xs font-medium px-3 py-1 rounded-md transition"
+        target="_blank">
+        📄 Download PDF
+    </a>
+@endif
+                    {{--  --}}
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <div class="bg-white/20 rounded-full p-2">
@@ -228,40 +273,6 @@
 <script type="text/javascript">
     const jadwalData = @json($jadwalData);
 </script>
-
-<style>
-    .line-clamp-1 {
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    
-    .accordion-content.open {
-        max-height: 1000px;
-    }
-    
-    .accordion-icon.rotate {
-        transform: rotate(180deg);
-    }
-    
-    @media (max-width: 640px) {
-        .accordion-header {
-            padding: 1rem;
-        }
-        
-        .accordion-content .p-4 {
-            padding: 1rem;
-        }
-    }
-
-    /* Popover styles */
-    .popover-visible {
-        visibility: visible !important;
-        opacity: 1 !important;
-        transform: translateY(-8px) !important;
-    }
-</style>
 
 <script>
     function toggleAccordion(element) {
