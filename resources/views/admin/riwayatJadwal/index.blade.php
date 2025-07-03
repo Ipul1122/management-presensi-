@@ -119,13 +119,13 @@
                 <div class="accordion-header cursor-pointer select-none bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 p-4 lg:p-6" 
                     onclick="toggleAccordion(this)">
                     {{-- ADD BUTTON PDF --}}
-@if(request('bulan') && request('tahun'))
-    <a href="{{ route('admin.riwayatJadwal.pdf', ['bulan' => request('bulan'), 'tahun' => request('tahun')]) }}"
-        class="inline-block bg-red-600 hover:bg-red-700 text-white text-xs font-medium px-3 py-1 rounded-md transition"
-        target="_blank">
-        📄 Download PDF
-    </a>
-@endif
+                    @if(request('bulan') && request('tahun'))
+                        <a href="{{ route('admin.riwayatJadwal.pdf', ['bulan' => request('bulan'), 'tahun' => request('tahun')]) }}"
+                            class="inline-block bg-red-600 hover:bg-red-700 text-white text-xs font-medium px-3 py-1 rounded-md transition"
+                            target="_blank">
+                            📄 Download PDF
+                        </a>
+                    @endif
                     {{--  --}}
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">

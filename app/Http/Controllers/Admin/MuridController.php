@@ -8,6 +8,7 @@ use App\Models\Murid;
 use Illuminate\Support\Facades\Storage;
 use App\Models\NotifikasiAdmin;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log; // Tambahkan ini
 
 class MuridController extends Controller
 {
@@ -26,15 +27,18 @@ class MuridController extends Controller
 
 public function store(Request $request)
 {
+    Log::info('MuridController@store called', ['request' => $request->all()]);
     $validatedData = $request->validate([
         'nama_anak' => 'required|string|max:255',
-        'foto_anak' => 'nullable|image|max:2048',
+        'foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
         'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
         'alamat' => 'required|string',
         'kelas' => 'required|string',
         'jenis_alkitab' => 'required|in:iqro,Al-Quran',
         'tanggal_daftar' => 'required|date',
-        ' foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', 
+        'nomor_telepon' => 'required|string|max:20',
+        'ayah' => 'required|string|max:255',
+        'ibu' => 'required|string|max:255',
     ]);
 
 
@@ -49,10 +53,11 @@ public function store(Request $request)
     }
 
     // Simpan ke database
-    $murid = Murid::create($validatedData);
+    Murid::create($validatedData);
+    Log::info('MuridController@store success', ['data' => $validatedData]);
 
-    // Redirect ke halaman show dengan flash message
-    return redirect()->route('admin.murid.index', $murid->id_pendaftaran)
+    // Redirect ke halaman index dengan flash message
+    return redirect()->route('admin.murid.index')
                     ->with('success', 'Data telah dibuat.');
 }
 
@@ -80,6 +85,9 @@ public function edit($id)
             'kelas' => 'required|string',
             'tanggal_daftar' => 'required|date',
             'jenis_alkitab' => 'required|in:iqro,Al-Quran',
+            'nomor_telepon' => 'required|string|max:20',
+            'ayah' => 'required|string|max:255',
+            'ibu' => 'required|string|max:255',
             'foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048', // max dalam kilobytes
         ]);        
 

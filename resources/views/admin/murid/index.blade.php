@@ -142,23 +142,15 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Al-kitab</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">
-                                    <span>Tanggal Daftar</span>
-                                    <button type="button" class="ml-1 text-gray-400 hover:text-gray-700">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Telepon</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ayah</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ibu</th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($murids as $index => $murid)
                         <tr class="hover:bg-gray-50 transition-colors duration-200 murid-row">
-                            {{-- ID PENDAFTARAN --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <input type="checkbox" name="ids[]" value="{{ $murid->id_pendaftaran }}" class="murid-checkbox rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer">
                             </td>
@@ -198,19 +190,20 @@
                                 <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-lg bg-green-100 text-green-800">
                                     {{ $murid->kelas }}
                                 </span>
-                            {{-- AL-KITAB --}}
                             </td>
+                            {{-- AL-KITAB --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $murid->jenis_alkitab == 'iqro' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
                                     {{ $murid->jenis_alkitab }}
                                 </span>
                             </td>
-                            {{-- TANGGAL DAFTAR --}}
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ \Carbon\Carbon::parse($murid->tanggal_daftar)->format('d M Y') }}
-                            </td>
+                            {{-- NOMOR TELEPON --}}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->nomor_telepon }}</td>
+                            {{-- AYAH --}}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->ayah }}</td>
+                            {{-- IBU --}}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->ibu }}</td>
                             {{-- ACTIONS --}}
-                            {{-- EDIT BUTTON --}}
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-2">
                                     <a href="{{ route('admin.murid.edit', $murid->id_pendaftaran) }}" class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 p-2 rounded-md transition-colors duration-200">

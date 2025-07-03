@@ -17,7 +17,7 @@
                                 <i class="fas fa-address-book text-2xl text-white"></i>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">MURID</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Murid</h2>
                                 <p class="text-gray-600 text-lg">Jumlah <span class="font-semibold text-indigo-600">{{ $jumlahMurid }}</span></p>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                                 <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">GURU</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Pengajar</h2>
                                 <p class="text-gray-600 text-lg">Jumlah <span class="font-semibold text-emerald-600">{{ $jumlahPengajar }}</span></p>
                             </div>
                         </div>
@@ -49,13 +49,13 @@
                                 <i class="fas fa-folder-open text-2xl text-white"></i>
                             </div>
                             <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">MURID</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Murid</h2>
                                 <p class="text-gray-600">Edit, Hapus, <br> Update</p>
                             </div>
                         </div>
                         <a href="{{ route('admin.murid.index') }}">
                             <button class="btn-modern bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
-                                KELOLA <i class="fas fa-arrow-right ml-2"></i>
+                                Kelola <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </a>
                     </div>
@@ -70,14 +70,14 @@
                                 <i class="fas fa-users-cog text-2xl text-white"></i>
                             </div>
                             <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">GURU</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Pengajar</h2>
                                 <p class="text-gray-600">Edit, Hapus, 
                                     <br>Update</p>
                             </div>
                         </div>
                         <a href="{{ route('admin.pengajar.index') }}">
                             <button class="btn-modern bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
-                                MANAGE <i class="fas fa-arrow-right ml-2"></i>
+                                Kelola <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </a>
                     </div>
@@ -89,9 +89,9 @@
     <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6">
         <h3 class="text-2xl font-bold text-white flex items-center">
             <i class="fas fa-calendar-alt mr-3"></i>
-            Manajemen Jadwal
+            Kelola Jadwal
         </h3>
-        <p class="text-indigo-100 mt-2">MANAGE jadwal kegiatan TPA</p>
+        <p class="text-indigo-100 mt-2">Kelola jadwal kegiatan TPA</p>
     </div>
     
     <div class="p-6">
@@ -325,7 +325,7 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-600 mb-2">Tidak Ada Jadwal</h3>
                     <p class="text-gray-500 mb-6">Belum ada jadwal yang tersedia untuk bulan ini</p>
-                    <a href="{{ route('admin.jadwal.create') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300">
+                    <a href="{{ route('admin.jadwal.create') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300">
                         <i class="fas fa-plus mr-2"></i>
                         Tambah Jadwal Baru
                     </a>
