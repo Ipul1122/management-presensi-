@@ -74,6 +74,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('jadwal', JadwalController::class);
         // Riwayat Jadwal
         Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');
+        Route::get('riwayatJadwal/pdf', [RiwayatJadwalController::class, 'exportPdf'])->name('riwayatJadwal.pdf');
+
 
         
         // Tambahan fitur khusus
