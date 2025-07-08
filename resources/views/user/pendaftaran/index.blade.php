@@ -1,4 +1,4 @@
-@extends('components.user.navbar');
+@extends('components.user.navbar')
 
 @section('navbar-user')
 

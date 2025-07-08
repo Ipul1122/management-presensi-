@@ -1,10 +1,10 @@
-@extends('components.user.navbar');
+@extends('components.user.navbar')
 
 @section('navbar-user')
     
 
 <!-- Jadwal Management Section -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mt-10">
+<div class="bg-white shadow-lg border border-gray-100 overflow-hidden mt-10 mb-10 ">
     <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6">
         <h3 class="text-2xl font-bold text-white flex items-center">
             <i class="fas fa-calendar-alt mr-3"></i>
