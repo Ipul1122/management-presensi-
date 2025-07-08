@@ -61,6 +61,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Dashboard route
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::match(['GET', 'DELETE'], '/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        
 
         // Murid resource route
         Route::resource('murid', MuridController::class);
@@ -73,6 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('pengajar', PengajarController::class);
         // Jadwal
         Route::resource('jadwal', JadwalController::class);
+
         // Riwayat Jadwal
         Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');
         Route::get('riwayatJadwal/pdf', [RiwayatJadwalController::class, 'exportPdf'])->name('riwayatJadwal.pdf');

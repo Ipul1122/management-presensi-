@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+    use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Murid;
 use App\Models\Pengajar;
@@ -53,4 +54,39 @@ class DashboardController extends Controller
             'jadwalBulanIni',
         ));
     }
+
+
+public function bulkDelete(Request $request)
+{
+    $action = $request->input('action');
+
+    if ($action === 'all') {
+        // Hapus semua jadwal bulan ini
+        $deletedCount = Jadwal::whereMonth('tanggal_jadwal', now()->month)
+            ->whereYear('tanggal_jadwal', now()->year)
+            ->delete();
+
+        return redirect()->route('admin.dashboard')
+            ->with('success', "Semua jadwal bulan ini ($deletedCount jadwal) berhasil dihapus.");
+    }
+
+    if ($action === 'selected') {
+        $selected = $request->input('selected_jadwals');
+
+        // Validasi input
+        if (empty($selected) || !is_array($selected)) {
+            return redirect()->route('admin.dashboard')
+                ->with('warning', 'Tidak ada jadwal yang dipilih untuk dihapus.');
+        }
+
+        // Hapus jadwal yang dipilih
+        $deletedCount = Jadwal::whereIn('id', $selected)->delete();
+
+        return redirect()->route('admin.dashboard')
+            ->with('success', "Jadwal terpilih ($deletedCount jadwal) berhasil dihapus.");
+    }
+
+    return redirect()->route('admin.dashboard')
+        ->with('error', 'Aksi tidak dikenali.');
+}
 }
