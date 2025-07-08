@@ -19,7 +19,7 @@
         <div class="flex items-center justify-between h-16">
 
             {{-- Kiri: Logo atau Nama --}}
-            <div class="flex-shrink-0 text-blue-600 xl:ml-10 text-2xl font-bold">
+            <div class="flex-shrink-0 text-blue-600 xl:ml-10 text-2xl font-bold ml-5">
                 TPA Nurul Haq
             </div>
 
@@ -53,6 +53,9 @@
                         </a>
                         <a href="{{ route('user.informasi.dataPengajar.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
                             <i class="fas fa-chalkboard-teacher mr-2"></i>Data Pengajar
+                        </a>
+                        <a href="{{ route('user.informasi.jadwal.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                            <i class="fas fa-chalkboard-teacher mr-2"></i>Data Jadwal
                         </a>
                     </div>
                 </div>
@@ -105,6 +108,9 @@
                     </a>
                     <a href="{{ route('user.informasi.dataPengajar.index') }}" class="block text-sm text-gray-600 hover:text-blue-600">
                         <i class="fas fa-chalkboard-teacher mr-2"></i>Data Pengajar
+                    </a>
+                    <a href="{{ route('user.informasi.jadwal.index') }}" class="block text-sm text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>Data Jadwal
                     </a>
                 </div>
             </div>

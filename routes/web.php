@@ -29,6 +29,7 @@ use App\Http\Controllers\User\TestimoniController;
 use App\Http\Controllers\User\DataPengajarController;
 use App\Http\Controllers\User\VisiDanMisiController;
 use App\Http\Controllers\User\DataMuridController;
+use App\Http\Controllers\User\JadwalUserController;
 
 
 /*
@@ -185,6 +186,7 @@ Route::prefix('user')->name('user.')->group(function() {
         Route::get('/dataPengajar', [DataPengajarController::class, 'index'])->name('dataPengajar.index');
         Route::get('/visiDanMisi', [VisiDanMisiController::class, 'index'])->name('visiDanMisi.index');
         Route::get('/dataMurid', [DataMuridController::class, 'index'])->name('dataMurid.index');
+        Route::get('/jadwal', [JadwalUserController::class, 'index'])->name('jadwal.index');
     });
     // GALERI USER
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');

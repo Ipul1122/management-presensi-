@@ -1,97 +1,16 @@
-@extends('components.layouts.admin.sidebar-and-navbar')
-@extends('components.layouts.admin.navbar')
+@extends('components.user.navbar');
 
-@section('content')
-
-        <!-- Main Content Area -->
-        <main class="flex-1 p-6 lg:p-8 space-y-8 custom-scrollbar overflow-y-auto">
-            
-            <!-- Dashboard Stats -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
-                <!-- Data Murid Card -->
-                <div class="group card-hover bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 border border-gray-100 overflow-hidden relative">
-                    <div class="gradient-blue absolute top-0 right-0 w-24 h-24 rounded-full -translate-y-8 translate-x-8 opacity-10"></div>
-                    <div class="flex items-center justify-between relative z-10">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-address-book text-2xl text-white"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Murid</h2>
-                                <p class="text-gray-600 text-lg">Jumlah <span class="font-semibold text-indigo-600">{{ $jumlahMurid }}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>    
-
-                <!-- Data Pengajar Card -->
-                <div class="group card-hover bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 border border-gray-100 overflow-hidden relative">
-                    <div class="gradient-green absolute top-0 right-0 w-24 h-24 rounded-full -translate-y-8 translate-x-8 opacity-10"></div>
-                    <div class="flex items-center justify-between relative z-10">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Pengajar</h2>
-                                <p class="text-gray-600 text-lg">Jumlah <span class="font-semibold text-emerald-600">{{ $jumlahPengajar }}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Manage Data Murid Card -->
-                <div class="group card-hover bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 border border-gray-100 overflow-hidden relative">
-                    <div class="gradient-purple absolute top-0 right-0 w-24 h-24 rounded-full -translate-y-8 translate-x-8 opacity-10"></div>
-                    <div class="flex items-center justify-between relative z-10">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-folder-open text-2xl text-white"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Murid</h2>
-                                <p class="text-gray-600">Edit, Hapus, <br> Update</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('admin.murid.index') }}">
-                            <button class="btn-modern bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
-                                Kelola <i class="fas fa-arrow-right ml-2"></i>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Manage Data Pengajar Card -->
-                <div class="group card-hover bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 border border-gray-100 overflow-hidden relative">
-                    <div class="gradient-pink absolute top-0 right-0 w-24 h-24 rounded-full -translate-y-8 translate-x-8 opacity-10"></div>
-                    <div class="flex items-center justify-between relative z-10">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-users-cog text-2xl text-white"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-1">Pengajar</h2>
-                                <p class="text-gray-600">Edit, Hapus, 
-                                    <br>Update</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('admin.pengajar.index') }}">
-                            <button class="btn-modern bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl">
-                                Kelola <i class="fas fa-arrow-right ml-2"></i>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+@section('navbar-user')
+    
 
 <!-- Jadwal Management Section -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mt-10">
     <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6">
         <h3 class="text-2xl font-bold text-white flex items-center">
             <i class="fas fa-calendar-alt mr-3"></i>
-            Kelola Jadwal
+            Informasi Jadwal
         </h3>
-        <p class="text-indigo-100 mt-2">Kelola jadwal kegiatan TPA</p>
+        <p class="text-indigo-100 mt-2">Informasi jadwal kegiatan TPA</p>
     </div>
     
     <div class="p-6">
@@ -148,7 +67,7 @@
                                 </div>
                                 
                                 <div class="flex items-center space-x-2 text-gray-600">
-                                    <i class="fas fa-user-teacher text-blue-500 w-4"></i>
+                                    <i class="fas fa-user text-blue-500 w-4"></i>
                                     <span class="text-sm">{{ $jadwal->nama_pengajar_jadwal }}</span>
                                 </div>
                                 
@@ -157,22 +76,22 @@
                                     <span class="text-sm">{{ $jadwal->kegiatan_jadwal }}</span>
                                 </div>
                                 
-                                <div class="flex items-start space-x-2 text-gray-600">
+                                {{-- <div class="flex items-start space-x-2 text-gray-600">
                                     <i class="fas fa-tasks text-orange-500 w-4 mt-0.5"></i>
                                     <span class="text-sm">{ $Rp {{ number_format($jadwal->gaji, 0, ',', '.') }}}</span>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         
                         <!-- Action Buttons for Mobile -->
-                        <div class="flex justify-end mt-4 space-x-2">
+                        {{-- <div class="flex justify-end mt-4 space-x-2">
                             <button type="button" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs rounded-lg hover:shadow-md transition-all duration-200">
                                 <i class="fas fa-edit mr-1"></i>Edit
                             </button>
                             <button type="button" class="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-600 text-white text-xs rounded-lg hover:shadow-md transition-all duration-200">
                                 <i class="fas fa-trash mr-1"></i>Hapus
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 @endforeach
             </div>
@@ -190,9 +109,9 @@
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Nama Jadwal</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Pengajar</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Kegiatan</th>
-                            <th class="px-6 py-4 text-left font-semibold text-gray-700">Gaji</th>
+                            {{-- <th class="px-6 py-4 text-left font-semibold text-gray-700">Gaji</th> --}}
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Status</th>
-                            <th class="px-6 py-4 text-left font-semibold text-gray-700">Aksi</th>
+                            {{-- <th class="px-6 py-4 text-left font-semibold text-gray-700">Aksi</th> --}}
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
@@ -242,11 +161,11 @@
                                     </div>
                                 </td>
                                 {{-- GAJI  --}}
-                                <td class="px-6 py-4">
+                                {{-- <td class="px-6 py-4">
                                     <div class="max-w-xs">
                                         <p class="text-gray-900 text-sm leading-relaxed">Rp {{ number_format($jadwal->gaji, 0, ',', '.') }}</p>
                                     </div>
-                                </td>
+                                </td> --}}
                                 <td class="px-6 py-4">
                                     @php
                                         $today = \Carbon\Carbon::today();
@@ -271,7 +190,7 @@
                                         {{ $status }}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4">
+                                {{-- <td class="px-6 py-4">
                                     <div class="flex space-x-2">
                                         <a href="{{ route('admin.jadwal.edit', $jadwal->id) }}">
                                             <button type="button" class="p-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:shadow-md transition-all duration-200 group">
@@ -279,7 +198,7 @@
                                             </button>
                                         </a>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -287,10 +206,10 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-between mt-8 space-y-4 sm:space-y-0 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border">
+            {{-- <div class="flex flex-col sm:flex-row items-center justify-between mt-8 space-y-4 sm:space-y-0 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border">
                 <a href="{{ route('admin.jadwal.index') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 btn-modern group">
                     <i class="fas fa-cog mr-2 group-hover:rotate-180 transition-transform duration-300"></i>
-                    Kelola Jadwal
+                    MANAGE Jadwal
                 </a>
 
                 <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
@@ -332,11 +251,7 @@
                             </div>
                         @endif
                     </form>
-                </div>
+                </div> --}}
             </div>
-        </main>
-    {{-- </div>
-</div> --}}
-
 
 @endsection
