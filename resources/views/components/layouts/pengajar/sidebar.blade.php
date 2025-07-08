@@ -458,6 +458,10 @@
             
             <div class="submenu" id="muridSubmenu">
                 <a href="{{ route('pengajar.muridAbsensi.index') }}" class="submenu-item text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-folder-open text-blue-700"></i>
+                    <span class="nav-text">Manage Murid</span>
+                </a>
+                <a href="{{ route('pengajar.muridAbsensi.create') }}" class="submenu-item text-gray-600 hover:text-blue-600">
                     <i class="fas fa-clipboard-check text-blue-700"></i>
                     <span class="nav-text">Absen Murid</span>
                 </a>
