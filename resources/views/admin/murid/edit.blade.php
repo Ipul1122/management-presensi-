@@ -143,6 +143,37 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="col-span-1">
+                <label for="nomor_telepon" class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l.4 2M7 13h10l1-2H6.4M5 6h14l1 2H6.4M16 16a2 2 0 11-4 0 2 2 0 014 0zM6 16a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" name="nomor_telepon" id="nomor_telepon" value="{{ old('nomor_telepon', $murid->nomor_telepon) }}" 
+                        class="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition duration-150">
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <label for="ayah" class="block text-sm font-medium text-gray-700 mb-1">Nama Ayah</label>
+                <div class="relative">
+                    <input type="text" name="ayah" id="ayah" value="{{ old('ayah', $murid->ayah) }}" 
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition duration-150 px-3 py-2">
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <label for="ibu" class="block text-sm font-medium text-gray-700 mb-1">Nama Ibu</label>
+                <div class="relative">
+                    <input type="text" name="ibu" id="ibu" value="{{ old('ibu', $murid->ibu) }}" 
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition duration-150 px-3 py-2">
+                </div>
+            </div>
+
         </div>
 
         <div class="mt-8 flex items-center justify-between">
