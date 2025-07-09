@@ -112,143 +112,143 @@
             </div>
         </div>
 
-        <!-- Table Section -->
-        <div class="overflow-x-auto">
-            <form id="muridListForm" action="{{ route('admin.murid.bulkDelete') }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="selectAll" class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer">
-                                    <span class="ml-2">Pilih</span>
+<!-- Table Section -->
+<div class="overflow-x-auto">
+    <form id="muridListForm" action="{{ route('admin.murid.bulkDelete') }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="selectAll" class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer">
+                            <span class="ml-2">Pilih</span>
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID Pendaftaran</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Foto</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <div class="flex items-center">
+                            <span>Nama Anak</span>
+                            <button type="button" class="ml-1 text-gray-400 hover:text-gray-700">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Kelamin</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Al-kitab</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Telepon</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ayah</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ibu</th>
+                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                @forelse($murids as $index => $murid)
+                <tr class="hover:bg-gray-50 transition-colors duration-200 murid-row">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <input type="checkbox" name="ids[]" value="{{ $murid->id_pendaftaran }}" class="murid-checkbox rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{{ $murid->id_pendaftaran }}</td>
+                    {{-- FOTO ANAK --}}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            @if ($murid->foto_anak)
+                                <div class="h-12 w-12 rounded-full overflow-hidden bg-gray-100 border-2 border-white shadow flex-shrink-0">
+                                    <img src="{{ asset('storage/' . $murid->foto_anak) }}" class="h-full w-full object-cover" alt="Foto {{ $murid->nama_anak }}">
                                 </div>
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Foto</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">
-                                    <span>Nama Anak</span>
-                                    <button type="button" class="ml-1 text-gray-400 hover:text-gray-700">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Kelamin</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Al-kitab</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Telepon</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ayah</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ibu</th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($murids as $index => $murid)
-                        <tr class="hover:bg-gray-50 transition-colors duration-200 murid-row">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <input type="checkbox" name="ids[]" value="{{ $murid->id_pendaftaran }}" class="murid-checkbox rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer">
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $index + 1 }}</td>
-                            {{-- FOTO ANAK --}}
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    @if ($murid->foto_anak)
-                                        <div class="h-12 w-12 rounded-full overflow-hidden bg-gray-100 border-2 border-white shadow flex-shrink-0">
-                                            <img src="{{ asset('storage/' . $murid->foto_anak) }}" class="h-full w-full object-cover" alt="Foto {{ $murid->nama_anak }}">
-                                        </div>
-                                    @else
-                                        <div class="h-12 w-12 rounded-full overflow-hidden bg-blue-100 flex items-center justify-center text-blue-500 flex-shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                            </svg>
-                                        </div>
-                                    @endif
-                                </div>
-                            </td>
-                            {{-- NAMA Anak --}}
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $murid->nama_anak }}</div>
-                            </td>
-                            {{-- JENIS KELAMIN --}}
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $murid->jenis_kelamin == 'Laki-laki' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
-                                    {{ $murid->jenis_kelamin }}
-                                </span>
-                            </td>
-                            {{-- ALAMAT --}}
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-900 max-w-xs truncate">{{ $murid->alamat }}</div>
-                            </td>
-                            {{-- KELAS --}}
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-lg bg-green-100 text-green-800">
-                                    {{ $murid->kelas }}
-                                </span>
-                            </td>
-                            {{-- AL-KITAB --}}
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $murid->jenis_alkitab == 'iqro' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
-                                    {{ $murid->jenis_alkitab }}
-                                </span>
-                            </td>
-                            {{-- NOMOR TELEPON --}}
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->nomor_telepon }}</td>
-                            {{-- AYAH --}}
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->ayah }}</td>
-                            {{-- IBU --}}
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->ibu }}</td>
-                            {{-- ACTIONS --}}
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <div class="flex justify-end space-x-2">
-                                    <a href="{{ route('admin.murid.edit', $murid->id_pendaftaran) }}" class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 p-2 rounded-md transition-colors duration-200">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                                        </svg>
-                                    </a>
-                                    {{-- DELETE BUTTTON --}}
-                                    <button type="button" class="delete-btn text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-md transition-colors duration-200" 
-                                        data-id="{{ $murid->id_pendaftaran }}" 
-                                        data-name="{{ $murid->nama_anak }}">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                        </svg>
-                                    </button>
-                                    {{-- VIEW BUTTON --}}
-                                    <button type="button" class="view-btn text-green-600 hover:text-green-900 bg-green-50 hover:bg-green-100 p-2 rounded-md transition-colors duration-200" 
-                                        data-id="{{ $murid->id_pendaftaran }}">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="9" class="px-6 py-10 text-center">
-                                <div class="flex flex-col items-center justify-center">
-                                    <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            @else
+                                <div class="h-12 w-12 rounded-full overflow-hidden bg-blue-100 flex items-center justify-center text-blue-500 flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                     </svg>
-                                    <p class="text-gray-500 text-lg mt-4">Belum ada data murid.</p>
-                                    <a href="{{ route('admin.murid.create') }}" class="mt-4 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                                        Tambah Murid Sekarang
-                                    </a>
                                 </div>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </form>
-        </div>
+                            @endif
+                        </div>
+                    </td>
+                    {{-- NAMA Anak --}}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">{{ $murid->nama_anak }}</div>
+                    </td>
+                    {{-- JENIS KELAMIN --}}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $murid->jenis_kelamin == 'Laki-laki' ? 'bg-blue-100 text-blue-800' : 'bg-pink-100 text-pink-800' }}">
+                            {{ $murid->jenis_kelamin }}
+                        </span>
+                    </td>
+                    {{-- ALAMAT --}}
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-gray-900 max-w-xs truncate">{{ $murid->alamat }}</div>
+                    </td>
+                    {{-- KELAS --}}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-lg bg-green-100 text-green-800">
+                            {{ $murid->kelas }}
+                        </span>
+                    </td>
+                    {{-- AL-KITAB --}}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $murid->jenis_alkitab == 'iqro' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800' }}">
+                            {{ $murid->jenis_alkitab }}
+                        </span>
+                    </td>
+                    {{-- NOMOR TELEPON --}}
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->nomor_telepon }}</td>
+                    {{-- AYAH --}}
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->ayah }}</td>
+                    {{-- IBU --}}
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $murid->ibu }}</td>
+                    {{-- ACTIONS --}}
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div class="flex justify-end space-x-2">
+                            <a href="{{ route('admin.murid.edit', $murid->id_pendaftaran) }}" class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 p-2 rounded-md transition-colors duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </a>
+                            {{-- DELETE BUTTTON --}}
+                            <button type="button" class="delete-btn text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 p-2 rounded-md transition-colors duration-200" 
+                                data-id="{{ $murid->id_pendaftaran }}" 
+                                data-name="{{ $murid->nama_anak }}">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                            {{-- VIEW BUTTON --}}
+                            <button type="button" class="view-btn text-green-600 hover:text-green-900 bg-green-50 hover:bg-green-100 p-2 rounded-md transition-colors duration-200" 
+                                data-id="{{ $murid->id_pendaftaran }}">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="12" class="px-6 py-10 text-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-gray-500 text-lg mt-4">Belum ada data murid.</p>
+                            <a href="{{ route('admin.murid.create') }}" class="mt-4 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                                Tambah Murid Sekarang
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </form>
+</div>
 
         <!-- Pagination Section -->
         <div class="px-6 py-4 border-t border-gray-200">
@@ -328,7 +328,7 @@
         </div>
     </div>
 </div>
-</ma>
+</main>
 
 <script>
     
@@ -376,44 +376,48 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Search and filter functionality
-    const searchInput = document.getElementById("searchInput");
-    const genderFilter = document.getElementById("genderFilter");
-    const kitabFilter = document.getElementById("kitabFilter");
-    const classFilter = document.getElementById("classFilter");
-    const rows = document.querySelectorAll(".murid-row");
+const searchInput = document.getElementById("searchInput");
+const genderFilter = document.getElementById("genderFilter");
+const kitabFilter = document.getElementById("kitabFilter");
+const classFilter = document.getElementById("classFilter");
+const rows = document.querySelectorAll(".murid-row");
 
-    function filterRows() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const selectedGender = genderFilter.value;
-        const selectedClass = classFilter.value;
-        const selectedKitab = kitabFilter.value;
+function filterRows() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedGender = genderFilter.value;
+    const selectedClass = classFilter.value;
+    const selectedKitab = kitabFilter.value;
 
-        rows.forEach((row) => {
-            const name = row
-                .querySelector("td:nth-child(4)")
-                .textContent.toLowerCase();
-            const gender = row
-                .querySelector("td:nth-child(5) span")
-                .textContent.trim();
-            const kelasElement = row.querySelector("td:nth-child(7) span");
-            const kelas = kelasElement ? kelasElement.textContent.trim() : "";
-            const kitab = row
-                .querySelector("td:nth-child(8) span")
-                .textContent.trim().toLowerCase();
+    rows.forEach((row) => {
+        // Update selectors based on new table structure
+        const idPendaftaran = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+        const name = row.querySelector("td:nth-child(4) div").textContent.toLowerCase();
+        const gender = row.querySelector("td:nth-child(5) span").textContent.trim();
+        const kelasElement = row.querySelector("td:nth-child(7) span");
+        const kelas = kelasElement ? kelasElement.textContent.trim() : "";
+        const kitab = row.querySelector("td:nth-child(8) span").textContent.trim().toLowerCase();
+        const ayah = row.querySelector("td:nth-child(10)").textContent.toLowerCase();
+        const ibu = row.querySelector("td:nth-child(11)").textContent.toLowerCase();
 
-            const matchesSearch = name.includes(searchTerm);
-            const matchesGender = !selectedGender || gender === selectedGender;
-            const matchesClass = !selectedClass || kelas === selectedClass;
-            const matchesKitab = !selectedKitab || kitab === selectedKitab;
-            const shouldShow = matchesSearch && matchesGender && matchesClass && matchesKitab;
-            row.classList.toggle("hidden", !shouldShow);
-        });
-    }
+        // Search in multiple fields: name, id_pendaftaran, ayah, ibu
+        const matchesSearch = name.includes(searchTerm) || 
+                            idPendaftaran.includes(searchTerm) ||
+                            ayah.includes(searchTerm) ||
+                            ibu.includes(searchTerm);
+        
+        const matchesGender = !selectedGender || gender === selectedGender;
+        const matchesClass = !selectedClass || kelas === selectedClass;
+        const matchesKitab = !selectedKitab || kitab === selectedKitab;
+        
+        const shouldShow = matchesSearch && matchesGender && matchesClass && matchesKitab;
+        row.classList.toggle("hidden", !shouldShow);
+    });
+}
 
-    searchInput.addEventListener("keyup", filterRows);
-    genderFilter.addEventListener("change", filterRows);
-    kitabFilter.addEventListener("change", filterRows);
-    classFilter.addEventListener("change", filterRows);
+searchInput.addEventListener("keyup", filterRows);
+genderFilter.addEventListener("change", filterRows);
+kitabFilter.addEventListener("change", filterRows);
+classFilter.addEventListener("change", filterRows);
 // END OF SEARCH AND FILTER FUNCTIONALITY
 
 
@@ -486,161 +490,143 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // View murid details modal
-    const viewModal = document.getElementById("viewModal");
-    const viewButtons = document.querySelectorAll(".view-btn");
-    const closeViewModal = document.getElementById("closeViewModal");
-    const viewModalContent = document.getElementById("viewModalContent");
+// View murid details modal
+const viewModal = document.getElementById("viewModal");
+const viewButtons = document.querySelectorAll(".view-btn");
+const closeViewModal = document.getElementById("closeViewModal");
+const viewModalContent = document.getElementById("viewModalContent");
 
-    viewButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-            const id = this.getAttribute("data-id");
-            showModal('viewModal');
+viewButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+        const id = this.getAttribute("data-id");
+        showModal('viewModal');
 
-            // Here you would normally make an AJAX request to get the details
-            // For now, we'll simulate loading with a timeout
-            setTimeout(() => {
-                // This would be replaced with actual data from your backend
-                const dummyData = {
-                    nama_anak: document
-                        .querySelector(`[data-id="${id}"]`)
-                        .closest("tr")
-                        .querySelector("td:nth-child(4) div").textContent,
-                    foto:
-                        document
-                            .querySelector(`[data-id="${id}"]`)
-                            .closest("tr")
-                            .querySelector("td:nth-child(3) img")?.src || null,
-                    jenis_kelamin: document
-                        .querySelector(`[data-id="${id}"]`)
-                        .closest("tr")
-                        .querySelector("td:nth-child(5) span")
-                        .textContent.trim(),
-                    kelas: document
-                        .querySelector(`[data-id="${id}"]`)
-                        .closest("tr")
-                        .querySelector("td:nth-child(7) span")
-                        .textContent.trim(),
-                    jenis_alkitab: document
-                        .querySelector(`[data-id="${id}"]`)
-                        .closest("tr")
-                        .querySelector("td:nth-child(8) span")
-                        .textContent.trim(),
-                    alamat: document
-                        .querySelector(`[data-id="${id}"]`)
-                        .closest("tr")
-                        .querySelector("td:nth-child(6) div").textContent,
-                    tanggal_daftar: document
-                        .querySelector(`[data-id="${id}"]`)
-                        .closest("tr")
-                        .querySelector("td:nth-child(9)")
-                        .textContent.trim(),
-                };
+        // Here you would normally make an AJAX request to get the details
+        // For now, we'll simulate loading with a timeout
+        setTimeout(() => {
+            // Get the row data from the table
+            const row = document.querySelector(`[data-id="${id}"]`).closest("tr");
+            
+            // Extract data from the correct table columns
+            const dummyData = {
+                nama_anak: row.querySelector("td:nth-child(4) div").textContent.trim(),
+                foto: row.querySelector("td:nth-child(3) img")?.src || null,
+                jenis_kelamin: row.querySelector("td:nth-child(5) span").textContent.trim(),
+                alamat: row.querySelector("td:nth-child(6) div").textContent.trim(),
+                kelas: row.querySelector("td:nth-child(7) span").textContent.trim(),
+                jenis_alkitab: row.querySelector("td:nth-child(8) span").textContent.trim(),
+                nomor_telepon: row.querySelector("td:nth-child(9)").textContent.trim(),
+                ayah: row.querySelector("td:nth-child(10)").textContent.trim(),
+                ibu: row.querySelector("td:nth-child(11)").textContent.trim(),
+            };
 
-                // Update modal content with the data
-                let photoHtml = "";
-                if (dummyData.foto) {
-                    photoHtml = `<img src="${dummyData.foto}" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg" alt="Foto Murid">`;
-                } else {
-                    photoHtml = `
-                        <div class="h-32 w-32 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                        </div>
-                    `;
-                }
-
-                viewModalContent.innerHTML = `
-                    <div class="flex flex-col items-center mb-6">
-                        ${photoHtml}
-                        <h3 class="text-xl font-bold mt-4">${
-                            dummyData.nama_anak
-                        }</h3>
-                        <div class="flex space-x-2 mt-2">
-                            <span class="px-3 py-1 text-sm font-medium rounded-full ${
-                                dummyData.jenis_kelamin.includes("Laki")
-                                    ? "bg-blue-100 text-blue-800"
-                                    : "bg-pink-100 text-pink-800"
-                            }">
-                                ${dummyData.jenis_kelamin}
-                            </span>
-                            <span class="px-3 py-1 text-sm font-medium rounded-full bg-green-100 text-green-800">
-                                ${dummyData.kelas}
-                            </span>
-                            <span class="px-3 py-1 text-sm font-medium rounded-full ${
-                                dummyData.jenis_alkitab.includes("iqro")
-                                    ? "bg-blue-100 text-blue-800"
-                                    : "bg-pink-100 text-pink-800"
-                            }">
-                                ${dummyData.jenis_alkitab}
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 class="text-sm font-medium text-gray-500">ID Pendaftaran</h4>
-                                <p class="text-gray-900">${id}</p>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-medium text-gray-500">Tanggal Daftar</h4>
-                                <p class="text-gray-900">${
-                                    dummyData.tanggal_daftar
-                                }</p>
-                            </div>
-                            <div class="col-span-1 md:col-span-2">
-                                <h4 class="text-sm font-medium text-gray-500">Alamat</h4>
-                                <p class="text-gray-900">${dummyData.alamat}</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-end space-x-3">
-                        <a href="/admin/murid/${id}/edit" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                            </svg>
-                            Edit
-                        </a>
-                        <button type="button" class="delete-btn-modal inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-200" 
-                            data-id="${id}" 
-                            data-name="${dummyData.nama_anak}">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                            Hapus
-                        </button>
+            // Update modal content with the data
+            let photoHtml = "";
+            if (dummyData.foto) {
+                photoHtml = `<img src="${dummyData.foto}" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg" alt="Foto Murid">`;
+            } else {
+                photoHtml = `
+                    <div class="h-32 w-32 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                        <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
                     </div>
                 `;
+            }
 
-                // Add event listener to the delete button in the modal
-                const deleteButtonInModal =
-                    viewModalContent.querySelector(".delete-btn-modal");
-                deleteButtonInModal.addEventListener("click", function () {
-                    const id = this.getAttribute("data-id");
-                    const name = this.getAttribute("data-name");
+            viewModalContent.innerHTML = `
+                <div class="flex flex-col items-center mb-6">
+                    ${photoHtml}
+                    <h3 class="text-xl font-bold mt-4">${dummyData.nama_anak}</h3>
+                    <div class="flex space-x-2 mt-2">
+                        <span class="px-3 py-1 text-sm font-medium rounded-full ${
+                            dummyData.jenis_kelamin.includes("Laki")
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-pink-100 text-pink-800"
+                        }">
+                            ${dummyData.jenis_kelamin}
+                        </span>
+                        <span class="px-3 py-1 text-sm font-medium rounded-full bg-green-100 text-green-800">
+                            Kelas ${dummyData.kelas}
+                        </span>
+                        <span class="px-3 py-1 text-sm font-medium rounded-full ${
+                            dummyData.jenis_alkitab.toLowerCase().includes("iqro")
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-purple-100 text-purple-800"
+                        }">
+                            ${dummyData.jenis_alkitab}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500">ID Pendaftaran</h4>
+                            <p class="text-gray-900">${id}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500">Nomor Telepon</h4>
+                            <p class="text-gray-900">${dummyData.nomor_telepon}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500">Nama Ayah</h4>
+                            <p class="text-gray-900">${dummyData.ayah}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500">Nama Ibu</h4>
+                            <p class="text-gray-900">${dummyData.ibu}</p>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <h4 class="text-sm font-medium text-gray-500">Alamat</h4>
+                            <p class="text-gray-900">${dummyData.alamat}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <a href="/admin/murid/${id}/edit" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                        </svg>
+                        Edit
+                    </a>
+                    <button type="button" class="delete-btn-modal inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-200" 
+                        data-id="${id}" 
+                        data-name="${dummyData.nama_anak}">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Hapus
+                    </button>
+                </div>
+            `;
 
-                    deleteModalName.textContent = name;
-                    deleteSingleItemForm.action = `/admin/murid/${id}`;
-                    hideModal('viewModal');
-                    showModal('deleteModal');
-                });
-            }, 500);
-        });
+            // Add event listener to the delete button in the modal
+            const deleteButtonInModal = viewModalContent.querySelector(".delete-btn-modal");
+            deleteButtonInModal.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                const name = this.getAttribute("data-name");
+
+                deleteModalName.textContent = name;
+                deleteSingleItemForm.action = `/admin/murid/${id}`;
+                hideModal('viewModal');
+                showModal('deleteModal');
+            });
+        }, 500);
     });
+});
 
-    closeViewModal.addEventListener("click", function () {
+closeViewModal.addEventListener("click", function () {
+    hideModal('viewModal');
+});
+
+// Close modal if clicked outside
+viewModal.addEventListener("click", function (e) {
+    if (e.target === viewModal) {
         hideModal('viewModal');
-    });
-
-    // Close modal if clicked outside
-    viewModal.addEventListener("click", function (e) {
-        if (e.target === viewModal) {
-            hideModal('viewModal');
-        }
-    });
+    }
+});
 
     // Alert auto-close
     const alerts = document.querySelectorAll("#alert-success, #alert-error");
@@ -709,6 +695,8 @@ document.head.insertAdjacentHTML(
         }
     </style>
 `
+
+
 );
 
 </script>

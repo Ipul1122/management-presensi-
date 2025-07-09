@@ -7,13 +7,18 @@ use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use App\Models\Pengajar; 
 use App\Models\NotifikasiAdmin;
+use Carbon\Carbon;
 
 class JadwalController extends Controller
 {
     public function index()
     {
-        $jadwals = Jadwal::orderBy('tanggal_jadwal', 'desc')->paginate(10); 
-        return view('admin.jadwal.index', compact('jadwals'));
+        $jadwals = Jadwal::whereMonth('tanggal_jadwal', Carbon::now()->month)
+                     ->whereYear('tanggal_jadwal', Carbon::now()->year)
+                     ->orderBy('tanggal_jadwal', 'asc')
+                     ->paginate(10); // atau sesuai kebutuhan
+
+    return view('admin.jadwal.index', compact('jadwals'));
     }
 
     public function create()

@@ -71,6 +71,7 @@ public function edit($id)
     {
         $murids = Murid::orderBy('created_at', 'desc')->paginate(10);
     
+        
         return view('admin.murid.show', compact('murids'));
     }
 
