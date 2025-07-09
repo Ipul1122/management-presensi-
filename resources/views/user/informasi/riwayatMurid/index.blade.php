@@ -1,9 +1,8 @@
-@extends('components.layouts.pengajar.sidebar')
+@extends('components.user.navbar')
 
-@section('sidebar-pengajar')
+@section('navbar-user')
 
-{{-- Custom CSS untuk animasi dan styling tambahan --}}
-<style>
+    <style>
     .fade-in {
         animation: fadeIn 0.5s ease-in-out;
     }
@@ -340,7 +339,7 @@
                 $totalHadir = $riwayatMurid->where('jenis_status', 'Hadir')->count();
                 // $totalSakit = $riwayatMurid->where('jenis_status', 'Sakit')->count();
                 $totalIzin = $riwayatMurid->where('jenis_status', 'Izin')->count();
-                $totalAlpha = $riwayatMurid->where('jenis_status', 'Alpha')->count();
+                // $totalAlpha = $riwayatMurid->where('jenis_status', 'Alpha')->count();
             @endphp
             <div class="bg-green-50 p-4 rounded-xl text-center">
                 <div class="text-2xl font-bold text-green-600">{{ $totalHadir }}</div>
@@ -354,10 +353,10 @@
                 <div class="text-2xl font-bold text-blue-600">{{ $totalIzin }}</div>
                 <div class="text-sm text-blue-700 font-medium">📝 Izin</div>
             </div>
-            <div class="bg-red-50 p-4 rounded-xl text-center">
+            {{-- <div class="bg-red-50 p-4 rounded-xl text-center">
                 <div class="text-2xl font-bold text-red-600">{{ $totalAlpha }}</div>
                 <div class="text-sm text-red-700 font-medium">❌ Alpha</div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="overflow-x-auto">
@@ -367,7 +366,7 @@
                         <th class="px-6 py-4 text-left rounded-tl-xl font-semibold">Tanggal</th>
                         <th class="px-6 py-4 text-center font-semibold">Status</th>
                         <th class="px-6 py-4 text-left font-semibold">Catatan</th>
-                        <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th>
+                        {{-- <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -408,7 +407,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-gray-700">{{ $riwayat->catatan ?: '-' }}</td>
-                            <td class="px-6 py-4 text-center">
+                            {{-- <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center space-x-2">
                                     <a href="{{ route('pengajar.riwayatMuridAbsensi.edit', $riwayat->id) }}" 
                                     class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
@@ -422,7 +421,7 @@
                                         </button>
                                     </form>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
@@ -459,7 +458,7 @@
                         <th class="px-6 py-4 text-left rounded-tl-xl font-semibold">Nama Murid</th>
                         <th class="px-6 py-4 text-center font-semibold">Status</th>
                         <th class="px-6 py-4 text-left font-semibold">Catatan</th>
-                        <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th>
+                        {{-- <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -486,10 +485,6 @@
                                         case 'izin':
                                             $statusClass = 'bg-blue-100 text-blue-800';
                                             $statusIcon = '📝';
-                                            break;
-                                        case 'alpha':
-                                            $statusClass = 'bg-red-100 text-red-800';
-                                            $statusIcon = '❌';
                                             break;
                                         default:
                                             $statusClass = 'bg-gray-100 text-gray-800';
@@ -675,4 +670,5 @@
         });
     });
 </script>
+
 @endsection

@@ -30,6 +30,8 @@ use App\Http\Controllers\User\DataPengajarController;
 use App\Http\Controllers\User\VisiDanMisiController;
 use App\Http\Controllers\User\DataMuridController;
 use App\Http\Controllers\User\JadwalUserController;
+// use App\Http\Controllers\User\RiwayatJadwalUserController;
+use App\Http\Controllers\User\RiwayatMuridAbsensiUserController;
 
 
 /*
@@ -189,6 +191,7 @@ Route::prefix('user')->name('user.')->group(function() {
         Route::get('/visiDanMisi', [VisiDanMisiController::class, 'index'])->name('visiDanMisi.index');
         Route::get('/dataMurid', [DataMuridController::class, 'index'])->name('dataMurid.index');
         Route::get('/jadwal', [JadwalUserController::class, 'index'])->name('jadwal.index');
+        Route::get('/riwayatMurid', [RiwayatMuridAbsensiUserController::class, 'index'])->name('riwayatMurid.index');
     });
     // GALERI USER
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
