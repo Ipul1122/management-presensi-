@@ -1,8 +1,8 @@
-@extends('components.layouts.pengajar.sidebar')
+@extends('components.layouts.admin.sidebar-and-navbar')
 
-@section('sidebar-pengajar')
+@section('content')
 
-{{-- Custom CSS untuk animasi dan styling tambahan --}}
+    {{-- Custom CSS untuk animasi dan styling tambahan --}}
 <style>
     .fade-in {
         animation: fadeIn 0.5s ease-in-out;
@@ -129,7 +129,7 @@
                 Filter Periode
             </h2>
             
-            <form method="GET" action="{{ route('pengajar.riwayatMuridAbsensi.index') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form method="GET" action="{{ route('admin.riwayatMurid.index') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="space-y-2">
                     <label for="bulan" class="block text-sm font-semibold text-gray-700">Pilih Bulan:</label>
                     <select name="bulan" id="bulan" onchange="this.form.submit()" 
@@ -408,13 +408,13 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-gray-700">{{ $riwayat->catatan ?: '-' }}</td>
-                            {{-- <td class="px-6 py-4 text-center">
+                            <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('pengajar.riwayatMuridAbsensi.edit', $riwayat->id) }}" 
+                                    <a href="{{ route('admin.riwayatMuridAbsensi.edit', $riwayat->id) }}" 
                                     class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
                                         Edit
                                     </a>
-                                    <form action="{{ route('pengajar.riwayatMuridAbsensi.hapus', $riwayat->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('{{ $riwayat->nama_murid }}')">
+                                    <form action="{{ route('admin.riwayatMuridAbsensi.hapus', $riwayat->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('{{ $riwayat->nama_murid }}')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
@@ -422,7 +422,7 @@
                                         </button>
                                     </form>
                                 </div>
-                            </td> --}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -459,7 +459,7 @@
                         <th class="px-6 py-4 text-left rounded-tl-xl font-semibold">Nama Murid</th>
                         <th class="px-6 py-4 text-center font-semibold">Status</th>
                         <th class="px-6 py-4 text-left font-semibold">Catatan</th>
-                        {{-- <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th> --}}
+                        <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -501,21 +501,21 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-gray-700">{{ $absensi->catatan ?: '-' }}</td>
-                            {{-- <td class="px-6 py-4 text-center"> --}}
-                                {{-- <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('pengajar.riwayatMuridAbsensi.edit', $absensi->id) }}" 
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center space-x-2">
+                                    <a href="{{ route('admin.riwayatMurid.edit', $absensi->id) }}" 
                                     class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
                                         ✏️ Edit
                                     </a>
-                                    <form action="{{ route('pengajar.riwayatMuridAbsensi.hapus', $absensi->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('{{ $absensi->nama_murid }}')">
+                                    <form action="{{ route('admin.riwayatMurid.hapus', $absensi->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('{{ $absensi->nama_murid }}')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
                                             🗑️ Hapus
                                         </button>
                                     </form>
-                                </div> --}}
-                            {{-- </td> --}}
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -675,4 +675,5 @@
         });
     });
 </script>
+
 @endsection

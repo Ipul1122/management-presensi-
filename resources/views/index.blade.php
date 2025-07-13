@@ -82,7 +82,7 @@
 
 
     {{-- Hero Section --}}
-    <section class="w-full bg-gradient-to-br from-emerald-100 to-white py-16 px-6 md:px-12 lg:px-20">
+    <section id="" class="w-full bg-gradient-to-br from-emerald-100 to-white py-16 px-6 md:px-12 lg:px-20">
         <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
             
             {{-- Left Content --}}

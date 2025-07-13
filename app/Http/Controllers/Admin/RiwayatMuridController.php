@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Pengajar;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -7,7 +7,7 @@ use App\Models\MuridAbsensi;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class RiwayatMuridAbsensiController extends Controller
+class RiwayatMuridController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -99,7 +99,7 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
             return $group->count();
         })->toArray();
 
-        return view('pengajar.riwayatMuridAbsensi.index', [
+        return view('admin.riwayatMurid.index', [
             'bulanList' => $bulanList,
             'bulanDipilih' => $bulanDipilih,
             'tanggalDipilih' => $tanggalDipilih,
@@ -120,7 +120,7 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
     public function edit($id)
     {
         $absensi = MuridAbsensi::findOrFail($id);
-        return view('pengajar.riwayatMuridAbsensi.edit', compact('absensi'));
+        return view('admin.riwayatMurid.edit', compact('absensi'));
     }
 
     /**
@@ -143,7 +143,7 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
             'catatan' => $request->catatan,
         ]);
 
-        return redirect()->route('pengajar.riwayatMuridAbsensi.index', [
+        return redirect()->route('admin.riwayatMurid.index', [
             'bulan' => Carbon::parse($request->tanggal_absen)->format('Y-m'),
             'tanggal' => Carbon::parse($request->tanggal_absen)->day
         ])->with('success', 'Data absensi berhasil diperbarui.');
@@ -160,7 +160,7 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
         
         $absensi->delete();
         
-        return redirect()->route('pengajar.riwayatMuridAbsensi.index', [
+        return redirect()->route('admin.riwayatMurid.index', [
             'bulan' => $bulan,
             'tanggal' => $tanggal
         ])->with('success', 'Data absensi berhasil dihapus.');
