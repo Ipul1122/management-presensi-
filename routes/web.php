@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\MuridController;
+use App\Http\Controllers\Admin\RiwayatMuridController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PengajarController;
 use App\Http\Controllers\Admin\NotifikasiController;
@@ -67,6 +68,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Murid resource route
         Route::resource('murid', MuridController::class);
+        // Riwayat Murid
+        Route::get('riwayatMurid', [RiwayatMuridController::class, 'index'])->name('riwayatMurid.index');
+        Route::get('riwayatMurid/{id}/edit', [RiwayatMuridController::class, 'edit'])->name('riwayatMurid.edit');
+        Route::put('riwayatMurid/{id}', [RiwayatMuridController::class, 'update'])->name('riwayatMurid.update');
+        Route::delete('riwayatMurid/{id}', [RiwayatMuridController::class, 'destroy'])->name('riwayatMurid.hapus');
+        Route::resource('riwayatMurid', RiwayatMuridController::class);
 
         // DataMurid Satuan Route
         Route::get('dataMurid', [MuridController::class, 'dataMurid'])->name('dataMurid');
