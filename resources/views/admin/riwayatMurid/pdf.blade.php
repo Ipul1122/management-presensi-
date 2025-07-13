@@ -1,17 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
     <title>Rekap Absensi Bulan {{ $bulan }}</title>
     <style>
-        body { font-family: DejaVu Sans, sans-serif; }
-        h2 { margin-top: 30px; font-size: 18px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th, td { padding: 8px; border: 1px solid #000; font-size: 12px; text-align: left; }
-        .title { text-align: center; margin-bottom: 30px; }
+        body {
+            font-family: DejaVu Sans, sans-serif;
+            font-size: 12px;
+            color: #000;
+        }
+        .title {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0077e6;
+        }
+        .no-data {
+            font-style: italic;
+            color: #888;
+        }
     </style>
 </head>
 <body>
-    <h1 class="title">Rekap Absensi Murid - Bulan {{ $bulan }}</h1>
+    <h1 class="title">Rekapitulasi Absensi Murid TPA<br>Bulan {{ $bulan }}</h1>
 
     @forelse ($groupedAbsensi as $tanggal => $items)
         <h2>{{ $tanggal }}</h2>
@@ -20,7 +48,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Murid</th>
-                    <th>Status</th>
+                    <th>Status Kehadiran</th>
                     <th>Catatan</th>
                 </tr>
             </thead>
@@ -36,7 +64,12 @@
             </tbody>
         </table>
     @empty
-        <p>Tidak ada data absensi pada bulan ini.</p>
+        <p class="no-data">Tidak ada data absensi untuk bulan ini.</p>
     @endforelse
+
+    <br><br>
+    <div style="text-align: right; font-size: 12px;">
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}
+    </div>
 </body>
 </html>

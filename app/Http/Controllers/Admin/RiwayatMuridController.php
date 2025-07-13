@@ -170,6 +170,10 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
     
     public function exportPdf(Request $request)
 {
+    // Set locale ke Bahasa Indonesia
+    Carbon::setLocale('id');
+
+    // Ambil bulan yang dipilih atau default ke bulan sekarang
     $bulanDipilih = $request->bulan ?? now()->format('Y-m');
     $carbonBulan = Carbon::createFromFormat('Y-m', $bulanDipilih);
 
@@ -180,15 +184,17 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
         ->orderBy('nama_murid', 'asc')
         ->get()
         ->groupBy(function($item) {
-            return Carbon::parse($item->tanggal_absen)->format('l, d F Y');
+            // Format tanggal dalam Bahasa Indonesia
+            return Carbon::parse($item->tanggal_absen)->translatedFormat('l, d F Y');
         });
 
+    // Buat PDF dengan view dan kirim ke browser
     $pdf = Pdf::loadView('admin.riwayatMurid.pdf', [
         'bulan' => $carbonBulan->translatedFormat('F Y'),
         'groupedAbsensi' => $dataAbsensi
     ])->setPaper('A4', 'portrait');
 
-    return $pdf->stream('absensi_bulan_' . $carbonBulan->format('Y_m') . '.pdf');
+    return $pdf->stream('rekap-absensi-' . $carbonBulan->format('Y_m') . '.pdf');
 }
 
 
