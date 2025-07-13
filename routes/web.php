@@ -74,6 +74,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('riwayatMurid/{id}', [RiwayatMuridController::class, 'update'])->name('riwayatMurid.update');
         Route::delete('riwayatMurid/{id}', [RiwayatMuridController::class, 'destroy'])->name('riwayatMurid.hapus');
         Route::resource('riwayatMurid', RiwayatMuridController::class);
+        // PDF Export
+        // PDF export route dengan nama berbeda
+        Route::get('riwayatMuridExportPdf', [RiwayatMuridController::class, 'exportPdf'])->name('riwayatMurid.exportPdf');
+
 
         // DataMurid Satuan Route
         Route::get('dataMurid', [MuridController::class, 'dataMurid'])->name('dataMurid');

@@ -208,6 +208,21 @@
         Filter Detail
     </h2>
     
+            {{-- BUTTON EXPORT PDF --}}
+
+        {{-- Tombol Export PDF --}}
+            <form action="{{ route('admin.riwayatMurid.exportPdf') }}" method="GET" target="_blank" class="mt-4">
+                <input type="hidden" name="bulan" value="{{ $bulanDipilih }}">
+                <button type="submit"
+                    class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl shadow-md font-semibold">
+                    📄 Export PDF Bulan {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->translatedFormat('F Y') }}
+                </button>
+            </form>
+
+
+        {{--  --}}
+
+
     <form method="GET" id="filterForm">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {{-- Dropdown Bulan --}}
@@ -240,6 +255,8 @@
             </div>
         </div>
 
+
+
         {{-- Calendar Layout Tanggal --}}
         @if ($jumlahHari)
             <div class="space-y-4 mt-6">
@@ -270,11 +287,6 @@
                     <button type="button" onclick="clearDateSelection()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium transition-colors duration-200">
                         🗑️ Hapus Pilihan Tanggal
                     </button>
-                    {{-- @if($muridDipilih)
-                        <button type="button" onclick="clearMuridSelection()" class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-lg text-sm font-medium transition-colors duration-200">
-                            👤 Hapus Pilihan Murid
-                        </button>
-                    @endif --}}
                     @if($tanggalDipilih)
                         <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
                             Terpilih: {{ $tanggalDipilih }}
@@ -410,11 +422,11 @@
                             <td class="px-6 py-4 text-gray-700">{{ $riwayat->catatan ?: '-' }}</td>
                             <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('admin.riwayatMuridAbsensi.edit', $riwayat->id) }}" 
+                                    <a href="{{ route('admin.riwayatMurid.edit', $riwayat->id) }}" 
                                     class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
                                         Edit
                                     </a>
-                                    <form action="{{ route('admin.riwayatMuridAbsensi.hapus', $riwayat->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('{{ $riwayat->nama_murid }}')">
+                                    <form action="{{ route('admin.riwayatMurid.hapus', $riwayat->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('{{ $riwayat->nama_murid }}')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
