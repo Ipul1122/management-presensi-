@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MuridAbsensi;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RiwayatMuridController extends Controller
 {
@@ -167,4 +168,28 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
     }
 
     
+    public function exportPdf(Request $request)
+{
+    $bulanDipilih = $request->bulan ?? now()->format('Y-m');
+    $carbonBulan = Carbon::createFromFormat('Y-m', $bulanDipilih);
+
+    // Ambil semua data absensi dalam bulan yang dipilih
+    $dataAbsensi = MuridAbsensi::whereMonth('tanggal_absen', $carbonBulan->month)
+        ->whereYear('tanggal_absen', $carbonBulan->year)
+        ->orderBy('tanggal_absen', 'asc')
+        ->orderBy('nama_murid', 'asc')
+        ->get()
+        ->groupBy(function($item) {
+            return Carbon::parse($item->tanggal_absen)->format('l, d F Y');
+        });
+
+    $pdf = Pdf::loadView('admin.riwayatMurid.pdf', [
+        'bulan' => $carbonBulan->translatedFormat('F Y'),
+        'groupedAbsensi' => $dataAbsensi
+    ])->setPaper('A4', 'portrait');
+
+    return $pdf->stream('absensi_bulan_' . $carbonBulan->format('Y_m') . '.pdf');
+}
+
+
 }
