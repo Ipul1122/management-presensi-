@@ -147,7 +147,7 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
             <div class="px-4 py-6 space-y-4">
-                <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                <a href="{{ route('index') }}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
                 
                 <div x-data="{ mobileOpen: false }" class="border-b border-gray-100 pb-4">
                     <button @click="mobileOpen = !mobileOpen" 
@@ -160,32 +160,32 @@
                     </button>
                     
                     <div x-show="mobileOpen" x-transition class="ml-4 mt-3 space-y-3">
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
+                        <a href="{{ route('user.informasi.visiDanMisi.index') }}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
                             <i class="fas fa-bullseye mr-3 text-blue-500"></i>
                             <span>Visi dan Misi</span>
                         </a>
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
+                        <a href="user.informasi.dataMurid.index" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
                             <i class="fas fa-users mr-3 text-blue-500"></i>
                             <span>Data Murid</span>
                         </a>
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
+                        <a href="user.informasi.dataPengajar.index" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
                             <i class="fas fa-chalkboard-teacher mr-3 text-blue-500"></i>
                             <span>Data Pengajar</span>
                         </a>
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
+                        <a href="user.informasi.jadwal.index" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
                             <i class="fas fa-calendar-alt mr-3 text-blue-500"></i>
                             <span>Jadwal</span>
                         </a>
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
+                        <a href="user.informasi.riwayatMurid.index" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
                             <i class="fas fa-history mr-3 text-blue-500"></i>
                             <span>Riwayat Murid</span>
                         </a>
                     </div>
                 </div>
                 
-                <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Galeri</a>
-                <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Pendaftaran</a>
-                <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Kontak</a>
+                <a href="user.galeri.index" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Galeri</a>
+                <a href="user.pendaftaran.index" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Pendaftaran</a>
+                <a href="user.testimoni.index" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Kontak</a>
                 
                 <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" 
                    class="block bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-lg text-center font-semibold shadow-lg mt-4">
