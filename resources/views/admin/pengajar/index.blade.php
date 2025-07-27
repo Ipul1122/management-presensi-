@@ -7,7 +7,7 @@
     <div class="mb-8 animate-fade-in">
         <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-blue-100">
             <div>
-                <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r text-black bg-clip-text text-transparent">
+                <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r text-blue-600 bg-clip-text ">
                     Daftar Pengajar
                 </h1>
                 <p class="text-black mt-1">Kelola data pengajar dengan mudah</p>
