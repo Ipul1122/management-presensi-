@@ -15,7 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'pengajar.role' => \App\Http\Middleware\PengajarMiddleware::class,
             'admin.role' => \App\Http\Middleware\AdminMiddleware::class,
               // Override middleware 'auth' bawaan Laravel dengan milikmu
-        'auth' => \App\Http\Middleware\Authenticate::class,
+            'auth' => \App\Http\Middleware\Authenticate::class,
+            'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
         ]);
         // $middleware->append(\App\Http\Middleware\Authenticate::class); 
     })
