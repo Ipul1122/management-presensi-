@@ -59,7 +59,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 
     // Routes dengan middleware auth:admin
-    Route::middleware(['auth:admin', 'admin.role'])->group(function () {
+    Route::middleware(['auth:admin', 'admin.role', 'prevent-back-history'])->group(function () {
         
         // Dashboard route
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -140,7 +140,7 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::post('/logout', [PengajarLoginController::class, 'logout'])->name('logout');
 
     // Routes dengan middleware auth:pengajar
- Route::middleware(['auth:pengajar', 'pengajar.role'])->group(function () {
+ Route::middleware(['auth:pengajar', 'pengajar.role', 'prevent-back-history'])->group(function () {
 
     Route::get('/dashboard', [DashboardPengajarController::class, 'index'])->name('dashboard');
     // Route untuk halaman dashboard pengajar

@@ -496,7 +496,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-gray-700">{{ $absensi->catatan ?: '-' }}</td>
-                            <td class="px-6 py-4 text-center">
+                            {{-- <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center space-x-2">
                                     <a href="{{ route('pengajar.riwayatMuridAbsensi.edit', $absensi->id) }}" 
                                     class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold transition-colors duration-200 text-xs">
@@ -510,7 +510,7 @@
                                         </button>
                                     </form>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
