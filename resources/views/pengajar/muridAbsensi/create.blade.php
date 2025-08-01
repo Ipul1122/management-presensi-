@@ -102,25 +102,18 @@
                     </h3>
                     
                     <form method="GET" action="{{ route('pengajar.muridAbsensi.create') }}">
-                        <div class="relative">
-                            <select name="nama_murid" id="nama_murid" 
-                                    class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 appearance-none bg-white" 
-                                    onchange="this.form.submit()">
-                                <option value="">-- Pilih Murid --</option>
-                                @foreach($murids as $murid)
-                                    <option value="{{ $murid->nama_anak }}" 
-                                            {{ request('nama_murid') == $murid->nama_anak ? 'selected' : '' }}>
-                                        {{ $murid->nama_anak }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </form>
+    <div class="relative">
+        <select id="nama_murid" name="nama_murid" class="tom-select w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white" onchange="this.form.submit()">
+            <option value="">-- Pilih Murid --</option>
+            @foreach($murids as $murid)
+                <option value="{{ $murid->nama_anak }}" {{ request('nama_murid') == $murid->nama_anak ? 'selected' : '' }}>
+                    {{ $murid->nama_anak }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</form>
+
 
                     <!-- Informasi Tanggal -->
                     <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
@@ -267,6 +260,16 @@
     </div>
     </div>
 
+<script>
+    new TomSelect("#nama_murid", {
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        },
+        placeholder: "  -------- Pilih Murid --------"
+    });
+</script>
 
 
     @endsection
