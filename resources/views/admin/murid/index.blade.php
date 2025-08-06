@@ -13,10 +13,16 @@
                 {{-- Total Murid --}}
                 <div class="mt-4 md:mt-0 flex space-x-4">
                 <span class="bg-blue-500 bg-opacity-30 text-white px-4 py-2 rounded-lg">
-                <span class="block text-sm">Total Murid</span>
-                <span class="font-bold text-xl">{{ $murids->total() }}</span>
+                    <span class="block text-sm">Total Murid</span>
+                    <span class="font-bold text-xl">{{ $murids->total() }}</span>
+                    <a href="{{ route('admin.murid.pdf') }}" target="_blank"
+                    class=" bg-transparent text-red-500 font-bold text-lg pr-2 py-2 inline-block">
+                    PDF
+                    </a>
                 </span>
             </div>
+
+
             </div>
         </div>
 
@@ -331,10 +337,6 @@
 </main>
 
 <script>
-    
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     // Select all functionality
     const selectAll = document.getElementById("selectAll");
@@ -695,9 +697,6 @@ document.head.insertAdjacentHTML(
         }
     </style>
 `
-
-
 );
-
 </script>
 @endsection

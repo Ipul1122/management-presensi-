@@ -210,7 +210,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $murid->jenis_bacaan == 'iqro' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
-                            @if($murid->jenis_bacaan == 'iqro')
+                            @if($murid->jenis_bacaan == "Iqro")
                                 📖 Iqro
                             @else
                                 📚 Al-Qur'an
@@ -254,7 +254,7 @@
                             @endif
                         </span>
                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium {{ $murid->jenis_bacaan == 'iqro' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
-                            @if($murid->jenis_bacaan == 'iqro')
+                            @if($murid->jenis_bacaan == "Iqro")
                                 📖 Iqro
                             @else
                                 📚 Al-Qur'an

@@ -68,6 +68,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Murid resource route
         Route::resource('murid', MuridController::class);
+
+        // Cetak PDF route
+        Route::get('/admin/data-murid/cetak-pdf', [MuridController::class, 'cetakPDF'])->name('murid.pdf');
+
         // Riwayat Murid
         Route::get('riwayatMurid', [RiwayatMuridController::class, 'index'])->name('riwayatMurid.index');
         Route::get('riwayatMurid/{id}/edit', [RiwayatMuridController::class, 'edit'])->name('riwayatMurid.edit');
