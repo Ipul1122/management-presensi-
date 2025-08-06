@@ -32,20 +32,20 @@
                         </div>
 
                         <select name="jenis_kelamin" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
-                            <option value="">Semua Gender</option>
+                            <option value="">Jenis Kelamin</option>
                             <option value="Laki-laki" {{ request('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                             <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </select>
 
                         <select name="kelas" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
-                            <option value="">Semua Kelas</option>
+                            <option value=""> Kelas</option>
                             @foreach ($kelas_list as $kelas)
                                 <option value="{{ $kelas }}" {{ request('kelas') == $kelas ? 'selected' : '' }}>{{ $kelas }}</option>
                             @endforeach
                         </select>
 
                         <select name="jenis_bacaan" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
-                            <option value="">Semua Bacaan</option>
+                            <option value="">Bacaan</option>
                             <option value="iqro" {{ strtolower(request('jenis_bacaan')) == 'iqro' ? 'selected' : '' }}>Iqro</option>
                             <option value="al-quran" {{ strtolower(request('jenis_bacaan')) == "al-qur'an" ? 'selected' : '' }}>Al-Qur'an</option>
                         </select>
@@ -54,7 +54,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"/>
                             </svg>
-                            Filter
+                            Cari Murid TPA
                         </button>
                     </div>
                 </form>
@@ -158,7 +158,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
                                         </svg>
                                         <p class="text-gray-500 text-lg font-medium">Murid yang anda cari belum ada</p>
-                                        <p class="text-gray-400 text-sm">Coba cari lagi atau hub <a href="https://whatsapp/6285693672730">Hub Admin</a> </p>
+                                        <p class="text-gray-400 text-sm">Coba cari lagi atau <span class="text-blue-600 font-bold"> <a href="https://wa.me/+6285693672730">Hub Admin</a>  </span></p>
                                     </div>
                                 </td>
                             </tr>

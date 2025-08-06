@@ -8,7 +8,8 @@ use App\Models\Murid;
 use Illuminate\Support\Facades\Storage;
 use App\Models\NotifikasiAdmin;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log; // Tambahkan ini
+use Illuminate\Support\Facades\Log; 
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MuridController extends Controller
 {
@@ -206,10 +207,25 @@ public function edit($id)
         return redirect()->route('admin.murid.index')->with('success', 'Seluruh data murid telah dihapus.');
     }
 
+    // Cetak PDF method
+    public function cetakPDF()
+{
+    // Ambil semua data murid dengan field yang sesuai dengan view PDF
+    $murid = Murid::select([
+        'id_pendaftaran',
+        'nama_anak',
+        'jenis_kelamin',
+        'alamat',
+        'kelas',
+        'jenis_alkitab',        // pastikan field ini ada di database
+        'nomor_telepon',        // pastikan field ini ada di database
+        'ayah',      // pastikan field ini ada di database
+        'ibu'        // pastikan field ini ada di database
+    ])->get();
 
-
-
-            // Info Data Murid
+    $pdf = Pdf::loadView('admin.murid.pdf', compact('murid'));
+    return $pdf->stream('data-murid.pdf');
+}
 
 }
 
