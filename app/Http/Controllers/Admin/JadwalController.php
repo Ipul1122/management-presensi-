@@ -28,37 +28,49 @@ class JadwalController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-        'nama_jadwal' => 'required|string',
-        'tanggal_jadwal' => 'required|date',
-        'pukul_jadwal' => 'required',
-        'kegiatan_jadwal' => 'required|string',
+{
+    
+    $request->validate([
+        'nama_jadwal' => 'required|array|min:1',
+        'nama_jadwal.*' => 'required|string',
+        'tanggal_jadwal' => 'required|array|min:1',
+        'tanggal_jadwal.*' => 'required|date',
+        'pukul_jadwal' => 'required|array|min:1',
+        'pukul_jadwal.*' => 'required|string',
+        'kegiatan_jadwal' => 'required|array|min:1',
+        'kegiatan_jadwal.*' => 'required|string',
         'nama_pengajar_jadwal' => 'required|array|min:1',
     ]);
-        
-        $pengajars = $request->nama_pengajar_jadwal;
-        $jumlahPengajar = count($pengajars);
-        $gaji = $jumlahPengajar * 50000; // Hitung gaji berdasarkan jumlah pengajar
 
-        Jadwal::create([
-        'nama_jadwal' => $request->nama_jadwal,
-        'tanggal_jadwal' => $request->tanggal_jadwal,
-        'pukul_jadwal' => $request->pukul_jadwal,
-        'kegiatan_jadwal' => $request->kegiatan_jadwal,
-        // Simpan sebagai string yang digabung
-        'nama_pengajar_jadwal' => implode(', ', $request->nama_pengajar_jadwal),
-        'gaji' => $gaji,
-    ]);
-        
-        NotifikasiAdmin::create([
-        'pesan' => 'Admin menambahkan jadwal baru: ' . $request->nama_jadwal,
-        'aksi' => 'Admin Tambah Jadwal',
-        'deskripsi' => 'Jadwal baru telah ditambahkan dengan nama: ' . $request->nama_jadwal
+    $jumlahJadwal = count($request->nama_jadwal);
+
+    for ($i = 0; $i < $jumlahJadwal; $i++) {
+        // Ambil pengajar untuk jadwal ini
+        $pengajarJadwal = $request->nama_pengajar_jadwal[$i] ?? [];
+        $jumlahPengajar = count($pengajarJadwal);
+        $gaji = $jumlahPengajar * 50000;
+
+        // Simpan jadwal
+        $jadwal = Jadwal::create([
+            'nama_jadwal' => $request->nama_jadwal[$i],
+            'tanggal_jadwal' => $request->tanggal_jadwal[$i],
+            'pukul_jadwal' => $request->pukul_jadwal[$i],
+            'kegiatan_jadwal' => $request->kegiatan_jadwal[$i],
+            'nama_pengajar_jadwal' => implode(', ', $pengajarJadwal),
+            'gaji' => $gaji,
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Jadwal berhasil ditambahkan');
+        // Simpan notifikasi untuk setiap jadwal baru
+        NotifikasiAdmin::create([
+            'pesan' => 'Admin menambahkan jadwal baru: ' . $request->nama_jadwal[$i],
+            'aksi' => 'Admin Tambah Jadwal',
+            'deskripsi' => 'Jadwal baru telah ditambahkan dengan nama: ' . $request->nama_jadwal[$i]
+        ]);
     }
+
+    return redirect()->route('admin.dashboard')->with('success', 'Semua jadwal berhasil ditambahkan');
+}
+
 
     public function edit($id)
     {

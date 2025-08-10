@@ -18,7 +18,7 @@ protected function redirectTo($request): ?string
             return route('pengajar.login');
         }
         else{
-            return route('unauthorized'); // Pastikan route ini ADA
+            return route('unauthorized'); 
         }
     }
 
