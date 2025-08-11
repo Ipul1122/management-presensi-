@@ -17,8 +17,9 @@ class JadwalController extends Controller
                      ->whereYear('tanggal_jadwal', Carbon::now()->year)
                      ->orderBy('tanggal_jadwal', 'asc')
                      ->paginate(5); 
+        $unreadCount = NotifikasiAdmin::where('is_read', false)->count();
 
-    return view('admin.jadwal.index', compact('jadwals'));
+    return view('admin.jadwal.index', compact('jadwals', 'unreadCount'));
     }
 
     public function create()
