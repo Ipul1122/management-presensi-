@@ -102,8 +102,8 @@
                 </div>
             </div>
 
-            <!-- Mobile-First Alternative Layout (Optional) -->
-            {{-- <div class="block sm:hidden space-y-3">
+            {{-- <!-- Mobile-First Alternative Layout (Optional) -->
+            <div class="block sm:hidden space-y-3">
                 <button type="button" id="add-absensi-mobile"
                     class="btn-modern w-full flex items-center justify-center px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg shadow-sm text-sm">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,7 +129,7 @@
                         Kembali
                     </button>
                 </a>
-            </div> --}}
+            </div>  --}}
 
         </form>
     </div>
