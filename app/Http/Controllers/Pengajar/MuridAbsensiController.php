@@ -39,7 +39,7 @@ class MuridAbsensiController extends Controller
     }
 
     // Ambil data absensi hari ini dengan filter
-    $absensis = $query->latest()->paginate(10)->appends($request->except('page'));
+    $absensis = $query->latest()->paginate(5)->appends($request->except('page'));
 
     // Statistik hanya untuk hari ini
     $hadirCount = MuridAbsensi::whereDate('tanggal_absen', $tanggalHariIni)
@@ -129,37 +129,40 @@ class MuridAbsensiController extends Controller
 
     public function store(Request $request)
 {
-    // Validasi
+    // Validasi array
     $validated = $request->validate([
-        'nama_murid' => 'required|string',
-        'jenis_kelamin' => 'required|string',
-        'jenis_bacaan' => 'required|string',
-        'jenis_status' => 'required|in:hadir,izin',
-        'tanggal_absen' => 'required|date',
-        'catatan' => 'nullable|string',
+        'absensi' => 'required|array|min:1',
+        'absensi.*.nama_murid' => 'required|string',
+        'absensi.*.jenis_kelamin' => 'required|string',
+        'absensi.*.jenis_bacaan' => 'required|string',
+        'absensi.*.jenis_status' => 'required|in:hadir,izin',
+        'absensi.*.tanggal_absen' => 'required|date',
+        'absensi.*.catatan' => 'nullable|string',
     ]);
 
-    // Simpan ke DB
-    MuridAbsensi::create([
-        'nama_murid' => $request->nama_murid,
-        'jenis_kelamin' => $request->jenis_kelamin,
-        'jenis_bacaan' => $request->jenis_bacaan,
-        'jenis_status' => $request->jenis_status,
-        'tanggal_absen' => $request->tanggal_absen,
-        'catatan' => $request->catatan,
-    ]);
+    foreach ($validated['absensi'] as $item) {
+        MuridAbsensi::create([
+            'nama_murid' => $item['nama_murid'],
+            'jenis_kelamin' => $item['jenis_kelamin'],
+            'jenis_bacaan' => $item['jenis_bacaan'],
+            'jenis_status' => $item['jenis_status'],
+            'tanggal_absen' => $item['tanggal_absen'],
+            'catatan' => $item['catatan'] ?? null,
+        ]);
 
-     // Setelah absensi berhasil disimpan, tambahkan notifikasi ke admin
-    NotifikasiAdmin::create([
-        'aksi' => 'Pengajar Input Absensi',
-        'deskripsi' => 'Pengajar ' . auth()->guard('pengajar')->user()->nama_pengajar . ' melakukan absensi murid bernama ' . $request->nama_murid,
-        'is_read' => false, // agar badge di ikon bell muncul
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+        // Notifikasi per murid
+        NotifikasiAdmin::create([
+            'aksi' => 'Pengajar Input Absensi',
+            'deskripsi' => 'Pengajar ' . auth()->guard('pengajar')->user()->nama_pengajar . 
+                           ' melakukan absensi murid bernama ' . $item['nama_murid'],
+            'is_read' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
 
-
-    return redirect()->route('pengajar.muridAbsensi.index')->with('success', 'Absensi berhasil disimpan.');
+    return redirect()->route('pengajar.muridAbsensi.index')
+                     ->with('success', 'Semua absensi berhasil disimpan.');
 }
 
 
