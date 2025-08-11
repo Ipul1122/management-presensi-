@@ -91,6 +91,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('pengajar', PengajarController::class);
         // Jadwal
         Route::resource('jadwal', JadwalController::class);
+        // bulk delete & delete all
+        Route::delete('/jadwal', [JadwalController::class, 'bulkDestroy'])->name('jadwal.bulkDestroy');
+
 
         // Riwayat Jadwal
         Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');

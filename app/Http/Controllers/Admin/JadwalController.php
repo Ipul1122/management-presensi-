@@ -16,7 +16,7 @@ class JadwalController extends Controller
         $jadwals = Jadwal::whereMonth('tanggal_jadwal', Carbon::now()->month)
                      ->whereYear('tanggal_jadwal', Carbon::now()->year)
                      ->orderBy('tanggal_jadwal', 'asc')
-                     ->paginate(10); // atau sesuai kebutuhan
+                     ->paginate(5); 
 
     return view('admin.jadwal.index', compact('jadwals'));
     }
@@ -176,6 +176,16 @@ public function bulkDelete(Request $request)
     return redirect()->route('admin.dashboard')->with('success', 'Jadwal berhasil dihapus.');
 }
 
+// DELETE ALL JADWAL
+public function bulkDestroy(Request $request)
+{
+    $ids = $request->selected_ids;
+    if ($ids) {
+        Jadwal::whereIn('id', $ids)->delete();
+        return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal terpilih berhasil dihapus.');
+    }
+    return redirect()->route('admin.jadwal.index')->with('success', 'Tidak ada jadwal yang dipilih.');
+}
 
 
 }

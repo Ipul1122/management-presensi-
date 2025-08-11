@@ -263,7 +263,7 @@ input[type="checkbox"]:checked {
                                 <div class="col-span-1">Select</div>
                                 <div class="col-span-2">Aksi</div>
                                 <div class="col-span-5">Deskripsi</div>
-                                <div class="col-span-3">Waktu</div>
+                                {{-- <div class="col-span-3">Waktu</div> --}}
                                 <div class="col-span-2">Timer</div>
                             </div>
                         </div>
@@ -287,12 +287,12 @@ input[type="checkbox"]:checked {
                             <div class="col-span-5">
                                 <p class="text-gray-900 font-medium">{{ $notif->deskripsi }}</p>
                             </div>
-                            <div class="col-span-3">
+                            {{-- <div class="col-span-3">
                                 <div class="flex items-center text-blue-500">
                                     <i class="fas fa-clock mr-2"></i>
                                     <span class="text-sm">{{ $notif->created_at->diffForHumans() }}</span>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-span-2">
                                 <div class="timer-container">
                                     <div class="flex items-center space-x-2">
@@ -379,226 +379,123 @@ document.addEventListener('DOMContentLoaded', function() {
     const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
     const selectedCountElement = document.getElementById('selectedCount');
     const selectedTextElement = document.getElementById('selectedText');
-    const bulkForm = document.getElementById('bulkForm');
 
-    // Timer management
-    let timerIntervals = new Map();
-    let autoRefreshInterval;
+    function updateAllTimers() {
+    const now = Math.floor(Date.now() / 1000);
 
-    // Initialize timers for all notifications
-    function initializeTimers() {
-        const notificationRows = document.querySelectorAll('[data-notification-id]');
-        
-        notificationRows.forEach(row => {
-            const notificationId = row.dataset.notificationId;
-            const createdAt = parseInt(row.dataset.createdAt);
-            
-            // Calculate initial remaining time
-            const now = Math.floor(Date.now() / 1000);
-            const elapsed = now - createdAt;
-            const remaining = Math.max(0, 300 - elapsed); // 5 minutes = 300 seconds
-            
-            if (remaining > 0) {
-                startTimer(notificationId, createdAt, row);
-            } else {
-                // Already expired
-                markAsExpired(row, notificationId);
-            }
+    document.querySelectorAll('[data-notification-id]').forEach(row => {
+        const createdAt = parseInt(row.dataset.createdAt);
+        const elapsed = now - createdAt;
+
+        // 1. Update timer countdown
+        const remaining = Math.max(0, 300 - elapsed);
+        updateTimerDisplay(row, remaining);
+
+        // 2. Update field waktu real-time
+        updateRealTimeClock(row, createdAt, now);
+
+        // 3. Hapus jika expired
+        if (remaining <= 0) {
+            markAsExpired(row, row.dataset.notificationId);
+        }
+    });
+}
+
+function updateRealTimeClock(element, createdAt, now) {
+    const date = new Date(createdAt * 1000); // base waktu created_at
+    date.setSeconds(date.getSeconds() + (now - createdAt)); // tambah elapsed
+
+    // Format waktu Indonesia
+    const formatter = new Intl.DateTimeFormat('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+
+    const timeString = formatter.format(date);
+
+    // Update semua elemen yang punya class 'real-time-clock'
+    const timeFields = element.querySelectorAll('.real-time-clock');
+    timeFields.forEach(field => {
+        field.textContent = timeString;
+    });
+}
+
+
+    function updateElapsedTime(element, elapsedSeconds) {
+        const minutes = Math.floor(elapsedSeconds / 60);
+        const seconds = elapsedSeconds % 60;
+        const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        const elapsedFields = element.querySelectorAll('.elapsed-time');
+        elapsedFields.forEach(field => {
+            field.textContent = timeString;
         });
     }
 
-    // Start timer for a specific notification
-    function startTimer(notificationId, createdAt, element) {
-        // Clear existing timer if any
-        if (timerIntervals.has(notificationId)) {
-            clearInterval(timerIntervals.get(notificationId));
-        }
-
-        // Update timer immediately
-        updateTimerForElement(element, createdAt);
-
-        const interval = setInterval(() => {
-            updateTimerForElement(element, createdAt);
-        }, 1000);
-
-        timerIntervals.set(notificationId, interval);
-    }
-
-    // Update timer for specific element
-    function updateTimerForElement(element, createdAt) {
-        const now = Math.floor(Date.now() / 1000);
-        const elapsed = now - createdAt;
-        const remaining = Math.max(0, 300 - elapsed); // 5 minutes = 300 seconds
-
-        updateTimerDisplay(element, remaining);
-
-        if (remaining <= 0) {
-            const notificationId = element.dataset.notificationId;
-            if (timerIntervals.has(notificationId)) {
-                clearInterval(timerIntervals.get(notificationId));
-                timerIntervals.delete(notificationId);
-            }
-            markAsExpired(element, notificationId);
-        }
-    }
-
-    // Update timer display
     function updateTimerDisplay(element, remainingSeconds) {
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
         const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-        // Update timer text for both desktop and mobile
-        const timerTexts = element.querySelectorAll('.timer-text');
-        const timerTextsMobile = element.querySelectorAll('.timer-text-mobile');
-        
-        [...timerTexts, ...timerTextsMobile].forEach(text => {
-            if (text) {
+        const timerTexts = element.querySelectorAll('.timer-text, .timer-text-mobile');
+        timerTexts.forEach(text => {
+            if (remainingSeconds > 0) {
                 text.textContent = timeString;
-            }
-        });
-
-        // Update progress circle
-        const progressCircles = element.querySelectorAll('.timer-progress');
-        
-        progressCircles.forEach(circle => {
-            const radius = parseInt(circle.getAttribute('r'));
-            const circumference = 2 * Math.PI * radius;
-            const progress = (remainingSeconds / 300) * circumference;
-            
-            // Set initial stroke-dasharray if not set
-            if (!circle.style.strokeDasharray) {
-                circle.style.strokeDasharray = circumference;
-            }
-            
-            circle.style.strokeDashoffset = circumference - progress;
-            
-            // Change color based on remaining time
-            if (remainingSeconds <= 60) {
-                circle.style.stroke = '#DC2626'; // Red for last minute
-            } else if (remainingSeconds <= 120) {
-                circle.style.stroke = '#F59E0B'; // Yellow for last 2 minutes
             } else {
-                circle.style.stroke = '#EF4444'; // Default red
-            }
-        });
-
-        // Add warning animation for last 30 seconds
-        const allTimerTexts = [...timerTexts, ...timerTextsMobile];
-        if (remainingSeconds <= 30 && remainingSeconds > 0) {
-            allTimerTexts.forEach(text => {
-                if (text) text.classList.add('timer-warning');
-            });
-        } else {
-            allTimerTexts.forEach(text => {
-                if (text) text.classList.remove('timer-warning');
-            });
-        }
-    }
-
-    // Mark notification as expired
-    function markAsExpired(element, notificationId) {
-        element.classList.add('notification-expired');
-        
-        // Show expired message
-        const timerTexts = element.querySelectorAll('.timer-text');
-        const timerTextsMobile = element.querySelectorAll('.timer-text-mobile');
-        
-        [...timerTexts, ...timerTextsMobile].forEach(text => {
-            if (text) {
                 text.textContent = 'EXPIRED';
                 text.style.color = '#DC2626';
                 text.style.fontWeight = 'bold';
             }
         });
 
-        // Update progress circles to show complete
         const progressCircles = element.querySelectorAll('.timer-progress');
         progressCircles.forEach(circle => {
-            circle.style.stroke = '#DC2626';
-            circle.style.strokeDashoffset = '0';
+            const radius = parseInt(circle.getAttribute('r'));
+            const circumference = 2 * Math.PI * radius;
+            const progress = (remainingSeconds / 300) * circumference;
+            circle.style.strokeDasharray = circumference;
+            circle.style.strokeDashoffset = circumference - progress;
+
+            if (remainingSeconds <= 60) {
+                circle.style.stroke = '#DC2626';
+            } else if (remainingSeconds <= 120) {
+                circle.style.stroke = '#F59E0B';
+            } else {
+                circle.style.stroke = '#EF4444';
+            }
         });
 
-        // Auto-remove after 3 seconds
+        timerTexts.forEach(text => {
+            if (remainingSeconds <= 30 && remainingSeconds > 0) {
+                text.classList.add('timer-warning');
+            } else {
+                text.classList.remove('timer-warning');
+            }
+        });
+    }
+
+    function markAsExpired(element) {
+        if (element.classList.contains('notification-expired')) return;
+        element.classList.add('notification-expired');
+
         setTimeout(() => {
             element.style.transition = 'all 0.5s ease-out';
             element.style.opacity = '0';
             element.style.transform = 'translateX(-100%)';
-            
             setTimeout(() => {
                 element.remove();
                 updateTotalCount();
-                // Refresh page to get updated data
-                window.location.reload();
             }, 500);
         }, 3000);
     }
 
-    // Update total notification count
     function updateTotalCount() {
         const currentCount = document.querySelectorAll('.notification-row, .notification-card').length;
         const totalElement = document.getElementById('totalNotifications');
-        if (totalElement) {
-            totalElement.textContent = currentCount;
-        }
+        if (totalElement) totalElement.textContent = currentCount;
     }
 
-    // Update selection count and UI
-    function updateSelectionUI() {
-        const checkedBoxes = document.querySelectorAll('.notification-checkbox:checked');
-        const selectedIds = new Set();
-        
-        // Count unique IDs only
-        checkedBoxes.forEach(checkbox => {
-            selectedIds.add(checkbox.value);
-        });
-        
-        const selectedCount = selectedIds.size;
-        const totalCount = Math.floor(notificationCheckboxes.length / 2); // Divide by 2 since we have duplicate checkboxes for mobile/desktop
-
-        // Update counter
-        if (selectedCountElement) {
-            selectedCountElement.textContent = selectedCount;
-        }
-        
-        // Update text
-        if (selectedTextElement) {
-            if (selectedCount === 0) {
-                selectedTextElement.textContent = 'Tidak ada yang dipilih';
-                if (deleteSelectedBtn) deleteSelectedBtn.disabled = true;
-            } else {
-                selectedTextElement.textContent = `${selectedCount} dari ${totalCount} dipilih`;
-                if (deleteSelectedBtn) deleteSelectedBtn.disabled = false;
-            }
-        }
-
-        // Update check all state
-        if (checkAllBox) {
-            if (selectedCount === 0) {
-                checkAllBox.indeterminate = false;
-                checkAllBox.checked = false;
-            } else if (selectedCount === totalCount) {
-                checkAllBox.indeterminate = false;
-                checkAllBox.checked = true;
-            } else {
-                checkAllBox.indeterminate = true;
-            }
-        }
-
-        // Add visual feedback to selected rows
-        notificationCheckboxes.forEach(checkbox => {
-            const row = checkbox.closest('.notification-row, .notification-card');
-            if (row) {
-                if (checkbox.checked) {
-                    row.classList.add('bg-blue-50', 'border-blue-200');
-                } else {
-                    row.classList.remove('bg-blue-50', 'border-blue-200');
-                }
-            }
-        });
-    }
-
-    // Check all functionality
     if (checkAllBox) {
         checkAllBox.addEventListener('change', function() {
             const isChecked = this.checked;
@@ -606,159 +503,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 checkbox.checked = isChecked;
             });
             updateSelectionUI();
-            
-            // Add animation effect
-            if (isChecked) {
-                notificationCheckboxes.forEach((checkbox, index) => {
-                    setTimeout(() => {
-                        checkbox.classList.add('animate-bounce');
-                        setTimeout(() => checkbox.classList.remove('animate-bounce'), 300);
-                    }, index * 50);
-                });
-            }
         });
     }
 
-    // Individual checkbox change
+    function updateSelectionUI() {
+        const checkedBoxes = document.querySelectorAll('.notification-checkbox:checked');
+        const selectedCount = checkedBoxes.length / 2;
+        selectedCountElement.textContent = selectedCount;
+        if (selectedCount === 0) {
+            selectedTextElement.textContent = 'Tidak ada yang dipilih';
+            deleteSelectedBtn.disabled = true;
+        } else {
+            selectedTextElement.textContent = `${selectedCount} dipilih`;
+            deleteSelectedBtn.disabled = false;
+        }
+    }
+
     notificationCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', updateSelectionUI);
     });
 
-    // Form submission with confirmation
-    if (bulkForm) {
-        bulkForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const checkedBoxes = document.querySelectorAll('.notification-checkbox:checked');
-            if (checkedBoxes.length === 0) {
-                showToast('Pilih setidaknya satu notifikasi untuk dihapus', 'warning');
-                return;
-            }
-
-            showConfirmDialog(
-                'Konfirmasi Hapus',
-                `Apakah Anda yakin ingin menghapus ${checkedBoxes.length} notifikasi yang dipilih?`,
-                () => {
-                    // Add loading state
-                    if (deleteSelectedBtn) {
-                        deleteSelectedBtn.classList.add('loading');
-                        deleteSelectedBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menghapus...';
-                        deleteSelectedBtn.disabled = true;
-                    }
-                    
-                    // Submit form
-                    this.submit();
-                }
-            );
-        });
-    }
-
-    // Initialize everything
-    updateSelectionUI();
-    initializeTimers();
-
-    // Auto-refresh to clean up expired notifications every 30 seconds
-    autoRefreshInterval = setInterval(() => {
-        // Check if any notifications should be expired
-        const now = Math.floor(Date.now() / 1000);
-        const notificationRows = document.querySelectorAll('[data-notification-id]');
-        let hasExpired = false;
-
-        notificationRows.forEach(row => {
-            const createdAt = parseInt(row.dataset.createdAt);
-            const elapsed = now - createdAt;
-            
-            if (elapsed >= 300) { // 5 minutes
-                hasExpired = true;
-            }
-        });
-
-        if (hasExpired) {
-            window.location.reload();
-        }
-    }, 30000);
-
-    // Auto-hide alerts after 5 seconds
-    setTimeout(() => {
-        const alerts = document.querySelectorAll('#successAlert, #errorAlert');
-        alerts.forEach(alert => {
-            if (alert) {
-                alert.style.transition = 'all 0.3s ease';
-                alert.style.opacity = '0';
-                alert.style.transform = 'translateY(-10px)';
-                setTimeout(() => alert.remove(), 300);
-            }
-        });
-    }, 5000);
-
-    // Clean up intervals when page unloads
-    window.addEventListener('beforeunload', () => {
-        timerIntervals.forEach(interval => clearInterval(interval));
-        if (autoRefreshInterval) clearInterval(autoRefreshInterval);
-    });
-});
-
-// Helper functions
-function closeAlert(alertId) {
-    const alert = document.getElementById(alertId);
-    if (alert) {
-        alert.style.transition = 'all 0.3s ease';
-        alert.style.opacity = '0';
-        alert.style.transform = 'translateY(-10px)';
-        setTimeout(() => alert.remove(), 300);
-    }
-}
-
-function confirmDeleteAll() {
-    return showConfirmDialog(
-        'Hapus Semua Notifikasi',
-        'Apakah Anda yakin ingin menghapus SEMUA notifikasi? Tindakan ini tidak dapat dibatalkan.',
-        () => true
-    );
-}
-
-function showConfirmDialog(title, message, onConfirm) {
-    // Simple confirm dialog - you can replace this with a custom modal
-    const result = confirm(`${title}\n\n${message}`);
-    if (result && onConfirm) {
-        return onConfirm();
-    }
-    return result;
-}
-
-function showToast(message, type = 'info') {
-    // Simple toast notification - you can enhance this with a toast library
-    const toast = document.createElement('div');
-    toast.className = `fixed top-4 right-4 px-6 py-3 rounded-lg text-white z-50 ${
-        type === 'success' ? 'bg-green-500' : 
-        type === 'error' ? 'bg-red-500' : 
-        type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
-    }`;
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => toast.remove(), 300);
-    }, 300);
-}
-
-// Add keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    // Ctrl/Cmd + A to select all
-    if ((e.ctrlKey || e.metaKey) && e.key === 'a' && !e.target.matches('input[type="text"], textarea')) {
-        e.preventDefault();
-        const checkAllBox = document.getElementById('checkAll');
-        if (checkAllBox) checkAllBox.click();
-    }
-    
-    // Delete key to delete selected
-    if (e.key === 'Delete' && !e.target.matches('input, textarea')) {
-        const deleteBtn = document.getElementById('deleteSelectedBtn');
-        if (deleteBtn && !deleteBtn.disabled) {
-            deleteBtn.click();
-        }
-    }
+    // Jalankan update setiap 1 detik
+    updateAllTimers();
+    setInterval(updateAllTimers, 1000);
 });
 </script>
 @endsection
