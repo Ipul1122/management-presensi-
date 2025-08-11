@@ -157,11 +157,11 @@
             <h2 class="text-xl font-semibold text-gray-800">Daftar Murid</h2>
             <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">{{ $totalMurid }} murid</span>
         </div>
-        <div class="flex items-center space-x-3">
+        {{-- <div class="flex items-center space-x-3">
             <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm font-medium">
                 📊 Export Data
             </button>
-        </div>
+        </div> --}}
     </div>
 </div>
 
