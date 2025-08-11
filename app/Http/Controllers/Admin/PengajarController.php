@@ -13,7 +13,8 @@ class PengajarController extends Controller
     public function index()
     {
         $pengajars = Pengajar::all();
-        return view('admin.pengajar.index', compact('pengajars'));
+        $unreadCount = NotifikasiAdmin::where('is_read', false)->count();
+        return view('admin.pengajar.index', compact('pengajars', 'unreadCount'));
     }
 
     public function create()

@@ -16,7 +16,9 @@ class MuridController extends Controller
         public function index()
     {
         $murids = Murid::orderBy('created_at', 'desc')->paginate(10); 
-        return view('admin.murid.index', compact('murids'));
+        $unreadCount = NotifikasiAdmin::where('is_read', false)->count();
+
+        return view('admin.murid.index', compact('murids', 'unreadCount'));
     }
 
 
