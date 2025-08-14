@@ -101,9 +101,9 @@
                 <table class="w-full modern-table">
                     <thead>
                         <tr class="bg-gradient-to-r from-gray-50 to-gray-100">
-                            <th class="px-6 py-4 text-left">
+                            {{-- <th class="px-6 py-4 text-left">
                                 <input type="checkbox" id="selectAll" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
-                            </th>
+                            </th> --}}
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Tanggal</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Pukul</th>
                             <th class="px-6 py-4 text-left font-semibold text-gray-700">Nama Jadwal</th>
@@ -117,10 +117,10 @@
                     <tbody class="divide-y divide-gray-100">
                         @foreach ($jadwalBulanIni as $jadwal)
                             <tr class="hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 transition-all duration-200">
-                                <td class="px-6 py-4">
+                                {{-- <td class="px-6 py-4">
                                     <input type="checkbox" name="selected_jadwals[]" value="{{ $jadwal->id }}" 
                                         class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
-                                </td>
+                                </td> --}}
                                 <td class="px-6 py-4">
                                     <div class="flex items-center space-x-2">
                                         {{-- TANGGAL JADWAL --}}

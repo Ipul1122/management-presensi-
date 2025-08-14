@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MuridAbsensi;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RiwayatMuridAbsensiUserController extends Controller
 {
@@ -49,7 +50,10 @@ class RiwayatMuridAbsensiUserController extends Controller
             ->get();
 
         // Jika tanggal valid, ambil data absensi untuk tanggal tersebut
-$absensiTanggal = collect();
+$absensiTanggal = new LengthAwarePaginator([], 0, 5, 1, [
+    'path' => request()->url(),
+    'query' => request()->query(),
+]);
 if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
     $tanggalFormat = Carbon::createFromFormat('Y-m-d', $bulanDipilih . '-' . str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT));
 
@@ -63,8 +67,11 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
     if ($muridDipilih) {
         $query->where('nama_murid', $muridDipilih);
     }
-
-    $absensiTanggal = $query->get();
+  $absensiTanggal = $query->paginate(5)->appends([
+        'bulan' => $bulanDipilih,
+        'murid' => $muridDipilih,
+        'tanggal' => $tanggalDipilih,
+    ]);
 }
 
         // Jika murid dipilih, ambil riwayat absensi murid tersebut dalam bulan ini

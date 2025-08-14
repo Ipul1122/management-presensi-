@@ -436,6 +436,9 @@
         </div>
     </div>
 @endif
+
+
+
 {{-- ----------------------------------------------- --}}
 
 {{-- Data Absensi Tanggal Tertentu --}}
@@ -444,10 +447,10 @@
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
                 <span class="bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">📅</span>
-                Absensi Tanggal {{ $tanggalDipilih }} {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->translatedFormat('F Y') }}
+                Absensi Tanggal {{ $tanggalDipilih }} {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->locale('id')->translatedFormat('F Y') }}
             </h2>
             <div class="text-sm bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-semibold">
-                {{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulanDipilih.'-'.str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT))->translatedFormat('l') }}
+                {{ \Carbon\Carbon::createFromFormat(    'Y-m-d',$bulanDipilih . '-' . str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT))->locale('id')->translatedFormat('l') }}
             </div>
         </div>
 
@@ -532,6 +535,10 @@
     </div>
 @endif
 
+{{-- Pagination --}}
+<div class="mt-4">
+    {{ $absensiTanggal->links('pagination::simple-tailwind') }}
+</div>
 
 {{-- ----------------------------------------------- --}}
 
