@@ -367,15 +367,15 @@
                         <th class="px-6 py-4 text-left rounded-tl-xl font-semibold">Tanggal</th>
                         <th class="px-6 py-4 text-center font-semibold">Status</th>
                         <th class="px-6 py-4 text-left font-semibold">Catatan</th>
-                        <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th>
+                        {{-- <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Aksi</th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($riwayatMurid as $riwayat)
                         <tr class="table-row-yellow border-b border-gray-100 hover:shadow-md transition-all duration-200">
                             <td class="px-6 py-4 font-medium text-gray-800">
-                                {{ \Carbon\Carbon::parse($riwayat->tanggal_absen)->translatedFormat('d F Y') }}
-                                <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($riwayat->tanggal_absen)->translatedFormat('l') }}</div>
+                                {{ \Carbon\Carbon::parse($riwayat->tanggal_absen)->locale('id')->isoFormat('DD MMM YYYY') }}
+                                <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($riwayat->tanggal_absen)->locale('id')->isoFormat('DD MMM YYYY') }}</div>
                             </td>
                             <td class="px-6 py-4 text-center">
                                 @php
@@ -445,10 +445,10 @@
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
                 <span class="bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">📅</span>
-                Absensi Tanggal {{ $tanggalDipilih }} {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->translatedFormat('F Y') }}
+                Absensi Tanggal {{ $tanggalDipilih }} {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->locale('id')->isoFormat('MMMM') }}
             </h2>
             <div class="text-sm bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-semibold">
-                {{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulanDipilih.'-'.str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT))->translatedFormat('l') }}
+                {{ \Carbon\Carbon::createFromFormat(    'Y-m-d',$bulanDipilih . '-' . str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT))->locale('id')->translatedFormat('l') }}
             </div>
         </div>
 
@@ -537,6 +537,10 @@
     </div>
 @endif
 
+{{-- Pagination --}}
+<div class="mt-4">
+    {{ $absensiTanggal->links('pagination::simple-tailwind') }}
+</div>
 
 {{-- ----------------------------------------------- --}}
 

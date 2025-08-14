@@ -122,27 +122,37 @@
             <p class="text-gray-600 text-lg">Kelola dan pantau kehadiran murid dengan mudah</p>
         </div>
 
-        {{-- Filter Card --}}
-        <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 hover-scale fade-in">
-            <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                <span class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">📅</span>
-                Filter Periode
-            </h2>
-            
-            <form method="GET" action="{{ route('admin.riwayatMurid.index') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                    <label for="bulan" class="block text-sm font-semibold text-gray-700">Pilih Bulan:</label>
-                    <select name="bulan" id="bulan" onchange="this.form.submit()" 
-                            class="w-full border-2 border-gray-200 px-4 py-3 rounded-xl shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200">
-                        @foreach ($bulanList as $bln)
-                            <option value="{{ $bln }}" {{ request('bulan') == $bln ? 'selected' : '' }}>
-                                {{ \Carbon\Carbon::parse($bln)->translatedFormat('F Y') }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </form>
+    {{-- Filter Card --}}
+<div class="bg-white rounded-2xl shadow-xl p-6 mb-8 hover-scale fade-in">
+    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+        <span class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">📅</span>
+        Filter Periode
+    </h2>
+    
+    <form method="GET" action="{{ route('admin.riwayatMurid.index') }}" class="flex flex-col md:flex-row gap-4 items-end">
+        {{-- Pilih Bulan --}}
+        <div class="flex-1">
+            <label for="bulan" class="block text-sm font-semibold text-gray-700">Pilih Bulan:</label>
+            <select name="bulan" id="bulan" onchange="this.form.submit()" 
+                    class="w-full border-2 border-gray-200 px-4 py-2 rounded-xl shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200">
+                @foreach ($bulanList as $bln)
+                    <option value="{{ $bln }}" {{ request('bulan') == $bln ? 'selected' : '' }}>
+                        {{ \Carbon\Carbon::parse($bln)->translatedFormat('F Y') }}
+                    </option>
+                @endforeach
+            </select>
         </div>
+
+        {{-- Tombol Export PDF --}}
+        <div>
+            <a href="{{ route('admin.riwayatMurid.exportPdf', ['bulan' => $bulanDipilih]) }}" target="_blank"
+               class="bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-xl shadow-md font-semibold whitespace-nowrap">
+               Konversi PDF Bulan {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->locale('id')->translatedFormat('F Y') }}
+            </a>
+        </div>
+    </form>
+</div>
+
 
         {{-- Rekap Kehadiran Section --}}
         @if (!empty($rekap && count($rekap)) > 0)
@@ -208,21 +218,6 @@
         Filter Detail
     </h2>
     
-            {{-- BUTTON EXPORT PDF --}}
-
-        {{-- Tombol Export PDF --}}
-            <form action="{{ route('admin.riwayatMurid.exportPdf') }}" method="GET" target="_blank" class="mt-4">
-                <input type="hidden" name="bulan" value="{{ $bulanDipilih }}">
-                <button type="submit"
-                    class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl shadow-md font-semibold">
-                    📄 Export PDF Bulan {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->translatedFormat('F Y') }}
-                </button>
-            </form>
-
-
-        {{--  --}}
-
-
     <form method="GET" id="filterForm">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {{-- Dropdown Bulan --}}
@@ -457,10 +452,10 @@
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
                 <span class="bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">📅</span>
-                Absensi Tanggal {{ $tanggalDipilih }} {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->translatedFormat('F Y') }}
+                Absensi Tanggal {{ $tanggalDipilih }} {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->locale('id')->translatedFormat('F Y') }}
             </h2>
             <div class="text-sm bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-semibold">
-                {{ \Carbon\Carbon::createFromFormat('Y-m-d', $bulanDipilih.'-'.str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT))->translatedFormat('l') }}
+                {{ \Carbon\Carbon::createFromFormat(    'Y-m-d',$bulanDipilih . '-' . str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT))->locale('id')->translatedFormat('l') }}
             </div>
         </div>
 
@@ -548,6 +543,11 @@
         </div>
     </div>
 @endif
+
+{{-- Pagination --}}
+<div class="mt-4">
+    {{ $absensiTanggal->links('pagination::simple-tailwind') }}
+</div>
 
 
 {{-- ----------------------------------------------- --}}
