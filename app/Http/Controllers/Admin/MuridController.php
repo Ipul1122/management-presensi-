@@ -31,38 +31,57 @@ class MuridController extends Controller
 public function store(Request $request)
 {
     Log::info('MuridController@store called', ['request' => $request->all()]);
+
+    // Validasi untuk array
     $validatedData = $request->validate([
-        'nama_anak' => 'required|string|max:255',
-        'foto_anak' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
-        'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-        'alamat' => 'required|string',
-        'kelas' => 'required|string',
-        'jenis_alkitab' => 'required|in:iqro,Al-Quran',
-        'tanggal_daftar' => 'required|date',
-        'nomor_telepon' => 'required|string|max:20',
-        'ayah' => 'required|string|max:255',
-        'ibu' => 'required|string|max:255',
+        'nama_anak.*' => 'required|string|max:255',
+        'foto_anak.*' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+        'jenis_kelamin.*' => 'required|in:Laki-laki,Perempuan',
+        'alamat.*' => 'required|string',
+        'kelas.*' => 'required|string',
+        'jenis_alkitab.*' => 'required|in:iqro,Al-Quran',
+        'tanggal_daftar.*' => 'required|date',
+        'nomor_telepon.*' => 'required|string|max:20',
+        'ayah.*' => 'required|string|max:255',
+        'ibu.*' => 'required|string|max:255',
     ]);
 
+    $count = count($request->nama_anak); // Jumlah pendaftaran
 
-    NotifikasiAdmin::create([
-        'aksi' => 'Admin Tambah Data Murid',
-        'deskripsi' => 'Admin menambahkan Murid bernama ' . $validatedData['nama_anak'],
-    ]);  
+    for ($i = 0; $i < $count; $i++) {
+        $muridData = [
+            'nama_anak'      => $request->nama_anak[$i],
+            'jenis_kelamin'  => $request->jenis_kelamin[$i],
+            'alamat'         => $request->alamat[$i],
+            'kelas'          => $request->kelas[$i],
+            'jenis_alkitab'  => $request->jenis_alkitab[$i],
+            'tanggal_daftar' => $request->tanggal_daftar[$i],
+            'nomor_telepon'  => $request->nomor_telepon[$i],
+            'ayah'           => $request->ayah[$i],
+            'ibu'            => $request->ibu[$i],
+        ];
 
-    // Simpan foto jika ada
-    if ($request->hasFile('foto_anak')) {
-        $validatedData['foto_anak'] = $request->file('foto_anak')->store('foto_anak', 'public');
+        // Upload foto jika ada
+        if (isset($request->foto_anak[$i]) && $request->foto_anak[$i] instanceof \Illuminate\Http\UploadedFile) {
+            $muridData['foto_anak'] = $request->foto_anak[$i]->store('foto_anak', 'public');
+        }
+
+        // Simpan ke database
+        $murid = Murid::create($muridData);
+
+        // Buat notifikasi
+        NotifikasiAdmin::create([
+            'aksi'       => 'Admin Tambah Data Murid',
+            'deskripsi'  => 'Admin menambahkan Murid bernama ' . $murid->nama_anak,
+        ]);
+
+        Log::info('MuridController@store success', ['data' => $muridData]);
     }
 
-    // Simpan ke database
-    Murid::create($validatedData);
-    Log::info('MuridController@store success', ['data' => $validatedData]);
-
-    // Redirect ke halaman index dengan flash message
     return redirect()->route('admin.murid.index')
-                    ->with('success', 'Data telah dibuat.');
+                    ->with('success', 'Semua data pendaftaran berhasil disimpan.');
 }
+
 
 public function edit($id)
 {

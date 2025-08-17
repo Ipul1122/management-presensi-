@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('admin.murid.store') }}" method="POST" enctype="multipart/form-data" class="p-8" id="formTambahMurid">
+                <form action="{{ route('admin.murid.store') }}" method="POST" enctype="multipart/form-data" class="p-8" id="formTambahMurid">
                 @csrf
 
                 <!-- Error Messages -->
@@ -42,251 +42,190 @@
                     </div>
                 @endif
 
-                <!-- Photo Upload Section -->
-                <div class="mb-8">
-                    <label class="block text-sm font-semibold text-gray-700 mb-4">
-                        Foto Anak <span class="text-red-500">*</span>
-                    </label>
-                    <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-                        <div class="relative">
-                            <div class="w-32 h-32 border-3 border-dashed border-gray-300 rounded-2xl flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 transition-all duration-300 hover:border-blue-400 group">
-                                <img id="preview" src="#" alt="Preview" class="w-full h-full object-cover rounded-2xl hidden">
-                                <div id="placeholder" class="text-center">
-                                    <svg class="w-12 h-12 text-gray-400 mx-auto mb-2 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    <p class="text-xs text-gray-500 font-medium">Upload Foto</p>
+                <!-- Container untuk semua form -->
+                <div id="formContainer">
+
+                    <!-- Satu set form pendaftaran -->
+                    <div class="form-pendaftaran border rounded-2xl p-6 mb-6 bg-white relative">
+                        <button type="button" class="btnHapusForm absolute top-2 right-2 text-red-500 hover:text-red-700 hidden">
+                            ✕
+                        </button>
+
+                        <!-- Foto Anak -->
+                        <div class="mb-8">
+                            <label class="block text-sm font-semibold text-gray-700 mb-4">
+                                Foto Anak <span class="text-red-500">*</span>
+                            </label>
+                            <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                                <div class="relative">
+                                    <div class="w-32 h-32 border-3 border-dashed border-gray-300 rounded-2xl flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 transition-all duration-300 hover:border-blue-400 group">
+                                        <img src="#" alt="Preview" class="previewFoto w-full h-full object-cover rounded-2xl hidden">
+                                        <div class="placeholder text-center">
+                                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-2 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            <p class="text-xs text-gray-500 font-medium">Upload Foto</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 text-center sm:text-left">
+                                    <label class="cursor-pointer">
+                                        <div class="inline-flex items-center px-6 py-3 border-2 border-blue-200 rounded-xl shadow-sm text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200">
+                                            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                            </svg>
+                                            Pilih Foto
+                                        </div>
+                                        <input type="file" name="foto_anak[]" accept=".jpg,.jpeg,.png" class="sr-only inputFoto" required>
+                                    </label>
+                                    <p class="text-xs text-gray-500 mt-2">JPG, JPEG, PNG (Maksimal 2MB)</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-1 text-center sm:text-left">
-                            <label for="foto_anak" class="cursor-pointer">
-                                <div class="inline-flex items-center px-6 py-3 border-2 border-blue-200 rounded-xl shadow-sm text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200">
-                                    <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                    </svg>
-                                    Pilih Foto
+
+                        <!-- Grid Form -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- Left Column -->
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Anak <span class="text-red-500">*</span></label>
+                                    <input type="text" name="nama_anak[]" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4" placeholder="Masukkan nama lengkap anak" required>
                                 </div>
-                            </label>
-                            <input type="file" name="foto_anak" id="foto_anak" accept=".jpg,.jpeg,.png" class="sr-only" required>
-                            <p class="text-xs text-gray-500 mt-2">JPG, JPEG, PNG (Maksimal 2MB)</p>
-                            <div id="foto_error" class="text-sm text-red-500 hidden mt-2"></div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Jenis Kelamin <span class="text-red-500">*</span></label>
+                                    <select name="jenis_kelamin[]" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4" required>
+                                        <option value="">Pilih Jenis Kelamin</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Ayah <span class="text-red-500">*</span></label>
+                                    <input type="text" name="ayah[]" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4" placeholder="Masukkan nama ayah" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Ibu <span class="text-red-500">*</span></label>
+                                    <input type="text" name="ibu[]" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4" placeholder="Masukkan nama ibu" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Kelas <span class="text-red-500">*</span></label>
+                                    <select name="kelas[]" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4" required>
+                                        <option value="">Pilih Kelas</option>
+                                        @for ($i = 1; $i <= 9; $i++)
+                                            <option value="{{ $i }}">Kelas {{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Nomor Telepon <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="tel" name="nomor_telepon[]" id 
+                                        class="w-full border-2 border-gray-200 rounded-xl py-3 px-4 nomor-telepon" 
+                                        placeholder="Masukkan nomor telepon" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Daftar <span class="text-red-500">*</span></label>
+                                    <input type="date" name="tanggal_daftar[]" value="{{ date('Y-m-d') }}" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Al-Kitab <span class="text-red-500">*</span></label>
+                                    <select name="jenis_alkitab[]" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4" required>
+                                        <option value="">Pilih Al-Kitab</option>
+                                        <option value="iqro">Iqro</option>
+                                        <option value="Al-Quran">Al-Qur'an</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Alamat <span class="text-red-500">*</span></label>
+                                    <textarea name="alamat[]" rows="4" class="w-full border-2 border-gray-200 rounded-xl py-3 px-4 resize-none" placeholder="Masukkan alamat lengkap" required></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
-                <!-- Form Fields Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Left Column -->
-                    <div class="space-y-6">
-                        <!-- Nama Anak -->
-                        <div class="form-group">
-                            <label for="nama_anak" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Nama Anak <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </div>
-                                <input type="text" name="nama_anak" id="nama_anak" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 placeholder-gray-400" 
-                                    placeholder="Masukkan nama lengkap anak" required>
-                            </div>
-                        </div>
-
-                        <!-- Jenis Kelamin -->
-                        <div class="form-group">
-                            <label for="jenis_kelamin" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Jenis Kelamin <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                                    </svg>
-                                </div>
-                                <select name="jenis_kelamin" id="jenis_kelamin" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 appearance-none bg-white" required>
-                                    <option value="">Pilih Jenis Kelamin</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Nama Ayah -->
-                        <div class="form-group">
-                            <label for="ayah" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Nama Ayah <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </div>
-                                <input type="text" name="ayah" id="ayah" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 placeholder-gray-400" 
-                                    placeholder="Masukkan nama ayah" required>
-                            </div>
-                        </div>
-
-                        <!-- Nama Ibu -->
-                        <div class="form-group">
-                            <label for="ibu" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Nama Ibu <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </div>
-                                <input type="text" name="ibu" id="ibu" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 placeholder-gray-400" 
-                                    placeholder="Masukkan nama ibu" required>
-                            </div>
-                        </div>
-
-                        <!-- Kelas -->
-                        <div class="form-group">
-                            <label for="kelas" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Kelas <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                    </svg>
-                                </div>
-                                <select name="kelas" id="kelas" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 appearance-none bg-white" required>
-                                    <option value="">Pilih Kelas</option>
-                                    @for ($i = 1; $i <= 9; $i++)
-                                        <option value="{{ $i }}">Kelas {{ $i }}</option>
-                                    @endfor
-                                </select>
-                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column -->
-                    <div class="space-y-6">
-                        <!-- Nomor Telepon -->
-                        <div class="form-group">
-                            <label for="nomor_telepon" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Nomor Telepon <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                    </svg>
-                                </div>
-                                <input type="tel" name="nomor_telepon" id="nomor_telepon" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 placeholder-gray-400" 
-                                    placeholder="Masukkan nomor telepon" required>
-                            </div>
-                        </div>
-
-                        <!-- Tanggal Daftar -->
-                        <div class="form-group">
-                            <label for="tanggal_daftar" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Tanggal Daftar <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <input type="date" name="tanggal_daftar" id="tanggal_daftar" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700" 
-                                    value="{{ date('Y-m-d') }}" required>
-                            </div>
-                        </div>
-
-                        <!-- Al-Kitab -->
-                        <div class="form-group">
-                            <label for="jenis_alkitab" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Al-Kitab <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                    </svg>
-                                </div>
-                                <select name="jenis_alkitab" id="jenis_alkitab" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 appearance-none bg-white" required>
-                                    <option value="">Pilih Al-Kitab</option>
-                                    <option value="iqro">Iqro</option>
-                                    <option value="Al-Quran">Al-Qur'an</option>
-                                </select>
-                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Alamat -->
-                        <div class="form-group">
-                            <label for="alamat" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Alamat <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute top-4 left-4 pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </div>
-                                <textarea name="alamat" id="alamat" rows="4" 
-                                    class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-200 text-gray-700 placeholder-gray-400 resize-none" 
-                                    placeholder="Masukkan alamat lengkap" required></textarea>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Tombol Tambah Daftar -->
+                <div class="mt-6">
+                    <button type="button" id="btnTambahDaftar" class="px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700">
+                        + Tambah Daftar
+                    </button>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row justify-between items-center mt-12 pt-8 border-t border-gray-200 space-y-4 sm:space-y-0">
                     <a href="{{ route('admin.murid.index') }}" 
-                        class="inline-flex items-center px-6 py-3 border-2 border-gray-300 rounded-xl text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200 font-medium">
-                        <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-                        </svg>
+                        class="inline-flex items-center px-6 py-3 border-2 border-gray-300 rounded-xl text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400">
                         Kembali
                     </a>
-                    
                     <button type="submit" id="submitBtn"
-                        class="inline-flex items-center px-8 py-3 border border-transparent rounded-xl text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                        </svg>
-                        <span id="submitText">Simpan Data</span>
+                        class="inline-flex items-center px-8 py-3 border border-transparent rounded-xl text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
+                        Simpan Data
                     </button>
                 </div>
+
             </form>
         </div>
     </div>
 </div>
 
 <script>
+
+document.getElementById('btnTambahDaftar').addEventListener('click', function () {
+    let container = document.getElementById('formContainer');
+    let originalForm = container.querySelector('.form-pendaftaran');
+    let clone = originalForm.cloneNode(true);
+
+    // Reset semua input di clone
+    clone.querySelectorAll('input, textarea, select').forEach(function (el) {
+        el.value = '';
+        if (el.type === 'file') el.value = null;
+    });
+
+    // Tampilkan tombol hapus
+    clone.querySelector('.btnHapusForm').classList.remove('hidden');
+
+    // Reset preview foto
+    clone.querySelector('.previewFoto').classList.add('hidden');
+    clone.querySelector('.placeholder').classList.remove('hidden');
+
+    container.appendChild(clone);
+});
+
+// Event hapus form
+document.addEventListener('click', function(e){
+    if(e.target.classList.contains('btnHapusForm')){
+        e.target.closest('.form-pendaftaran').remove();
+    }
+});
+
+// Event preview foto
+document.addEventListener('change', function(e){
+    if(e.target.classList.contains('inputFoto')){
+        let file = e.target.files[0];
+        let preview = e.target.closest('.form-pendaftaran').querySelector('.previewFoto');
+        let placeholder = e.target.closest('.form-pendaftaran').querySelector('.placeholder');
+
+        if(file){
+            let reader = new FileReader();
+            reader.onload = function(evt){
+                preview.src = evt.target.result;
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        } else {
+            preview.classList.add('hidden');
+            placeholder.classList.remove('hidden');
+        }
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('formTambahMurid');
     const submitBtn = document.getElementById('submitBtn');
