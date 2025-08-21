@@ -218,7 +218,7 @@
                         <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <a href="https://wa.me/085693672730" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -228,19 +228,19 @@
                 <div class="space-y-4">
                     <h3 class="text-lg font-semibold">Menu Utama</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-blue-100 hover:text-white transition-colors flex items-center">
+                        <li><a href="{{ route('index') }}" class="text-blue-100 hover:text-white transition-colors flex items-center">
                             <i class="fas fa-home mr-2"></i>Beranda
                         </a></li>
-                        <li><a href="#" class="text-blue-100 hover:text-white transition-colors flex items-center">
+                        <li><a href="{{ route('user.informasi.dataMurid.index') }}" class="text-blue-100 hover:text-white transition-colors flex items-center">
                             <i class="fas fa-info-circle mr-2"></i>Informasi
                         </a></li>
-                        <li><a href="#" class="text-blue-100 hover:text-white transition-colors flex items-center">
+                        <li><a href="{{route('user.galeri.index')}}" class="text-blue-100 hover:text-white transition-colors flex items-center">
                             <i class="fas fa-images mr-2"></i>Galeri
                         </a></li>
-                        <li><a href="#" class="text-blue-100 hover:text-white transition-colors flex items-center">
+                        <li><a href="{{route('user.pendaftaran.index')}}" class="text-blue-100 hover:text-white transition-colors flex items-center">
                             <i class="fas fa-user-plus mr-2"></i>Pendaftaran
                         </a></li>
-                        <li><a href="#" class="text-blue-100 hover:text-white transition-colors flex items-center">
+                        <li><a href="{{route('user.kontak.index')}}" class="text-blue-100 hover:text-white transition-colors flex items-center">
                             <i class="fas fa-envelope mr-2"></i>Kontak
                         </a></li>
                     </ul>

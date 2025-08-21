@@ -33,7 +33,7 @@ use App\Http\Controllers\User\DataMuridController;
 use App\Http\Controllers\User\JadwalUserController;
 // use App\Http\Controllers\User\RiwayatJadwalUserController;
 use App\Http\Controllers\User\RiwayatMuridAbsensiUserController;
-
+use App\Http\Controllers\SitemapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,8 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Riwayat Murid
         Route::get('riwayatMurid', [RiwayatMuridController::class, 'index'])->name('riwayatMurid.index');
-        Route::get('riwayatMurid/{id}/edit', [RiwayatMuridController::class, 'edit'])->name('riwayatMurid.edit');
-        Route::put('riwayatMurid/{id}', [RiwayatMuridController::class, 'update'])->name('riwayatMurid.update');
+        // Route::put('riwayatMurid/{id}', [RiwayatMuridController::class, 'update'])->name('riwayatMurid.update');
         Route::delete('riwayatMurid/{id}', [RiwayatMuridController::class, 'destroy'])->name('riwayatMurid.hapus');
         Route::resource('riwayatMurid', RiwayatMuridController::class);
         // PDF Export
@@ -109,16 +108,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/pengajar-delete-all', [PengajarController::class, 'deleteAll'])->name('pengajar.deleteAll');
         
         // NOTIFIKASI
-        Route::get('notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
-        // HAPUS BEBERAPA PILIHAN NOTIFIKASI
-        Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
-        Route::delete('/notifikasi-delete-selected', [NotifikasiController::class, 'bulkDelete'])->name('notifikasi.bulkDelete');
-        Route::get('/notifikasi-delete-all', [NotifikasiController::class, 'deleteAll'])->name('notifikasi.deleteAll');
-        
+        Route::prefix('notifikasi')->name('notifikasi.')->group(function () {
+            Route::get('/', [NotifikasiController::class, 'index'])->name('index');
+            Route::delete('/delete-selected', [NotifikasiController::class, 'bulkDelete'])->name('bulkDelete');
+            Route::delete('/delete-all', [NotifikasiController::class, 'deleteAll'])->name('deleteAll');
+            Route::get('/times', [NotifikasiController::class, 'getNotificationTimes'])->name('times');
+        });
+
         // JADWAL
         Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
-        Route::get(' jadwal/{id}' , [JadwalController::class, 'edit'])->name('jadwal.edit');
-        Route::put(' jadwal/{id}' , [JadwalController::class, 'update'])->name('jadwal.update');
+        // Route::get(' jadwal/{id}' , [JadwalController::class, 'edit'])->name('jadwal.edit');
+        // Route::put(' jadwal/{id}' , [JadwalController::class, 'update'])->name('jadwal.update');
         // JADWAL HAPUS BEBERAPA PILIHAN ATAU SEMUA
         Route::delete('/jadwal-delete-selected', [JadwalController::class, 'bulkDelete'])->name('jadwal.bulkDelete');
         Route::get('/jadwal-delete-all', [JadwalController::class, 'deleteAll'])->name('jadwal.deleteAll');
@@ -155,7 +155,7 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     // Routes Murid Absensis
     Route::resource('muridAbsensi', MuridAbsensiController::class);
     Route::get('muridAbsensi/create', [MuridAbsensiController::class, 'create'])->name('muridAbsensi.create');
-    Route::post('muridAbsensi/store', [MuridAbsensiController::class, 'store'])->name('muridAbsensi.store');
+    // Route::post('muridAbsensi/store', [MuridAbsensiController::class, 'store'])->name('muridAbsensi.store');
 
     // Route edit dan hapus muridAbsensi
     Route::get('/muridAbsensi/{id}/edit', [MuridAbsensiController::class, 'edit'])->name('pengajar.muridAbsensi.edit');
@@ -164,8 +164,8 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 
     // Riwayat Murid Absensi
     Route::get('riwayatMuridAbsensi', [RiwayatMuridAbsensiController::class, 'index'])->name('riwayatMuridAbsensi.index');
-    Route::get('riwayatMuridAbsensi/{id}/edit', [RiwayatMuridAbsensiController::class, 'edit'])->name('riwayatMuridAbsensi.edit');
-    Route::put('riwayatMuridAbsensi/{id}', [RiwayatMuridAbsensiController::class, 'update'])->name('riwayatMuridAbsensi.update');
+    // Route::get('riwayatMuridAbsensi/{id}/edit', [RiwayatMuridAbsensiController::class, 'edit'])->name('riwayatMuridAbsensi.edit');
+    // Route::put('riwayatMuridAbsensi/{id}', [RiwayatMuridAbsensiController::class, 'update'])->name('riwayatMuridAbsensi.update');
     Route::delete('riwayatMuridAbsensi/{id}', [RiwayatMuridAbsensiController::class, 'destroy'])->name('riwayatMuridAbsensi.hapus');
     Route::resource('riwayatMuridAbsensi', RiwayatMuridAbsensiController::class);
         
@@ -197,6 +197,10 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 | USER ROUTES
 |--------------------------------------------------------------------------
 */
+
+
+// Sitemap 
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 // user
 Route::get('/', [HomeController::class, 'index'])->name('index');

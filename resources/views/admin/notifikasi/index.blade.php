@@ -2,163 +2,26 @@
 
 @section('content')
 
-    <style>
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-.animate-fadeIn {
-    animation: fadeIn 0.3s ease-out;
-}
-
-.notification-row:hover {
-    transform: translateX(4px);
-}
-
-.notification-card:hover {
-    transform: translateX(2px);
-}
-
-/* Custom checkbox styling */
-input[type="checkbox"]:checked {
-    background-color: #3B82F6;
-    border-color: #3B82F6;
-}
-
-/* Timer styling */
-/* Timer styling */
-.timer-circle {
-    position: relative;
-}
-
-.timer-progress {
-    transition: stroke-dashoffset 1s linear;
-    stroke-linecap: round;
-}
-
-.timer-text {
-    font-family: 'Courier New', monospace;
-    font-weight: 600;
-}
-
-.timer-text-mobile {
-    font-family: 'Courier New', monospace;
-    font-weight: 600;
-}
-
-/* Expired notification styling */
-.notification-expired {
-    opacity: 0.7;
-    background-color: #FEF2F2 !important;
-    border-left: 4px solid #EF4444;
-}
-
-.notification-expired .timer-text,
-.notification-expired .timer-text-mobile {
-    color: #DC2626 !important;
-    font-weight: bold !important;
-}
-
-/* Pulse animation for near expiry */
-@keyframes pulse-red {
-    0%, 100% { 
-        color: #EF4444;
-        transform: scale(1);
-    }
-    50% { 
-        color: #DC2626;
-        transform: scale(1.1);
-    }
-}
-
-.timer-warning {
-    animation: pulse-red 1s infinite;
-}
-
-/* Progress circle animations */
-@keyframes progress-warning {
-    0%, 100% { 
-        stroke: #EF4444;
-    }
-    50% { 
-        stroke: #DC2626;
-    }
-}
-
-.timer-progress.warning {
-    animation: progress-warning 1s infinite;
-}
-
-/* Ensure SVG circles are properly initialized */
-.timer-circle svg circle {
-    stroke-width: 2;
-    fill: none;
-}
-
-.timer-circle svg circle:first-child {
-    stroke: #E5E7EB;
-}
-
-.timer-circle svg circle.timer-progress {
-    stroke: #EF4444;
-    stroke-dasharray: inherit;
-    stroke-dashoffset: 0;
-    transform-origin: center;
-}
-/* Grid system update for 13 columns */
-.grid-cols-13 {
-    grid-template-columns: repeat(13, minmax(0, 1fr));
-}
-
-.col-span-13 {
-    grid-column: span 13 / span 13;
-}
-
-/* Smooth transitions for all interactive elements */
-* {
-    transition: all 0.2s ease;
-}
-
-/* Loading state for buttons */
-.loading {
-    position: relative;
-}
-
-.loading::after {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    margin: auto;
-    border: 2px solid transparent;
-    border-top-color: #ffffff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Pulse animation for near expiry */
-@keyframes pulse-red {
-    0%, 100% { 
-        color: #EF4444;
-        transform: scale(1);
-    }
-    50% { 
-        color: #DC2626;
-        transform: scale(1.05);
-    }
-}
-
-.timer-warning {
-    animation: pulse-red 1s infinite;
-}
+<style>
+/* === CSS yang sudah ada tetap, saya singkat agar tidak kepanjangan === */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px);} to {opacity:1; transform:translateY(0);} }
+.animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+.notification-row:hover { transform: translateX(4px); }
+.notification-card:hover { transform: translateX(2px); }
+input[type="checkbox"]:checked { background-color: #3B82F6; border-color:#3B82F6;}
+.timer-circle { position: relative; }
+.timer-progress { transition: stroke-dashoffset 1s linear; stroke-linecap: round; }
+.timer-text, .timer-text-mobile { font-family: 'Courier New', monospace; font-weight: 600; }
+.notification-expired { opacity: .7; background-color:#FEF2F2!important; border-left:4px solid #EF4444; }
+.notification-expired .timer-text, .notification-expired .timer-text-mobile { color:#DC2626!important; font-weight:bold!important;}
+@keyframes pulse-red {0%,100%{color:#EF4444;transform:scale(1);}50%{color:#DC2626;transform:scale(1.05);}}
+.timer-warning{animation:pulse-red 1s infinite;}
+.grid-cols-13 {grid-template-columns:repeat(13,minmax(0,1fr));}
+.col-span-13 {grid-column:span 13 / span 13;}
+* { transition: all .2s ease; }
 </style>
-
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4 md:p-6">
     <!-- Header Section -->
@@ -263,13 +126,14 @@ input[type="checkbox"]:checked {
                                 <div class="col-span-1">Select</div>
                                 <div class="col-span-2">Aksi</div>
                                 <div class="col-span-5">Deskripsi</div>
-                                {{-- <div class="col-span-3">Waktu</div> --}}
                                 <div class="col-span-2">Timer</div>
                             </div>
                         </div>
                     @endif
                     
-                    <div class="notification-row border-b border-gray-100 hover:bg-blue-50 transition-all duration-200 px-6 py-4" data-notification-id="{{ $notif->id }}" data-created-at="{{ $notif->created_at->timestamp }}">
+                    <div class="notification-row border-b border-gray-100 hover:bg-blue-50 transition-all duration-200 px-6 py-4" 
+                        data-notification-id="{{ $notif->id }}" 
+                        data-created-at="{{ $notif->created_at->timestamp }}">
                         <div class="grid grid-cols-13 gap-4 items-center">
                             <div class="col-span-1">
                                 <input type="checkbox" name="ids[]" value="{{ $notif->id }}" 
@@ -287,12 +151,6 @@ input[type="checkbox"]:checked {
                             <div class="col-span-5">
                                 <p class="text-gray-900 font-medium">{{ $notif->deskripsi }}</p>
                             </div>
-                            {{-- <div class="col-span-3">
-                                <div class="flex items-center text-blue-500">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span class="text-sm">{{ $notif->created_at->diffForHumans() }}</span>
-                                </div>
-                            </div> --}}
                             <div class="col-span-2">
                                 <div class="timer-container">
                                     <div class="flex items-center space-x-2">
@@ -315,7 +173,9 @@ input[type="checkbox"]:checked {
 
                 <!-- Mobile Card View -->
                 <div class="md:hidden border-b border-gray-100">
-                    <div class="notification-card p-4 hover:bg-blue-50 transition-all duration-200" data-notification-id="{{ $notif->id }}" data-created-at="{{ $notif->created_at->timestamp }}">
+                    <div class="notification-card p-4 hover:bg-blue-50 transition-all duration-200" 
+                        data-notification-id="{{ $notif->id }}" 
+                        data-created-at="{{ $notif->created_at->timestamp }}">
                         <div class="flex items-start space-x-3">
                             <input type="checkbox" name="ids[]" value="{{ $notif->id }}" 
                                 class="notification-checkbox mt-1 w-5 h-5 text-blue-600 rounded border-2 border-gray-300 focus:ring-blue-500 focus:ring-2 transition-all">
@@ -369,8 +229,6 @@ input[type="checkbox"]:checked {
     </div>
 </div>
 
-<!-- Custom Styles -->
-
 <!-- Enhanced JavaScript -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -381,55 +239,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectedTextElement = document.getElementById('selectedText');
 
     function updateAllTimers() {
-    const now = Math.floor(Date.now() / 1000);
-
-    document.querySelectorAll('[data-notification-id]').forEach(row => {
-        const createdAt = parseInt(row.dataset.createdAt);
-        const elapsed = now - createdAt;
-
-        // 1. Update timer countdown
-        const remaining = Math.max(0, 300 - elapsed);
-        updateTimerDisplay(row, remaining);
-
-        // 2. Update field waktu real-time
-        updateRealTimeClock(row, createdAt, now);
-
-        // 3. Hapus jika expired
-        if (remaining <= 0) {
-            markAsExpired(row, row.dataset.notificationId);
-        }
-    });
-}
-
-function updateRealTimeClock(element, createdAt, now) {
-    const date = new Date(createdAt * 1000); // base waktu created_at
-    date.setSeconds(date.getSeconds() + (now - createdAt)); // tambah elapsed
-
-    // Format waktu Indonesia
-    const formatter = new Intl.DateTimeFormat('id-ID', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    });
-
-    const timeString = formatter.format(date);
-
-    // Update semua elemen yang punya class 'real-time-clock'
-    const timeFields = element.querySelectorAll('.real-time-clock');
-    timeFields.forEach(field => {
-        field.textContent = timeString;
-    });
-}
-
-
-    function updateElapsedTime(element, elapsedSeconds) {
-        const minutes = Math.floor(elapsedSeconds / 60);
-        const seconds = elapsedSeconds % 60;
-        const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-
-        const elapsedFields = element.querySelectorAll('.elapsed-time');
-        elapsedFields.forEach(field => {
-            field.textContent = timeString;
+        const now = Math.floor(Date.now() / 1000);
+        document.querySelectorAll('[data-notification-id]').forEach(row => {
+            const createdAt = parseInt(row.dataset.createdAt);
+            const elapsed = now - createdAt;
+            const remaining = Math.max(0, 300 - elapsed);
+            updateTimerDisplay(row, remaining);
+            if (remaining <= 0) {
+                markAsExpired(row, row.dataset.notificationId);
+            }
         });
     }
 
@@ -437,18 +255,10 @@ function updateRealTimeClock(element, createdAt, now) {
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
         const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-
         const timerTexts = element.querySelectorAll('.timer-text, .timer-text-mobile');
         timerTexts.forEach(text => {
-            if (remainingSeconds > 0) {
-                text.textContent = timeString;
-            } else {
-                text.textContent = 'EXPIRED';
-                text.style.color = '#DC2626';
-                text.style.fontWeight = 'bold';
-            }
+            text.textContent = remainingSeconds > 0 ? timeString : 'EXPIRED';
         });
-
         const progressCircles = element.querySelectorAll('.timer-progress');
         progressCircles.forEach(circle => {
             const radius = parseInt(circle.getAttribute('r'));
@@ -456,38 +266,36 @@ function updateRealTimeClock(element, createdAt, now) {
             const progress = (remainingSeconds / 300) * circumference;
             circle.style.strokeDasharray = circumference;
             circle.style.strokeDashoffset = circumference - progress;
-
-            if (remainingSeconds <= 60) {
-                circle.style.stroke = '#DC2626';
-            } else if (remainingSeconds <= 120) {
-                circle.style.stroke = '#F59E0B';
-            } else {
-                circle.style.stroke = '#EF4444';
-            }
-        });
-
-        timerTexts.forEach(text => {
-            if (remainingSeconds <= 30 && remainingSeconds > 0) {
-                text.classList.add('timer-warning');
-            } else {
-                text.classList.remove('timer-warning');
-            }
         });
     }
 
-    function markAsExpired(element) {
+    function markAsExpired(element, notifId) {
         if (element.classList.contains('notification-expired')) return;
         element.classList.add('notification-expired');
 
-        setTimeout(() => {
-            element.style.transition = 'all 0.5s ease-out';
-            element.style.opacity = '0';
-            element.style.transform = 'translateX(-100%)';
-            setTimeout(() => {
-                element.remove();
-                updateTotalCount();
-            }, 500);
-        }, 3000);
+        // Hapus dari database via AJAX
+        fetch(`/admin/notifikasi/auto-delete/${notifId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                setTimeout(() => {
+                    element.style.transition = 'all 0.5s ease-out';
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateX(-100%)';
+                    setTimeout(() => {
+                        element.remove();
+                        updateTotalCount();
+                    }, 500);
+                }, 1000);
+            }
+        })
+        .catch(err => console.error(err));
     }
 
     function updateTotalCount() {
@@ -510,20 +318,14 @@ function updateRealTimeClock(element, createdAt, now) {
         const checkedBoxes = document.querySelectorAll('.notification-checkbox:checked');
         const selectedCount = checkedBoxes.length / 2;
         selectedCountElement.textContent = selectedCount;
-        if (selectedCount === 0) {
-            selectedTextElement.textContent = 'Tidak ada yang dipilih';
-            deleteSelectedBtn.disabled = true;
-        } else {
-            selectedTextElement.textContent = `${selectedCount} dipilih`;
-            deleteSelectedBtn.disabled = false;
-        }
+        selectedTextElement.textContent = selectedCount === 0 ? 'Tidak ada yang dipilih' : `${selectedCount} dipilih`;
+        deleteSelectedBtn.disabled = selectedCount === 0;
     }
 
     notificationCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', updateSelectionUI);
     });
 
-    // Jalankan update setiap 1 detik
     updateAllTimers();
     setInterval(updateAllTimers, 1000);
 });
