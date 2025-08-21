@@ -64,17 +64,30 @@ class MuridAbsensiController extends Controller
 }
 
 
-    public function create(Request $request)
+ public function create(Request $request)
 {
+    // Ambil semua murid
     $murids = Murid::all();
-    $selectedMurid = null;
 
+    // Catatan terakhir per murid
+    $riwayatCatatan = MuridAbsensi::select('nama_murid', 'catatan')
+        ->whereNotNull('catatan')
+        ->orderByDesc('tanggal_absen')
+        ->get()
+        ->groupBy('nama_murid')
+        ->map(function($items) {
+            return $items->first()->catatan; // ambil catatan terbaru tiap murid
+        })
+        ->toArray();
+
+    $selectedMurid = null;
     if ($request->has('nama_murid')) {
         $selectedMurid = Murid::where('nama_anak', $request->nama_murid)->first();
     }
 
-    return view('pengajar.muridAbsensi.create', compact('murids', 'selectedMurid'));
+    return view('pengajar.muridAbsensi.create', compact('murids', 'selectedMurid', 'riwayatCatatan'));
 }
+
 
 
     public function edit($id)

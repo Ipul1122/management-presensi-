@@ -70,4 +70,22 @@ class NotifikasiController extends Controller
         
         return response()->json($times);
     }
+
+    /**
+     * API endpoint untuk hapus notifikasi by ID (auto delete dari AJAX)
+     */
+    public function autoDelete($id)
+    {
+        try {
+            $deleted = NotifikasiAdmin::where('id', $id)->delete();
+
+            if ($deleted) {
+                return response()->json(['success' => true]);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Notifikasi tidak ditemukan'], 404);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -90,7 +90,7 @@
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold gradient-text leading-tight">
                     Daftar TPA ? <br>
                     <span class="gradient-text-highlight">Disini aja</span> <br>
-                    tpanurhaq.my.id
+                    tpanurhaq.com
                 </h1>
                 <p class="text-gray-600 text-lg sm:text-xl">
                     Dibangun untuk mempermudah melihat perkembangan anak murid selama proses pembelajaran di TPA Nurul Haq.

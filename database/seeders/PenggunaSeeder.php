@@ -13,22 +13,22 @@ class PenggunaSeeder extends Seeder
 {
     // Admin
     Pengguna::create([
-        'username' => 'admin',
-        'password' => Hash::make('admin123'),
+        'username' => 'admintpa',
+        'password' => Hash::make(''),
         'role' => 'admin',
     ]);
 
     // Pengajar 1
     Pengguna::create([
-        'username' => 'pengajar1',
-        'password' => Hash::make('pengajar123'),
+        'username' => 'iqro',
+        'password' => Hash::make('iqro2025'),
         'role' => 'pengajar',
     ]);
 
     // Pengajar 2
     Pengguna::create([
-        'username' => 'pengajar2',
-        'password' => Hash::make('pengajar123'),
+        'username' => 'alquran',
+        'password' => Hash::make('alquran2025'),
         'role' => 'pengajar',
     ]);
 }
