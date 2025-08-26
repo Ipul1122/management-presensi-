@@ -75,4 +75,56 @@ $judul = "Riwayat Jadwal - $namaBulan $tahun";
 
     return $pdf->download("riwayat-jadwal-$bulan-$tahun.pdf");
 }
+
+
+public function bulkDelete(Request $request)
+{
+    $ids = array_filter(explode(',', (string) $request->input('ids', '')));
+    if (empty($ids)) {
+        return back()->withErrors(['ids' => 'Tidak ada data yang dipilih.']);
+    }
+    Jadwal::whereIn('id', $ids)->delete();
+    return back()->with('success', 'Jadwal terpilih berhasil dihapus.');
+}
+
+public function deleteAll(Request $request)
+{
+    // jika ingin batasi per filter (bulan/tahun), sesuaikan query
+    $bulan = $request->query('bulan');
+    $tahun = $request->query('tahun');
+
+    $q = Jadwal::query();
+    if ($bulan) {
+        $q->whereMonth('tanggal_jadwal', $bulan);
+    }
+    if ($tahun) {
+        $q->whereYear('tanggal_jadwal', $tahun);
+    }
+    $deleted = $q->delete();
+    return back()->with('success', "Berhasil menghapus {$deleted} jadwal.");
+}
+
+public function update(Request $request, $id)
+{
+    $data = $request->validate([
+        'nama_jadwal'          => 'required|string|max:255',
+        'tanggal_jadwal'       => 'required|date',
+        'pukul_jadwal'         => 'required|string|max:100',
+        'nama_pengajar_jadwal' => 'required|string|max:255',
+        'kegiatan_jadwal'      => 'nullable|string',
+        'gaji'                 => 'nullable|integer|min:0',
+    ]);
+
+    $jadwal = Jadwal::findOrFail($id);
+    $jadwal->update($data);
+
+    return back()->with('success', 'Jadwal berhasil diperbarui.');
+}
+
+public function destroy($id)
+{
+    Jadwal::findOrFail($id)->delete();
+    return back()->with('success', 'Jadwal berhasil dihapus.');
+}
+
 }
