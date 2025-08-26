@@ -97,7 +97,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Riwayat Jadwal
         Route::get('riwayatJadwal', [RiwayatJadwalController::class, 'index'])->name('riwayatJadwal.index');
         Route::get('riwayatJadwal/pdf', [RiwayatJadwalController::class, 'exportPdf'])->name('riwayatJadwal.pdf');
-
+        Route::delete('riwayatJadwal/bulk-delete', [RiwayatJadwalController::class, 'bulkDelete'])->name('riwayatJadwal.bulkDelete');
+        Route::delete('riwayatJadwal/delete-all', [RiwayatJadwalController::class, 'deleteAll'])->name('riwayatJadwal.deleteAll');
+        Route::get('riwayatJadwal/{id}/edit', [RiwayatJadwalController::class, 'edit'])->name('riwayatJadwal.edit');
+        Route::delete('riwayatJadwal/{id}', [RiwayatJadwalController::class, 'destroy'])->name('riwayatJadwal.destroy');
+        Route::put('riwayatJadwal/{id}', [RiwayatJadwalController::class, 'update'])->name('riwayatJadwal.update');
 
         
         // Tambahan fitur khusus
