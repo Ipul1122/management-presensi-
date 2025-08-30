@@ -42,9 +42,16 @@
 
         <a href="https://forms.gle/xwMYkaf2YXzuKiE99" 
             target="_blank"
-            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg shadow hover:bg-indigo-700 transition">
-            Daftar
+            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg shadow hover:bg-indigo-700 transition mr-4">
+            Daftar melalui G-Form
         </a>
+
+        <a href="{{ route('user.daftar.index') }}" 
+            class="inline-block bg-green-600 text-white my-5 px-10 py-3 rounded-full text-lg shadow hover:bg-green-700 transition">
+            Daftar melalui Web
+        </a>
+
+
     </div>
 </section>
 

@@ -263,7 +263,7 @@
 
                             <a href="{{ route('admin.riwayatMurid.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
                                 <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-folder-open text-white text-sm"></i>
+                                    <i class="fa-solid fa-clock-rotate-left text-white text-sm"></i>
                                 </div>
                                 <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Riwayat Murid</span>
                             </a>
@@ -360,6 +360,12 @@
                                     <i class="fas fa-table text-white text-sm"></i>
                                 </div>
                                 <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">SpreadSheets</span>
+                            </a>
+                            <a href="{{ route('admin.daftarMurid.index') }}" target="_blank" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
+                                    <i class="fa-solid fa-user-plus text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Pendaftaran Murid</span>
                             </a>
                         </div>
                     </div>
