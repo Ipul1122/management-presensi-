@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MuridController;
 use App\Http\Controllers\Admin\RiwayatMuridController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PengajarController;
+use App\Http\Controllers\Admin\DaftarMuridController;
 use App\Http\Controllers\Admin\NotifikasiController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\RiwayatJadwalController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\InformasiController;
 use App\Http\Controllers\User\GaleriController;
 use App\Http\Controllers\User\PendaftaranController;
+use App\Http\Controllers\User\DaftarController;  
 use App\Http\Controllers\User\KontakController;
 use App\Http\Controllers\User\TestimoniController;
 use App\Http\Controllers\User\DataPengajarController;
@@ -127,7 +129,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/jadwal-delete-selected', [JadwalController::class, 'bulkDelete'])->name('jadwal.bulkDelete');
         Route::get('/jadwal-delete-all', [JadwalController::class, 'deleteAll'])->name('jadwal.deleteAll');
         
-        // ADMIN TESTIMONI FROM USER
+        // Admin Daftar from User
+        Route::get('/daftar-murid', [DaftarMuridController::class, 'index'])->name('daftarMurid.index');
+        Route::post('daftar-murid/{id}/terima', [DaftarMuridController::class, 'terima'])->name('daftarMurid.terima');
+        Route::delete('daftar-murid/{id}/tolak', [DaftarMuridController::class, 'tolak'])->name('daftarMurid.tolak');
+
+         // ADMIN TESTIMONI FROM USER
         Route::get('/testimoniUser', [TestimoniUserController::class, 'index'])->name('testimoniUser.index');
         Route::post('/testimoniUser/{id}/approve', [TestimoniUserController::class, 'approve'])->name('testimoniUser.approve');
         Route::post('/testimoniUser/{id}/reject', [TestimoniUserController::class, 'reject'])->name('testimoniUser.reject');
@@ -223,6 +230,8 @@ Route::prefix('user')->name('user.')->group(function() {
     Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
     // PENDAFTARAN USER
     Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
+   Route::get('/daftar', [DaftarController::class, 'index'])->name('daftar.index'); 
+    Route::post('/daftar/store', [DaftarController::class, 'store'])->name('daftar.store');
     // KONTAK USER
     Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
     // TESTIMONI USER
