@@ -4,10 +4,8 @@
 @section('sidebar-pengajar')
 @section('navbar-pengajar')
 
-
 <style>
 
-    /* Teacher Slider CSS */
 .teacher-slider-container {
     position: relative;
     overflow: hidden;
