@@ -18,8 +18,10 @@ use App\Http\Controllers\Pengajar\MuridAbsensiController;
 use App\Http\Controllers\Pengajar\RiwayatMuridAbsensiController;
 use App\Http\Controllers\Pengajar\LoginController as PengajarLoginController;
 use App\Http\Controllers\Pengajar\DashboardPengajarController;
+use App\Http\Controllers\Pengajar\JadwalJadwalPengajar;
 use App\Http\Controllers\Pengajar\RiwayatJadwalPengajarController;
 use App\Http\Controllers\Pengajar\panduanPengajarController;
+
 
 // USER CONTROLLERS
 use App\Http\Controllers\User\HomeController;
@@ -194,6 +196,9 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::delete('/muridAbsensi-delete-selected', [MuridAbsensiController::class, 'bulkDelete'])->name('muridAbsensi.bulkDelete');
     Route::delete('/muridAbsensi-delete-all', [MuridAbsensiController::class, 'deleteAll'])->name('muridAbsensi.deleteAll');
 
+    // Jadwal Pengajar
+    Route::get('jadwal', [JadwalJadwalPengajar::class, 'index'])->name('jadwal.index');
+
     // Riwayat Jadwal Pengajar
     Route::get('riwayatJadwal', [RiwayatJadwalPengajarController::class, 'index'])->name('riwayatJadwal.index');
 
@@ -232,6 +237,7 @@ Route::prefix('user')->name('user.')->group(function() {
     Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
    Route::get('/daftar', [DaftarController::class, 'index'])->name('daftar.index'); 
     Route::post('/daftar/store', [DaftarController::class, 'store'])->name('daftar.store');
+    
     // KONTAK USER
     Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
     // TESTIMONI USER
