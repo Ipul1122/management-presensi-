@@ -327,79 +327,81 @@
             </form>
 
             <!-- Mobile Cards View -->
-            <div class="block lg:hidden">
-                @foreach ($absensis as $absen)
-                <div class="border-b border-slate-100 last:border-b-0 p-6 hover:bg-slate-50/50 transition-colors duration-200 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r {{ $absen->jenis_kelamin == 'Perempuan' ? 'from-pink-500/5 to-rose-500/5' : 'from-blue-500/5 to-indigo-500/5' }}"></div>
-                    
-                    <div class="relative flex items-start justify-between mb-4">
-                        <div class="flex items-center space-x-4">
-                            <input type="checkbox" name="mobile_ids[]" value="{{ $absen->id }}" class="mobile-checkbox w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            <div class="relative">
-                                <div class="w-14 h-14 rounded-2xl {{ $absen->jenis_kelamin == 'Perempuan' ? 'bg-gradient-to-br from-pink-400 to-rose-500' : 'bg-gradient-to-br from-blue-400 to-indigo-500' }} flex items-center justify-center shadow-lg">
-                                    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <div class="absolute -bottom-1 -right-1 w-5 h-5 {{ $absen->jenis_status == 'Hadir' ? 'bg-emerald-500' : 'bg-red-500' }} rounded-full border-2 border-white flex items-center justify-center">
-                                    @if($absen->jenis_status == 'Hadir')
-                                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    @else
-                                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    @endif
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold text-slate-900 mb-1">{{ $absen->nama_murid }}</h4>
-                                <p class="text-sm {{ $absen->jenis_kelamin == 'Perempuan' ? 'text-pink-600' : 'text-blue-600' }} font-medium">
-                                    {{ $absen->jenis_kelamin }}
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <span class="px-3 py-1 text-xs font-semibold rounded-full {{ $absen->jenis_status == 'Hadir' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800' }}">
-                                {{ $absen->jenis_status }}
-                        </span>
+<div class="block lg:hidden">
+    @foreach ($absensis as $absen)
+    <div class="border-b border-slate-100 last:border-b-0 p-6 hover:bg-slate-50/50 transition-colors duration-200 relative overflow-hidden">
+        <!-- Background tidak menghalangi klik -->
+        <div class="absolute inset-0 bg-gradient-to-r {{ $absen->jenis_kelamin == 'Perempuan' ? 'from-pink-500/5 to-rose-500/5' : 'from-blue-500/5 to-indigo-500/5' }} pointer-events-none"></div>
+        
+        <div class="relative flex items-start justify-between mb-4">
+            <div class="flex items-center space-x-4">
+                <input type="checkbox" name="mobile_ids[]" value="{{ $absen->id }}" class="mobile-checkbox w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                <div class="relative">
+                    <div class="w-14 h-14 rounded-2xl {{ $absen->jenis_kelamin == 'Perempuan' ? 'bg-gradient-to-br from-pink-400 to-rose-500' : 'bg-gradient-to-br from-blue-400 to-indigo-500' }} flex items-center justify-center shadow-lg">
+                        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
                     </div>
-                    
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div class="bg-white/50 rounded-xl p-3">
-                            <span class="text-xs text-slate-500 font-medium">Jenis Bacaan</span>
-                            <p class="text-sm font-semibold text-indigo-600 mt-1">{{ $absen->jenis_bacaan }}</p>
-                        </div>
-                        <div class="bg-white/50 rounded-xl p-3">
-                            <span class="text-xs text-slate-500 font-medium">Tanggal</span>
-                            <p class="text-sm font-semibold text-slate-700 mt-1">{{ \Carbon\Carbon::parse($absen->tanggal_absen)->format('d/m/Y') }}</p>
-                        </div>
-                    </div>
-                    
-                    @if($absen->catatan)
-                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4">
-                        <span class="text-xs text-amber-700 font-medium">Catatan</span>
-                        <p class="text-sm text-amber-800 mt-1">{{ $absen->catatan }}</p>
-                    </div>
-                    @endif
-
-                    <div class="flex space-x-3">
-                        <a href="{{ route('pengajar.muridAbsensi.edit', $absen->id) }}" 
-                        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-center py-2 px-4 rounded-xl text-sm font-medium transition-colors duration-200">
-                            Edit
-                        </a>
-                        <form action="{{ route('pengajar.muridAbsensi.destroy', $absen->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-xl text-sm font-medium transition-colors duration-200">
-                                Hapus
-                            </button>
-                        </form>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 {{ $absen->jenis_status == 'Hadir' ? 'bg-emerald-500' : 'bg-red-500' }} rounded-full border-2 border-white flex items-center justify-center">
+                        @if($absen->jenis_status == 'Hadir')
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        @else
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        @endif
                     </div>
                 </div>
-                @endforeach
+                <div>
+                    <h4 class="text-lg font-semibold text-slate-900 mb-1">{{ $absen->nama_murid }}</h4>
+                    <p class="text-sm {{ $absen->jenis_kelamin == 'Perempuan' ? 'text-pink-600' : 'text-blue-600' }} font-medium">
+                        {{ $absen->jenis_kelamin }}
+                    </p>
+                </div>
             </div>
+            
+            <span class="px-3 py-1 text-xs font-semibold rounded-full {{ $absen->jenis_status == 'Hadir' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800' }}">
+                    {{ $absen->jenis_status }}
+            </span>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="bg-white/50 rounded-xl p-3">
+                <span class="text-xs text-slate-500 font-medium">Jenis Bacaan</span>
+                <p class="text-sm font-semibold text-indigo-600 mt-1">{{ $absen->jenis_bacaan }}</p>
+            </div>
+            <div class="bg-white/50 rounded-xl p-3">
+                <span class="text-xs text-slate-500 font-medium">Tanggal</span>
+                <p class="text-sm font-semibold text-slate-700 mt-1">{{ \Carbon\Carbon::parse($absen->tanggal_absen)->format('d/m/Y') }}</p>
+            </div>
+        </div>
+        
+        @if($absen->catatan)
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4">
+            <span class="text-xs text-amber-700 font-medium">Catatan</span>
+            <p class="text-sm text-amber-800 mt-1">{{ $absen->catatan }}</p>
+        </div>
+        @endif
+
+        <div class="flex space-x-3">
+            <a href="{{ route('pengajar.muridAbsensi.edit', $absen->id) }}" 
+            class="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-center py-2 px-4 rounded-xl text-sm font-medium transition-colors duration-200">
+                Edit
+            </a>
+            <form action="{{ route('pengajar.muridAbsensi.destroy', $absen->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-xl text-sm font-medium transition-colors duration-200">
+                    Hapus
+                </button>
+            </form>
+        </div>
+    </div>
+    @endforeach
+</div>
+
 
             <!-- Desktop Table View -->
             <div class="hidden lg:block overflow-x-auto">
