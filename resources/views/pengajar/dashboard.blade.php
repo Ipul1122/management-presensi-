@@ -274,13 +274,15 @@ html {
                                     <div class="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">Jadwal Hari Ini</h4>
-                                    <p class="text-sm text-gray-500 mt-1">Lihat agenda hari ini</p>
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">Jadwal Hari Ini</h4>
+                                        <p class="text-sm text-gray-500 mt-1">Lihat agenda hari ini</p>
                                 </div>
                             </div>
+                            <a href="{{ route('pengajar.jadwal.index')}}">
                             <button class="px-5 py-2.5 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 hover:scale-105 transition-all duration-200 font-semibold text-sm shadow-sm">
                                 Lihat
                             </button>
+                            </a>
                         </div>
                     </div>
                 </div>

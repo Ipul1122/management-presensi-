@@ -486,10 +486,23 @@
                 <span class="nav-text">Info Data Pengajar</span>
             </a>
             
-            <a href="{{ route('pengajar.riwayatJadwal.index') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
+            <!-- Menu Jadwal dengan Submenu -->
+            <div class="mobile-nav-item text-gray-700 hover:text-blue-600" id="jadwalMenuToggle">
                 <i class="fas fa-calendar-alt text-blue-700"></i>
-                <span class="nav-text">Riwayat Jadwal</span>
-            </a>
+                <span class="nav-text">Menu Jadwal</span>
+                <i class="fas fa-chevron-right dropdown-arrow" id="jadwalDropdownArrow"></i>
+            </div>
+            
+            <div class="submenu" id="jadwalSubmenu">
+                <a href="{{ route('pengajar.jadwal.index') }}" class="submenu-item text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-calendar-day text-blue-700"></i>
+                    <span class="nav-text">Lihat Jadwal</span>
+                </a>
+                <a href="{{ route('pengajar.riwayatJadwal.index') }}" class="submenu-item text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-calendar-check text-blue-700"></i>
+                    <span class="nav-text">Riwayat Jadwal</span>
+                </a>
+            </div>
             
             <a href="{{ route('pengajar.panduanPengajar.index') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
                 <i class="fa-solid fa-book text-blue-700"></i>
@@ -532,13 +545,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const muridMenuToggle = document.getElementById('muridMenuToggle');
     const muridSubmenu = document.getElementById('muridSubmenu');
     const muridDropdownArrow = document.getElementById('muridDropdownArrow');
+    const jadwalMenuToggle = document.getElementById('jadwalMenuToggle');
+    const jadwalSubmenu = document.getElementById('jadwalSubmenu');
+    const jadwalDropdownArrow = document.getElementById('jadwalDropdownArrow');
 
     // Debug log to check if elements are found
     console.log('Sidebar elements:', {
         arrowToggle: !!arrowToggle,
         sidebar: !!sidebar,
         sidebarOverlay: !!sidebarOverlay,
-        muridMenuToggle: !!muridMenuToggle
+        muridMenuToggle: !!muridMenuToggle,
+        jadwalMenuToggle: !!jadwalMenuToggle
     });
 
     function openSidebar() {
@@ -571,7 +588,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (muridSubmenu && muridDropdownArrow) {
             muridSubmenu.classList.toggle('active');
             muridDropdownArrow.classList.toggle('active');
-            console.log('Submenu toggled');
+            console.log('Murid submenu toggled');
+        }
+    }
+
+    function toggleJadwalSubmenu() {
+        if (jadwalSubmenu && jadwalDropdownArrow) {
+            jadwalSubmenu.classList.toggle('active');
+            jadwalDropdownArrow.classList.toggle('active');
+            console.log('Jadwal submenu toggled');
         }
     }
 
@@ -606,6 +631,16 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
             console.log('Murid menu toggle clicked');
             toggleMuridSubmenu();
+        });
+    }
+
+    // Jadwal submenu toggle with better event handling
+    if (jadwalMenuToggle) {
+        jadwalMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Jadwal menu toggle clicked');
+            toggleJadwalSubmenu();
         });
     }
 
