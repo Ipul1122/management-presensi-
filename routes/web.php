@@ -154,7 +154,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // [BARU] Route untuk menghapus log
         Route::delete('/sikap-murid-tpa/{id}', [AdminSikapController::class, 'destroy'])->name('sikapMurid.destroy');
 
-        Route::get('/admin/mata-pelajaran', [AdminMapelController::class, 'index'])->name('mataPelajaran.index');
+        Route::get('/mata-pelajaran', [AdminMapelController::class, 'index'])->name('mataPelajaran.index');
         Route::delete('/mata-pelajaran/{id}', [App\Http\Controllers\Admin\MataPelajaranController::class, 'destroy'])->name('mataPelajaran.destroy');
     });
 });
@@ -222,8 +222,8 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::post('/sikap-murid-tpa', [PengajarSikapController::class, 'store'])->name('sikapMurid.store');
     Route::delete('/sikap-murid-tpa/{id}', [App\Http\Controllers\Pengajar\SikapMuridController::class, 'destroy'])->name('sikapMurid.destroy');    
 
-    Route::get('/pengajar/mata-pelajaran', [PengajarMapelController::class, 'index'])->name('mataPelajaran.index');
-    Route::post('/pengajar/mata-pelajaran', [PengajarMapelController::class, 'store'])->name('mataPelajaran.store');
+    Route::get('/mata-pelajaran', [PengajarMapelController::class, 'index'])->name('mataPelajaran.index');
+    Route::post('/mata-pelajaran', [PengajarMapelController::class, 'store'])->name('mataPelajaran.store');
 
     Route::delete('/mata-pelajaran/{id}', [App\Http\Controllers\Pengajar\MataPelajaranController::class, 'destroy'])->name('mataPelajaran.destroy');
 });
