@@ -25,7 +25,7 @@ class MataPelajaranController extends Controller
         $riwayat = MataPelajaran::where('nama_pengajar', $namaPengajar)
                     ->whereDate('created_at', Carbon::today())
                     ->latest()
-                    ->take(1) // Membatasi hanya 10 record
+                    ->take(10) // Membatasi hanya 10 record
                     ->get();
 
         return view('pengajar.mataPelajaran.index', compact('murids', 'riwayat'));

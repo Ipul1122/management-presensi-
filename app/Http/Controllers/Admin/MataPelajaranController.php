@@ -66,16 +66,15 @@ class MataPelajaranController extends Controller
         $rekapNilai = (clone $queryBase)
                         ->selectRaw('
                             nama_murid, 
-                            nama_pengajar, 
                             SUM(nilai) as total_nilai, 
                             COUNT(id) as jumlah_input, 
                             MAX(created_at) as last_update
                         ')
-                        ->groupBy('nama_murid', 'nama_pengajar')
+                        ->groupBy('nama_murid') // Group by hanya berdasarkan murid
                         ->orderByDesc('total_nilai')
                         ->paginate(10, ['*'], 'rekap_page')
                         ->appends(['periode' => $selectedPeriod, 'pengajar' => $selectedPengajar]);
-
+                        
         // B. RIWAYAT AKTIVITAS (Clone query base)
         $aktivitas = (clone $queryBase)
                         ->latest()

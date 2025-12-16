@@ -65,7 +65,7 @@
                 <i class="fas fa-chart-pie text-blue-500"></i> Rekap Total Nilai
             </h2>
             <div class="text-xs font-medium px-2 py-1 bg-blue-100 text-blue-600 rounded-lg hidden sm:block">
-                Group by Murid & Pengajar
+                Group by Murid
             </div>
         </div>
         
@@ -74,7 +74,6 @@
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">Nama Murid</th>
-                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">Pengajar</th>
                         <th class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase">Frekuensi Input</th>
                         <th class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase">Total Nilai</th>
                     </tr>
@@ -83,7 +82,7 @@
                     @forelse($rekapNilai as $data)
                     <tr class="hover:bg-blue-50/30 transition">
                         <td class="px-6 py-4 font-bold text-gray-800">{{ $data->nama_murid }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600">{{ $data->nama_pengajar }}</td>
+                        
                         <td class="px-6 py-4 text-center">
                             <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold">
                                 {{ $data->jumlah_input }}x Input
@@ -101,7 +100,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="px-6 py-8 text-center text-gray-400">
+                        <td colspan="3" class="px-6 py-8 text-center text-gray-400">
                             Belum ada rekap nilai untuk filter ini.
                         </td>
                     </tr>
