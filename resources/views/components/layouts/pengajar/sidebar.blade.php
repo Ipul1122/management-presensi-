@@ -24,7 +24,6 @@
     }
 
     .sidebar {
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         backdrop-filter: blur(20px);
         transform: translateX(-100%);
         position: fixed;
@@ -145,10 +144,7 @@
         animation: float 6s ease-in-out infinite;
     }
 
-    @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(180deg); }
-    }
+  
 
     .sidebar-header h2 {
         font-size: 1.25rem;
