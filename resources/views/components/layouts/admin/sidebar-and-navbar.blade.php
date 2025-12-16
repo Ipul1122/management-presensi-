@@ -272,6 +272,10 @@
                                 <i class="fas fa-medal text-lg ..."></i> 
                                 <span>Poin Sikap</span>
                             </a>
+                            <a href="{{ route('admin.mataPelajaran.index') }}" class="..."> 
+                                <i class="fas fa-medal text-lg ..."></i> 
+                                <span>Poin Mata Pelajaran</span>
+                            </a>
 
                             <a href="{{ route('admin.poinMuridTpa.index') }}" 
                                 class="relative flex items-center px-4 py-3 mb-2 transition-all duration-300 rounded-xl group hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 {{ request()->routeIs('admin.poinMuridTpa.index') ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-200' : 'text-gray-600 hover:text-white' }}">
