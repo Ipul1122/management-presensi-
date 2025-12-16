@@ -20,14 +20,46 @@
                 <form action="{{ route('pengajar.sikapMurid.store') }}" method="POST">
                     @csrf
                     
-                    <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Pilih Murid</label>
-                        <select name="nama_murid" class="w-full rounded-xl border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 transition" required>
-                            <option value="" disabled selected>-- Pilih Nama Murid --</option>
+                    <div class="mb-6 relative" id="muridSearchContainer">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Pilih Nama Murid</label>
+                        
+                        <input type="hidden" name="nama_murid" id="realNamaMurid" required>
+                        
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="searchMurid" 
+                                placeholder="Ketik untuk mencari nama..." 
+                                class="w-full pl-10 pr-10 py-3 rounded-xl border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 transition cursor-pointer"
+                                autocomplete="off"
+                            >
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" id="clearSearch">
+                                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                            </div>
+                        </div>
+
+                        <div 
+                            id="dropdownList" 
+                            class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-60 overflow-y-auto hidden custom-scrollbar"
+                        >
                             @foreach($murids as $m)
-                                <option value="{{ $m->nama_anak }}">{{ $m->nama_anak }}</option>
+                                <div 
+                                    class="option-item px-4 py-3 hover:bg-purple-50 cursor-pointer text-gray-700 transition border-b border-gray-50 last:border-0 flex justify-between items-center group"
+                                    onclick="selectMurid('{{ $m->nama_anak }}')"
+                                >
+                                    <span class="font-medium group-hover:text-purple-700">{{ $m->nama_anak }}</span>
+                                    <i class="fas fa-check text-purple-600 opacity-0 transition-opacity check-icon"></i>
+                                </div>
                             @endforeach
-                        </select>
+                            
+                            <div id="noResult" class="px-4 py-4 text-center text-gray-400 hidden">
+                                <i class="far fa-sad-tear mb-1"></i><br>
+                                <span class="text-sm">Nama tidak ditemukan</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mb-6">
@@ -148,4 +180,69 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchMurid');
+        const hiddenInput = document.getElementById('realNamaMurid');
+        const dropdown = document.getElementById('dropdownList');
+        const options = document.querySelectorAll('.option-item');
+        const noResult = document.getElementById('noResult');
+        const container = document.getElementById('muridSearchContainer');
+
+        // 1. Tampilkan Dropdown saat fokus
+        searchInput.addEventListener('focus', () => {
+            dropdown.classList.remove('hidden');
+        });
+
+        // 2. Logic Pencarian (Filter)
+        searchInput.addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            let hasResult = false;
+            
+            // Reset value asli jika user mengetik ulang (mencegah input nama sembarangan)
+            hiddenInput.value = ''; 
+
+            options.forEach(option => {
+                const text = option.innerText.toLowerCase();
+                if(text.includes(filter)) {
+                    option.classList.remove('hidden');
+                    hasResult = true;
+                } else {
+                    option.classList.add('hidden');
+                }
+            });
+            
+            if(!hasResult) {
+                noResult.classList.remove('hidden');
+            } else {
+                noResult.classList.add('hidden');
+            }
+            
+            dropdown.classList.remove('hidden');
+        });
+
+        // 3. Klik di luar untuk menutup dropdown
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                dropdown.classList.add('hidden');
+                // Validasi: Jika text di input tidak cocok dengan salah satu opsi, kosongkan
+                if(hiddenInput.value === '') {
+                    searchInput.value = '';
+                }
+            }
+        });
+    });
+
+    // 4. Fungsi Pilih Murid
+    function selectMurid(nama) {
+        document.getElementById('searchMurid').value = nama;
+        document.getElementById('realNamaMurid').value = nama;
+        document.getElementById('dropdownList').classList.add('hidden');
+        
+        // Highlight opsi yang dipilih visual (opsional)
+        document.querySelectorAll('.check-icon').forEach(el => el.classList.add('opacity-0'));
+        event.currentTarget.querySelector('.check-icon').classList.remove('opacity-0');
+    }
+</script>
 @endsection
