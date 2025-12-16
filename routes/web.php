@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\RiwayatJadwalController;
 use App\Http\Controllers\Admin\TestimoniUserController;
 use App\Http\Controllers\Admin\PoinMuridController;
 use App\Http\Controllers\Admin\SikapMuridController as AdminSikapController;
+use App\Http\Controllers\Admin\MataPelajaranController as AdminMapelController;
 
 // Pengajar Controllers
 use App\Http\Controllers\Pengajar\MuridAbsensiController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\Pengajar\JadwalJadwalPengajar;
 use App\Http\Controllers\Pengajar\RiwayatJadwalPengajarController;
 use App\Http\Controllers\Pengajar\panduanPengajarController;
 use App\Http\Controllers\Pengajar\SikapMuridController as PengajarSikapController;
+use App\Http\Controllers\Pengajar\MataPelajaranController as PengajarMapelController;
 
 
 // USER CONTROLLERS
@@ -151,6 +153,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/sikap-murid-tpa', [AdminSikapController::class, 'index'])->name('sikapMurid.index');
         // [BARU] Route untuk menghapus log
         Route::delete('/sikap-murid-tpa/{id}', [AdminSikapController::class, 'destroy'])->name('sikapMurid.destroy');
+
+        Route::get('/admin/mata-pelajaran', [AdminMapelController::class, 'index'])->name('mataPelajaran.index');
+        Route::delete('/mata-pelajaran/{id}', [App\Http\Controllers\Admin\MataPelajaranController::class, 'destroy'])->name('mataPelajaran.destroy');
     });
 });
 
@@ -216,6 +221,11 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::get('/sikap-murid-tpa', [PengajarSikapController::class, 'index'])->name('sikapMurid.index');
     Route::post('/sikap-murid-tpa', [PengajarSikapController::class, 'store'])->name('sikapMurid.store');
     Route::delete('/sikap-murid-tpa/{id}', [App\Http\Controllers\Pengajar\SikapMuridController::class, 'destroy'])->name('sikapMurid.destroy');    
+
+    Route::get('/pengajar/mata-pelajaran', [PengajarMapelController::class, 'index'])->name('mataPelajaran.index');
+    Route::post('/pengajar/mata-pelajaran', [PengajarMapelController::class, 'store'])->name('mataPelajaran.store');
+
+    Route::delete('/mata-pelajaran/{id}', [App\Http\Controllers\Pengajar\MataPelajaranController::class, 'destroy'])->name('mataPelajaran.destroy');
 });
     
 });

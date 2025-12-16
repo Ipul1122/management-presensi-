@@ -479,6 +479,10 @@
                     <i class="fas fa-heart text-lg ..."></i> 
                     <span>Nilai Sikap</span>
                 </a>
+                <a href="{{ route('pengajar.mataPelajaran.index') }}" class="..."> 
+                    <i class="fas fa-heart text-lg ..."></i> 
+                    <span>Nilai Mata Pelajaran</span>
+                </a>
             </div>
 
             <a href="{{ route('pengajar.infoDataPengajar.index') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
