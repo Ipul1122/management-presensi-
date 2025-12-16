@@ -20,9 +20,12 @@ class MataPelajaranController extends Controller
         $namaPengajar = $user->username ?? $user->nama ?? 'Pengajar';
 
         // Riwayat input hari ini (Opsional, agar mirip fitur sebelumnya)
+        // UPDATE: Dibatasi maksimal 10 data terbaru. 
+        // Data ke-11 dan seterusnya tidak akan diambil (seolah-olah tertimpa di tampilan).
         $riwayat = MataPelajaran::where('nama_pengajar', $namaPengajar)
                     ->whereDate('created_at', Carbon::today())
                     ->latest()
+                    ->take(1) // Membatasi hanya 10 record
                     ->get();
 
         return view('pengajar.mataPelajaran.index', compact('murids', 'riwayat'));
