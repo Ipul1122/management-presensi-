@@ -267,6 +267,20 @@
                                 </div>
                                 <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Riwayat Murid</span>
                             </a>
+
+                            <a href="{{ route('admin.poinMuridTpa.index') }}" 
+                                class="relative flex items-center px-4 py-3 mb-2 transition-all duration-300 rounded-xl group hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 {{ request()->routeIs('admin.poinMuridTpa.index') ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-200' : 'text-gray-600 hover:text-white' }}">
+                                
+                                <div class="flex items-center justify-center w-10 h-10 mr-3 transition-all duration-300 bg-white rounded-lg shadow-sm bg-opacity-20 group-hover:bg-opacity-20 hover:scale-110">
+                                    <i class="fas fa-star-half-alt text-lg {{ request()->routeIs('admin.poinMuridTpa.index') ? 'text-white' : 'text-yellow-500 group-hover:text-white' }}"></i>
+                                </div>
+                                
+                                <span class="font-medium tracking-wide">Poin Murid</span>
+                                
+                                @if(request()->routeIs('admin.poinMuridTpa.index'))
+                                    <div class="absolute right-4 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                                @endif
+                            </a>
                         </div>
                     </div>
 

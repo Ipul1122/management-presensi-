@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\NotifikasiController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\RiwayatJadwalController;
 use App\Http\Controllers\Admin\TestimoniUserController;
+use App\Http\Controllers\Admin\PoinMuridController;
 
 // Pengajar Controllers
 use App\Http\Controllers\Pengajar\MuridAbsensiController;
@@ -143,6 +144,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // ADMIN HAPUS TESTIMONI USER
         Route::post('/testimoniUser/bulk-delete',  [TestimoniUserController::class, 'bulkDelete'])->name('testimoniUser.bulkDelete');
         Route::delete('/testimoniUser/delete-all', [TestimoniUserController::class, 'deleteAll'])->name('testimoniUser.deleteAll');
+
+        Route::get('/poin-murid-tpa', [PoinMuridController::class, 'index'])->name('poinMuridTpa.index');
     });
 });
 
