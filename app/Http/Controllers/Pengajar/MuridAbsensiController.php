@@ -88,8 +88,6 @@ class MuridAbsensiController extends Controller
     return view('pengajar.muridAbsensi.create', compact('murids', 'selectedMurid', 'riwayatCatatan'));
 }
 
-
-
     public function edit($id)
     {
         $absensi = MuridAbsensi::findOrFail($id);
