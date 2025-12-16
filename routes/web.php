@@ -149,6 +149,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/poin-murid-tpa', [PoinMuridController::class, 'index'])->name('poinMuridTpa.index');
         Route::get('/sikap-murid-tpa', [AdminSikapController::class, 'index'])->name('sikapMurid.index');
+        // [BARU] Route untuk menghapus log
+        Route::delete('/sikap-murid-tpa/{id}', [AdminSikapController::class, 'destroy'])->name('sikapMurid.destroy');
     });
 });
 
