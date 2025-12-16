@@ -22,4 +22,7 @@ class Pengajar extends Model
         // 'tanggal_daftar'
     ];
     
+    public function Pengajar(){
+        return $this->belongsTo(Pengajar::class, 'id_murid');
+    }
 }

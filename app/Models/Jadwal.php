@@ -21,4 +21,9 @@ class Jadwal extends Model
         'kegiatan_jadwal',
         'gaji',
     ];
+
+    public function Pengajar()
+    {
+        return $this->belongsTo(Pengajar::class, 'id_pengajar',);
+    }
 }
