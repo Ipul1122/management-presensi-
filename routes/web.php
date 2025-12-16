@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\RiwayatJadwalController;
 use App\Http\Controllers\Admin\TestimoniUserController;
 use App\Http\Controllers\Admin\PoinMuridController;
+use App\Http\Controllers\Admin\SikapMuridController as AdminSikapController;
 
 // Pengajar Controllers
 use App\Http\Controllers\Pengajar\MuridAbsensiController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Pengajar\DashboardPengajarController;
 use App\Http\Controllers\Pengajar\JadwalJadwalPengajar;
 use App\Http\Controllers\Pengajar\RiwayatJadwalPengajarController;
 use App\Http\Controllers\Pengajar\panduanPengajarController;
+use App\Http\Controllers\Pengajar\SikapMuridController as PengajarSikapController;
 
 
 // USER CONTROLLERS
@@ -146,6 +148,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/testimoniUser/delete-all', [TestimoniUserController::class, 'deleteAll'])->name('testimoniUser.deleteAll');
 
         Route::get('/poin-murid-tpa', [PoinMuridController::class, 'index'])->name('poinMuridTpa.index');
+        Route::get('/sikap-murid-tpa', [AdminSikapController::class, 'index'])->name('sikapMurid.index');
     });
 });
 
@@ -207,7 +210,12 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
 
     // Panduan Pengajar
     Route::get('panduanPengajar', [panduanPengajarController::class, 'index'])->name('panduanPengajar.index');
-    });
+
+    Route::get('/sikap-murid-tpa', [PengajarSikapController::class, 'index'])->name('sikapMurid.index');
+    Route::post('/sikap-murid-tpa', [PengajarSikapController::class, 'store'])->name('sikapMurid.store');
+    Route::delete('/sikap-murid-tpa/{id}', [App\Http\Controllers\Pengajar\SikapMuridController::class, 'destroy'])->name('sikapMurid.destroy');    
+});
+    
 });
 
 

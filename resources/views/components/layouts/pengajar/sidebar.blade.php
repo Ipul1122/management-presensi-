@@ -475,6 +475,10 @@
                     <i class="fas fa-info-circle text-blue-700"></i>
                     <span class="nav-text">Info Data Murid</span>
                 </a>
+                <a href="{{ route('pengajar.sikapMurid.index') }}" class="..."> 
+                    <i class="fas fa-heart text-lg ..."></i> 
+                    <span>Nilai Sikap</span>
+                </a>
             </div>
 
             <a href="{{ route('pengajar.infoDataPengajar.index') }}" class="main-nav-item text-gray-700 hover:text-blue-600">
