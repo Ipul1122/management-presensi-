@@ -7,14 +7,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
-    {{-- Responsive Styles --}}
     <style>
+        /* Base Sidebar Transitions */
         .sidebar {
-            transition: all 0.3s ease-in-out;
-            backdrop-filter: blur(10px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
         }
         
-        /* Desktop: Hidden by default, can be toggled */
+        /* Desktop: Fixed & Toggleable */
         @media (min-width: 1024px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -23,23 +23,23 @@
                 left: 0;
                 height: 100vh;
                 z-index: 50;
-                width: 288px; /* w-72 = 288px */
+                width: 280px;
             }
             .sidebar.active {
                 transform: translateX(0);
             }
             .main-content {
-                transition: margin-left 0.3s ease-in-out;
+                transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 margin-left: 0;
                 width: 100%;
             }
             .main-content.sidebar-open {
-                margin-left: 288px;
-                width: calc(100% - 288px);
+                margin-left: 280px;
+                width: calc(100% - 280px);
             }
         }
         
-        /* Mobile and Tablet: Overlay behavior */
+        /* Mobile: Off-canvas */
         @media (max-width: 1023px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -48,7 +48,7 @@
                 left: 0;
                 height: 100vh;
                 z-index: 50;
-                width: 288px;
+                width: 280px;
             }
             .sidebar.active {
                 transform: translateX(0);
@@ -59,375 +59,305 @@
             }
         }
         
-        /* Arrow toggle button styles */
+        /* Toggle Button */
         .arrow-toggle {
             position: fixed;
             top: 50%;
             left: 0;
             transform: translateY(-50%);
             z-index: 45;
-            width: 40px;
-            height: 80px;
-            background: linear-gradient(135deg, #93c5fd 0%, #38bdf8 100%);
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
+            width: 32px;
+            height: 64px;
+            background: #4f46e5; /* Indigo-600 */
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-left: none;
+            box-shadow: 4px 0 15px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
             cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: none;
         }
         
         .arrow-toggle:hover {
-            width: 45px;
-            box-shadow: 6px 0 25px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            width: 40px;
+            background: #4338ca; /* Indigo-700 */
         }
         
         .arrow-toggle i {
             color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-size: 14px;
         }
         
-        .arrow-toggle:hover i {
-            transform: scale(1.1);
-        }
-        
-        /* When sidebar is open, move the toggle */
         .arrow-toggle.sidebar-open {
-            left: 288px;
-            background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            left: 280px;
+            background: #ef4444; /* Red-500 */
+            box-shadow: 4px 0 15px rgba(239, 68, 68, 0.3);
         }
-        
+
         .arrow-toggle.sidebar-open:hover {
-            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            background: #dc2626; /* Red-600 */
         }
         
-        /* Responsive content padding */
-        .content-wrapper {
-            padding: 80px 1rem 2rem 1rem;
-        }
-        
-        @media (min-width: 640px) {
-            .content-wrapper {
-                padding: 80px 2rem 2rem 2rem;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .content-wrapper {
-                padding: 2rem;
-            }
-        }
-        
-        /* Custom gradient backgrounds */
-        .gradient-blue { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .gradient-green { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .gradient-purple { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
-        .gradient-pink { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
-        
-        /* Glassmorphism effect */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        /* Hover animations */
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-        
-        /* Custom scrollbar */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; }
-        
-        /* Dropdown styles */
+        /* Dropdown Animation */
         .dropdown-menu {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
             opacity: 0;
         }
         .dropdown-menu.active {
-            max-height: 300px;
+            max-height: 500px; /* Cukup besar untuk menampung submenu */
             opacity: 1;
         }
-        .dropdown-toggle .dropdown-arrow {
+        .dropdown-arrow {
             transition: transform 0.3s ease;
         }
         .dropdown-toggle.active .dropdown-arrow {
             transform: rotate(180deg);
         }
         
-        /* Overlay for mobile */
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Mobile Overlay */
         .sidebar-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6); /* Slate-900 with opacity */
             z-index: 40;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
+            backdrop-filter: blur(2px);
         }
         .sidebar-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-        
-        @media (min-width: 1024px) {
-            .sidebar-overlay {
-                display: none;
-            }
-        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+    
+    <div class="min-h-screen flex">
         
-        <!-- Sidebar Overlay for Mobile -->
-        <div id="sidebarOverlay" class="sidebar-overlay"></div>
+        <div id="sidebarOverlay" class="sidebar-overlay lg:hidden"></div>
         
-        <!-- Arrow Toggle Button -->
-        <button id="arrowToggle" class="arrow-toggle" title="Buka Menu">
-            <i class="fas fa-chevron-right"></i>
+        <button id="arrowToggle" class="arrow-toggle group" title="Buka Menu">
+            <i class="fas fa-chevron-right group-hover:scale-110 transition-transform"></i>
         </button>
 
-        <div class="flex flex-1">
-            <!-- Modern Sidebar -->
-            <aside class="sidebar w-72 bg-white/90 backdrop-blur-md shadow-2xl border-r border-white/20 custom-scrollbar overflow-y-auto">
-                <div class="p-6 space-y-2">
-                    <div class="flex justify-between items-center mb-6">
-                        <span class="font-bold text-gray-800 ml-4">Menu Navigasi</span>
-                        <button id="closeSidebar" class="text-gray-600 hover:text-gray-800 p-2 hover:bg-gray-100 rounded-lg transition-all duration-200 lg:hidden">
-                            <i class="fas fa-times"></i>
-                        </button>
+        <aside class="sidebar bg-white border-r border-slate-200 shadow-xl flex flex-col custom-scrollbar">
+            
+            <div class="h-20 flex items-center px-6 border-b border-slate-100 bg-gradient-to-r from-indigo-600 to-indigo-700">
+                <div class="flex items-center space-x-3 text-white">
+                    <div class="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-inner">
+                        <i class="fas fa-school text-xl"></i>
                     </div>
+                    <div>
+                        <h1 class="font-bold text-lg leading-tight">Sistem Presensi</h1>
+                        <p class="text-xs text-indigo-100 opacity-80">Administrator Panel</p>
+                    </div>
+                </div>
+                <button id="closeSidebar" class="lg:hidden ml-auto text-white/80 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
 
-                    <!-- DASHBOARD SECTION -->
-                    <div class="mb-6">
-                        <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group">
-                            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-tachometer-alt text-white"></i>
-                            </div>
-                            <span class="font-medium text-gray-700 group-hover:text-indigo-700">Dashboard</span>
-                        </a>
-                    </div>
+            <div class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+                
+                {{-- Dashboard --}}
+                <a href="{{ route('admin.dashboard') }}" 
+                   class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-50 text-indigo-700 font-semibold shadow-sm' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600' }}">
+                    <i class="fas fa-tachometer-alt w-6 text-center {{ request()->routeIs('admin.dashboard') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500' }}"></i>
+                    <span class="ml-3">Dashboard</span>
+                </a>
+
+                <div class="pt-4 pb-2">
+                    <p class="px-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Manajemen</p>
+                </div>
+
+                {{-- Menu Murid --}}
+                @php
+                    $isMuridActive = request()->routeIs('admin.murid.*') || request()->routeIs('admin.dataMurid') || request()->routeIs('admin.riwayatMurid.*') || request()->routeIs('admin.sikapMurid.*') || request()->routeIs('admin.mataPelajaran.*') || request()->routeIs('admin.poinMuridTpa.*');
+                @endphp
+                <div class="relative">
+                    <button class="dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group {{ $isMuridActive ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600' }}" data-dropdown="murid">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-graduate w-6 text-center {{ $isMuridActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500' }}"></i>
+                            <span class="ml-3">Data Murid</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300 dropdown-arrow {{ $isMuridActive ? 'text-indigo-600' : 'text-slate-400' }}"></i>
+                    </button>
                     
-                    <!-- MENU MURID SECTION -->
-                    <div class="mb-6">
-                        <button class="dropdown-toggle w-full flex items-center justify-between p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group" data-dropdown="murid">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fas fa-user-graduate text-white"></i>
-                                </div>
-                                <span class="font-medium text-gray-700 group-hover:text-indigo-700">Data Murid</span>
-                            </div>
-                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-indigo-600"></i>
-                        </button>
-                        
-                        <div class="dropdown-menu pl-4 mt-2 space-y-1" id="dropdown-murid">
-                            <a href="{{ route('admin.murid.create') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-user-plus text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Tambah Data Murid</span>
+                    <div id="dropdown-murid" class="dropdown-menu {{ $isMuridActive ? 'active' : '' }}">
+                        <div class="bg-slate-50 rounded-lg mt-1 mx-2 py-2 space-y-1 border border-slate-100">
+                            <a href="{{ route('admin.murid.create') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.murid.create') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-plus w-5 text-center text-xs opacity-70"></i>
+                                <span>Tambah Murid</span>
                             </a>
-                            
-                            <a href="{{ route('admin.dataMurid') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fa-solid fa-chart-simple text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Statistik Murid</span>
+                            <a href="{{ route('admin.murid.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.murid.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-list w-5 text-center text-xs opacity-70"></i>
+                                <span>Daftar Murid</span>
                             </a>
-                            
-                            <a href="{{ route('admin.murid.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-folder-open text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Manage Data Murid</span>
+                            <a href="{{ route('admin.dataMurid') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.dataMurid') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-chart-pie w-5 text-center text-xs opacity-70"></i>
+                                <span>Statistik</span>
                             </a>
-
-                            <a href="{{ route('admin.riwayatMurid.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fa-solid fa-clock-rotate-left text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Riwayat Murid</span>
+                            <a href="{{ route('admin.riwayatMurid.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.riwayatMurid.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-history w-5 text-center text-xs opacity-70"></i>
+                                <span>Riwayat Absensi</span>
                             </a>
-
-                            <a href="{{ route('admin.sikapMurid.index') }}" class="..."> 
-                                <i class="fas fa-medal text-lg ..."></i> 
+                            <div class="border-t border-slate-200 my-1 mx-4"></div>
+                             <a href="{{ route('admin.sikapMurid.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.sikapMurid.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-smile w-5 text-center text-xs opacity-70"></i>
                                 <span>Poin Sikap</span>
                             </a>
-                            <a href="{{ route('admin.mataPelajaran.index') }}" class="..."> 
-                                <i class="fas fa-medal text-lg ..."></i> 
-                                <span>Poin Mata Pelajaran</span>
+                            <a href="{{ route('admin.mataPelajaran.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.mataPelajaran.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-book w-5 text-center text-xs opacity-70"></i>
+                                <span>Mata Pelajaran</span>
                             </a>
-
-                            <a href="{{ route('admin.poinMuridTpa.index') }}" 
-                                class="relative flex items-center px-4 py-3 mb-2 transition-all duration-300 rounded-xl group hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 {{ request()->routeIs('admin.poinMuridTpa.index') ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-200' : 'text-gray-600 hover:text-white' }}">
-                                
-                                <div class="flex items-center justify-center w-10 h-10 mr-3 transition-all duration-300 bg-white rounded-lg shadow-sm bg-opacity-20 group-hover:bg-opacity-20 hover:scale-110">
-                                    <i class="fas fa-star-half-alt text-lg {{ request()->routeIs('admin.poinMuridTpa.index') ? 'text-white' : 'text-yellow-500 group-hover:text-white' }}"></i>
-                                </div>
-                                
-                                <span class="font-medium tracking-wide">Poin Murid</span>
-                                
-                                @if(request()->routeIs('admin.poinMuridTpa.index'))
-                                    <div class="absolute right-4 w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                                @endif
+                            <a href="{{ route('admin.poinMuridTpa.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.mataPelajaran.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-star w-5 text-center text-xs opacity-70"></i>
+                                <span>Absensi Poin</span>
                             </a>
-                            
-                            
-
+                            {{-- Total Poin --}}
+                            {{-- <a href="{{ route('admin.totalPoin.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.poinMuridTpa.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-star w-5 text-center text-xs opacity-70"></i>
+                                <span>Total Poin</span>
+                            </a> --}}
                         </div>
-                    </div>
-
-                    <!-- MENU PENGAJAR SECTION -->
-                    <div class="mb-6">
-                        <button class="dropdown-toggle w-full flex items-center justify-between p-4 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-xl transition-all duration-300 group" data-dropdown="pengajar">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fas fa-chalkboard-teacher text-white"></i>
-                                </div>
-                                <span class="font-medium text-gray-700 group-hover:text-blue-700">Data Pengajar</span>
-                            </div>
-                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-blue-600"></i>
-                        </button>
-                        
-                        <div class="dropdown-menu pl-4 mt-2 space-y-1" id="dropdown-pengajar">
-                            <a href="{{ route('admin.pengajar.create') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-chalkboard-teacher text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-blue-700">Tambah Data Pengajar</span>
-                            </a>
-                            
-                            <a href="{{ route('admin.pengajar.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-users-cog text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-blue-700">Manage Data Pengajar</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- MENU JADWAL SECTION -->
-                    <div class="mb-6">
-                        <button class="dropdown-toggle w-full flex items-center justify-between p-4 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 rounded-xl transition-all duration-300 group" data-dropdown="jadwal">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fa-solid fa-calendar-days text-white"></i>
-                                </div>
-                                <span class="font-medium text-gray-700 group-hover:text-blue-700">Jadwal</span>
-                            </div>
-                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-blue-600"></i>
-                        </button>
-                        
-                        <div class="dropdown-menu pl-4 mt-2 space-y-1" id="dropdown-jadwal">
-                            <a href="{{ route('admin.jadwal.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
-                                    <i class="fa-solid fa-calendar-days text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-blye-700">Manage Jadwal</span>
-                            </a>
-                            
-                            <a href="{{ route('admin.riwayatJadwal.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-blye-50 hover:to-orange-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md flex items-center justify-center">
-                                    <i class="fa-solid fa-history text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-blye-700">Riwayat Jadwal</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- MENU LAINNYA SECTION -->
-                    <div class="mb-6">
-                        <button class="dropdown-toggle w-full flex items-center justify-between p-4 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-xl transition-all duration-300 group" data-dropdown="lainnya">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fas fa-ellipsis-h text-white"></i>
-                                </div>
-                                <span class="font-medium text-gray-700 group-hover:text-indigo-700">Menu Lainnya</span>
-                            </div>
-                            <i class="fas fa-chevron-down dropdown-arrow text-gray-400 group-hover:text-indigo-600"></i>
-                        </button>
-                        
-                        <div class="dropdown-menu pl-4 mt-2 space-y-1" id="dropdown-lainnya">
-                            <a href="{{ route('admin.notifikasi.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-bell text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Notifikasi</span>
-                            </a>
-                            
-                            <a href="{{ route('admin.testimoniUser.index') }}" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-comments text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Testimoni User</span>
-                            </a>
-                            
-                            <a href="https://docs.google.com/spreadsheets/d/1ltY_KB9K1NTsIKE5RmwIGYe-gofJ_sN8YVHH1JEj5zc/edit?usp=sharing" target="_blank" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-table text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">SpreadSheets</span>
-                            </a>
-                            <a href="{{ route('admin.daftarMurid.index') }}" target="_blank" class="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 rounded-lg transition-all duration-300 group">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-md flex items-center justify-center">
-                                    <i class="fa-solid fa-user-plus text-white text-sm"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-700">Pendaftaran Murid</span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    {{-- LOGOUT SECTION --}}
-                    <div class="pt-4 border-t border-gray-200 mt-6">
-                        <form action="{{ route('admin.logout') }}" method="POST">
-                            @csrf
-                            <button class="flex items-center space-x-3 p-4 w-full hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 rounded-xl transition-all duration-300 group">
-                                <div class="w-10 h-10 bg-gradient-to-r from-red-400 to-red-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fas fa-sign-out-alt text-white"></i>
-                                </div>
-                                <span class="font-medium text-gray-700 group-hover:text-red-700">Logout</span>
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <div class="pt-4 text-center">
-                        <p class="text-sm text-gray-400 bg-gray-50 px-3 py-2 rounded-full">Versi Web 1.0</p>
                     </div>
                 </div>
-            </aside>
 
-
-            {{-- Main Content --}}
-            <main class="main-content flex-1">
-                <div class="">
-                    @yield('content')
+                {{-- Menu Pengajar --}}
+                @php
+                    $isPengajarActive = request()->routeIs('admin.pengajar.*');
+                @endphp
+                <div class="relative">
+                    <button class="dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group {{ $isPengajarActive ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600' }}" data-dropdown="pengajar">
+                        <div class="flex items-center">
+                            <i class="fas fa-chalkboard-teacher w-6 text-center {{ $isPengajarActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500' }}"></i>
+                            <span class="ml-3">Data Pengajar</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300 dropdown-arrow {{ $isPengajarActive ? 'text-indigo-600' : 'text-slate-400' }}"></i>
+                    </button>
+                    
+                    <div id="dropdown-pengajar" class="dropdown-menu {{ $isPengajarActive ? 'active' : '' }}">
+                        <div class="bg-slate-50 rounded-lg mt-1 mx-2 py-2 space-y-1 border border-slate-100">
+                            <a href="{{ route('admin.pengajar.create') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.pengajar.create') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-plus w-5 text-center text-xs opacity-70"></i>
+                                <span>Tambah Pengajar</span>
+                            </a>
+                            <a href="{{ route('admin.pengajar.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.pengajar.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-users w-5 text-center text-xs opacity-70"></i>
+                                <span>Daftar Pengajar</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </main>
-        </div>
+
+                {{-- Menu Jadwal --}}
+                @php
+                    $isJadwalActive = request()->routeIs('admin.jadwal.*') || request()->routeIs('admin.riwayatJadwal.*');
+                @endphp
+                <div class="relative">
+                    <button class="dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group {{ $isJadwalActive ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600' }}" data-dropdown="jadwal">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt w-6 text-center {{ $isJadwalActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500' }}"></i>
+                            <span class="ml-3">Jadwal Pelajaran</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300 dropdown-arrow {{ $isJadwalActive ? 'text-indigo-600' : 'text-slate-400' }}"></i>
+                    </button>
+                    
+                    <div id="dropdown-jadwal" class="dropdown-menu {{ $isJadwalActive ? 'active' : '' }}">
+                        <div class="bg-slate-50 rounded-lg mt-1 mx-2 py-2 space-y-1 border border-slate-100">
+                            <a href="{{ route('admin.jadwal.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.jadwal.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-calendar-check w-5 text-center text-xs opacity-70"></i>
+                                <span>Kelola Jadwal</span>
+                            </a>
+                            <a href="{{ route('admin.riwayatJadwal.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.riwayatJadwal.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-clock w-5 text-center text-xs opacity-70"></i>
+                                <span>Riwayat Jadwal</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Menu Lainnya --}}
+                @php
+                    $isLainnyaActive = request()->routeIs('admin.notifikasi.*') || request()->routeIs('admin.testimoniUser.*') || request()->routeIs('admin.daftarMurid.*');
+                @endphp
+                <div class="relative">
+                    <button class="dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group {{ $isLainnyaActive ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600' }}" data-dropdown="lainnya">
+                        <div class="flex items-center">
+                            <i class="fas fa-layer-group w-6 text-center {{ $isLainnyaActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500' }}"></i>
+                            <span class="ml-3">Lainnya</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300 dropdown-arrow {{ $isLainnyaActive ? 'text-indigo-600' : 'text-slate-400' }}"></i>
+                    </button>
+                    
+                    <div id="dropdown-lainnya" class="dropdown-menu {{ $isLainnyaActive ? 'active' : '' }}">
+                        <div class="bg-slate-50 rounded-lg mt-1 mx-2 py-2 space-y-1 border border-slate-100">
+                            <a href="{{ route('admin.notifikasi.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.notifikasi.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-bell w-5 text-center text-xs opacity-70"></i>
+                                <span>Notifikasi</span>
+                            </a>
+                            <a href="{{ route('admin.testimoniUser.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.testimoniUser.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-comment-alt w-5 text-center text-xs opacity-70"></i>
+                                <span>Testimoni User</span>
+                            </a>
+                            <a href="{{ route('admin.daftarMurid.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.daftarMurid.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                                <i class="fas fa-clipboard-list w-5 text-center text-xs opacity-70"></i>
+                                <span>Pendaftaran Baru</span>
+                            </a>
+                             <a href="https://docs.google.com/spreadsheets/d/1ltY_KB9K1NTsIKE5RmwIGYe-gofJ_sN8YVHH1JEj5zc/edit?usp=sharing" target="_blank" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors text-slate-500 hover:text-green-600 hover:bg-white/50 mx-2">
+                                <i class="fas fa-file-excel w-5 text-center text-xs opacity-70"></i>
+                                <span>SpreadSheets</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 border-t border-slate-200 bg-slate-50">
+                <div class="flex items-center p-3 bg-white rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="ml-3 overflow-hidden">
+                        <p class="text-sm font-medium text-slate-700 truncate">Admin</p>
+                        <p class="text-xs text-slate-500 truncate">Administrator</p>
+                    </div>
+                    <form action="{{ route('admin.logout') }}" method="POST" class="ml-auto">
+                        @csrf
+                        <button type="submit" class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors" title="Logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="text-center mt-3">
+                    <span class="text-[10px] text-slate-400">Versi Sistem 1.0</span>
+                </div>
+            </div>
+
+        </aside>
+
+        <main class="main-content flex-1 min-h-screen">
+            <div class="w-full">
+                @yield('content')
+            </div>
+        </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
             const arrowToggle = document.getElementById('arrowToggle');
             const closeSidebar = document.getElementById('closeSidebar');
             const sidebar = document.querySelector('.sidebar');
@@ -435,59 +365,65 @@
             const sidebarOverlay = document.getElementById('sidebarOverlay');
             const arrowIcon = arrowToggle.querySelector('i');
 
-            // Toggle sidebar function
+            // Set state awal jika di desktop (sesuai kebutuhan user, default tertutup)
+            // Jika ingin default terbuka di desktop, hapus transform pada CSS @media desktop
+            
             function toggleSidebar() {
                 sidebar.classList.toggle('active');
                 arrowToggle.classList.toggle('sidebar-open');
                 sidebarOverlay.classList.toggle('active');
                 
-                // Change arrow icon and tooltip
+                // Icon rotation logic
                 if (sidebar.classList.contains('active')) {
-                    arrowIcon.className = 'fas fa-chevron-left';
-                    arrowToggle.title = 'Tutup Menu';
+                    arrowIcon.classList.remove('fa-chevron-right');
+                    arrowIcon.classList.add('fa-chevron-left');
                 } else {
-                    arrowIcon.className = 'fas fa-chevron-right';
-                    arrowToggle.title = 'Buka Menu';
+                    arrowIcon.classList.remove('fa-chevron-left');
+                    arrowIcon.classList.add('fa-chevron-right');
                 }
-                
-                // Only adjust main content margin on desktop
+
+                // Adjust Content Margin on Desktop
                 if (window.innerWidth >= 1024) {
                     mainContent.classList.toggle('sidebar-open');
                 }
             }
 
-            // Event listeners
             arrowToggle.addEventListener('click', toggleSidebar);
-            closeSidebar.addEventListener('click', toggleSidebar);
+            if(closeSidebar) closeSidebar.addEventListener('click', toggleSidebar);
             sidebarOverlay.addEventListener('click', toggleSidebar);
 
-            // Dropdown functionality
-            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const dropdownId = this.getAttribute('data-dropdown');
-                    const dropdownMenu = document.getElementById('dropdown-' + dropdownId);
+            // Dropdown Logic
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const menuId = this.getAttribute('data-dropdown');
+                    const menu = document.getElementById('dropdown-' + menuId);
                     
-                    // Close all other dropdowns
-                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.classList.remove('active');
-                        }
+                    // Close other menus (Accordian style) - Optional, remove if you want multiple open
+                    /*
+                    document.querySelectorAll('.dropdown-menu').forEach(m => {
+                        if(m !== menu) m.classList.remove('active');
                     });
-                    document.querySelectorAll('.dropdown-toggle').forEach(otherToggle => {
-                        if (otherToggle !== this) {
-                            otherToggle.classList.remove('active');
-                        }
+                    document.querySelectorAll('.dropdown-toggle').forEach(t => {
+                        if(t !== this) t.classList.remove('active'); // Reset arrow
                     });
-                    
-                    // Toggle current dropdown
-                    dropdownMenu.classList.toggle('active');
-                    this.classList.toggle('active');
+                    */
+
+                    this.classList.toggle('active'); // Rotate arrow
+                    menu.classList.toggle('active');
                 });
             });
 
-            // Handle window resize
-            window.addEventListener('resize', function() {
+            // Ensure active dropdowns have their arrow rotated on load
+            document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
+                const id = menu.id.replace('dropdown-', '');
+                const toggle = document.querySelector(`.dropdown-toggle[data-dropdown="${id}"]`);
+                if(toggle) toggle.classList.add('active');
+            });
+
+            // Responsive Handler
+            window.addEventListener('resize', () => {
                 if (window.innerWidth < 1024) {
                     mainContent.classList.remove('sidebar-open');
                 } else {
@@ -495,13 +431,6 @@
                     if (sidebar.classList.contains('active')) {
                         mainContent.classList.add('sidebar-open');
                     }
-                }
-            });
-
-            // Close sidebar on escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && sidebar.classList.contains('active')) {
-                    toggleSidebar();
                 }
             });
         });
