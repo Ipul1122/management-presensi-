@@ -1,9 +1,9 @@
-@extends('components.layouts.pengajar')
-@extends('components.layouts.pengajar.navbar')
+{{-- @extends('components.layouts.pengajar') --}}
+{{-- @extends('components.layouts.pengajar.navbar') --}}
 @extends('components.layouts.pengajar.sidebar')
 
-@section('content')
-<div class="p-6 space-y-8">
+@section('sidebar-pengajar')
+<div class="p-6">
     
     <div class="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-6 text-white shadow-lg">
         <h1 class="text-2xl font-bold flex items-center gap-3">

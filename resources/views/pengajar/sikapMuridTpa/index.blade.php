@@ -1,16 +1,13 @@
-@extends('components.layouts.pengajar')
-@extends('components.layouts.pengajar.navbar')
 @extends('components.layouts.pengajar.sidebar')
 
-
-@section('content')
+@section('sidebar-pengajar')
 <div class="p-6 space-y-8">
     
-    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
+    <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 text-white shadow-lg">
         <h1 class="text-2xl font-bold flex items-center gap-3">
             <i class="fas fa-heart"></i> Input Nilai Sikap
         </h1>
-        <p class="mt-2 text-purple-100">Berikan apresiasi kepada murid yang bersikap baik hari ini.</p>
+        <p class="mt-2 text-blue-100">Berikan apresiasi kepada murid yang bersikap baik hari ini.</p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -33,7 +30,7 @@
                                 type="text" 
                                 id="searchMurid" 
                                 placeholder="Ketik untuk mencari nama..." 
-                                class="w-full pl-10 pr-10 py-3 rounded-xl border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 transition cursor-pointer"
+                                class="w-full pl-10 pr-10 py-3 rounded-xl border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 transition cursor-pointer"
                                 autocomplete="off"
                             >
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" id="clearSearch">
@@ -47,11 +44,11 @@
                         >
                             @foreach($murids as $m)
                                 <div 
-                                    class="option-item px-4 py-3 hover:bg-purple-50 cursor-pointer text-gray-700 transition border-b border-gray-50 last:border-0 flex justify-between items-center group"
+                                    class="option-item px-4 py-3 hover:bg-blue-50 cursor-pointer text-gray-700 transition border-b border-gray-50 last:border-0 flex justify-between items-center group"
                                     onclick="selectMurid('{{ $m->nama_anak }}')"
                                 >
-                                    <span class="font-medium group-hover:text-purple-700">{{ $m->nama_anak }}</span>
-                                    <i class="fas fa-check text-purple-600 opacity-0 transition-opacity check-icon"></i>
+                                    <span class="font-medium group-hover:text-blue-700">{{ $m->nama_anak }}</span>
+                                    <i class="fas fa-check text-blue-600 opacity-0 transition-opacity check-icon"></i>
                                 </div>
                             @endforeach
                             
@@ -71,14 +68,14 @@
                                     ['icon' => 'fa-hand-holding-heart', 'color' => 'text-pink-500', 'label' => 'Jujur'],
                                     ['icon' => 'fa-hands-helping', 'color' => 'text-blue-500', 'label' => 'Tidak Bercanda/Berantem'],
                                     ['icon' => 'fa-user-clock', 'color' => 'text-green-500', 'label' => 'Disiplin'],
-                                    ['icon' => 'fa-users', 'color' => 'text-purple-500', 'label' => 'Tidak mengejek orang tua'],
+                                    ['icon' => 'fa-users', 'color' => 'text-blue-500', 'label' => 'Tidak mengejek orang tua'],
                                     ['icon' => 'fa-volume-mute', 'color' => 'text-red-500', 'label' => 'Tidak teriak-teriak'],
                                 ];
                             @endphp
 
                             @foreach($kriteria as $k)
-                            <label class="relative flex items-center p-4 border rounded-xl cursor-pointer hover:bg-purple-50 transition-colors group">
-                                <input type="checkbox" name="sikap[]" value="{{ $k['label'] }}" class="w-5 h-5 text-purple-600 rounded focus:ring-purple-500 border-gray-300">
+                            <label class="relative flex items-center p-4 border rounded-xl cursor-pointer hover:bg-blue-50 transition-colors group">
+                                <input type="checkbox" name="sikap[]" value="{{ $k['label'] }}" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
                                 <div class="ml-3 flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-white transition">
                                         <i class="fas {{ $k['icon'] }} {{ $k['color'] }}"></i>
@@ -91,7 +88,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all">
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all">
                         <i class="fas fa-paper-plane mr-2"></i> Kirim Nilai Sikap
                     </button>
                 </form>
@@ -103,7 +100,7 @@
                 
                 <div class="mb-4 border-b border-gray-100 pb-4">
                     <h3 class="font-bold text-gray-800 flex items-center gap-2">
-                        <i class="fas fa-history text-purple-500"></i> Riwayat Hari Ini
+                        <i class="fas fa-history text-blue-500"></i> Riwayat Hari Ini
                     </h3>
                     <p class="text-xs text-gray-400 mt-1">
                         Log aktivitas penilaian sikap hari ini.
@@ -112,7 +109,7 @@
                 
                 <div class="space-y-4 flex-1 overflow-y-auto custom-scrollbar pr-2 max-h-[500px]">
                     @forelse($riwayatHariIni as $log)
-                    <div class="group bg-gray-50 hover:bg-purple-50 transition-colors rounded-xl p-4 border border-gray-100 relative">
+                    <div class="group bg-gray-50 hover:bg-blue-50 transition-colors rounded-xl p-4 border border-gray-100 relative">
                         
                         <div class="flex justify-between items-start mb-2">
                             <div>
@@ -125,7 +122,7 @@
                                 </div>
                             </div>
                             
-                            <span class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-sm">
+                            <span class="bg-gradient-to-r from-blue-500 to-blue-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-sm">
                                 +{{ $log->jumlah_poin }}
                             </span>
                         </div>
