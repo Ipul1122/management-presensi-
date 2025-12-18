@@ -4,7 +4,7 @@
 @section('sidebar-pengajar')
 @section('navbar-pengajar')
 
-    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 min-h-screen">
+    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 ">
         <div class="p-4 sm:p-6 lg:p-8 space-y-8">
             
             <div class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-8 text-white shadow-lg shadow-blue-500/20">

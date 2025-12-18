@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\TestimoniUserController;
 use App\Http\Controllers\Admin\PoinMuridController;
 use App\Http\Controllers\Admin\SikapMuridController as AdminSikapController;
 use App\Http\Controllers\Admin\MataPelajaranController as AdminMapelController;
+use App\Http\Controllers\Admin\SemuaPoinMuridController;
 
 // Pengajar Controllers
 use App\Http\Controllers\Pengajar\MuridAbsensiController;
@@ -156,6 +157,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/mata-pelajaran', [AdminMapelController::class, 'index'])->name('mataPelajaran.index');
         Route::delete('/mata-pelajaran/{id}', [App\Http\Controllers\Admin\MataPelajaranController::class, 'destroy'])->name('mataPelajaran.destroy');
+
+        // Semua Poin Murid TPA
+        Route::get('/semua-poin-murid', [SemuaPoinMuridController::class, 'index'])->name('semuaPoinMuridTpa.index');
     });
 });
 
