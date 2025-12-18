@@ -1,8 +1,6 @@
 @extends('components.layouts.pengajar.sidebar')
-@extends('components.layouts.pengajar.navbar')
 
 @section('sidebar-pengajar')
-@section('navbar-pengajar')
     
 
 <!-- Jadwal Management Section -->

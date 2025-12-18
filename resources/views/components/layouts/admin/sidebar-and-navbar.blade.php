@@ -227,10 +227,10 @@
                                 <span>Absensi Poin</span>
                             </a>
                             {{-- Total Poin --}}
-                            {{-- <a href="{{ route('admin.totalPoin.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.poinMuridTpa.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
+                            <a href="{{ route('admin.semuaPoinMuridTpa.index') }}" class="flex items-center px-4 py-2 text-sm rounded-md transition-colors {{ request()->routeIs('admin.poinMuridTpa.index') ? 'text-indigo-600 font-medium bg-white shadow-sm mx-2' : 'text-slate-500 hover:text-indigo-600 hover:bg-white/50 mx-2' }}">
                                 <i class="fas fa-star w-5 text-center text-xs opacity-70"></i>
                                 <span>Total Poin</span>
-                            </a> --}}
+                            </a>
                         </div>
                     </div>
                 </div>
