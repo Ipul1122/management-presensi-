@@ -12,9 +12,9 @@
         <p class="mt-2 text-blue-100">Input nilai harian atau materi hafalan murid.</p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-5">
         
-        <div class="lg:col-span-2">
+        <div class="lg:col-span-2 ">
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                 <form action="{{ route('pengajar.mataPelajaran.store') }}" method="POST">
                     @csrf
