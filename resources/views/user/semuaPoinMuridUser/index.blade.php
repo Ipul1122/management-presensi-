@@ -1,6 +1,7 @@
-@extends('components.layouts.pengajar.sidebar')
+@extends('components.user.navbar')
 
-@section('sidebar-pengajar')
+
+@section( 'navbar-user')
 <div class="p-4 sm:p-6 space-y-6">
     
     {{-- Header & Toolbar Filter --}}
