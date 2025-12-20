@@ -1,6 +1,6 @@
-@extends('components.layouts.admin.sidebar-and-navbar')
+@extends('components.layouts.pengajar.sidebar')
 
-@section('content')
+@section('sidebar-pengajar')
 <div class="p-4 sm:p-6 space-y-6">
     
     {{-- Header & Toolbar Filter --}}

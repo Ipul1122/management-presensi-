@@ -27,6 +27,7 @@ use App\Http\Controllers\Pengajar\RiwayatJadwalPengajarController;
 use App\Http\Controllers\Pengajar\panduanPengajarController;
 use App\Http\Controllers\Pengajar\SikapMuridController as PengajarSikapController;
 use App\Http\Controllers\Pengajar\MataPelajaranController as PengajarMapelController;
+use App\Http\Controllers\Pengajar\SemuaPoinMuridPengajarController;
 
 
 // USER CONTROLLERS
@@ -230,6 +231,9 @@ Route::prefix('pengajar')->name('pengajar.')->group(function () {
     Route::post('/mata-pelajaran', [PengajarMapelController::class, 'store'])->name('mataPelajaran.store');
 
     Route::delete('/mata-pelajaran/{id}', [App\Http\Controllers\Pengajar\MataPelajaranController::class, 'destroy'])->name('mataPelajaran.destroy');
+    
+    // Semua Poin Murid Pengajar
+    Route::get('/semua-poin-murid', [SemuaPoinMuridPengajarController::class, 'index'])->name('semuaPoinMuridPengajar.index');
 });
     
 });
