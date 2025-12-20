@@ -108,6 +108,10 @@
                                 <i class="fas fa-history mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
                                 <span>Riwayat Murid</span>
                             </a>
+                            <a href="{{route('user.semuaPoinMuridUser.index')}}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
+                                <i class="fas fa-history mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
+                                <span>Poin Murid</span>
+                            </a>
                         </div>
                     </div>
                     
@@ -127,7 +131,7 @@
 
                 <!-- CTA Button -->
                 <div class="hidden md:block">
-                    <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" 
+                    <a href="{{ route('user.pendaftaran.index') }}" target="_blank" 
                        class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold shadow-lg hover:shadow-xl hover-lift transform transition-all duration-300">
                         <i class="fas fa-user-plus mr-2"></i>
                         Daftar Sekarang
@@ -180,13 +184,17 @@
                             <i class="fas fa-history mr-3 text-blue-500"></i>
                             <span>Riwayat Murid</span>
                         </a>
+                        <a href="{{route('user.semuaPoinMuridUser.index')}}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
+                            <i class="fas fa-history mr-3 text-blue-500"></i>
+                            <span>Poin Murid</span>
+                        </a>
                     </div>
                 </div>
                 
                 <a href="{{route('user.galeri.index')}}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Galeri</a>
                 <a href="{{route('user.pendaftaran.index')}}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Pendaftaran</a>
                 <a href="{{route('user.testimoni.index')}}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Kontak</a>
-                <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" 
+                <a href="{{ route('user.pendaftaran.index') }}" target="_blank" 
                    class="block bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-lg text-center font-semibold shadow-lg mt-4">
                     <i class="fas fa-user-plus mr-2"></i>
                     Daftar Sekarang

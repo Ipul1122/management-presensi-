@@ -45,6 +45,7 @@ use App\Http\Controllers\User\JadwalUserController;
 // use App\Http\Controllers\User\RiwayatJadwalUserController;
 use App\Http\Controllers\User\RiwayatMuridAbsensiUserController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\User\SemuaPoinMuridUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -275,4 +276,6 @@ Route::prefix('user')->name('user.')->group(function() {
     Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
     Route::post('/testimoni/store', [TestimoniController::class, 'store'])->name('testimoni.store');
 
+    // SEMUA POIN MURID USER
+    Route::get('/semua-poin-murid', [SemuaPoinMuridUserController::class, 'index'])->name('semuaPoinMuridUser.index');
 });
