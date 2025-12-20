@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Pengajar;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use App\Models\MataPelajaran;
 use App\Models\PoinSikap;
 use App\Models\NotifikasiAdmin;
 
-class SemuaPoinMuridController extends Controller
+class SemuaPoinMuridPengajarController extends Controller
 {
     public function index(Request $request)
     {
@@ -106,7 +106,7 @@ class SemuaPoinMuridController extends Controller
         $notifikasi = NotifikasiAdmin::latest()->take(10)->get();
         $judulPeriode = $periodList[$selectedPeriod] ?? 'Periode Terpilih';
 
-        return view('admin.semuaPoinMuridTpa.index', compact(
+        return view('pengajar.semuaPoinMuridPengajar.index', compact(
             'dataGabungan',
             'unreadCount',
             'notifikasi',
