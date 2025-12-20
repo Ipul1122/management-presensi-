@@ -109,7 +109,7 @@
                                 <span>Riwayat Murid</span>
                             </a>
                             <a href="{{route('user.semuaPoinMuridUser.index')}}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
-                                <i class="fas fa-history mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
+                                <i class="fas fa-arrow-up-right-dots mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
                                 <span>Poin Murid</span>
                             </a>
                         </div>
@@ -185,7 +185,7 @@
                             <span>Riwayat Murid</span>
                         </a>
                         <a href="{{route('user.semuaPoinMuridUser.index')}}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
-                            <i class="fas fa-history mr-3 text-blue-500"></i>
+                            <i class="fas fa-arrow-up-right-dots mr-3 text-blue-500"></i>
                             <span>Poin Murid</span>
                         </a>
                     </div>
