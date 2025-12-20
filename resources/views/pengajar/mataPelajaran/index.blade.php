@@ -10,6 +10,20 @@
             <i class="fas fa-book-open"></i> Penilaian Mata Pelajaran
         </h1>
         <p class="mt-2 text-blue-100">Input nilai harian atau materi hafalan murid.</p>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            
+            <a href="{{ route('pengajar.muridAbsensi.create') }}" 
+            class="inline-flex justify-center items-center px-4 py-2 bg-white text-blue-700 font-semibold rounded-lg shadow-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200 ease-in-out">
+                <i class="fas fa-plus-circle mr-2"></i> Input Absensi
+            </a>
+
+            <a href="{{ route('pengajar.sikapMurid.index') }}" 
+            class="inline-flex justify-center items-center px-4 py-2 bg-blue-800 text-white font-semibold rounded-lg shadow-md hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200 ease-in-out border border-blue-700">
+                <i class="fas fa-list mr-2"></i> Lihat Sikap Murid
+            </a>
+
+        </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-5">
