@@ -3,11 +3,25 @@
 @section('sidebar-pengajar')
 <div class="p-6 space-y-8">
     
-    <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 text-white shadow-lg">
+   <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 text-white shadow-lg">
         <h1 class="text-2xl font-bold flex items-center gap-3">
             <i class="fas fa-heart"></i> Input Nilai Sikap
         </h1>
         <p class="mt-2 text-blue-100">Berikan apresiasi kepada murid yang bersikap baik hari ini.</p>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            
+            <a href="{{ route('pengajar.muridAbsensi.create') }}" 
+            class="inline-flex justify-center items-center px-5 py-2.5 bg-white text-blue-800 font-semibold rounded-xl shadow-md hover:bg-blue-50 focus:ring-4 focus:ring-blue-300 transition duration-300">
+                <i class="fas fa-user-check mr-2"></i> Absensi
+            </a>
+
+            <a href="{{ route('pengajar.mataPelajaran.index') }}" 
+            class="inline-flex justify-center items-center px-5 py-2.5 bg-blue-500 text-white font-semibold rounded-xl shadow-md hover:bg-blue-400 focus:ring-4 focus:ring-blue-300 transition duration-300 border border-blue-400">
+                <i class="fas fa-book mr-2"></i> Mata Pelajaran
+            </a>
+
+        </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

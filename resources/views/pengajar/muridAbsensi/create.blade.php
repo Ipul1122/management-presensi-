@@ -56,14 +56,26 @@
 }
 
 /* Enhanced styling for themed cards */
-.theme-alquran .card-header {
+/* Removed dependency on jenis bacaan for main color, add gender-based header styles */
+.theme-perempuan .card-header {
     background: linear-gradient(135deg, #db2777, #be185d);
     color: white;
 }
 
-.theme-iqro .card-header {
+.theme-laki-laki .card-header {
     background: linear-gradient(135deg, #2563eb, #1d4ed8);
     color: white;
+}
+
+/* Theme indicator by gender */
+.theme-perempuan .theme-indicator {
+    background-color: #db2777;
+    box-shadow: 0 0 15px rgba(219, 39, 119, 0.4);
+}
+
+.theme-laki-laki .theme-indicator {
+    background-color: #2563eb;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
 }
 
 .card-header {
@@ -84,16 +96,6 @@
     height: 12px;
     border-radius: 50%;
     transition: all 0.3s ease;
-}
-
-.theme-alquran .theme-indicator {
-    background-color: #db2777;
-    box-shadow: 0 0 15px rgba(219, 39, 119, 0.4);
-}
-
-.theme-iqro .theme-indicator {
-    background-color: #2563eb;
-    box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
 }
 </style>
 
@@ -138,7 +140,7 @@
                 </div>
                 <div class="lg:order-2">
                     <button type="submit"
-                        class="btn-modern w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+                        class="btn-modern w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                         </svg>
@@ -169,13 +171,15 @@
 jQuery(document).ready(function($) {
     const muridData = @json($murids);
     const container = $('#absensi-container');
+    const STORAGE_KEY = 'absensi_draft_data'; // Kunci penyimpanan di browser
     let absensiIndex = 0;
 
+    // --- 1. Fungsi Membuat Form HTML (Sama seperti sebelumnya) ---
     function createAbsensiForm(index) {
         let muridOptions = muridData.map(m => `<option value="${m.nama_anak}">${m.nama_anak}</option>`).join('');
 
         return `
-        <div class="absensi-item border border-gray-300 rounded-xl p-4 mb-4 relative bg-gray-50">
+        <div class="absensi-item border border-gray-300 rounded-xl p-4 mb-4 relative bg-gray-50" data-index="${index}">
             <div class="theme-indicator"></div>
             <div class="card-header" style="display: none;">
                 <span class="theme-text"></span>
@@ -207,7 +211,7 @@ jQuery(document).ready(function($) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Status Kehadiran</label>
-                    <select name="absensi[${index}][jenis_status]" class="w-full p-2 border rounded" required>
+                    <select name="absensi[${index}][jenis_status]" class="jenis-status w-full p-2 border rounded" required>
                         <option value="">-- Pilih Status --</option>
                         <option value="hadir">✅ Hadir</option>
                         <option value="izin">📝 Izin</option>
@@ -215,48 +219,117 @@ jQuery(document).ready(function($) {
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Absen</label>
-                    <input type="date" name="absensi[${index}][tanggal_absen]" value="{{ date('Y-m-d') }}" class="w-full p-2 border rounded" required>
+                    <input type="date" name="absensi[${index}][tanggal_absen]" value="{{ date('Y-m-d') }}" class="tanggal-absen w-full p-2 border rounded" required>
                 </div>
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Catatan</label>
-                <textarea name="absensi[${index}][catatan]" rows="2" class="w-full p-2 border rounded" placeholder="Jelaskan Iqro atau Al-Qur'an..." required></textarea>
+                <textarea name="absensi[${index}][catatan]" rows="2" class="catatan w-full p-2 border rounded" placeholder="Jelaskan Iqro atau Al-Qur'an..." required></textarea>
             </div>
         </div>
         `;
     }
 
     function updateTheme(item) {
-        const jenisKelamin = item.find('.jenis-kelamin').val()?.toLowerCase();
-        const jenisBacaan = item.find('.jenis-bacaan').val()?.toLowerCase();
+        const jenisKelamin = (item.find('.jenis-kelamin').val() || '').toLowerCase();
         const cardHeader = item.find('.card-header');
         const themeText = item.find('.theme-text');
-        
-        // Reset all theme classes
+
+        // Hapus kelas tema yang mungkin ada
         item.removeClass('theme-alquran theme-iqro theme-perempuan theme-laki-laki');
-        
-        // Apply jenis bacaan theme
-        if (jenisBacaan && jenisBacaan.includes('al-qur') || jenisBacaan === 'alquran') {
-            item.addClass('theme-alquran');
-            cardHeader.show();
-            themeText.text('📖 Al-Qur\'an');
-        } else if (jenisBacaan && jenisBacaan.includes('iqro')) {
-            item.addClass('theme-iqro');
-            cardHeader.show();
-            themeText.text('📚 Iqro');
-        } else {
-            cardHeader.hide();
-        }
-        
-        // Apply jenis kelamin theme
-        if (jenisKelamin === 'perempuan' || jenisKelamin === 'p') {
+
+        // Tentukan tema berdasarkan jenis kelamin (bukan jenis bacaan)
+        if (jenisKelamin && (jenisKelamin.includes('perempuan') || jenisKelamin === 'p')) {
             item.addClass('theme-perempuan');
-        } else if (jenisKelamin === 'laki-laki' || jenisKelamin === 'l') {
+            cardHeader.show();
+            themeText.text('👧 Perempuan');
+        } else if (jenisKelamin && (jenisKelamin.includes('laki') || jenisKelamin === 'l' || jenisKelamin.includes('laki-laki'))) {
             item.addClass('theme-laki-laki');
+            cardHeader.show();
+            themeText.text('👦 Laki-laki');
+        } else {
+            // Jika tidak ada info gender, sembunyikan header dan pastikan kelas tema dihapus
+            cardHeader.hide();
         }
     }
 
-    // Tambah absensi
+    // --- 2. Fungsi Simpan Draft ke LocalStorage ---
+    function saveDraft() {
+        let draftData = [];
+        $('.absensi-item').each(function() {
+            let row = $(this);
+            draftData.push({
+                nama_murid: row.find('.murid-select').val(),
+                jenis_status: row.find('.jenis-status').val(),
+                tanggal_absen: row.find('.tanggal-absen').val(),
+                catatan: row.find('.catatan').val()
+            });
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(draftData));
+    }
+
+    // --- 3. Fungsi Load Draft dari LocalStorage ---
+    function loadDraft() {
+        let savedData = localStorage.getItem(STORAGE_KEY);
+        if (savedData) {
+            let parsedData = JSON.parse(savedData);
+            
+            if (parsedData.length > 0) {
+                parsedData.forEach((item) => {
+                    // Buat form baru
+                    container.append(createAbsensiForm(absensiIndex));
+                    let currentRow = container.find('.absensi-item').last();
+                    
+                    // Isi value dari draft
+                    let selectMurid = currentRow.find('.murid-select');
+                    selectMurid.val(item.nama_murid);
+                    currentRow.find('.jenis-status').val(item.jenis_status);
+                    currentRow.find('.tanggal-absen').val(item.tanggal_absen);
+                    currentRow.find('.catatan').val(item.catatan);
+
+                    // Inisialisasi Select2
+                    selectMurid.select2({ 
+                        placeholder: "-- Pilih Murid --", 
+                        allowClear: true 
+                    });
+
+                    // Trigger change untuk mengisi otomatis data readonly & update tema
+                    if (item.nama_murid) {
+                        // Kita panggil manual logika pengisian data murid
+                        fillMuridData(currentRow, item.nama_murid);
+                    }
+
+                    absensiIndex++;
+                });
+            } else {
+                $('#add-absensi').click(); // Jika array kosong, tambah default
+            }
+        } else {
+            $('#add-absensi').click(); // Jika tidak ada draft, tambah default
+        }
+    }
+
+    // Helper untuk mengisi data murid (dipisah agar bisa dipanggil saat loadDraft)
+    function fillMuridData(parentRow, selectedName) {
+        let murid = muridData.find(m => (m.nama_anak || '').trim().toLowerCase() === (selectedName || '').trim().toLowerCase());
+
+        if (murid) {
+            parentRow.find('.nama-display').val(murid.nama_anak || '');
+            parentRow.find('.jenis-kelamin').val(murid.jenis_kelamin || '');
+            parentRow.find('.jenis-bacaan').val(murid.jenis_alkitab || '');
+            setTimeout(() => { updateTheme(parentRow); }, 50);
+        } else {
+            parentRow.find('.nama-display').val('');
+            parentRow.find('.jenis-kelamin').val('');
+            parentRow.find('.jenis-bacaan').val('');
+            parentRow.removeClass('theme-alquran theme-iqro theme-perempuan theme-laki-laki');
+            parentRow.find('.card-header').hide();
+        }
+    }
+
+    // --- Event Listeners ---
+
+    // Tambah Absensi
     $('#add-absensi').click(function() {
         container.append(createAbsensiForm(absensiIndex));
         container.find('.murid-select').last().select2({ 
@@ -264,43 +337,36 @@ jQuery(document).ready(function($) {
             allowClear: true 
         });
         absensiIndex++;
+        saveDraft(); // Simpan state saat tambah baris
     });
 
-    // Hapus absensi
+    // Hapus Absensi
     container.on('click', '.remove-absensi', function() {
         $(this).closest('.absensi-item').remove();
+        saveDraft(); // Simpan state saat hapus baris
     });
 
-    // Auto-fill data murid and update theme
+    // Saat memilih murid (Select2 / Dropdown)
     container.on('change', '.murid-select', function() {
-        let selectedName = $(this).val()?.trim() || '';
+        let selectedName = $(this).val();
         let parent = $(this).closest('.absensi-item');
-        let murid = muridData.find(m => (m.nama_anak || '').trim().toLowerCase() === selectedName.toLowerCase());
-
-        if (murid) {
-            parent.find('.nama-display').val(murid.nama_anak || '');
-            parent.find('.jenis-kelamin').val(murid.jenis_kelamin || '');
-            parent.find('.jenis-bacaan').val(murid.jenis_alkitab || '');
-            
-            // Update theme after filling data
-            setTimeout(() => {
-                updateTheme(parent);
-            }, 100);
-        } else {
-            parent.find('.nama-display').val('');
-            parent.find('.jenis-kelamin').val('');
-            parent.find('.jenis-bacaan').val('');
-            
-            // Reset theme
-            parent.removeClass('theme-alquran theme-iqro theme-perempuan theme-laki-laki');
-            parent.find('.card-header').hide();
-        }
+        fillMuridData(parent, selectedName);
+        saveDraft(); // Simpan otomatis saat data berubah
     });
 
-    // Add initial form on page load
-    if (container.children().length === 0) {
-        $('#add-absensi').click();
-    }
+    // Simpan otomatis saat input apapun berubah (status, tanggal, catatan)
+    container.on('change input', 'input, select, textarea', function() {
+        saveDraft();
+    });
+
+    // Bersihkan draft SAAT form berhasil disubmit
+    $('#multi-absensi-form').on('submit', function() {
+        localStorage.removeItem(STORAGE_KEY);
+    });
+
+    // --- Eksekusi Awal ---
+    // Load data draft saat halaman dimuat
+    loadDraft();
 });
 </script>
 

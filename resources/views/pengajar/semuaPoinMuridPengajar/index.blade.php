@@ -17,7 +17,7 @@
         </div>
         
         {{-- Form Filter Gabungan --}}
-        <form method="GET" action="{{ route('admin.semuaPoinMuridTpa.index') }}" 
+        <form method="GET" action="{{ route('pengajar.semuaPoinMuridPengajar.index') }}" 
               class="flex flex-col sm:flex-row w-full lg:w-auto bg-white p-1.5 rounded-2xl border border-gray-200 shadow-sm gap-2">
             
             {{-- SEARCH BAR + DROPDOWN SUGGESTION --}}
@@ -45,7 +45,7 @@
 
                 {{-- Tombol Clear / Reset Search --}}
                 @if($search)
-                    <a href="{{ route('admin.semuaPoinMuridTpa.index', ['periode' => $selectedPeriod]) }}" 
+                    <a href="{{ route('pengajar.semuaPoinMuridPengajar.index', ['periode' => $selectedPeriod]) }}" 
                        class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer hover:text-red-500 text-gray-400 transition-colors"
                        title="Hapus pencarian">
                         <i class="fa-solid fa-xmark"></i>
@@ -163,7 +163,7 @@
                                         Tidak ada murid dengan nama "<span class="font-semibold">{{ $search }}</span>" pada periode ini.
                                     </p>
                                     @if($search)
-                                        <a href="{{ route('admin.semuaPoinMuridTpa.index', ['periode' => $selectedPeriod]) }}" class="mt-4 text-blue-600 hover:text-blue-700 text-sm font-medium hover:underline">
+                                        <a href="{{ route('pengajar.semuaPoinMuridPengajar.index', ['periode' => $selectedPeriod]) }}" class="mt-4 text-blue-600 hover:text-blue-700 text-sm font-medium hover:underline">
                                             Reset Pencarian
                                         </a>
                                     @endif
@@ -201,7 +201,7 @@
                 <div class="p-12 text-center">
                     <p class="text-gray-500 font-medium">Murid tidak ditemukan.</p>
                     @if($search)
-                        <a href="{{ route('admin.semuaPoinMuridTpa.index', ['periode' => $selectedPeriod]) }}" class="text-blue-600 text-sm mt-2 block">Hapus Filter</a>
+                        <a href="{{ route('pengajar.semuaPoinMuridPengajar.index', ['periode' => $selectedPeriod]) }}" class="text-blue-600 text-sm mt-2 block">Hapus Filter</a>
                     @endif
                 </div>
             @endforelse
