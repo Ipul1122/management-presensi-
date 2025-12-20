@@ -1,78 +1,94 @@
 @extends('components.user.navbar')
 
 @section('navbar-user')
-    
 
-<!-- Pengajar Section -->
-<section id="pengajar" class="py-16 bg-gradient-to-br from-emerald-50 to-green-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                    Para Pengajar Kami
-                </span>
-            </h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Bertemu dengan tim pengajar berpengalaman yang mendedikasikan diri untuk pendidikan putra-putri Anda</p>
-        </div>
+    {{-- Import Font Quicksand --}}
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <div class="relative">
-            <div class="overflow-x-auto scrollbar-hide pb-4">
-                <div class="flex space-x-6 w-max px-4">
-                    @foreach ($pengajars as $pengajar)
-                        <div class="min-w-[300px] max-w-[320px] group">
-                            <div class="bg-white/80 backdrop-blur-sm shadow-xl rounded-3xl p-6 border border-emerald-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                                <!-- Header Card -->
-                                <div class="flex items-center space-x-4 mb-6">
-                                    @if($pengajar->foto_pengajar)
-                                        <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
-                                            alt="foto" class="h-16 w-16 rounded-2xl object-cover border-3 border-emerald-200 shadow-lg group-hover:scale-105 transition-transform duration-300">
-                                    @else
-                                        <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform duration-300">
-                                            {{ strtoupper(substr($pengajar->nama_pengajar, 0, 1)) }}
-                                        </div>
-                                    @endif
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-gray-900 text-lg mb-1">
-                                            {{ $pengajar->nama_pengajar }}
-                                        </h3>
-                                        <div class="flex items-center text-blue-600">
-                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                                            </svg>
-                                            <span class="text-sm font-medium">Pengajar TPA</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Deskripsi -->
-                                <div class="bg-gray-50 rounded-2xl p-4">
-                                    <p class="text-gray-700 text-sm leading-relaxed">{{ $pengajar->deskripsi }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            
-            <!-- Scroll Indicator -->
-            <div class="flex justify-center mt-4 space-x-2">
-                <div class="w-2 h-2 bg-emerald-300 rounded-full"></div>
-                <div class="w-8 h-2 bg-emerald-500 rounded-full"></div>
-                <div class="w-2 h-2 bg-emerald-300 rounded-full"></div>
-            </div>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+
+    {{-- 1. HEADER / HERO SECTION --}}
+    <div class="relative bg-emerald-600 pt-24 pb-20 rounded-b-[3rem] shadow-xl overflow-hidden">
+        {{-- Background Decoration --}}
+        <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-amber-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">Para Pengajar Kami</h1>
+            <p class="text-emerald-100 text-lg max-w-2xl mx-auto leading-relaxed">
+                "Guru adalah pelita yang menerangi jalan menuju masa depan gemilang." <br>
+                Berkenalan dengan tim pengajar TPA Nurul Haq yang berdedikasi.
+            </p>
         </div>
     </div>
-</section>
 
-<style>
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-</style>
+    {{-- 2. MAIN CONTENT (Grid Layout) --}}
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-20 relative z-20">
+        
+        @if($pengajars->isEmpty())
+            {{-- Empty State --}}
+            <div class="bg-white rounded-3xl p-8 shadow-lg text-center max-w-lg mx-auto">
+                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                    👨‍🏫
+                </div>
+                <h3 class="text-lg font-bold text-gray-800">Belum Ada Data Pengajar</h3>
+                <p class="text-gray-500 mt-2">Data pengajar akan segera kami perbarui.</p>
+            </div>
+        @else
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                @foreach ($pengajars as $pengajar)
+                    <div class="group bg-white rounded-3xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden">
+                        
+                        {{-- Hiasan Atas --}}
+                        <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-emerald-50 to-transparent"></div>
 
+                        {{-- Foto Profil --}}
+                        <div class="relative mb-4 mt-2">
+                            <div class="absolute inset-0 bg-emerald-200 rounded-full blur-lg opacity-50 group-hover:opacity-80 transition-opacity"></div>
+                            
+                            @if($pengajar->foto_pengajar)
+                                <img src="{{ asset('storage/' . $pengajar->foto_pengajar) }}" 
+                                    alt="{{ $pengajar->nama_pengajar }}" 
+                                    class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                            @else
+                                <div class="relative w-24 h-24 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-3xl border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                                    {{ strtoupper(substr($pengajar->nama_pengajar, 0, 1)) }}
+                                </div>
+                            @endif
+                            
+                            {{-- Badge Icon --}}
+                            <div class="absolute bottom-0 right-0 bg-amber-400 text-white rounded-full p-1.5 border-2 border-white shadow-sm" title="Pengajar TPA">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                            </div>
+                        </div>
+
+                        {{-- Informasi --}}
+                        <div class="relative w-full">
+                            <h3 class="font-bold text-gray-900 text-xl mb-1 line-clamp-1" title="{{ $pengajar->nama_pengajar }}">
+                                {{ $pengajar->nama_pengajar }}
+                            </h3>
+                            <p class="text-emerald-600 text-sm font-medium mb-4">Pengajar TPA</p>
+                            
+                            {{-- Deskripsi Box --}}
+                            <div class="bg-slate-50 rounded-2xl p-4 w-full min-h-[100px] flex items-center justify-center">
+                                <p class="text-gray-600 text-sm leading-relaxed line-clamp-4 italic">
+                                    "{{ $pengajar->deskripsi ?? 'Berdedikasi untuk mendidik generasi Qur\'ani.' }}"
+                                </p>
+                            </div>
+                        </div>
+
+                        {{-- Hover Effect Line --}}
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+    </section>
 
 @endsection
