@@ -8,6 +8,16 @@
     @vite('resources/css/app.css', 'resources/js/app.js')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
+
+        /* Base Style */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+        }
+
+        .font-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
