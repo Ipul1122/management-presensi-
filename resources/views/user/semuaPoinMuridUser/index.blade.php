@@ -113,8 +113,8 @@
                             {{-- Profil Murid --}}
                             <td class="px-6 py-5">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm uppercase shadow-sm">
-                                        {{ substr($murid->nama_anak, 0, 2) }}
+                                    <div class="flex items-center justify-center text-white font-bold text-sm uppercase shadow-sm">
+                                        {{ substr($murid->nama_anak, 0, 0) }}
                                     </div>
                                     <div>
                                         <div class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors">
