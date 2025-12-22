@@ -13,11 +13,43 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class MuridController extends Controller
 {
-        public function index()
+    public function index(Request $request)
     {
-        $murids = Murid::orderBy('created_at', 'desc')->paginate(10); 
+        // Memulai query dari model Murid
+        $query = Murid::query();
+
+        // Filter Pencarian (Search)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nama_anak', 'like', "%{$search}%")
+                  ->orWhere('id_pendaftaran', 'like', "%{$search}%")
+                  ->orWhere('ayah', 'like', "%{$search}%")
+                  ->orWhere('ibu', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter Gender
+        if ($request->filled('gender')) {
+            $query->where('jenis_kelamin', $request->gender);
+        }
+
+        // Filter Kitab
+        if ($request->filled('kitab')) {
+            $query->where('jenis_alkitab', $request->kitab);
+        }
+
+        // Filter Kelas
+        if ($request->filled('kelas')) {
+            $query->where('kelas', $request->kelas);
+        }
+
+        // Ambil data dengan pagination (urutkan terbaru)
+        $murids = $query->orderBy('created_at', 'asc')->paginate(10);
+        
         $unreadCount = NotifikasiAdmin::where('is_read', false)->count();
 
+        // Return view dengan membawa data pencarian agar input tidak reset
         return view('admin.murid.index', compact('murids', 'unreadCount'));
     }
 
