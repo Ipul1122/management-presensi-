@@ -58,7 +58,9 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                     Tambah Murid
                 </a>
-                <button type="button" id="bulkDeleteBtn" class="hidden flex-shrink-0 px-5 py-3 bg-rose-50 text-rose-600 hover:bg-rose-100 font-bold rounded-xl border border-rose-100 transition-all flex items-center gap-2 animate-pulse-subtle">
+                
+                {{-- FIX: Removed 'flex' class here, it will be added by JS when needed --}}
+                <button type="button" id="bulkDeleteBtn" class="hidden flex-shrink-0 px-5 py-3 bg-rose-50 text-rose-600 hover:bg-rose-100 font-bold rounded-xl border border-rose-100 transition-all items-center gap-2 animate-pulse-subtle">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     Hapus (<span id="selectedCountText">0</span>)
                 </button>
@@ -232,7 +234,7 @@
     </div>
 </div>
 
-<div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+<div id="deleteModal" class="fixed inset-0 z-50 items-center justify-center hidden">
     <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="deleteBackdrop"></div>
     
     <div class="relative bg-white rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="deletePanel">
@@ -252,7 +254,7 @@
     </div>
 </div>
 
-<div id="bulkDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+<div id="bulkDeleteModal" class="fixed inset-0 z-50 items-center justify-center hidden">
     <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="bulkBackdrop"></div>
     <div class="relative bg-white rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="bulkPanel">
         <div class="w-20 h-20 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-5 text-rose-500 ring-8 ring-rose-50/50">
@@ -267,7 +269,7 @@
     </div>
 </div>
 
-<div id="viewModal" class="fixed inset-0 z-50 flex items-center justify-center hidden px-4">
+<div id="viewModal" class="fixed inset-0 z-50 items-center justify-center hidden px-4">
     <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity opacity-0" id="viewBackdrop"></div>
     <div class="relative bg-white rounded-[2rem] shadow-2xl w-full max-w-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300" id="viewPanel">
         
@@ -356,10 +358,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (bulkDeleteBtn) {
             if (count > 0) {
                 bulkDeleteBtn.classList.remove("hidden");
-                bulkDeleteBtn.classList.add("flex");
+                bulkDeleteBtn.classList.add("flex"); // FIX: Clean toggle
             } else {
                 bulkDeleteBtn.classList.add("hidden");
-                bulkDeleteBtn.classList.remove("flex");
+                bulkDeleteBtn.classList.remove("flex"); // FIX: Clean toggle
             }
         }
         
@@ -383,7 +385,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // === 3. Animated Modal Logic ===
+    // === 3. Animated Modal Logic (FIX: Explicit Flex Toggle) ===
     const animateModal = (modalId, show) => {
         const modal = document.getElementById(modalId);
         if(!modal) return;
@@ -392,6 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if(show) {
             modal.classList.remove('hidden');
+            modal.classList.add('flex'); // Add flex only when showing
             setTimeout(() => {
                 backdrop.classList.remove('opacity-0');
                 panel.classList.remove('scale-95', 'opacity-0');
@@ -401,7 +404,10 @@ document.addEventListener("DOMContentLoaded", function () {
             backdrop.classList.add('opacity-0');
             panel.classList.remove('scale-100', 'opacity-100');
             panel.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex'); // Remove flex when hiding
+            }, 300);
         }
     };
 
@@ -468,7 +474,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const getVal = (sel) => row.querySelector(sel)?.textContent.trim() || '-';
             const imgEl = row.querySelector("img");
             
-            // Extract data from row safely
             const data = {
                 name: getVal("h3"),
                 id: getVal(".font-mono"),
