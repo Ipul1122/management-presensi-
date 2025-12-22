@@ -156,9 +156,9 @@
             
             <div class="h-20 flex items-center px-6 border-b border-slate-100 bg-gradient-to-r from-indigo-600 to-indigo-700">
                 <div class="flex items-center space-x-3 text-white">
-                    <div class="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-inner">
+                    {{-- <div class="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-inner">
                         <i class="fas fa-school text-xl"></i>
-                    </div>
+                    </div> --}}
                     <div>
                         <h1 class="font-bold text-lg leading-tight">Sistem Presensi</h1>
                         <p class="text-xs text-indigo-100 opacity-80">Administrator Panel</p>
