@@ -343,7 +343,7 @@
                     </form>
                 </div>
                 <div class="text-center mt-3">
-                    <span class="text-[10px] text-slate-400">Versi Sistem 1.0</span>
+                    <span class="text-[10px] text-slate-400">Versi Sistem 2.0</span>
                 </div>
             </div>
 
