@@ -124,14 +124,14 @@
 
     {{-- Filter Card --}}
 <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 hover-scale fade-in">
-    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+    {{-- <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
         <span class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">📅</span>
         Filter Periode
     </h2>
-    
+     --}}
     <form method="GET" action="{{ route('admin.riwayatMurid.index') }}" class="flex flex-col md:flex-row gap-4 items-end">
         {{-- Pilih Bulan --}}
-        <div class="flex-1">
+        {{-- <div class="flex-1">
             <label for="bulan" class="block text-sm font-semibold text-gray-700">Pilih Bulan:</label>
             <select name="bulan" id="bulan" onchange="this.form.submit()" 
                     class="w-full border-2 border-gray-200 px-4 py-2 rounded-xl shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200">
@@ -141,7 +141,7 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
         {{-- Tombol Export PDF --}}
         <div>
@@ -154,62 +154,7 @@
 </div>
 
 
-        {{-- Rekap Kehadiran Section --}}
-        @if (!empty($rekap && count($rekap)) > 0)
-        <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 hover-scale fade-in">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
-                    <span class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">📊</span>
-                    Rekap Kehadiran
-                </h2>
-                <div class="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
-                    @if (!empty($bulanDipilih))
-                        {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->translatedFormat('F Y') }}
-                    @else
-                        -
-                    @endif
-                </div>
-            </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full table-auto border-collapse">
-                    <thead>
-                        <tr class="gradient-bg  text-white">
-                            <th class="px-6 py-4 text-left rounded-tl-xl font-semibold">No</th>
-                            <th class="px-6 py-4 text-left font-semibold">Nama Murid</th>
-                            <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Jumlah Hadir</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($rekap as $nama => $jumlah)
-                            @php
-                                // Ambil gender dari database (gunakan cache sederhana untuk efisiensi)
-                                static $genderCache = [];
-                                if (!isset($genderCache[$nama])) {
-                                    $genderCache[$nama] = \App\Models\Murid::where('nama_anak', $nama)->value('jenis_kelamin');
-                                }
-                                $jenisKelamin = strtolower($genderCache[$nama] ?? '');
-                                $genderClass = $jenisKelamin === 'perempuan' ? 'murid-perempuan' : 'murid-laki';
-                            @endphp
-                            <tr class="table-row-yellow text-left border-b border-black hover:shadow-md transition-all duration-200 ">
-                                <td class="px-6 py-4 font-medium text-gray-800">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4 text-left">
-                                    <span class="px-4 py-[3px] sm:text-left rounded font-semibold {{ $genderClass }}">
-                                        {{ $nama }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-4 py-2 rounded-full font-bold {{ $jumlah > 4 ? 'hadir-tinggi' : 'bg-gray-100 text-gray-700' }}">
-                                        {{ $jumlah > 4 ? '🌟' : '📈' }} {{ $jumlah }}x
-                                    </span>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        @endif
+        
 
         {{-- Filter Detail Section - Updated --}}
 <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 hover-scale fade-in">
@@ -543,6 +488,64 @@
         </div>
     </div>
 @endif
+
+
+{{-- Rekap Kehadiran Section --}}
+        @if (!empty($rekap && count($rekap)) > 0)
+        <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 hover-scale fade-in">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <span class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">📊</span>
+                    Rekap Kehadiran
+                </h2>
+                <div class="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                    @if (!empty($bulanDipilih))
+                        {{ \Carbon\Carbon::createFromFormat('Y-m', $bulanDipilih)->translatedFormat('F Y') }}
+                    @else
+                        -
+                    @endif
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto border-collapse">
+                    <thead>
+                        <tr class="gradient-bg  text-white">
+                            <th class="px-6 py-4 text-left rounded-tl-xl font-semibold">No</th>
+                            <th class="px-6 py-4 text-left font-semibold">Nama Murid</th>
+                            <th class="px-6 py-4 text-center rounded-tr-xl font-semibold">Jumlah Hadir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($rekap as $nama => $jumlah)
+                            @php
+                                // Ambil gender dari database (gunakan cache sederhana untuk efisiensi)
+                                static $genderCache = [];
+                                if (!isset($genderCache[$nama])) {
+                                    $genderCache[$nama] = \App\Models\Murid::where('nama_anak', $nama)->value('jenis_kelamin');
+                                }
+                                $jenisKelamin = strtolower($genderCache[$nama] ?? '');
+                                $genderClass = $jenisKelamin === 'perempuan' ? 'murid-perempuan' : 'murid-laki';
+                            @endphp
+                            <tr class="table-row-yellow text-left border-b border-black hover:shadow-md transition-all duration-200 ">
+                                <td class="px-6 py-4 font-medium text-gray-800">{{ $loop->iteration }}</td>
+                                <td class="px-6 py-4 text-left">
+                                    <span class="px-4 py-[3px] sm:text-left rounded font-semibold {{ $genderClass }}">
+                                        {{ $nama }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="px-4 py-2 rounded-full font-bold {{ $jumlah > 4 ? 'hadir-tinggi' : 'bg-gray-100 text-gray-700' }}">
+                                        {{ $jumlah > 4 ? '🌟' : '📈' }} {{ $jumlah }}x
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @endif
 
 {{-- Pagination --}}
 <div class="mt-4">
