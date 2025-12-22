@@ -46,6 +46,7 @@ use App\Http\Controllers\User\JadwalUserController;
 use App\Http\Controllers\User\RiwayatMuridAbsensiUserController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\User\SemuaPoinMuridUserController;
+use App\Http\Controllers\User\PeraturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -278,4 +279,7 @@ Route::prefix('user')->name('user.')->group(function() {
 
     // SEMUA POIN MURID USER
     Route::get('/semua-poin-murid', [SemuaPoinMuridUserController::class, 'index'])->name('semuaPoinMuridUser.index');
+
+    // Peraturan User
+    Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan.index');
 });

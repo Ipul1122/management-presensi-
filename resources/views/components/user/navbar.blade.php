@@ -4,30 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'Sistem Presensi TPA') }}</title>
+    
+    {{-- Import Font Quicksand --}}
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     @vite('resources/css/app.css', 'resources/js/app.js')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
     <style>
-
-        /* Base Style */
         body {
             font-family: 'Quicksand', sans-serif;
-            background-color: #f8fafc; /* Slate-50 */
         }
 
-        .font-quicksand {
-            font-family: 'Quicksand', sans-serif;
-        }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
         ::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 3px;
+            background: #10b981; /* Emerald-500 */
+            border-radius: 4px;
         }
         
         /* Smooth transitions */
@@ -37,13 +36,13 @@
         
         /* Custom backdrop blur */
         .backdrop-blur-custom {
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.95);
         }
         
         /* Gradient text */
         .gradient-text {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            background: linear-gradient(135deg, #059669, #34d399); 
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -58,35 +57,34 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-slate-50 text-gray-800 flex flex-col min-h-screen">
 
-    <!-- Modern Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-custom border-b border-gray-200/50">
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-custom border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between h-20">
                 
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="#" class="text-2xl font-bold gradient-text hover-scale">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    {{-- <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-white shadow-lg shadow-emerald-200">
+                        <i class="fas fa-quran"></i>
+                    </div> --}}
+                    <a href="{{ route('index') }}" class="text-2xl font-bold text-gray-800 tracking-tight hover:text-emerald-600 transition-colors">
                         TPA Nurul Haq
                     </a>
                 </div>
 
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('index') }}" class="text-gray-700 hover:text-blue-600 font-medium relative group">
+                    <a href="{{ route('index') }}" class="text-gray-600 hover:text-emerald-600 font-bold relative group text-sm uppercase tracking-wide">
                         Home
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
                     </a>
                     
-                    <!-- Dropdown Menu -->
                     <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button @click="open = !open" class="text-gray-700 hover:text-blue-600 font-medium flex items-center group">
+                        <button class="text-gray-600 hover:text-emerald-600 font-bold flex items-center group text-sm uppercase tracking-wide focus:outline-none">
                             Informasi
-                            <svg class="ml-1 h-4 w-4 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <svg class="ml-1 h-4 w-4 text-gray-400 group-hover:text-emerald-500 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
                             </svg>
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
                         </button>
                         
                         <div x-show="open" 
@@ -96,76 +94,89 @@
                             x-transition:leave="transition ease-in duration-150" 
                             x-transition:leave-start="opacity-100 transform scale-100 translate-y-0" 
                             x-transition:leave-end="opacity-0 transform scale-95 translate-y-2"
-                            class="absolute left-0 mt-3 w-56 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
+                            class="absolute left-0 mt-4 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-3 z-50">
                             
-                            <a href="{{ route('user.informasi.visiDanMisi.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
-                                <i class="fas fa-bullseye mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
-                                <span>Visi dan Misi</span>
+                            <a href="{{ route('user.informasi.visiDanMisi.index') }}" class="flex items-center px-5 py-3 text-sm text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 group transition-colors">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-bullseye text-emerald-600"></i>
+                                </div>
+                                <span class="font-semibold">Visi dan Misi</span>
                             </a>
-                            <a href="{{ route('user.informasi.dataMurid.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
-                                <i class="fas fa-users mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
-                                <span>Data Murid</span>
+                            <a href="{{ route('user.informasi.dataMurid.index') }}" class="flex items-center px-5 py-3 text-sm text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 group transition-colors">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-users text-blue-600"></i>
+                                </div>
+                                <span class="font-semibold">Data Murid</span>
                             </a>
-                            <a href="{{ route('user.informasi.dataPengajar.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
-                                <i class="fas fa-chalkboard-teacher mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
-                                <span>Data Pengajar</span>
+                            <a href="{{ route('user.informasi.dataPengajar.index') }}" class="flex items-center px-5 py-3 text-sm text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 group transition-colors">
+                                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-chalkboard-teacher text-amber-600"></i>
+                                </div>
+                                <span class="font-semibold">Data Pengajar</span>
                             </a>
-                            <a href="{{ route('user.informasi.jadwal.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
-                                <i class="fas fa-calendar-alt mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
-                                <span>Jadwal</span>
+                            <a href="{{ route('user.informasi.jadwal.index') }}" class="flex items-center px-5 py-3 text-sm text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 group transition-colors">
+                                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-calendar-alt text-purple-600"></i>
+                                </div>
+                                <span class="font-semibold">Jadwal Belajar</span>
                             </a>
-                            <a href="{{ route('user.informasi.riwayatMurid.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
-                                <i class="fas fa-history mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
-                                <span>Riwayat Murid</span>
+                            <a href="{{ route('user.informasi.riwayatMurid.index') }}" class="flex items-center px-5 py-3 text-sm text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 group transition-colors">
+                                <div class="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-history text-teal-600"></i>
+                                </div>
+                                <span class="font-semibold">Riwayat Murid</span>
                             </a>
-                            <a href="{{route('user.semuaPoinMuridUser.index')}}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 group">
-                                <i class="fas fa-arrow-up-right-dots mr-3 text-blue-500 group-hover:scale-110 transition-transform"></i>
-                                <span>Poin Murid</span>
+                            <a href="{{route('user.semuaPoinMuridUser.index')}}" class="flex items-center px-5 py-3 text-sm text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 group transition-colors">
+                                <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-star text-rose-600"></i>
+                                </div>
+                                <span class="font-semibold">Poin & Prestasi</span>
                             </a>
                         </div>
                     </div>
                     
-                    <a href="{{ route('user.galeri.index') }}" class="text-gray-700 hover:text-blue-600 font-medium relative group">
+                    <a href="{{ route('user.galeri.index') }}" class="text-gray-600 hover:text-emerald-600 font-bold relative group text-sm uppercase tracking-wide">
                         Galeri
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
                     </a>
-                    <a href="{{ route('user.pendaftaran.index') }}" class="text-gray-700 hover:text-blue-600 font-medium relative group">
+                    <a href="{{ route('user.pendaftaran.index') }}" class="text-gray-600 hover:text-emerald-600 font-bold relative group text-sm uppercase tracking-wide">
                         Pendaftaran
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
                     </a>
-                    <a href="{{ route('user.kontak.index') }}" class="text-gray-700 hover:text-blue-600 font-medium relative group">
+                    <a href="{{ route('user.peraturan.index') }}" class="text-gray-600 hover:text-emerald-600 font-bold relative group text-sm uppercase tracking-wide">
+                        Peraturan
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="{{ route('user.kontak.index') }}" class="text-gray-600 hover:text-emerald-600 font-bold relative group text-sm uppercase tracking-wide">
                         Kontak
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
                     </a>
                 </div>
 
-                <!-- CTA Button -->
                 <div class="hidden md:block">
                     <a href="{{ route('user.pendaftaran.index') }}" target="_blank" 
-                       class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold shadow-lg hover:shadow-xl hover-lift transform transition-all duration-300">
-                        <i class="fas fa-user-plus mr-2"></i>
+                       class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-emerald-200 hover:shadow-emerald-300 hover:-translate-y-1 transform transition-all duration-300 flex items-center group">
+                        <i class="fas fa-user-plus mr-2 group-hover:rotate-12 transition-transform"></i>
                         Daftar Sekarang
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <button x-data="{ open: false }" @click="open = !open; document.getElementById('mobile-menu').classList.toggle('hidden')" 
-                        class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        class="md:hidden p-2 rounded-lg text-emerald-600 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-xl">
             <div class="px-4 py-6 space-y-4">
-                <a href="{{ route('index') }}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                <a href="{{ route('index') }}" class="block text-gray-700 hover:text-emerald-600 font-semibold py-2">Home</a>
                 
-                <div x-data="{ mobileOpen: false }" class="border-b border-gray-100 pb-4">
+                <div x-data="{ mobileOpen: false }" class="border-b border-gray-50 pb-4">
                     <button @click="mobileOpen = !mobileOpen" 
-                            class="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 font-medium py-2">
+                            class="flex items-center justify-between w-full text-gray-700 hover:text-emerald-600 font-semibold py-2">
                         <span>Informasi</span>
                         <svg class="h-4 w-4 transition-transform duration-300" :class="{ 'rotate-180': mobileOpen }" 
                              fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -173,130 +184,112 @@
                         </svg>
                     </button>
                     
-                    <div x-show="mobileOpen" x-transition class="ml-4 mt-3 space-y-3">
-                        <a href="{{ route('user.informasi.visiDanMisi.index') }}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
-                            <i class="fas fa-bullseye mr-3 text-blue-500"></i>
-                            <span>Visi dan Misi</span>
-                        </a>
-                        <a href="{{route('user.informasi.dataMurid.index')}}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
-                            <i class="fas fa-users mr-3 text-blue-500"></i>
-                            <span>Data Murid</span>
-                        </a>
-                        <a href="{{route('user.informasi.dataPengajar.index')}}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
-                            <i class="fas fa-chalkboard-teacher mr-3 text-blue-500"></i>
-                            <span>Data Pengajar</span>
-                        </a>
-                        <a href="{{route('user.informasi.jadwal.index')}}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
-                            <i class="fas fa-calendar-alt mr-3 text-blue-500"></i>
-                            <span>Jadwal</span>
-                        </a>
-                        <a href="{{route('user.informasi.riwayatMurid.index')}}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
-                            <i class="fas fa-history mr-3 text-blue-500"></i>
-                            <span>Riwayat Murid</span>
-                        </a>
-                        <a href="{{route('user.semuaPoinMuridUser.index')}}" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
-                            <i class="fas fa-arrow-up-right-dots mr-3 text-blue-500"></i>
-                            <span>Poin Murid</span>
-                        </a>
+                    <div x-show="mobileOpen" x-transition class="ml-4 mt-2 space-y-2 border-l-2 border-emerald-100 pl-4">
+                        <a href="{{ route('user.informasi.visiDanMisi.index') }}" class="block py-2 text-gray-600 hover:text-emerald-600">Visi dan Misi</a>
+                        <a href="{{route('user.informasi.dataMurid.index')}}" class="block py-2 text-gray-600 hover:text-emerald-600">Data Murid</a>
+                        <a href="{{route('user.informasi.dataPengajar.index')}}" class="block py-2 text-gray-600 hover:text-emerald-600">Data Pengajar</a>
+                        <a href="{{route('user.informasi.jadwal.index')}}" class="block py-2 text-gray-600 hover:text-emerald-600">Jadwal</a>
+                        <a href="{{route('user.informasi.riwayatMurid.index')}}" class="block py-2 text-gray-600 hover:text-emerald-600">Riwayat Murid</a>
+                        <a href="{{route('user.semuaPoinMuridUser.index')}}" class="block py-2 text-gray-600 hover:text-emerald-600">Poin Murid</a>
                     </div>
                 </div>
                 
-                <a href="{{route('user.galeri.index')}}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Galeri</a>
-                <a href="{{route('user.pendaftaran.index')}}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Pendaftaran</a>
-                <a href="{{route('user.testimoni.index')}}" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Kontak</a>
+                <a href="{{route('user.galeri.index')}}" class="block text-gray-700 hover:text-emerald-600 font-semibold py-2">Galeri</a>
+                <a href="{{route('user.pendaftaran.index')}}" class="block text-gray-700 hover:text-emerald-600 font-semibold py-2">Pendaftaran</a>
+                <a href="{{route('user.peraturan.index')}}" class="block text-gray-700 hover:text-emerald-600 font-semibold py-2">Peraturan</a>
+                <a href="{{route('user.kontak.index')}}" class="block text-gray-700 hover:text-emerald-600 font-semibold py-2">Kontak</a>
+                
                 <a href="{{ route('user.pendaftaran.index') }}" target="_blank" 
-                   class="block bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-lg text-center font-semibold shadow-lg mt-4">
-                    <i class="fas fa-user-plus mr-2"></i>
-                    Daftar Sekarang
+                   class="block bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-3 rounded-xl text-center font-bold shadow-lg mt-6 active:scale-95 transition-transform">
+                    <i class="fas fa-user-plus mr-2"></i> Daftar Sekarang
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="pt-16">
+    <main class="pt-20 flex-grow">
         @yield('navbar-user')
     </main>
 
-    <!-- Modern Footer -->
-    <footer class="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white">
-        <div class="max-w-7xl mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer class="relative bg-gradient-to-r from-emerald-500 to-teal-400 text-white mt-auto overflow-hidden">
+        
+        {{-- Hiasan Background (Circles) --}}
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-white opacity-10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-yellow-300 opacity-20 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-6 py-16 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 
-                <!-- Brand Section -->
-                <div class="space-y-4">
-                    <h2 class="text-2xl font-bold">TPA Nurul Haq</h2>
-                    <p class="text-blue-100 leading-relaxed">
-                        Membimbing generasi Qur'ani dengan penuh kasih sayang, ilmu, dan akhlak Islami untuk masa depan yang cerah.
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        {{-- <div class="w-12 h-12 bg-white text-emerald-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg transform rotate-3">
+                            <i class="fas fa-quran"></i>
+                        </div> --}}
+                        <h2 class="text-3xl font-bold tracking-tight drop-shadow-md">TPA Nurul Haq</h2>
+                    </div>
+                    <p class="text-emerald-50 font-medium leading-relaxed bg-white/10 p-4 rounded-xl border border-white/20 backdrop-blur-sm">
+                        "Membimbing generasi Qur'ani dengan penuh kasih sayang, ilmu, dan akhlak Islami."
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                    
+                    {{-- Social Media Buttons (Warna Warni) --}}
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 bg-white text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white hover:-translate-y-1 transition-all shadow-md">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <a href="#" class="w-10 h-10 bg-white text-pink-500 rounded-full flex items-center justify-center hover:bg-pink-500 hover:text-white hover:-translate-y-1 transition-all shadow-md">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/085693672730" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <a href="https://wa.me/085693672730" class="w-10 h-10 bg-white text-green-500 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-white hover:-translate-y-1 transition-all shadow-md">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold">Menu Utama</h3>
-                    <ul class="space-y-2">
-                        <li><a href="{{ route('index') }}" class="text-blue-100 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-home mr-2"></i>Beranda
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-yellow-200 drop-shadow-sm border-b-2 border-white/20 pb-2 inline-block">Menu Utama</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('index') }}" class="group flex items-center text-emerald-50 hover:text-white hover:translate-x-2 transition-all font-medium">
+                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>Beranda
                         </a></li>
-                        <li><a href="{{ route('user.informasi.dataMurid.index') }}" class="text-blue-100 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-info-circle mr-2"></i>Informasi
+                        <li><a href="{{ route('user.informasi.dataMurid.index') }}" class="group flex items-center text-emerald-50 hover:text-white hover:translate-x-2 transition-all font-medium">
+                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>Informasi
                         </a></li>
-                        <li><a href="{{route('user.galeri.index')}}" class="text-blue-100 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-images mr-2"></i>Galeri
+                        <li><a href="{{route('user.galeri.index')}}" class="group flex items-center text-emerald-50 hover:text-white hover:translate-x-2 transition-all font-medium">
+                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>Galeri Foto
                         </a></li>
-                        <li><a href="{{route('user.pendaftaran.index')}}" class="text-blue-100 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-user-plus mr-2"></i>Pendaftaran
-                        </a></li>
-                        <li><a href="{{route('user.kontak.index')}}" class="text-blue-100 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-envelope mr-2"></i>Kontak
+                        <li><a href="{{route('user.pendaftaran.index')}}" class="group flex items-center text-emerald-50 hover:text-white hover:translate-x-2 transition-all font-medium">
+                            <span class="w-2 h-2 bg-yellow-300 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>Pendaftaran
                         </a></li>
                     </ul>
                 </div>
 
-                <!-- Contact Info -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold">Kontak Kami</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mr-3 mt-1 text-blue-300"></i>
-                            <span class="text-blue-100 text-sm">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-yellow-200 drop-shadow-sm border-b-2 border-white/20 pb-2 inline-block">Hubungi Kami</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start bg-white/10 p-3 rounded-xl hover:bg-white/20 transition-colors cursor-default">
+                            <i class="fas fa-map-marker-alt text-yellow-300 text-xl mr-3 mt-1"></i>
+                            <span class="text-white text-sm leading-snug">
                                 Jl. Rawa Bahagia I No.8, Grogol, Jakarta Barat 11450
                             </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone mr-3 text-blue-300"></i>
-                            <span class="text-blue-100">0812-3456-7890</span>
+                        <li class="flex items-center bg-white/10 p-3 rounded-xl hover:bg-white/20 transition-colors cursor-default">
+                            <i class="fas fa-phone text-yellow-300 text-xl mr-3"></i>
+                            <span class="text-white font-medium">0856-9367-2730 (Admin)</span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-blue-300"></i>
-                            <span class="text-blue-100">tpa.nurulhaq@gmail.com</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-clock mr-3 text-blue-300"></i>
-                            <span class="text-blue-100">Senin - Minggu: 08.00 - 17.00</span>
-                        </li>
+                        {{-- <li class="flex items-center bg-white/10 p-3 rounded-xl hover:bg-white/20 transition-colors cursor-default">
+                            <i class="fas fa-envelope text-yellow-300 text-xl mr-3"></i>
+                            <span class="text-white text-sm">tpa.nurulhaq@gmail.com</span>
+                        </li> --}}
                     </ul>
                 </div>
 
-                <!-- Location Map -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold">Lokasi Kami</h3>
-                    <div class="rounded-lg overflow-hidden shadow-lg">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-yellow-200 drop-shadow-sm border-b-2 border-white/20 pb-2 inline-block">Lokasi</h3>
+                    <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white/30 transform hover:scale-105 transition-transform duration-300">
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.738454302736!2d106.79538937413047!3d-6.1657695604241525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f642d88d5841%3A0x6c31ab35f182053a!2sMasjid%20Nurul%20Haq!5e0!3m2!1sid!2sid!4v1750151052295!5m2!1sid!2sid" 
                             width="100%" 
-                            height="150" 
+                            height="180" 
                             style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy" 
@@ -306,16 +299,15 @@
                 </div>
             </div>
 
-            <!-- Copyright -->
-            <div class="border-t border-blue-500/30 mt-8 pt-8 text-center">
-                <p class="text-blue-100 text-sm">
-                    &copy; 2025 TPA Nurul Haq. Dibuat dengan <i class="fas fa-heart text-red-400"></i> untuk generasi Qur'ani.
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <p class="text-emerald-100 font-medium text-sm">
+                    © {{ date('Y') }} <span class="font-bold text-white">TPA Nurul Haq</span>. 
+                    Dibuat dengan <i class="fas fa-heart text-red-500 animate-pulse mx-1"></i> dan Semangat Belajar.
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- Notification Popover -->
     <div x-data="visitTimer()" x-init="startTimer()" x-show="showPopover" 
          x-transition:enter="transition ease-out duration-300" 
          x-transition:enter-start="opacity-0 transform scale-90 translate-y-4" 
@@ -323,36 +315,30 @@
          x-transition:leave="transition ease-in duration-200" 
          x-transition:leave-start="opacity-100 transform scale-100 translate-y-0" 
          x-transition:leave-end="opacity-0 transform scale-90 translate-y-4"
-         class="fixed bottom-6 right-6 bg-white border border-gray-200 shadow-2xl rounded-xl w-80 p-6 z-50">
+         class="fixed bottom-6 right-6 bg-white border border-emerald-100 shadow-2xl rounded-2xl w-80 p-6 z-50">
         
         <div class="flex items-start mb-4">
-            <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <i class="fas fa-clock text-blue-600"></i>
+            <div class="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-clock text-emerald-600 text-xl"></i>
             </div>
-            <div class="ml-3">
-                <p class="text-sm font-medium text-gray-900">
-                    Sudah <span x-text="elapsedMinutes" class="font-bold text-blue-600"></span> menit mengunjungi website!
+            <div class="ml-4">
+                <p class="text-sm font-bold text-gray-900">
+                    Sudah <span x-text="elapsedMinutes" class="text-emerald-600 text-base"></span> menit di sini!
                 </p>
-                <p class="text-xs text-gray-500 mt-1">
-                    Jangan lewatkan kesempatan bergabung dengan kami
+                <p class="text-xs text-gray-500 mt-1 leading-relaxed">
+                    Tertarik mendaftarkan putra-putri Anda? Yuk daftar sekarang!
                 </p>
             </div>
         </div>
         
-        <div class="flex space-x-2">
+        <div class="flex gap-2">
             <a href="https://forms.gle/xwMYkaf2YXzuKiE99" target="_blank" 
-               class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium text-center transition-colors">
-                <i class="fas fa-user-plus mr-1"></i>
-                Daftar
+               class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-bold text-center transition-colors shadow-md shadow-emerald-200">
+                <i class="fas fa-user-plus mr-1"></i> Daftar
             </a>
             <button @click="dismiss()" 
-                    class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors">
+                    class="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 rounded-lg text-sm font-medium transition-colors border border-gray-100">
                 Nanti
-            </button>
-            <button @click="dismiss()" 
-                    class="px-4 py-2 bg-green-100 hover:bg-green-200 text-green-700 rounded-lg text-sm font-medium transition-colors">
-                <i class="fas fa-check mr-1"></i>
-                Sudah
             </button>
         </div>
     </div>
@@ -371,7 +357,7 @@
                             this.shownTimes.push(this.elapsedMinutes);
                             this.showPopover = true;
                         }
-                    }, 60000); // 1 minute
+                    }, 60000); 
                 },
                 
                 dismiss() {
