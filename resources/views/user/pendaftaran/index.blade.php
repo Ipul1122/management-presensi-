@@ -20,7 +20,7 @@
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-amber-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style="animation-delay: 1s"></div>
 
         <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">Penerimaan Santri Baru</h1>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">Penerimaan Murid Baru</h1>
             <p class="text-emerald-100 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
                 "Barangsiapa yang menempuh jalan untuk mencari ilmu, maka Allah akan mudahkan baginya jalan menuju surga."
             </p>
@@ -37,12 +37,12 @@
                     <i class="fas fa-users"></i>
                 </div>
                 <div>
-                    <h3 class="text-gray-500 font-bold uppercase text-sm tracking-wider mb-1">Total Santri</h3>
+                    <h3 class="text-gray-500 font-bold uppercase text-sm tracking-wider mb-1">Total Murid</h3>
                     <div class="text-4xl font-extrabold text-gray-800 flex items-baseline">
                         <span id="murid-count">0</span>
                         <span class="text-emerald-500 text-2xl ml-1">+</span>
                     </div>
-                    <p class="text-gray-400 text-sm mt-1">Santri aktif belajar</p>
+                    <p class="text-gray-400 text-sm mt-1">Murid aktif belajar</p>
                 </div>
             </div>
 

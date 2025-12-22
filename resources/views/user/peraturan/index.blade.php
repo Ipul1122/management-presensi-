@@ -24,15 +24,15 @@
                     <ul class="space-y-4">
                         <li class="flex items-start gap-3 text-gray-600">
                             <svg class="w-6 h-6 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Hadir 10 menit sebelum kegiatan dimulai.</span>
+                            <span>Hadir Sebelum ashar dan melaksanakan sholat mendapatkan nilai +.</span>
                         </li>
                         <li class="flex items-start gap-3 text-gray-600">
                             <svg class="w-6 h-6 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Mengisi daftar hadir setiap kali datang.</span>
+                            <span>izin kepada pengajar jika berhalangan hadir.</span>
                         </li>
                         <li class="flex items-start gap-3 text-gray-600">
                             <svg class="w-6 h-6 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Wajib izin kepada pengajar jika berhalangan hadir.</span>
+                            <span>Diperbolehkan membawa snack sebelum TPA Mulai.</span>
                         </li>
                     </ul>
                 </div>
@@ -58,6 +58,10 @@
                             <svg class="w-6 h-6 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             <span>Menghormati pengajar dan menyayangi teman.</span>
                         </li>
+                        <li class="flex items-start gap-3 text-gray-600">
+                            <svg class="w-6 h-6 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Menjaga kebersihan dan kerapian pada Masjid Nurul Haq.</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -82,6 +86,10 @@
                             <svg class="w-6 h-6 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             <span>Menjaga kebersihan dan kerapian peralatan milik TPA.</span>
                         </li>
+                        <li class="flex items-start gap-3 text-gray-600">
+                            <svg class="w-6 h-6 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Menjaga barang berharga dan jangan sampai tertinggal.</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -105,6 +113,14 @@
                         <li class="flex items-start gap-3 text-gray-600">
                             <svg class="w-6 h-6 text-rose-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                             <span>Dilarang mencoret-coret fasilitas TPA/Masjid.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600">
+                            <svg class="w-6 h-6 text-rose-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <span>Pengajar tidak bertanggug jawab atas kehilangan barang.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600">
+                            <svg class="w-6 h-6 text-rose-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <span>Pengajar tidak bertanggug jawab atas insiden murid berkelahi.</span>
                         </li>
                     </ul>
                 </div>

@@ -121,17 +121,26 @@
     <section class="py-10 bg-emerald-600 text-white">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-emerald-500/50">
             <div>
-                <p class="text-3xl font-bold mb-1">50+</p>
-                <p class="text-emerald-100 text-sm">Santri Aktif</p>
+                <div class="flex justify-center items-baseline mb-1">
+                    <span id="murid-count" class="text-3xl font-bold">0</span>
+                    <span class="text-3xl font-bold ml-1">+</span>
+                </div>
+                <p class="text-emerald-100 text-sm">Murid Aktif</p>
             </div>
+
             <div>
-                <p class="text-3xl font-bold mb-1">8+</p>
+                <div class="flex justify-center items-baseline mb-1">
+                    <span id="pengajar-count" class="text-3xl font-bold">0</span>
+                    <span class="text-3xl font-bold ml-1">+</span>
+                </div>
                 <p class="text-emerald-100 text-sm">Pengajar</p>
             </div>
+
             <div>
                 <p class="text-3xl font-bold mb-1">2 th +</p>
                 <p class="text-emerald-100 text-sm">Berdiri</p>
             </div>
+
             <div>
                 <p class="text-3xl font-bold mb-1">100%</p>
                 <p class="text-emerald-100 text-sm">Ceria</p>
@@ -380,6 +389,46 @@
                 detail: { src: src, title: title }
             }));
         }
+
+        function countUp(id, target) {
+        let el = document.getElementById(id);
+        if (!el) return;
+        
+        // Pastikan target adalah angka integer
+        target = parseInt(target);
+        
+        let count = 0;
+        // Logic kecepatan: target besar lebih cepat, target kecil lebih lambat
+        let duration = 2000; // Durasi animasi total 2 detik
+        let intervalTime = 20; // Update setiap 20ms
+        let steps = duration / intervalTime; 
+        let increment = target > 0 ? Math.ceil(target / steps) : 0;
+
+        if (target === 0) {
+            el.textContent = 0;
+            return;
+        }
+
+        let interval = setInterval(() => {
+            count += increment;
+            if (count >= target) {
+                count = target;
+                clearInterval(interval);
+            }
+            // Format angka (opsional, misal 1.000)
+            el.textContent = count.toLocaleString('id-ID'); 
+        }, intervalTime);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Mengambil data dari variabel Blade Controller
+        // Menggunakan json_encode untuk memastikan output aman (menjadi angka murni)
+        let totalMurid = {{ $murids ?? 0 }};
+        let totalPengajar = {{ $pengajars ?? 0 }};
+
+        countUp('murid-count', totalMurid);
+        countUp('pengajar-count', totalPengajar);
+    });
     </script>
 
 @endsection
