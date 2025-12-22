@@ -14,28 +14,24 @@ class RiwayatMuridController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+   public function index(Request $request)
     {
+        // 1. Ambil daftar bulan untuk dropdown
         $bulanList = MuridAbsensi::selectRaw('DATE_FORMAT(tanggal_absen, "%Y-%m") as bulan')
             ->distinct()
             ->orderByDesc('bulan')
             ->pluck('bulan');
 
+        // 2. Tentukan range tanggal berdasarkan bulan dipilih
         $bulanDipilih = $request->bulan ?? now()->format('Y-m');
         $carbonBulan = Carbon::createFromFormat('Y-m', $bulanDipilih);
-        $start = $carbonBulan->copy()->startOfMonth();
-        $end = $carbonBulan->copy()->endOfMonth();
-
-        // Ambil jumlah hari dalam bulan
-        $jumlahHari = $carbonBulan->daysInMonth;
-
-        // Ambil tanggal yang dipilih
-        $tanggalDipilih = $request->tanggal;
         
-        // Ambil murid yang dipilih
+        // Data pendukung view
+        $jumlahHari = $carbonBulan->daysInMonth;
+        $tanggalDipilih = $request->tanggal;
         $muridDipilih = $request->murid;
 
-        // Ambil tanggal-tanggal yang memiliki data absensi dalam bulan ini
+        // 3. Ambil tanggal yang ada datanya (untuk highlight kalender)
         $tanggalDenganData = MuridAbsensi::whereMonth('tanggal_absen', $carbonBulan->month)
             ->whereYear('tanggal_absen', $carbonBulan->year)
             ->selectRaw('DISTINCT DAY(tanggal_absen) as tanggal')
@@ -43,7 +39,7 @@ class RiwayatMuridController extends Controller
             ->pluck('tanggal')
             ->toArray();
 
-        // Ambil daftar murid yang pernah diabsen dalam bulan ini
+        // 4. Ambil daftar murid (Dropdown/List Nama)
         $daftarMurid = MuridAbsensi::whereMonth('tanggal_absen', $carbonBulan->month)
             ->whereYear('tanggal_absen', $carbonBulan->year)
             ->leftJoin('murids', 'murid_absensis.nama_murid', '=', 'murids.nama_anak')
@@ -52,34 +48,35 @@ class RiwayatMuridController extends Controller
             ->orderBy('nama_murid')
             ->get();
 
-        // Jika tanggal valid, ambil data absensi untuk tanggal tersebut
-$absensiTanggal = new LengthAwarePaginator([], 0, 5, 1, [
-    'path' => request()->url(),
-    'query' => request()->query(),
-]);
-if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
-    $tanggalFormat = Carbon::createFromFormat('Y-m-d', $bulanDipilih . '-' . str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT));
+        // 5. Logika Absensi Harian (Tabel Detail Harian)
+        $absensiTanggal = new LengthAwarePaginator([], 0, 5, 1, [
+            'path' => request()->url(),
+            'query' => request()->query(),
+        ]);
 
-    $query = MuridAbsensi::whereDate('tanggal_absen', $tanggalFormat)
-        ->leftJoin('murids', 'murid_absensis.nama_murid', '=', 'murids.nama_anak')
-        ->select('murid_absensis.*', 'murids.jenis_kelamin')
-        ->orderBy('tanggal_absen', 'desc')
-        ->orderBy('nama_murid', 'asc');
+        if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
+            $tanggalFormat = Carbon::createFromFormat('Y-m-d', $bulanDipilih . '-' . str_pad($tanggalDipilih, 2, '0', STR_PAD_LEFT));
 
-    // Tambahkan filter murid jika dipilih
-    if ($muridDipilih) {
-        $query->where('nama_murid', $muridDipilih);
-    }
+            $query = MuridAbsensi::whereDate('tanggal_absen', $tanggalFormat)
+                ->leftJoin('murids', 'murid_absensis.nama_murid', '=', 'murids.nama_anak')
+                ->select('murid_absensis.*', 'murids.jenis_kelamin')
+                // OPSI: Jika ingin status 'Hadir' selalu di atas pada tabel harian, buka komentar di bawah:
+                // ->orderByRaw("FIELD(jenis_status, 'Hadir', 'Izin', 'Sakit', 'Alpha')") 
+                ->orderBy('nama_murid', 'asc');
 
-    $absensiTanggal = $query->paginate(5);
-    $absensiTanggal->appends([
-        'bulan' => $bulanDipilih,
-        'murid' => $muridDipilih,
-        'tanggal' => $tanggalDipilih,
-    ]);
-}
+            if ($muridDipilih) {
+                $query->where('nama_murid', $muridDipilih);
+            }
 
-        // Jika murid dipilih, ambil riwayat absensi murid tersebut dalam bulan ini
+            $absensiTanggal = $query->paginate(5);
+            $absensiTanggal->appends([
+                'bulan' => $bulanDipilih,
+                'murid' => $muridDipilih,
+                'tanggal' => $tanggalDipilih,
+            ]);
+        }
+
+        // 6. Logika Riwayat Individu
         $riwayatMurid = collect();
         $tanggalAbsensiMurid = [];
         if ($muridDipilih) {
@@ -91,23 +88,24 @@ if ($tanggalDipilih && $tanggalDipilih >= 1 && $tanggalDipilih <= $jumlahHari) {
                 ->orderBy('tanggal_absen', 'desc')
                 ->get();
 
-            // Ambil tanggal-tanggal absensi murid untuk highlight kalender
             $tanggalAbsensiMurid = $riwayatMurid->map(function($item) {
                 return Carbon::parse($item->tanggal_absen)->day;
             })->toArray();
         }
 
-        // Ambil data absensi berdasarkan bulan untuk rekap
+        // 7. PERBAIKAN UTAMA: Hitung Rekap & Urutkan Nilai Terbaik (Terbanyak) ke Atas
         $absensi = MuridAbsensi::whereMonth('tanggal_absen', $carbonBulan->month)
             ->whereYear('tanggal_absen', $carbonBulan->year)
             ->where('jenis_status', 'Hadir')
             ->whereIn(DB::raw('DAYNAME(tanggal_absen)'), ['Friday', 'Saturday', 'Sunday'])
             ->get();
 
-        // Hitung rekap per murid
-        $rekap = $absensi->groupBy('nama_murid')->map(function ($group) {
-            return $group->count();
-        })->toArray();
+        $rekap = $absensi->groupBy('nama_murid')
+            ->map(function ($group) {
+                return $group->count();
+            })
+            ->sortDesc() // <--- MENAMBAHKAN INI: Mengurutkan dari nilai terbesar ke terkecil
+            ->toArray();
 
         return view('admin.riwayatMurid.index', [
             'bulanList' => $bulanList,
