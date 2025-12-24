@@ -415,7 +415,6 @@
                 count = target;
                 clearInterval(interval);
             }
-            // Format angka (opsional, misal 1.000)
             el.textContent = count.toLocaleString('id-ID'); 
         }, intervalTime);
     }
